@@ -16,7 +16,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Example Page',
+    name: 'Template Page',
     to: '/example',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     badge: {
@@ -30,7 +30,7 @@ const _nav = [
   },
   // {
   //   component: CNavItem,
-  //   name: 'Example Page',
+  //   name: 'Template Page',
   //   to: '/example',
   //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   // },

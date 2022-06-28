@@ -2,7 +2,7 @@ import PageForm from '../../components/PageForm'
 import PageHeader from '../../components/PageHeader'
 import PageTable from '../../components/PageTable'
 
-const ExamplePage = ({ pageTitle, pageDescrbition, formTitle, formInputs, onFormSubmit, onFormReset, tableTitle, tableData, onDataDuplicate, onDataEdit, onDataDelete }) => {
+const TemplatePage = ({ pageTitle, pageDescrbition, formTitle, formInputs, onFormSubmit, onFormReset, tableTitle, tableData, onDataDuplicate, onDataEdit, onDataDelete }) => {
 
   return (
     <>
@@ -13,4 +13,4 @@ const ExamplePage = ({ pageTitle, pageDescrbition, formTitle, formInputs, onForm
   )
 }
 
-export default ExamplePage
+export default TemplatePage

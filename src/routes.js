@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-const ExamplePage = React.lazy(() => import('./views/examplePage'))
+const TemplatePage = React.lazy(() => import('./views/templatePage'))
 
 // Template
 const Colors = React.lazy(() => import('./views/template/theme/colors/Colors'))
@@ -44,7 +44,7 @@ const Widgets = React.lazy(() => import('./views/template/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
-  { path: '/example', name: 'ExamplePage', element: ExamplePage },
+  { path: '/example', name: 'TemplatePage', element: TemplatePage },
 
   // Template
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
