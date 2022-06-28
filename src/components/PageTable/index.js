@@ -39,7 +39,7 @@ const keyFilter = key => {
   }
 }
 
-const Tables = ({ title, data = dataDemo, onDuplicate = id => console.log("Duplicating", id), onEdit = id => console.log("Editing", id), onDelete = id => console.log("Deleting", id) }) => {
+const Tables = ({ title, data = dataDemo, onActionSelection = action => console.log("Selecting Action", action) }) => {
   return (
     <CRow>
       <CCol xs={12}>
@@ -54,43 +54,49 @@ const Tables = ({ title, data = dataDemo, onDuplicate = id => console.log("Dupli
             <CTable striped hover>
               <CTableHead>
                 <CTableRow>
-                  {Object.keys(data[0]).filter(key => keyFilter(key)).map((key, i) => (
-                    <CTableHeaderCell key={i}>
-                      {key}
+                  {data.length > 0 ?
+                    <>
+                      {Object.keys(data[0]).filter(key => keyFilter(key)).map((key, i) => (
+                        <CTableHeaderCell key={i}>
+                          {key}
+                        </CTableHeaderCell>
+                      ))}
+                      <CTableHeaderCell >
+                        Actions
+                      </CTableHeaderCell>
+                    </>
+                    : <CTableHeaderCell className="text-center">
+                      No Data to Show
                     </CTableHeaderCell>
-                  ))}
-                  <CTableHeaderCell>
-                    Actions
-                  </CTableHeaderCell>
+                  }
                 </CTableRow>
               </CTableHead>
 
               <CTableBody>
-                {data.map((record, i) => (
+                {data?.map((record, i) => (
                   <CTableRow key={i}>
-                    {Object.keys(record).filter(key => keyFilter(key)).map((key, y) => (
+                    {Object?.keys(record).filter(key => keyFilter(key))?.map((key, y) => (
                       <CTableDataCell key={y}>{record[key]}</CTableDataCell>
                     ))}
-                    {onEdit && (
-                      <CTableDataCell >
-                        <CButtonGroup role="group" size='sm'>
-                          <CButton onClick={onDuplicate(record.id)} color='success' className='text-white'>
-                            Duplicate
-                          </CButton>
+                    <CTableDataCell >
+                      <CButtonGroup role="group" size='sm'>
+                        <CButton onClick={() => onActionSelection('view', record)} color='info' className='text-white'>
+                          View
+                        </CButton>
 
-                          {onEdit && (
-                            <CButton onClick={onEdit(record.id)} color='warning' className='text-white'>
-                              Edit
-                            </CButton>
-                          )}
-                          {onDelete && (
-                            <CButton onClick={onDelete(record.id)} color='danger' className='text-white'>
-                              Delete
-                            </CButton>
-                          )}
-                        </CButtonGroup>
-                      </CTableDataCell>
-                    )}
+                        <CButton onClick={() => onActionSelection('create', record)} color='success' className='text-white'>
+                          Duplicate
+                        </CButton>
+
+                        <CButton onClick={() => onActionSelection('update', record)} color='warning' className='text-white'>
+                          Edit
+                        </CButton>
+
+                        <CButton onClick={() => onActionSelection('delete', record)} color='danger' className='text-white'>
+                          Delete
+                        </CButton>
+                      </CButtonGroup>
+                    </CTableDataCell>
                   </CTableRow>
                 ))}
               </CTableBody>

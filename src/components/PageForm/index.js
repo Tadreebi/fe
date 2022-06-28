@@ -95,7 +95,17 @@ const length = count => {
   }
 };
 
-const PageForm = ({ title, inputs = inputsDemo, SubmitText = "Submit", onSubmit, onReset }) => {
+const PageForm = ({ title, inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction }) => {
+
+  const submitTextDecider = () => {
+    switch (currentAction) {
+      case "create": return "Create";
+      case "update": return "Update";
+      case "delete": return "Delete";
+      default: return "Submit";
+    }
+  };
+
   return (
     <CCard className="mb-4">
       {title && (
@@ -107,7 +117,7 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText = "Submit", onSubmit,
       <CCardBody>
         <CForm onSubmit={onSubmit}>
           <CRow>
-            {inputs.map((input, i) => (
+            {inputs?.map((input, i) => (
               <CCol md={input.fullwidth ? 12 : input.double ? 8 : length(inputs.length)} className="py-3" key={i}>
                 <CFormLabel>
                   {input.title || "Title"} {input.required ? <span className='text-danger'>*</span> : ""}
@@ -120,12 +130,12 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText = "Submit", onSubmit,
                     required={input.required}
                     value={input.value}
                     onChange={input.onChange}
-                    disabled={input.disabled}
+                    disabled={input.disabled || currentAction === "view"}
                     multiple={input.multiple}
                   >
                     <option>Please Select...</option>
 
-                    {input.options.map((option, i) => (
+                    {input.options?.map((option, i) => (
                       <option value={option.value} key={i}>{option.title}</option>
                     ))}
                   </CFormSelect>
@@ -136,14 +146,14 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText = "Submit", onSubmit,
                     required={input.required}
                     value={input.value}
                     onChange={input.onChange}
-                    disabled={input.disabled}
+                    disabled={input.disabled || currentAction === "view"}
                     readOnly={input.readOnly}
                     multiple={input.multiple}
                   />
                 ) : (input.type === "checkbox" || input.type === "radio") ? (
                   <>
                     <CRow>
-                      {input.options.map((option, i) => (
+                      {input.options?.map((option, i) => (
                         <CCol md={length(input.options.length)} className="py-3" key={i}>
                           <CFormCheck
                             name={input.name}
@@ -152,7 +162,7 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText = "Submit", onSubmit,
                             label={option.title}
                             required={input.required}
                             onChange={input.onChange}
-                            disabled={input.disabled}
+                            disabled={input.disabled || currentAction === "view"}
                           />
                         </CCol>
                       ))}
@@ -165,7 +175,7 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText = "Submit", onSubmit,
                     size={input.size || "lg"}
                     checked={input.value}
                     onChange={input.onChange}
-                    disabled={input.disabled}
+                    disabled={input.disabled || currentAction === "view"}
                   />
                 ) : (
                   <CFormInput
@@ -176,7 +186,7 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText = "Submit", onSubmit,
                     required={input.required}
                     value={input.value}
                     onChange={input.onChange}
-                    disabled={input.disabled}
+                    disabled={input.disabled || currentAction === "view"}
                     readOnly={input.readOnly}
                     multiple={input.multiple}
                   />
@@ -190,9 +200,9 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText = "Submit", onSubmit,
                     Reset
                   </CButton>
                 )}
-                <CButton type="submit" color='success' className='text-white'>
-                  {SubmitText}
-                </CButton>
+                {currentAction !== "view" && (<CButton type="submit" color='success' className='text-white'>
+                  {SubmitText || submitTextDecider()}
+                </CButton>)}
               </CButtonGroup>
             </CCol>
           </CRow>
