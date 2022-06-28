@@ -8,6 +8,10 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
 
 Soon...
 
+## Adding New Module Instructions
+
+Soon...
+
 ## React App Building Steps
 
 Soon...
