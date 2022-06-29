@@ -10,7 +10,12 @@ Soon...
 
 ## Adding New Module Instructions
 
-Soon...
+- Duplicate an exising module (e.g. directory of src/views/StudentReports) & rename it according to targeted model.
+- Add the URL to src/_nav.js, below "Model Pages".
+- Import the module inside src/routes.js, below "Modules".
+- Add the path inside const routes of src/routes.js, below "Modules".
+- You could find the link to yor module now in the sidebar of the app. Now you can see the page.
+- Update the data inside created module.
 
 ## React App Building Steps
 
@@ -22,7 +27,7 @@ Soon...
 
 ## How to start development
 
-Soon...
+    npm run start
 
 ## Technical Features
 
