@@ -52,6 +52,7 @@ const routes = [
   // Modules
   { path: '/example', name: 'Template Page', element: TemplatePage },
   { path: '/student-reports', name: 'Student Reports', element: StudentReports },
+  { path: '/university-feedback', name: 'University Feedback', element: UniversityFeedback },
 
   // Template
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
