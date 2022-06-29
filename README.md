@@ -8,8 +8,16 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
 
 Soon...
 
+## [Deployed App](https://tadreebi.vercel.app/)
+
 ## Adding New Module Instructions
 
+- Make sure you have the laatest version of dev branch locally by running CLI command of 
+
+    git pull
+- Create your new branch out of dev by running CLI command of 
+
+    git checkout -b new_branch dev
 - Duplicate an exising module (e.g. directory of src/views/StudentReports) & rename it according to targeted model.
 - Add the URL to src/_nav.js, below "Model Pages".
 - Import the module inside src/routes.js, below "Modules".
