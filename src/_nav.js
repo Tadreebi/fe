@@ -35,6 +35,12 @@ const _nav = [
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {
+    component: CNavItem,
+    name: 'University Feedback',
+    to: '/university-feedback',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
     component: CNavTitle,
     name: 'Template',
   },

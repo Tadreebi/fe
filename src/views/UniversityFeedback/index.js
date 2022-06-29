@@ -15,16 +15,15 @@ const StudentReports = () => {
     { id: 5, name: "Suhaib" },
   ];
 
+  const Rating = [
+    { id: 1, name: "1" },
+    { id: 2, name: "2" },
+    { id: 3, name: "3" },
+    { id: 4, name: "4" },
+    { id: 5, name: "5" },
+  ];
+
   const inputs = [
-    {
-      title: "Title",
-      name: "title", // should match the property name in the backend model
-      type: "text",
-      placeholder: "Report Title",
-      required: true,
-      value: report.title, // should match the property name in the backend model
-      onChange: e => setReport(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
-    },
     {
       title: "Student",
       name: "student",
@@ -36,37 +35,25 @@ const StudentReports = () => {
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Report Type",
-      name: "type",
-      type: "select",
-      required: true,
-      value: report.type,
-      onChange: e => setReport(current => ({ ...current, type: e.target.value })),
-      options: [
-        { title: "Weekly Report", value: "Weekly" },
-        { title: "Monthly Report", value: "Monthly" },
-        { title: "Final Report", value: "Final" }
-      ]
-    },
-    {
-      title: "Start Date of Report",
-      name: "startDate",
+      title: "Date of Feedback",
+      name: "Date",
       type: "date",
       required: true,
       value: report.startDate,
       onChange: e => setReport(current => ({ ...current, startDate: e.target.value }))
     },
     {
-      title: "End Date of Report",
-      name: "endDate",
-      type: "date",
+      title: "Title",
+      name: "title", // should match the property name in the backend model
+      type: "text",
+      placeholder: "Title of the Feedback",
       required: true,
-      value: report.endDate,
-      onChange: e => setReport(current => ({ ...current, endDate: e.target.value }))
+      value: report.title, // should match the property name in the backend model
+      onChange: e => setReport(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
     },
     {
-      title: "Report Introduction",
-      name: "intro",
+      title: "Feedback",
+      name: "Feedback",
       type: "textarea",
       fullwidth: true,
       required: true,
@@ -74,13 +61,14 @@ const StudentReports = () => {
       onChange: e => setReport(current => ({ ...current, intro: e.target.value }))
     },
     {
-      title: "Report Conclusion",
-      name: "conclusion",
-      type: "textarea",
-      fullwidth: true,
+      title: "Rating",
+      name: "rating",
+      type: "select",
+      double: true,
       required: true,
-      value: report.conclusion,
-      onChange: e => setReport(current => ({ ...current, conclusion: e.target.value }))
+      value: report.rate,
+      onChange: e => setReport(current => ({ ...current, rate: e.target.value })),
+      options: Rating.map(rate => ({ title: rate.name, value: rate.id }))
     },
   ];
 
@@ -130,13 +118,13 @@ const StudentReports = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Reports"}
-        pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
+        pageTitle={"University Feedback"}
+        pageDescrbition={"For univesity to submit periodical & final reports to teh student"}
         formTitle={"CRUD Reports"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"Student Reports List"}
+        tableTitle={"University Feedback List"}
         tableData={reports}
         onActionSelection={onActionSelection}
         currentAction={action}

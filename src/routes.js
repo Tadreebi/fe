@@ -5,6 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 // Modules
 const TemplatePage = React.lazy(() => import('./views/templatePage'))
 const StudentReports = React.lazy(() => import('./views/StudentReports'))
+const UniversityFeedback = React.lazy(() => import('./views/UniversityFeedback'))
 
 // Template
 const Colors = React.lazy(() => import('./views/template/theme/colors/Colors'))
