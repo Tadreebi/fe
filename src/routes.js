@@ -6,6 +6,9 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const TemplatePage = React.lazy(() => import('./views/templatePage'))
 const StudentReports = React.lazy(() => import('./views/StudentReports'))
 const UniversityFeedback = React.lazy(() => import('./views/UniversityFeedback'))
+const StudentRegister = React.lazy(() => import('./views/StudentRegister'))
+const UniversityRegister = React.lazy(() => import('./views/UniversityRegister'))
+const CompanyRegister = React.lazy(() => import('./views/CompanyRegister'))
 
 // Template
 const Colors = React.lazy(() => import('./views/template/theme/colors/Colors'))
@@ -53,6 +56,9 @@ const routes = [
   { path: '/example', name: 'Template Page', element: TemplatePage },
   { path: '/student-reports', name: 'Student Reports', element: StudentReports },
   { path: '/university-feedback', name: 'University Feedback', element: UniversityFeedback },
+  { path: '/register/student', name: 'Student Register', element: StudentRegister },
+  { path: '/register/university', name: 'University Register', element: UniversityRegister },
+  { path: '/register/company', name: 'Company Register', element: CompanyRegister },
 
   // Template
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
