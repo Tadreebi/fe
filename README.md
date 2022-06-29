@@ -12,6 +12,7 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
 - Whenever you remember a missed part of the backend code, please head to BE [project task manager](https://github.com/Tadreebi/be/projects/2) & add card for it.
 
 ## How to start development
+
 - For first time..
   - Clone repo to local machine.
   - Cd to directory
@@ -35,10 +36,10 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
           git fetch
           git checkout new_branch_name
 - To create local branch first...
-  - Make sure you have the latest version of dev branch locally by running CLI command of 
+  - Make sure you have the latest version of dev branch locally by running CLI command of
 
           git pull
-  - Create your new branch out of dev by running CLI command of 
+  - Create your new branch out of dev by running CLI command of
 
           git checkout -b new_branch dev
 - Duplicate an exising module (e.g. directory of src/views/StudentReports) & rename it according to targeted model.
