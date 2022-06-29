@@ -59,6 +59,10 @@ Soon...
 
 - Centralized Components (Template & styling library only called in the components for ease of replacement)
 
+## Future Techincal Features to Add
+
+Soon...
+
 ## Libraries Used
 
 - React
@@ -67,7 +71,3 @@ Soon...
 - CoreUi
 - Chart.Js
 - Prop-types
-
-## Future Techincal Features to Add
-
-Soon...
