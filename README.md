@@ -50,10 +50,10 @@ Soon...
   - Cd to directory
   - Run CLI command of
   
-      npm install
+        npm install
 - Run CLI command of
 
-    npm run start
+      npm run start
 
 ## Technical Features
 
