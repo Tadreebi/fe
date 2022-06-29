@@ -49,8 +49,8 @@ const StudentExperience = () => {
       double: true,
       required: true,
       value: experience.student,
-      onChange: e => setExperience(current => ({ ...current, student: e.target.value })),
-      options: companies.map(student => ({ title: student.name, value: student.id }))
+      onChange: e => setExperience(current => ({ ...current, company: e.target.value })),
+      options: companies.map(company => ({ title: company.name, value: company.id }))
     },
     {
       title: "Improved Aspects",
@@ -59,7 +59,7 @@ const StudentExperience = () => {
       fullwidth: true,
       required: true,
       value: experience.improved_aspects,
-      onChange: e => setExperience(current => ({ ...current, intro: e.target.value }))
+      onChange: e => setExperience(current => ({ ...current, improved_aspects: e.target.value }))
     },
     {
       title: "Missed Aspects",
@@ -68,7 +68,7 @@ const StudentExperience = () => {
       fullwidth: true,
       required: true,
       value: experience.missed_aspects,
-      onChange: e => setExperience(current => ({ ...current, conclusion: e.target.value }))
+      onChange: e => setExperience(current => ({ ...current, missed_aspects: e.target.value }))
     },
     {
       title: "get hired",
@@ -77,7 +77,7 @@ const StudentExperience = () => {
       fullwidth: true,
       required: true,
       value: experience.get_hired,
-      onChange: e => setExperience(current => ({ ...current, conclusion: e.target.value }))
+      onChange: e => setExperience(current => ({ ...current, get_hired: e.target.value }))
     },
     {
       title: "more",
@@ -86,7 +86,7 @@ const StudentExperience = () => {
       fullwidth: true,
       required: true,
       value: experience.more,
-      onChange: e => setExperience(current => ({ ...current, conclusion: e.target.value }))
+      onChange: e => setExperience(current => ({ ...current, more: e.target.value }))
     },
   ];
 
