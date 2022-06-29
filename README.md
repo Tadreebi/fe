@@ -8,7 +8,23 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
 
 ## Development Instructions & Notes
 
-- Please try to stick to the Node.Js common naming convention of camel-case, so you would nameYourThingLikeThis.
+- Please try to stick to the Node.Js common naming convention of camel-case, so you would nameYourThingLikeThis. Except when you name n call a component, its name should be camel-case but first letter capitalized, so it woulb be LikeThisNaming.
+- Whenever you remember a missed key in the backend, please head to BE [project](https://github.com/Tadreebi/be/projects/2) task manager & add card for it.
+
+## React App Building Steps
+
+Soon...
+
+## How to start development
+- For first time..
+  - Clone repo to local machine.
+  - Cd to directory
+  - Run CLI command of
+  
+        npm install
+- Run CLI command of
+
+      npm run start
 
 ## Adding New Module Instructions
 
@@ -36,24 +52,9 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
 - You could find the link to yor module now in the sidebar of the app. Now you can see the page.
 - Update the data inside created module.
 
-## React App Building Steps
-
-Soon...
-
 ## Testing Steps
 
 Soon...
-
-## How to start development
-- For first time..
-  - Clone repo to local machine.
-  - Cd to directory
-  - Run CLI command of
-  
-        npm install
-- Run CLI command of
-
-      npm run start
 
 ## Technical Features
 
