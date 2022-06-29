@@ -6,7 +6,7 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
 
 ## Development Instructions & Notes
 
-Soon...
+- Please try to stick to the Node.Js common naming convention of camel-case, so you would nameYourThingLikeThis.
 
 ## [Deployed App](https://tadreebi.vercel.app/)
 
@@ -50,7 +50,16 @@ Soon...
 
 ## Technical Features
 
-Soon...
+- Centralized Components (Template & styling library only called in the components for ease of replacement)
+
+## Libraries Used
+
+- React
+- React-Dom
+- Redux
+- CoreUi
+- Chart.Js
+- Prop-types
 
 ## Future Techincal Features to Add
 
