@@ -4,11 +4,11 @@ Frontend React.Js App of TADREEBI
 
 You may find full app documantation on [Introductory Repo](https://github.com/Tadreebi/app)
 
+[Deployed App](https://tadreebi.vercel.app/)
+
 ## Development Instructions & Notes
 
 - Please try to stick to the Node.Js common naming convention of camel-case, so you would nameYourThingLikeThis.
-
-## [Deployed App](https://tadreebi.vercel.app/)
 
 ## Adding New Module Instructions
 
