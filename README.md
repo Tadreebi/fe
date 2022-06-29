@@ -45,6 +45,13 @@ Soon...
 Soon...
 
 ## How to start development
+- For first time..
+  - Clone repo to local machine.
+  - Cd to directory
+  - Run CLI command of
+  
+      npm install
+- Run CLI command of
 
     npm run start
 
