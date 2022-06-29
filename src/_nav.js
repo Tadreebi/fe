@@ -28,12 +28,12 @@ const _nav = [
     component: CNavTitle,
     name: 'Model Pages',
   },
-  // {
-  //   component: CNavItem,
-  //   name: 'Template Page',
-  //   to: '/example',
-  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-  // },
+  {
+    component: CNavItem,
+    name: 'Student Reports',
+    to: '/student-reports',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
   {
     component: CNavTitle,
     name: 'Template',

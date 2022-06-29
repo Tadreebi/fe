@@ -1,7 +1,10 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+
+// Modules
 const TemplatePage = React.lazy(() => import('./views/templatePage'))
+const StudentReports = React.lazy(() => import('./views/StudentReports'))
 
 // Template
 const Colors = React.lazy(() => import('./views/template/theme/colors/Colors'))
@@ -44,7 +47,10 @@ const Widgets = React.lazy(() => import('./views/template/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
-  { path: '/example', name: 'TemplatePage', element: TemplatePage },
+
+  // Modules
+  { path: '/example', name: 'Template Page', element: TemplatePage },
+  { path: '/student-reports', name: 'Student Reports', element: StudentReports },
 
   // Template
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
