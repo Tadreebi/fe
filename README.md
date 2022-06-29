@@ -9,11 +9,7 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
 ## Development Instructions & Notes
 
 - Please try to stick to the Node.Js common naming convention of camel-case, so you would nameYourThingLikeThis. Except when you name n call a component, its name should be camel-case but first letter capitalized, so it woulb be LikeThisNaming.
-- Whenever you remember a missed key in the backend, please head to BE [project](https://github.com/Tadreebi/be/projects/2) task manager & add card for it.
-
-## React App Building Steps
-
-Soon...
+- Whenever you remember a missed part of the backend code, please head to BE [project task manager](https://github.com/Tadreebi/be/projects/2) & add card for it.
 
 ## How to start development
 - For first time..
@@ -33,7 +29,7 @@ Soon...
 - To create remote branch first (This is recommended to help the TO-Do automation, n make sure that you branched it out of latest version of dev branch)...
   - Go to created To-Do card on [project](https://github.com/Tadreebi/fe/projects/1)
   - After transfering it into an issue, click on the card title.
-  - In the right-side bar to be shown, sroll down to its tail.
+  - In the right-side bar to be shown, scroll down to its tail.
   - You'de find a clickable text of "create branch". Click it, give a name to your branch n create it. Then use the given command to pull the branch to local machine.
 
           git fetch
