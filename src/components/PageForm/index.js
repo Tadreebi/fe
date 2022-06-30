@@ -1,6 +1,5 @@
 import CollapseCard from '../CollapseCard';
-import Button from '../Root/Buttons';
-import ButtonGroup from '../Root/Buttons/Group';
+import { Button, ButtonGroup } from '../Root/Buttons';
 import Form from '../Root/Form';
 import { Col, Row } from '../Root/Grid';
 import { Boolean, CheckList, Input, Option, Select, Textarea } from '../Root/InputFields';

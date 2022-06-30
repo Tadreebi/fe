@@ -5,6 +5,11 @@ import { Option, Select } from "./Select";
 import Textarea from "./Textarea";
 
 export {
-  Boolean, CheckList, Input, Select, Option, Textarea
+  Boolean,
+  CheckList,
+  Input,
+  Option,
+  Select,
+  Textarea
 };
 

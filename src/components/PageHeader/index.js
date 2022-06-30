@@ -1,5 +1,4 @@
-import Card from '../Root/Cards/Card'
-import CardBody from '../Root/Cards/CardBody'
+import { Card, CardBody } from '../Root/Cards';
 
 const Header = ({ title = "Page Title", descrbition = "Page description" }) => {
   return (

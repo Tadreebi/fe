@@ -1,6 +1,6 @@
 import { CCard, CCardBody, CCardHeader, CCol, CRow, CWidgetStatsA } from '@coreui/react';
-import { CChartBar, CChartLine } from '@coreui/react-chartjs';
 import { getStyle } from '@coreui/utils';
+import { BarChart, LineChart } from '../Root/Charts';
 import statisticsDemoData from './demoData';
 
 const colors = [
@@ -52,7 +52,7 @@ const PageStatistics = ({ title, statistics = statisticsDemoData }) => {
                   statistic.chart && (
                     <>
                       {statistic.chart.type === "line" ? (
-                        <CChartLine
+                        <LineChart
                           className={statistic.chart.fill ? "mt-3" : "mt-3 mx-3"}
                           data={{
                             labels: Object.keys(statistic.chart.data),
@@ -114,7 +114,7 @@ const PageStatistics = ({ title, statistics = statisticsDemoData }) => {
                           }}
                         />
                       ) : statistic.chart.type === "bar" && (
-                        <CChartBar
+                        <BarChart
                           className="mt-3 mx-3"
                           data={{
                             labels: Object.keys(statistic.chart.data),

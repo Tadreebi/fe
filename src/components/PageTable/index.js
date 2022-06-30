@@ -1,12 +1,6 @@
 import CollapseCard from '../CollapseCard';
-import Button from '../Root/Buttons';
-import ButtonGroup from '../Root/Buttons/Group';
-import Table from '../Root/Table';
-import TableTD from '../Root/Table/TabeTD';
-import TableTH from '../Root/Table/TabeTH';
-import TableBody from '../Root/Table/TableBody';
-import TableHeader from '../Root/Table/TableHeader';
-import TableRow from '../Root/Table/TableRow';
+import { Button, ButtonGroup } from '../Root/Buttons';
+import { Table, TableBody, TableHeader, TableRow, TableTD, TableTH } from '../Root/Table';
 
 const dataDemo = [
   {

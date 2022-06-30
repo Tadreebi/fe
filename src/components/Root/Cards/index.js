@@ -4,5 +4,8 @@ import CardFooter from "./CardFooter"
 import CardHeader from "./CardHeader"
 
 export {
-  Card, CardBody, CardHeader, CardFooter
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter
 }

@@ -1,11 +1,18 @@
-import { CTable } from '@coreui/react';
+import TableTD from "./TabeTD";
+import TableTH from "./TabeTH";
+import Table from "./Table";
+import TableBody from "./TableBody";
+import TableFooter from "./TableFooter";
+import TableHeader from "./TableHeader";
+import TableRow from "./TableRow";
 
-const Table = ({ children, ...rest }) => {
-  return (
-    <CTable {...rest}>
-      {children}
-    </CTable>
-  )
-}
+export {
+  TableTD,
+  TableTH,
+  Table,
+  TableBody,
+  TableFooter,
+  TableHeader,
+  TableRow
+};
 
-export default Table
