@@ -36,6 +36,10 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Student Goals',
+    to: '/student-goals',
+  },
+  {
     name: 'Student Profile',
     to: '/student-profile',
   },
