@@ -1,6 +1,6 @@
-import PageForm from '../../components/PageForm'
-import PageHeader from '../../components/PageHeader'
-import PageTable from '../../components/PageTable'
+import PageForm from 'src/components/PageForm'
+import PageHeader from 'src/components/PageHeader'
+import PageTable from 'src/components/PageTable'
 
 const TemplatePage = ({ pageTitle, pageDescrbition, formTitle, formInputs, onFormSubmit, onFormReset, tableTitle, tableData, onDataCreate, onDataEdit, onDataDelete, onActionSelection, currentAction }) => {
 
