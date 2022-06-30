@@ -38,6 +38,10 @@ const _nav = [
     component: CNavItem,
     name: 'Student Experience',
     to: '/student-experiences',
+  },
+  {
+    name: 'University Feedback',
+    to: '/university-feedback',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {
