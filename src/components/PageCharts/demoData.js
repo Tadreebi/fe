@@ -125,6 +125,6 @@ const chartsDemoData = [
       }
     ]
   },
-];;
+];
 
 export default chartsDemoData

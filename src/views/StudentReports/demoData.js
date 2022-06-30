@@ -12,7 +12,7 @@ const reportsDemoData = [
   },
   {
     title: "Report 2",
-    student: 5,
+    student: 3,
     type: "Weekly Report",
     startDate: "2022-6-12",
     endDate: "2022-06-16",
@@ -34,7 +34,7 @@ const reportsDemoData = [
   },
   {
     title: "Report 4",
-    student: 5,
+    student: 3,
     type: "Weekly Report",
     startDate: "2022-6-24",
     endDate: "2022-06-30",

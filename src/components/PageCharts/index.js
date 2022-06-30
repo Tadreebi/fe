@@ -34,8 +34,8 @@ const PageCharts = ({ title, charts = chartsDemoData }) => {
 
       <CCardBody>
         <CRow>
-          {charts?.map(chart => (
-            <CCol sm={12} lg={6} className="px-5 my-3">
+          {charts?.map((chart, i) => (
+            <CCol sm={12} lg={6} className="px-5 my-3" key={i}>
               <h5>
                 {chart.title}
               </h5>
