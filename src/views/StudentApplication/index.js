@@ -3,7 +3,7 @@ import TemplatePage from '../templatePage'
 
 
 const StudentApplication = () => {
-  const [reports, setReports] = useState([]);
+  const [applications, setApplications] = useState([]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
 
@@ -125,21 +125,21 @@ const StudentApplication = () => {
   };
 
   const onDataCreate = () => {
-    setReports(current => [...current, { ...application, id: current.length }]);
+    setApplications(current => [...current, { ...application, id: current.length }]);
     setApplication({});
     setAction("create");
     console.log('Form Data Created');
   };
 
   const onDataEdit = () => {
-    setReports(current => [...current.filter(rep => rep.id !== application.id), application]);
+    setApplications(current => [...current.filter(rep => rep.id !== application.id), application]);
     setApplication({});
     setAction("create");
     console.log('Form Data Updated');
   };
 
   const onDataDelete = () => {
-    setReports(current => [...current.filter(rep => rep.id !== application.id)]);
+    setApplications(current => [...current.filter(rep => rep.id !== application.id)]);
     setApplication({});
     setAction("create");
     console.log('Form Data Deleted');
@@ -148,14 +148,14 @@ const StudentApplication = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Reports"}
-        pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
-        formTitle={"CRUD Reports"}
+        pageTitle={"Student Applications"}
+        pageDescrbition={"For student to apply for a specific internship posted by the company"}
+        formTitle={"CRUD Applications"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"Student Reports List"}
-        tableData={reports}
+        tableTitle={"Student Applications List"}
+        tableData={applications}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
