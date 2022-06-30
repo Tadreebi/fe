@@ -1,9 +1,9 @@
-import {
-  CButton, CButtonGroup, CCard,
-  CCardBody,
-  CCardHeader,
-  CCol, CForm, CFormCheck, CFormInput, CFormLabel, CFormSelect, CFormSwitch, CFormTextarea, CRow
-} from '@coreui/react';
+import CollapseCard from '../CollapseCard';
+import { Button, ButtonGroup } from '../Root/Buttons';
+import Form from '../Root/Form';
+import { Col, Row } from '../Root/Grid';
+import { Boolean, CheckList, Input, Option, Select, Textarea } from '../Root/InputFields';
+import Label from '../Root/Label';
 
 const inputsDemo = [
   {
@@ -95,7 +95,7 @@ const length = count => {
   }
 };
 
-const PageForm = ({ title, inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction }) => {
+const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction }) => {
 
   const submitTextDecider = () => {
     switch (currentAction) {
@@ -107,108 +107,102 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText, onSubmit, onReset, c
   };
 
   return (
-    <CCard className="mb-4">
-      {title && (
-        <CCardHeader>
-          {title}
-        </CCardHeader>
-      )}
+    <CollapseCard title={title}>
+      <Form onSubmit={onSubmit}>
+        <Row>
+          {inputs?.map((input, i) => (
+            <Col md={input.fullwidth ? 12 : input.double ? 8 : length(inputs.length)} className="py-3" key={i}>
+              <Label>
+                {input.title || "Title"} {input.required ? <span className='text-danger'>*</span> : ""}
+              </Label>
 
-      <CCardBody>
-        <CForm onSubmit={onSubmit}>
-          <CRow>
-            {inputs?.map((input, i) => (
-              <CCol md={input.fullwidth ? 12 : input.double ? 8 : length(inputs.length)} className="py-3" key={i}>
-                <CFormLabel>
-                  {input.title || "Title"} {input.required ? <span className='text-danger'>*</span> : ""}
-                </CFormLabel>
+              {input.type === "select" ? (
+                <Select
+                  name={input.name}
+                  size={input.size || "md"}
+                  required={input.required}
+                  value={input.value}
+                  onChange={input.onChange}
+                  disabled={input.disabled || currentAction === "view"}
+                  multiple={input.multiple}
+                >
+                  <Option>Please Select...</Option>
 
-                {input.type === "select" ? (
-                  <CFormSelect
-                    name={input.name}
-                    size={input.size || "md"}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    multiple={input.multiple}
-                  >
-                    <option>Please Select...</option>
-
+                  {input.options?.map((option, i) => (
+                    <Option value={option.value} key={i}>{option.title}</Option>
+                  ))}
+                </Select>
+              ) : input.type === "textarea" ? (
+                <Textarea
+                  name={input.name}
+                  placeholder={input.placeholder || input.title}
+                  required={input.required}
+                  value={input.value}
+                  onChange={input.onChange}
+                  disabled={input.disabled || currentAction === "view"}
+                  readOnly={input.readOnly}
+                  multiple={input.multiple}
+                />
+              ) : (input.type === "checkbox" || input.type === "radio") ? (
+                <>
+                  <Row>
                     {input.options?.map((option, i) => (
-                      <option value={option.value} key={i}>{option.title}</option>
+                      <Col md={length(input.options.length)} className="py-3" key={i}>
+                        <CheckList
+                          name={input.name}
+                          multiple={input.type === "checkbox"}
+                          value={option.value}
+                          label={option.title}
+                          required={input.required}
+                          onChange={input.onChange}
+                          disabled={input.disabled || currentAction === "view"}
+                        />
+                      </Col>
                     ))}
-                  </CFormSelect>
-                ) : input.type === "textarea" ? (
-                  <CFormTextarea
-                    name={input.name}
-                    placeholder={input.placeholder || input.title}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    readOnly={input.readOnly}
-                    multiple={input.multiple}
-                  />
-                ) : (input.type === "checkbox" || input.type === "radio") ? (
-                  <>
-                    <CRow>
-                      {input.options?.map((option, i) => (
-                        <CCol md={length(input.options.length)} className="py-3" key={i}>
-                          <CFormCheck
-                            name={input.name}
-                            type={input.type}
-                            value={option.value}
-                            label={option.title}
-                            required={input.required}
-                            onChange={input.onChange}
-                            disabled={input.disabled || currentAction === "view"}
-                          />
-                        </CCol>
-                      ))}
-                    </CRow>
-                  </>
-                ) : input.type === "switch" ? (
-                  <CFormSwitch
-                    label={input.title}
-                    name={input.name}
-                    size={input.size || "lg"}
-                    checked={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                  />
-                ) : (
-                  <CFormInput
-                    name={input.name}
-                    size={input.size}
-                    type={input.type}
-                    placeholder={input.placeholder || input.title}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    readOnly={input.readOnly}
-                    multiple={input.multiple}
-                  />
-                )}
-              </CCol>
-            ))}
-            <CCol xs={12} >
-              <CButtonGroup role="group">
-                {onReset && (
-                  <CButton onClick={onReset} color='warning' className='text-white'>
-                    Reset
-                  </CButton>
-                )}
-                {currentAction !== "view" && (<CButton type="submit" color='success' className='text-white'>
+                  </Row>
+                </>
+              ) : input.type === "switch" ? (
+                <Boolean
+                  label={input.title}
+                  name={input.name}
+                  size={input.size || "lg"}
+                  checked={input.value}
+                  onChange={input.onChange}
+                  disabled={input.disabled || currentAction === "view"}
+                />
+              ) : (
+                <Input
+                  name={input.name}
+                  size={input.size}
+                  type={input.type}
+                  placeholder={input.placeholder || input.title}
+                  required={input.required}
+                  value={input.value}
+                  onChange={input.onChange}
+                  disabled={input.disabled || currentAction === "view"}
+                  readOnly={input.readOnly}
+                  multiple={input.multiple}
+                />
+              )}
+            </Col>
+          ))}
+          <Col xs={12} >
+            <ButtonGroup role="group" style={{ float: 'right' }}>
+              {onReset && (
+                <Button onClick={onReset} color='warning' className='text-white'>
+                  Reset
+                </Button>
+              )}
+              {currentAction !== "view" && (
+                <Button type="submit" color='success' className='text-white'>
                   {SubmitText || submitTextDecider()}
-                </CButton>)}
-              </CButtonGroup>
-            </CCol>
-          </CRow>
-        </CForm>
-      </CCardBody>
-    </CCard>
+                </Button>
+              )}
+            </ButtonGroup>
+          </Col>
+        </Row>
+      </Form>
+    </CollapseCard>
   )
 }
 

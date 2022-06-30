@@ -1,16 +1,13 @@
-import {
-  CCard,
-  CCardBody
-} from '@coreui/react'
+import { Card, CardBody } from '../Root/Cards';
 
 const Header = ({ title = "Page Title", descrbition = "Page description" }) => {
   return (
-    <CCard className='mb-3 py-1'>
-      <CCardBody>
+    <Card className='mb-3 py-1'>
+      <CardBody>
         <h4 className='py-2'><u>{title}</u></h4>
         <small>{descrbition}</small>
-      </CCardBody>
-    </CCard>
+      </CardBody>
+    </Card>
   )
 }
 

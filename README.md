@@ -12,6 +12,7 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
 - Whenever you remember a missed part of the backend code, please head to BE [project task manager](https://github.com/Tadreebi/be/projects/2) & add card for it.
 
 ## How to start development
+
 - For first time..
   - Clone repo to local machine.
   - Cd to directory
@@ -35,16 +36,17 @@ You may find full app documantation on [Introductory Repo](https://github.com/Ta
           git fetch
           git checkout new_branch_name
 - To create local branch first...
-  - Make sure you have the latest version of dev branch locally by running CLI command of 
+  - Make sure you have the latest version of dev branch locally by running CLI command of
 
           git pull
-  - Create your new branch out of dev by running CLI command of 
+  - Create your new branch out of dev by running CLI command of
 
           git checkout -b new_branch dev
 - Duplicate an exising module (e.g. directory of src/views/StudentReports) & rename it according to targeted model.
 - Add the URL to src/_nav.js, below "Model Pages".
 - Import the module inside src/routes.js, below "Modules".
-- Add the path inside const routes of src/routes.js, below "Modules".
+- Import the created module inside src/routes.js, below "Modules" imports.
+- Add imported component to the list of routes of src/routes.js, below "Modules" routes.
 - You could find the link to yor module now in the sidebar of the app. Now you can see the page.
 - Update the data inside created module.
 
