@@ -5,6 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 // Modules
 const TemplatePage = React.lazy(() => import('./views/templatePage'))
 const StudentReports = React.lazy(() => import('./views/StudentReports'))
+const StudentApplication = React.lazy(() => import('./views/StudentApplication'))
 const OpportunityPosts = React.lazy(() => import('./views/OpportunityPosts'))
 const StudentProposals = React.lazy(() => import('./views/StudentProposals'))
 const StudentExperiences = React.lazy(() => import('./views/StudentExperience'))
@@ -58,6 +59,7 @@ const routes = [
   // Modules
   { path: '/example', name: 'Template Page', element: TemplatePage },
   { path: '/student-reports', name: 'Student Reports', element: StudentReports },
+  { path: '/student-application', name: 'Student Application', element: StudentApplication },
   { path: '/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },
   { path: '/student-proposals', name: 'Student Proposals', element: StudentProposals },
   { path: '/student-experiences', name: 'Student Reports', element: StudentExperiences },

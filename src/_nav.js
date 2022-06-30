@@ -36,6 +36,10 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Student Application',
+    to: '/student-application',
+  },
+  {
     name: 'Opportunity Posts',
     to: '/opportunity-posts',
   },
