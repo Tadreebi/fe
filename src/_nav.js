@@ -38,6 +38,36 @@ const _nav = [
     component: CNavItem,
     name: 'Opportunity Posts',
     to: '/opportunity-posts',
+  },
+  {
+    name: 'Student Proposals',
+    to: '/student-proposals',
+  },
+  {
+    name: 'Student Experience',
+    to: '/student-experiences',
+  },
+  {
+    name: 'University Feedback',
+    to: '/university-feedback',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Student Register',
+    to: '/register/student',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'University Register',
+    to: '/register/university',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Company Register',
+    to: '/register/company',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {
