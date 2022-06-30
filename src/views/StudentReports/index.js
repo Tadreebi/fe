@@ -1,64 +1,6 @@
 import { useState } from 'react'
 import TemplatePage from '../templatePage'
-
-const reportsDemoData = [
-  {
-    title: "Report 1",
-    student: 5,
-    type: "Weekly Report",
-    startDate: "2022-6-05",
-    endDate: "2022-06-09",
-    intro: "this is my weekly report of which I did a lot of things",
-    remarks: "This is bar report, please resubmit",
-    accepted: false,
-    conclusion: "So all in all this was a rich week",
-  },
-  {
-    title: "Report 2",
-    student: 5,
-    type: "Weekly Report",
-    startDate: "2022-6-12",
-    endDate: "2022-06-16",
-    intro: "this is my weekly report of which I did a lot of things",
-    remarks: "",
-    accepted: false,
-    conclusion: "So all in all this was a rich week",
-  },
-  {
-    title: "Report 3",
-    student: 5,
-    type: "Weekly Report",
-    startDate: "2022-6-19",
-    endDate: "2022-06-23",
-    intro: "this is my weekly report of which I did a lot of things",
-    remarks: "",
-    accepted: false,
-    conclusion: "So all in all this was a rich week",
-  },
-  {
-    title: "Report 4",
-    student: 5,
-    type: "Weekly Report",
-    startDate: "2022-6-24",
-    endDate: "2022-06-30",
-    intro: "this is my weekly report of which I did a lot of things",
-    remarks: "",
-    accepted: false,
-    conclusion: "So all in all this was a rich week",
-  },
-  {
-    title: "Report 5",
-    student: 5,
-    type: "Monthly Report",
-    startDate: "2022-6-05",
-    endDate: "2022-06-30",
-    intro: "this is my monthly report of which I did a lot of things",
-    remarks: "",
-    accepted: true,
-    conclusion: "So all in all this was a rich month",
-  }
-];
-
+import reportsDemoData from './demoData'
 
 const StudentReports = () => {
   const [reportsList, setReportsList] = useState([...reportsDemoData]);
