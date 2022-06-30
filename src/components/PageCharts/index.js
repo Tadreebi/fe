@@ -1,5 +1,6 @@
-import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react';
-import { CChartBar, CChartDoughnut, CChartLine, CChartPie, CChartPolarArea, CChartRadar } from '@coreui/react-chartjs';
+import { Card, CardBody, CardHeader } from '../Root/Cards';
+import { BarChart, DoughnutChart, LineChart, PieChart, PolarChart, RadarChart } from '../Root/Charts';
+import { Col, Row } from '../Root/Grid';
 import chartsDemoData from './demoData';
 
 const colors = [
@@ -27,21 +28,21 @@ const rgbColors = color => {
 
 const PageCharts = ({ title, charts = chartsDemoData }) => {
   return (
-    <CCard className="mb-4">
-      <CCardHeader>
+    <Card className="mb-4">
+      <CardHeader>
         {title || "Charts"}
-      </CCardHeader>
+      </CardHeader>
 
-      <CCardBody>
-        <CRow>
+      <CardBody>
+        <Row>
           {charts?.map((chart, i) => (
-            <CCol sm={12} lg={6} className="px-5 my-3" key={i}>
+            <Col sm={12} lg={6} className="px-5 my-3" key={i}>
               <h5>
                 {chart.title}
               </h5>
 
               {chart.type === "bar" ? (
-                <CChartBar
+                <BarChart
                   data={{
                     labels: Object.keys(chart.data[0].data),
                     datasets: chart.data.map(dat =>
@@ -54,7 +55,7 @@ const PageCharts = ({ title, charts = chartsDemoData }) => {
                   }}
                 />
               ) : chart.type === "line" ? (
-                <CChartLine
+                <LineChart
                   data={{
                     labels: Object.keys(chart.data[0].data),
                     datasets: chart.data.map(dat =>
@@ -70,7 +71,7 @@ const PageCharts = ({ title, charts = chartsDemoData }) => {
                   }}
                 />
               ) : chart.type === "doughnut" ? (
-                <CChartDoughnut
+                <DoughnutChart
                   data={{
                     labels: Object.keys(chart.data),
                     datasets: [
@@ -82,7 +83,7 @@ const PageCharts = ({ title, charts = chartsDemoData }) => {
                   }}
                 />
               ) : chart.type === "pie" ? (
-                <CChartPie
+                <PieChart
                   data={{
                     labels: Object.keys(chart.data),
                     datasets: [
@@ -95,7 +96,7 @@ const PageCharts = ({ title, charts = chartsDemoData }) => {
                   }}
                 />
               ) : chart.type === "polar" ? (
-                <CChartPolarArea
+                <PolarChart
                   data={{
                     labels: Object.keys(chart.data),
                     datasets: [
@@ -108,7 +109,7 @@ const PageCharts = ({ title, charts = chartsDemoData }) => {
                   }}
                 />
               ) : chart.type === "radar" && (
-                <CChartRadar
+                <RadarChart
                   data={{
                     labels: Object.keys(chart.data[0].data),
                     datasets: chart.data.map((dat, i) =>
@@ -126,11 +127,11 @@ const PageCharts = ({ title, charts = chartsDemoData }) => {
                   }}
                 />
               )}
-            </CCol>
+            </Col>
           ))}
-        </CRow>
-      </CCardBody>
-    </CCard>
+        </Row>
+      </CardBody>
+    </Card>
   )
 }
 

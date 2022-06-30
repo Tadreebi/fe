@@ -1,12 +1,6 @@
-import { CButton } from '@coreui/react';
+import Button from "./Button";
+import ButtonGroup from "./Group";
 
-const Button = ({ children, ...rest }) => {
-
-  return (
-    <CButton {...rest} >
-      {children}
-    </CButton>
-  )
+export {
+  Button, ButtonGroup
 }
-
-export default Button

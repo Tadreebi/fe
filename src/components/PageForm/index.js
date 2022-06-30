@@ -2,13 +2,8 @@ import CollapseCard from '../CollapseCard';
 import Button from '../Root/Buttons';
 import ButtonGroup from '../Root/Buttons/Group';
 import Form from '../Root/Form';
-import Col from '../Root/Grid/Col';
-import Row from '../Root/Grid/Row';
-import Boolean from '../Root/InputFields/Boolean';
-import CheckList from '../Root/InputFields/CheckList';
-import Input from '../Root/InputFields/Input';
-import { Option, Select } from '../Root/InputFields/Select';
-import Textarea from '../Root/InputFields/Textarea';
+import { Col, Row } from '../Root/Grid';
+import { Boolean, CheckList, Input, Option, Select, Textarea } from '../Root/InputFields';
 import Label from '../Root/Label';
 
 const inputsDemo = [

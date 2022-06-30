@@ -1,8 +1,6 @@
 import { cilArrowCircleBottom, cilArrowCircleRight } from '@coreui/icons';
 import { useState } from 'react';
-import Card from '../Root/Cards/Card';
-import CardBody from '../Root/Cards/CardBody';
-import CardHeader from '../Root/Cards/CardHeader';
+import { Card, CardBody, CardHeader } from '../Root/Cards';
 import Collapse from '../Root/Collapse';
 import Icon from '../Root/Icon';
 
