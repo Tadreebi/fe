@@ -12,6 +12,8 @@ const OpportunityPosts = React.lazy(() => import('./views/OpportunityPosts'))
 const StudentProposals = React.lazy(() => import('./views/StudentProposals'))
 const StudentExperiences = React.lazy(() => import('./views/StudentExperience'))
 const UniversityFeedback = React.lazy(() => import('./views/UniversityFeedback'))
+const PasswordReset = React.lazy(() => import('./views/PasswordReset'))
+const PasswordChange = React.lazy(() => import('./views/PasswordChange'))
 const StudentRegister = React.lazy(() => import('./views/StudentRegister'))
 const UniversityRegister = React.lazy(() => import('./views/UniversityRegister'))
 const CompanyRegister = React.lazy(() => import('./views/CompanyRegister'))
@@ -68,6 +70,8 @@ const routes = [
   { path: '/student-proposals', name: 'Student Proposals', element: StudentProposals },
   { path: '/student-experiences', name: 'Student Reports', element: StudentExperiences },
   { path: '/university-feedback', name: 'University Feedback', element: UniversityFeedback },
+  { path: '/password/reset', name: 'Reset Password', element: PasswordReset },
+  { path: '/password/change', name: 'Change Password', element: PasswordChange },
   { path: '/register/student', name: 'Student Register', element: StudentRegister },
   { path: '/register/university', name: 'University Register', element: UniversityRegister },
   { path: '/register/company', name: 'Company Register', element: CompanyRegister },
