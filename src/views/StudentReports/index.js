@@ -1,9 +1,67 @@
 import { useState } from 'react'
 import TemplatePage from '../templatePage'
 
+const reportsDemoData = [
+  {
+    title: "Report 1",
+    student: 5,
+    type: "Weekly Report",
+    startDate: "2022-6-05",
+    endDate: "2022-06-09",
+    intro: "this is my weekly report of which I did a lot of things",
+    remarks: "This is bar report, please resubmit",
+    accepted: false,
+    conclusion: "So all in all this was a rich week",
+  },
+  {
+    title: "Report 2",
+    student: 5,
+    type: "Weekly Report",
+    startDate: "2022-6-12",
+    endDate: "2022-06-16",
+    intro: "this is my weekly report of which I did a lot of things",
+    remarks: "",
+    accepted: false,
+    conclusion: "So all in all this was a rich week",
+  },
+  {
+    title: "Report 3",
+    student: 5,
+    type: "Weekly Report",
+    startDate: "2022-6-19",
+    endDate: "2022-06-23",
+    intro: "this is my weekly report of which I did a lot of things",
+    remarks: "",
+    accepted: false,
+    conclusion: "So all in all this was a rich week",
+  },
+  {
+    title: "Report 4",
+    student: 5,
+    type: "Weekly Report",
+    startDate: "2022-6-24",
+    endDate: "2022-06-30",
+    intro: "this is my weekly report of which I did a lot of things",
+    remarks: "",
+    accepted: false,
+    conclusion: "So all in all this was a rich week",
+  },
+  {
+    title: "Report 5",
+    student: 5,
+    type: "Monthly Report",
+    startDate: "2022-6-05",
+    endDate: "2022-06-30",
+    intro: "this is my monthly report of which I did a lot of things",
+    remarks: "",
+    accepted: true,
+    conclusion: "So all in all this was a rich month",
+  }
+];
+
 
 const StudentReports = () => {
-  const [reports, setReports] = useState([]);
+  const [reportsList, setReportsList] = useState([...reportsDemoData]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
 
@@ -82,6 +140,24 @@ const StudentReports = () => {
       value: report.conclusion,
       onChange: e => setReport(current => ({ ...current, conclusion: e.target.value }))
     },
+    {
+      title: "Report Remarks",
+      name: "remarks",
+      type: "textarea",
+      fullwidth: true,
+      required: true,
+      value: report.remarks,
+      onChange: e => setReport(current => ({ ...current, remarks: e.target.value }))
+    },
+    {
+      title: "Accepted",
+      name: "accepted",
+      type: "switch",
+      fullwidth: true,
+      required: true,
+      value: report.accepted,
+      onChange: e => setReport(current => ({ ...current, accepted: e.target.checked }))
+    },
   ];
 
   const onFormSubmit = e => {
@@ -107,37 +183,83 @@ const StudentReports = () => {
   };
 
   const onDataCreate = () => {
-    setReports(current => [...current, { ...report, id: current.length }]);
+    setReportsList(current => [...current, { ...report, id: current.length }]);
     setReport({});
     setAction("create");
     console.log('Form Data Created');
   };
 
   const onDataEdit = () => {
-    setReports(current => [...current.filter(rep => rep.id !== report.id), report]);
+    setReportsList(current => [...current.filter(rep => rep.id !== report.id), report]);
     setReport({});
     setAction("create");
     console.log('Form Data Updated');
   };
 
   const onDataDelete = () => {
-    setReports(current => [...current.filter(rep => rep.id !== report.id)]);
+    setReportsList(current => [...current.filter(rep => rep.id !== report.id)]);
     setReport({});
     setAction("create");
     console.log('Form Data Deleted');
   };
+
+  const statisticsData = [
+    {
+      title: "Submitted Reports",
+      number: reportsList.length,
+      chart: {
+        type: "bar",
+        data: {
+          "Pending Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
+          "Accepted Reports": reportsList.filter(rep => rep.accepted === true)?.length,
+          "Rejected Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
+        },
+        fill: true
+      }
+    },
+    {
+      title: "Types of Reports Submitted",
+      number: reportsList.map(rep => rep.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Monthly Report": reportsList.filter(rep => rep.type === "Monthly Report")?.length,
+          "Weekly Report": reportsList.filter(rep => rep.type === "Weekly Report")?.length,
+          "Final Report": reportsList.filter(rep => rep.type === "Final Report")?.length,
+        },
+      }
+    },
+    {
+      title: "Users",
+      number: "26",
+      chart: {
+        type: "line",
+        data: {
+          "Label 1": 70,
+          "Label 2": 60,
+          "Label 3": 40,
+          "Label 4": 50
+        },
+      }
+    },
+    {
+      title: "Users",
+      number: "26",
+    }
+  ];
 
   return (
     <>
       <TemplatePage
         pageTitle={"Student Reports"}
         pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
+        statisticsData={statisticsData}
         formTitle={"CRUD Reports"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Reports List"}
-        tableData={reports}
+        tableData={reportsList}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}

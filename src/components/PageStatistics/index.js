@@ -77,7 +77,7 @@ const PageStatistics = ({ title, statistics = statisticsDemo }) => {
           {statistics?.map((statistic, i) => (
             <CCol sm={6} lg={length(statistics.length)} key={i}>
               <CWidgetStatsA
-                className="mb-4"
+                className={`mb-4 ${statistic.chart ? "" : "pb-5"}`}
                 color={statistic.color || colors[i % (colors.length - 1)]}
                 value={statistic.number}
                 title={statistic.title}
