@@ -1,50 +1,7 @@
 import { CCard, CCardBody, CCardHeader, CCol, CRow, CWidgetStatsA } from '@coreui/react';
 import { CChartBar, CChartLine } from '@coreui/react-chartjs';
 import { getStyle } from '@coreui/utils';
-
-const statisticsDemo = [
-  {
-    color: "primary",
-    number: "26",
-    title: "Users",
-    chart: {
-      type: "line",
-      data: {
-        "Label 1": 70,
-        "Label 2": 60,
-        "Label 3": 40,
-        "Label 4": 50
-      },
-      fill: true
-    }
-  },
-  {
-    number: "26",
-    title: "Users",
-    chart: {
-      type: "line",
-      data: {
-        "Label 1": 70,
-        "Label 2": 60,
-        "Label 3": 40,
-        "Label 4": 50
-      },
-    }
-  },
-  {
-    number: "26",
-    title: "Users",
-    chart: {
-      type: "bar",
-      data: {
-        "Label 1": 7,
-        "Label 2": 6,
-        "Label 3": 4,
-        "Label 4": 5
-      },
-    }
-  }
-];
+import statisticsDemoData from './demoData';
 
 const colors = [
   "primary",
@@ -65,7 +22,7 @@ const length = count => {
   }
 };
 
-const PageStatistics = ({ title, statistics = statisticsDemo }) => {
+const PageStatistics = ({ title, statistics = statisticsDemoData }) => {
   return (
     <CCard className="mb-4">
       <CCardHeader>
