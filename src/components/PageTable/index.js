@@ -1,11 +1,6 @@
-import {
-  CButton, CButtonGroup, CTable,
-  CTableBody, CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow
-} from '@coreui/react';
-import CollapseCard from '../Cards/CollapseCard';
+import CollapseCard from '../CollapseCard';
+import { Button, ButtonGroup } from '../Root/Buttons';
+import { Table, TableBody, TableHeader, TableRow, TableTD, TableTH } from '../Root/Table';
 
 const dataDemo = [
   {
@@ -35,59 +30,59 @@ const keyFilter = key => {
   }
 }
 
-const Tables = ({ title, data = dataDemo, onActionSelection = action => console.log("Selecting Action", action) }) => {
+const Tables = ({ title = "Table", data = dataDemo, onActionSelection = action => console.log("Selecting Action", action) }) => {
   return (
     <CollapseCard title={title} open>
-      <CTable striped hover>
-        <CTableHead>
-          <CTableRow>
+      <Table striped hover>
+        <TableHeader>
+          <TableRow>
             {data.length > 0 ?
               <>
                 {Object.keys(data[0]).filter(key => keyFilter(key)).map((key, i) => (
-                  <CTableHeaderCell key={i}>
+                  <TableTH key={i}>
                     {key}
-                  </CTableHeaderCell>
+                  </TableTH>
                 ))}
-                <CTableHeaderCell >
+                <TableTH >
                   Actions
-                </CTableHeaderCell>
+                </TableTH>
               </>
-              : <CTableHeaderCell className="text-center">
+              : <TableTH className="text-center">
                 No Data to Show
-              </CTableHeaderCell>
+              </TableTH>
             }
-          </CTableRow>
-        </CTableHead>
+          </TableRow>
+        </TableHeader>
 
-        <CTableBody>
+        <TableBody>
           {data?.map((record, i) => (
-            <CTableRow key={i}>
+            <TableRow key={i}>
               {Object?.keys(record).filter(key => keyFilter(key))?.map((key, y) => (
-                <CTableDataCell key={y}>{record[key]}</CTableDataCell>
+                <TableTD key={y}>{record[key]}</TableTD>
               ))}
-              <CTableDataCell >
-                <CButtonGroup role="group" size='sm'>
-                  <CButton onClick={() => onActionSelection('view', record)} color='info' className='text-white'>
+              <TableTD >
+                <ButtonGroup role="group" size='sm'>
+                  <Button onClick={() => onActionSelection('view', record)} color='info' className='text-white'>
                     View
-                  </CButton>
+                  </Button>
 
-                  <CButton onClick={() => onActionSelection('create', record)} color='success' className='text-white'>
+                  <Button onClick={() => onActionSelection('create', record)} color='success' className='text-white'>
                     Duplicate
-                  </CButton>
+                  </Button>
 
-                  <CButton onClick={() => onActionSelection('update', record)} color='warning' className='text-white'>
+                  <Button onClick={() => onActionSelection('update', record)} color='warning' className='text-white'>
                     Edit
-                  </CButton>
+                  </Button>
 
-                  <CButton onClick={() => onActionSelection('delete', record)} color='danger' className='text-white'>
+                  <Button onClick={() => onActionSelection('delete', record)} color='danger' className='text-white'>
                     Delete
-                  </CButton>
-                </CButtonGroup>
-              </CTableDataCell>
-            </CTableRow>
+                  </Button>
+                </ButtonGroup>
+              </TableTD>
+            </TableRow>
           ))}
-        </CTableBody>
-      </CTable>
+        </TableBody>
+      </Table>
     </CollapseCard>
   )
 }

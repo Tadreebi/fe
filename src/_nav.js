@@ -36,6 +36,36 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Student Goals',
+    to: '/student-goals',
+  },
+  {
+    component: CNavItem,
+    name: 'Student Profile',
+    to: '/student-profile',
+  },
+  {
+    component: CNavItem,
+    name: 'Student Application',
+    to: '/student-application',
+  },
+  {
+    component: CNavItem,
+    name: 'Opportunity Posts',
+    to: '/opportunity-posts',
+  },
+  {
+    component: CNavItem,
+    name: 'Student Proposals',
+    to: '/student-proposals',
+  },
+  {
+    component: CNavItem,
+    name: 'Student Experience',
+    to: '/student-experiences',
+  },
+  {
+    component: CNavItem,
     name: 'University Feedback',
     to: '/university-feedback',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
@@ -44,12 +74,28 @@ const _nav = [
     component: CNavItem,
     name: 'Reset Password',
     to: '/password/reset',
+  },
+  {
+    component: CNavItem,
+    name: 'Student Register',
+    to: '/register/student',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Change Password',
     to: '/password/change',
+  },
+  {
+    component: CNavItem,
+    name: 'University Register',
+    to: '/register/university',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Company Register',
+    to: '/register/company',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {

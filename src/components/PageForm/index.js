@@ -1,5 +1,9 @@
-import { CButton, CButtonGroup, CCol, CForm, CFormCheck, CFormInput, CFormLabel, CFormSelect, CFormSwitch, CFormTextarea, CRow } from '@coreui/react';
-import CollapseCard from '../Cards/CollapseCard';
+import CollapseCard from '../CollapseCard';
+import { Button, ButtonGroup } from '../Root/Buttons';
+import Form from '../Root/Form';
+import { Col, Row } from '../Root/Grid';
+import { Boolean, CheckList, Input, Option, Select, Textarea } from '../Root/InputFields';
+import Label from '../Root/Label';
 
 const inputsDemo = [
   {
@@ -104,16 +108,16 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
 
   return (
     <CollapseCard title={title}>
-      <CForm onSubmit={onSubmit}>
-        <CRow>
+      <Form onSubmit={onSubmit}>
+        <Row>
           {inputs?.map((input, i) => (
-            <CCol md={input.fullwidth ? 12 : input.double ? 8 : length(inputs.length)} className="py-3" key={i}>
-              <CFormLabel>
+            <Col md={input.fullwidth ? 12 : input.double ? 8 : length(inputs.length)} className="py-3" key={i}>
+              <Label>
                 {input.title || "Title"} {input.required ? <span className='text-danger'>*</span> : ""}
-              </CFormLabel>
+              </Label>
 
               {input.type === "select" ? (
-                <CFormSelect
+                <Select
                   name={input.name}
                   size={input.size || "md"}
                   required={input.required}
@@ -122,14 +126,14 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   disabled={input.disabled || currentAction === "view"}
                   multiple={input.multiple}
                 >
-                  <option>Please Select...</option>
+                  <Option>Please Select...</Option>
 
                   {input.options?.map((option, i) => (
-                    <option value={option.value} key={i}>{option.title}</option>
+                    <Option value={option.value} key={i}>{option.title}</Option>
                   ))}
-                </CFormSelect>
+                </Select>
               ) : input.type === "textarea" ? (
-                <CFormTextarea
+                <Textarea
                   name={input.name}
                   placeholder={input.placeholder || input.title}
                   required={input.required}
@@ -141,24 +145,24 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                 />
               ) : (input.type === "checkbox" || input.type === "radio") ? (
                 <>
-                  <CRow>
+                  <Row>
                     {input.options?.map((option, i) => (
-                      <CCol md={length(input.options.length)} className="py-3" key={i}>
-                        <CFormCheck
+                      <Col md={length(input.options.length)} className="py-3" key={i}>
+                        <CheckList
                           name={input.name}
-                          type={input.type}
+                          multiple={input.type === "checkbox"}
                           value={option.value}
                           label={option.title}
                           required={input.required}
                           onChange={input.onChange}
                           disabled={input.disabled || currentAction === "view"}
                         />
-                      </CCol>
+                      </Col>
                     ))}
-                  </CRow>
+                  </Row>
                 </>
               ) : input.type === "switch" ? (
-                <CFormSwitch
+                <Boolean
                   label={input.title}
                   name={input.name}
                   size={input.size || "lg"}
@@ -167,7 +171,7 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   disabled={input.disabled || currentAction === "view"}
                 />
               ) : (
-                <CFormInput
+                <Input
                   name={input.name}
                   size={input.size}
                   type={input.type}
@@ -180,22 +184,24 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   multiple={input.multiple}
                 />
               )}
-            </CCol>
+            </Col>
           ))}
-          <CCol xs={12} >
-            <CButtonGroup role="group" style={{ float: 'right' }}>
+          <Col xs={12} >
+            <ButtonGroup role="group" style={{ float: 'right' }}>
               {onReset && (
-                <CButton onClick={onReset} color='warning' className='text-white'>
+                <Button onClick={onReset} color='warning' className='text-white'>
                   Reset
-                </CButton>
+                </Button>
               )}
-              {currentAction !== "view" && (<CButton type="submit" color='success' className='text-white'>
-                {SubmitText || submitTextDecider()}
-              </CButton>)}
-            </CButtonGroup>
-          </CCol>
-        </CRow>
-      </CForm>
+              {currentAction !== "view" && (
+                <Button type="submit" color='success' className='text-white'>
+                  {SubmitText || submitTextDecider()}
+                </Button>
+              )}
+            </ButtonGroup>
+          </Col>
+        </Row>
+      </Form>
     </CollapseCard>
   )
 }
