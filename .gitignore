@@ -104,5 +104,6 @@ dist
 .tern-port
 
 # User Generated
+package.json
 yarn.lock
 .vscode

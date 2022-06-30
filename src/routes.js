@@ -6,6 +6,18 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const TemplatePage = React.lazy(() => import('./views/templatePage'))
 const StudentReports = React.lazy(() => import('./views/StudentReports'))
 const UniversityTips = React.lazy(() => import('./views/UniversityTips'))
+const StudentGoals = React.lazy(() => import('./views/StudentGoals'))
+const StudentProfile = React.lazy(() => import('./views/StudentProfile'))
+const StudentApplication = React.lazy(() => import('./views/StudentApplication'))
+const OpportunityPosts = React.lazy(() => import('./views/OpportunityPosts'))
+const StudentProposals = React.lazy(() => import('./views/StudentProposals'))
+const StudentExperiences = React.lazy(() => import('./views/StudentExperience'))
+const UniversityFeedback = React.lazy(() => import('./views/UniversityFeedback'))
+const PasswordReset = React.lazy(() => import('./views/PasswordReset'))
+const PasswordChange = React.lazy(() => import('./views/PasswordChange'))
+const StudentRegister = React.lazy(() => import('./views/StudentRegister'))
+const UniversityRegister = React.lazy(() => import('./views/UniversityRegister'))
+const CompanyRegister = React.lazy(() => import('./views/CompanyRegister'))
 
 // Template
 const Colors = React.lazy(() => import('./views/template/theme/colors/Colors'))
@@ -53,6 +65,18 @@ const routes = [
   { path: '/example', name: 'Template Page', element: TemplatePage },
   { path: '/student-reports', name: 'Student Reports', element: StudentReports },
   { path: '/university-tips', name: 'University Tips', element: UniversityTips },
+  { path: '/students/goals', name: 'Student Goals', element: StudentGoals },
+  { path: '/students/profile', name: 'Student Profile', element: StudentProfile },
+  { path: '/students/application', name: 'Student Application', element: StudentApplication },
+  { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },
+  { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
+  { path: '/students/experiences', name: 'Student Reports', element: StudentExperiences },
+  { path: '/staff/feedback', name: 'University Feedback', element: UniversityFeedback },
+  { path: '/password/reset', name: 'Reset Password', element: PasswordReset },
+  { path: '/password/change', name: 'Change Password', element: PasswordChange },
+  { path: '/register/student', name: 'Student Register', element: StudentRegister },
+  { path: '/register/university', name: 'University Register', element: UniversityRegister },
+  { path: '/register/company', name: 'Company Register', element: CompanyRegister },
 
   // Template
   { path: '/theme', name: 'Theme', element: Colors, exact: true },

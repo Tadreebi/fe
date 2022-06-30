@@ -1,9 +1,10 @@
-import { useState } from 'react'
-import TemplatePage from '../templatePage'
-
+import { useState } from 'react';
+import { Col, Row } from 'src/components/Root/Grid';
+import TemplatePage from '../templatePage';
+import reportsDemoData from './demoData';
 
 const StudentReports = () => {
-  const [reports, setReports] = useState([]);
+  const [reportsList, setReportsList] = useState([...reportsDemoData]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
 
@@ -82,6 +83,24 @@ const StudentReports = () => {
       value: report.conclusion,
       onChange: e => setReport(current => ({ ...current, conclusion: e.target.value }))
     },
+    {
+      title: "Report Remarks",
+      name: "remarks",
+      type: "textarea",
+      fullwidth: true,
+      required: true,
+      value: report.remarks,
+      onChange: e => setReport(current => ({ ...current, remarks: e.target.value }))
+    },
+    {
+      title: "Accepted",
+      name: "accepted",
+      type: "switch",
+      fullwidth: true,
+      required: true,
+      value: report.accepted,
+      onChange: e => setReport(current => ({ ...current, accepted: e.target.checked }))
+    },
   ];
 
   const onFormSubmit = e => {
@@ -107,37 +126,219 @@ const StudentReports = () => {
   };
 
   const onDataCreate = () => {
-    setReports(current => [...current, { ...report, id: current.length }]);
+    setReportsList(current => [...current, { ...report, id: current.length }]);
     setReport({});
     setAction("create");
     console.log('Form Data Created');
   };
 
   const onDataEdit = () => {
-    setReports(current => [...current.filter(rep => rep.id !== report.id), report]);
+    setReportsList(current => [...current.filter(rep => rep.id !== report.id), report]);
     setReport({});
     setAction("create");
     console.log('Form Data Updated');
   };
 
   const onDataDelete = () => {
-    setReports(current => [...current.filter(rep => rep.id !== report.id)]);
+    setReportsList(current => [...current.filter(rep => rep.id !== report.id)]);
     setReport({});
     setAction("create");
     console.log('Form Data Deleted');
   };
+
+  const statisticsData = [
+    {
+      title: "Submitted Reports",
+      number: reportsList.length,
+      chart: {
+        type: "bar",
+        data: {
+          "Pending Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
+          "Accepted Reports": reportsList.filter(rep => rep.accepted === true)?.length,
+          "Rejected Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
+        },
+        fill: true
+      }
+    },
+    {
+      title: "Types of Reports Submitted",
+      number: reportsList.map(rep => rep.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Monthly Report": reportsList.filter(rep => rep.type === "Monthly Report")?.length,
+          "Weekly Report": reportsList.filter(rep => rep.type === "Weekly Report")?.length,
+          "Final Report": reportsList.filter(rep => rep.type === "Final Report")?.length,
+        },
+      }
+    },
+    {
+      title: "Users",
+      number: "26",
+      chart: {
+        type: "line",
+        data: {
+          "Label 1": 70,
+          "Label 2": 60,
+          "Label 3": 40,
+          "Label 4": 50
+        },
+      }
+    },
+    {
+      title: "Users",
+      number: "26",
+    }
+  ];
+
+  const chartsData = [
+    {
+      title: "Submitted Reports",
+      type: "bar",
+      data: [
+        {
+          title: "Pending Reports",
+          color: "warning",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
+          }), {}),
+        },
+        {
+          title: "Accepted Reports",
+          color: "success",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
+          }), {}),
+        },
+        {
+          title: "Rejected Reports",
+          color: "danger",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
+          }), {}),
+        }
+      ]
+    },
+    {
+      title: "Submitted Reports",
+      type: "line",
+      data: [
+        {
+          title: "Pending Reports",
+          color: "warning",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
+          }), {}),
+        },
+        {
+          title: "Accepted Reports",
+          color: "success",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
+          }), {}),
+        },
+        {
+          title: "Rejected Reports",
+          color: "danger",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
+          }), {}),
+        }
+      ]
+    },
+    {
+      title: "Submitted Reports",
+      type: "doughnut",
+      data: {
+        "Monthly Report": reportsList.filter(rep => rep.type === "Monthly Report")?.length,
+        "Weekly Report": reportsList.filter(rep => rep.type === "Weekly Report")?.length,
+        "Final Report": reportsList.filter(rep => rep.type === "Final Report")?.length,
+      }
+    },
+    {
+      title: "Submitted Reports",
+      type: "pie",
+      data: {
+        "Pending Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
+        "Accepted Reports": reportsList.filter(rep => rep.accepted === true)?.length,
+        "Rejected Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
+      }
+    },
+    {
+      title: "Submitted Reports",
+      type: "polar",
+      data: {
+        "Pending Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
+        "Accepted Reports": reportsList.filter(rep => rep.accepted === true)?.length,
+        "Rejected Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
+      }
+    },
+    {
+      title: "Submitted Reports",
+      type: "radar",
+      data: [
+        {
+          title: "Pending Reports",
+          color: "warning",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
+          }), {}),
+        },
+        {
+          title: "Accepted Reports",
+          color: "success",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
+          }), {}),
+        },
+        {
+          title: "Rejected Reports",
+          color: "danger",
+          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+            ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
+          }), {}),
+        }
+      ]
+    },
+  ];
+
+  const tableColumns = [
+    {
+      name: "Title",
+      selector: row => row.title,
+      sortable: true
+    },
+    {
+      name: "Student",
+      selector: row => row.student,
+      sortable: true
+    },
+    {
+      name: "Period Cover By Report",
+      selector: row => `${new Date(row.startDate).toLocaleDateString('en-GB')} to ${new Date(row.endDate).toLocaleDateString('en-GB')}`,
+      sortable: true
+    },
+    {
+      name: "Accepted By Supervisor",
+      selector: row => row.accepted ? "True" : "False",
+      sortable: true
+    }
+  ];
 
   return (
     <>
       <TemplatePage
         pageTitle={"Student Reports"}
         pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
-        formTitle={"CRUD Reports"}
+        statisticsData={statisticsData} // New
+        chartsData={chartsData} // New
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Reports List"}
-        tableData={reports}
+        tableColumns={tableColumns} // New
+        tableRowDetails={true} // New
+        tableData={reportsList}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}

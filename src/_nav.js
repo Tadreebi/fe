@@ -29,10 +29,106 @@ const _nav = [
     name: 'Model Pages',
   },
   {
-    component: CNavItem,
-    name: 'Student Reports',
-    to: '/student-reports',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    component: CNavGroup,
+    name: 'Students',
+    to: '/students',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Student Reports',
+        to: '/students/reports',
+        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Student Goals',
+        to: '/students/goals',
+      },
+      {
+        component: CNavItem,
+        name: 'Student Profile',
+        to: '/students/profile',
+      },
+      {
+        component: CNavItem,
+        name: 'Student Application',
+        to: '/students/application',
+      },
+      {
+        component: CNavItem,
+        name: 'Student Proposals',
+        to: '/students/proposals',
+      },
+      {
+        component: CNavItem,
+        name: 'Student Experience',
+        to: '/students/experiences',
+      },
+    ]
+  },
+  {
+    component: CNavGroup,
+    name: 'Company',
+    to: '/company',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Opportunity Posts',
+        to: '/company/opportunity-posts',
+      },
+    ]
+  },
+  {
+    component: CNavGroup,
+    name: 'Univeristy',
+    to: '/staff',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'University Feedback',
+        to: '/staff/feedback',
+        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+      },
+    ]
+  },
+  {
+    component: CNavGroup,
+    name: 'Auth Pages',
+    to: '/auth',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Reset Password',
+        to: '/password/reset',
+      },
+      {
+        component: CNavItem,
+        name: 'Student Register',
+        to: '/register/student',
+        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Change Password',
+        to: '/password/change',
+      },
+      {
+        component: CNavItem,
+        name: 'University Register',
+        to: '/register/university',
+        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Company Register',
+        to: '/register/company',
+        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+      },
+    ]
   },
   {
     component: CNavItem,
