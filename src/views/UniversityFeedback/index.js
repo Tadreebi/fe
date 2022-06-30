@@ -120,7 +120,6 @@ const StudentReports = () => {
       <TemplatePage
         pageTitle={"University Feedback"}
         pageDescrbition={"For univesity to submit periodical & final reports to teh student"}
-        formTitle={"CRUD Reports"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}

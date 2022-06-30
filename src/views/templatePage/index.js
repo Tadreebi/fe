@@ -4,7 +4,7 @@ import PageStatistics from 'src/components/PageStatistics'
 import PageHeader from 'src/components/PageHeader'
 import PageTable from 'src/components/PageTable'
 
-const TemplatePage = ({ pageTitle, pageDescrbition, statisticsTitle, statisticsData, chartsTitle, chartsData, formTitle, formInputs, onFormSubmit, onFormReset, tableTitle, tableData, onDataCreate, onDataEdit, onDataDelete, onActionSelection, currentAction }) => {
+const TemplatePage = ({ pageTitle, pageDescrbition, statisticsTitle, statisticsData, chartsTitle, chartsData, formTitle, formInputs, onFormSubmit, onFormReset, tableTitle, tableColumns, tableData, tableRowDetails, onDataCreate, onDataEdit, onDataDelete, onActionSelection, currentAction }) => {
 
   return (
     <>
@@ -12,7 +12,7 @@ const TemplatePage = ({ pageTitle, pageDescrbition, statisticsTitle, statisticsD
       {statisticsData && (<PageStatistics title={statisticsTitle} statistics={statisticsData} />)}
       {chartsData && (<PageCharts title={chartsTitle} charts={chartsData} />)}
       <PageForm title={formTitle} inputs={formInputs} onSubmit={onFormSubmit} onReset={onFormReset} currentAction={currentAction} />
-      <PageTable title={tableTitle} data={tableData} onCreate={onDataCreate} onEdit={onDataEdit} onDelete={onDataDelete} onActionSelection={onActionSelection} />
+      <PageTable title={tableTitle} columns={tableColumns} expandedComponent={tableRowDetails} data={tableData} onCreate={onDataCreate} onEdit={onDataEdit} onDelete={onDataDelete} onActionSelection={onActionSelection} />
     </>
   )
 }
