@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import TemplatePage from '../templatePage'
-import reportsDemoData from './demoData'
+import { useState } from 'react';
+import { Col, Row } from 'src/components/Root/Grid';
+import TemplatePage from '../templatePage';
+import reportsDemoData from './demoData';
 
 const StudentReports = () => {
   const [reportsList, setReportsList] = useState([...reportsDemoData]);
@@ -301,18 +302,42 @@ const StudentReports = () => {
     },
   ];
 
+  const tableColumns = [
+    {
+      name: "Title",
+      selector: row => row.title,
+      sortable: true
+    },
+    {
+      name: "Student",
+      selector: row => row.student,
+      sortable: true
+    },
+    {
+      name: "Period Cover By Report",
+      selector: row => `${new Date(row.startDate).toLocaleDateString('en-GB')} to ${new Date(row.endDate).toLocaleDateString('en-GB')}`,
+      sortable: true
+    },
+    {
+      name: "Accepted By Supervisor",
+      selector: row => row.accepted ? "True" : "False",
+      sortable: true
+    }
+  ];
+
   return (
     <>
       <TemplatePage
         pageTitle={"Student Reports"}
         pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
-        statisticsData={statisticsData}
-        chartsData={chartsData}
-        formTitle={"CRUD Reports"}
+        statisticsData={statisticsData} // New
+        chartsData={chartsData} // New
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Reports List"}
+        tableColumns={tableColumns} // New
+        tableRowDetails={true} // New
         tableData={reportsList}
         onActionSelection={onActionSelection}
         currentAction={action}
