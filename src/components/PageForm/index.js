@@ -2,8 +2,9 @@ import {
   CButton, CButtonGroup, CCard,
   CCardBody,
   CCardHeader,
-  CCol, CForm, CFormCheck, CFormInput, CFormLabel, CFormSelect, CFormSwitch, CFormTextarea, CRow
+  CCol, CForm, CFormLabel, CRow
 } from '@coreui/react';
+import InputField from '../InputField';
 
 const inputsDemo = [
   {
@@ -123,74 +124,7 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText, onSubmit, onReset, c
                   {input.title || "Title"} {input.required ? <span className='text-danger'>*</span> : ""}
                 </CFormLabel>
 
-                {input.type === "select" ? (
-                  <CFormSelect
-                    name={input.name}
-                    size={input.size || "md"}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    multiple={input.multiple}
-                  >
-                    <option>Please Select...</option>
-
-                    {input.options?.map((option, i) => (
-                      <option value={option.value} key={i}>{option.title}</option>
-                    ))}
-                  </CFormSelect>
-                ) : input.type === "textarea" ? (
-                  <CFormTextarea
-                    name={input.name}
-                    placeholder={input.placeholder || input.title}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    readOnly={input.readOnly}
-                    multiple={input.multiple}
-                  />
-                ) : (input.type === "checkbox" || input.type === "radio") ? (
-                  <>
-                    <CRow>
-                      {input.options?.map((option, i) => (
-                        <CCol md={length(input.options.length)} className="py-3" key={i}>
-                          <CFormCheck
-                            name={input.name}
-                            type={input.type}
-                            value={option.value}
-                            label={option.title}
-                            required={input.required}
-                            onChange={input.onChange}
-                            disabled={input.disabled || currentAction === "view"}
-                          />
-                        </CCol>
-                      ))}
-                    </CRow>
-                  </>
-                ) : input.type === "switch" ? (
-                  <CFormSwitch
-                    label={input.title}
-                    name={input.name}
-                    size={input.size || "lg"}
-                    checked={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                  />
-                ) : (
-                  <CFormInput
-                    name={input.name}
-                    size={input.size}
-                    type={input.type}
-                    placeholder={input.placeholder || input.title}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    readOnly={input.readOnly}
-                    multiple={input.multiple}
-                  />
-                )}
+                <InputField field={input} currentAction={currentAction} />
               </CCol>
             ))}
             <CCol xs={12} >
