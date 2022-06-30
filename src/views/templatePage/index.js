@@ -1,7 +1,7 @@
 import PageCharts from 'src/components/PageCharts'
 import PageForm from 'src/components/PageForm'
-import PageHeader from 'src/components/PageHeader'
 import PageStatistics from 'src/components/PageStatistics'
+import PageHeader from 'src/components/PageHeader'
 import PageTable from 'src/components/PageTable'
 
 const TemplatePage = ({ pageTitle, pageDescrbition, statisticsTitle, statisticsData, chartsTitle, chartsData, formTitle, formInputs, onFormSubmit, onFormReset, tableTitle, tableData, onDataCreate, onDataEdit, onDataDelete, onActionSelection, currentAction }) => {
