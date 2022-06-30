@@ -5,6 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 // Modules
 const TemplatePage = React.lazy(() => import('./views/templatePage'))
 const StudentReports = React.lazy(() => import('./views/StudentReports'))
+const UniversityTips = React.lazy(() => import('./views/UniversityTips'))
 const StudentGoals = React.lazy(() => import('./views/StudentGoals'))
 const StudentProfile = React.lazy(() => import('./views/StudentProfile'))
 const StudentApplication = React.lazy(() => import('./views/StudentApplication'))
@@ -62,14 +63,23 @@ const routes = [
 
   // Modules
   { path: '/example', name: 'Template Page', element: TemplatePage },
+
+  // Students
   { path: '/students/reports', name: 'Student Reports', element: StudentReports },
   { path: '/students/goals', name: 'Student Goals', element: StudentGoals },
   { path: '/students/profile', name: 'Student Profile', element: StudentProfile },
   { path: '/students/application', name: 'Student Application', element: StudentApplication },
-  { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
   { path: '/students/experiences', name: 'Student Reports', element: StudentExperiences },
+
+  // Univerity
+  { path: '/staff/tips', name: 'University Tips', element: UniversityTips },
   { path: '/staff/feedback', name: 'University Feedback', element: UniversityFeedback },
+
+  // Company
+  { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },
+
+  // Auth
   { path: '/password/reset', name: 'Reset Password', element: PasswordReset },
   { path: '/password/change', name: 'Change Password', element: PasswordChange },
   { path: '/register/student', name: 'Student Register', element: StudentRegister },
