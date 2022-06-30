@@ -1,15 +1,11 @@
 import {
-  CButton, CButtonGroup, CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CTable,
+  CButton, CButtonGroup, CTable,
   CTableBody, CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow
-} from '@coreui/react'
+} from '@coreui/react';
+import CollapseCard from '../Cards/CollapseCard';
 
 const dataDemo = [
   {
@@ -41,70 +37,58 @@ const keyFilter = key => {
 
 const Tables = ({ title, data = dataDemo, onActionSelection = action => console.log("Selecting Action", action) }) => {
   return (
-    <CRow>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          {title && (
-            <CCardHeader>
-              {title}
-            </CCardHeader>
-          )}
-
-          <CCardBody>
-            <CTable striped hover>
-              <CTableHead>
-                <CTableRow>
-                  {data.length > 0 ?
-                    <>
-                      {Object.keys(data[0]).filter(key => keyFilter(key)).map((key, i) => (
-                        <CTableHeaderCell key={i}>
-                          {key}
-                        </CTableHeaderCell>
-                      ))}
-                      <CTableHeaderCell >
-                        Actions
-                      </CTableHeaderCell>
-                    </>
-                    : <CTableHeaderCell className="text-center">
-                      No Data to Show
-                    </CTableHeaderCell>
-                  }
-                </CTableRow>
-              </CTableHead>
-
-              <CTableBody>
-                {data?.map((record, i) => (
-                  <CTableRow key={i}>
-                    {Object?.keys(record).filter(key => keyFilter(key))?.map((key, y) => (
-                      <CTableDataCell key={y}>{record[key]}</CTableDataCell>
-                    ))}
-                    <CTableDataCell >
-                      <CButtonGroup role="group" size='sm'>
-                        <CButton onClick={() => onActionSelection('view', record)} color='info' className='text-white'>
-                          View
-                        </CButton>
-
-                        <CButton onClick={() => onActionSelection('create', record)} color='success' className='text-white'>
-                          Duplicate
-                        </CButton>
-
-                        <CButton onClick={() => onActionSelection('update', record)} color='warning' className='text-white'>
-                          Edit
-                        </CButton>
-
-                        <CButton onClick={() => onActionSelection('delete', record)} color='danger' className='text-white'>
-                          Delete
-                        </CButton>
-                      </CButtonGroup>
-                    </CTableDataCell>
-                  </CTableRow>
+    <CollapseCard title={title} open>
+      <CTable striped hover>
+        <CTableHead>
+          <CTableRow>
+            {data.length > 0 ?
+              <>
+                {Object.keys(data[0]).filter(key => keyFilter(key)).map((key, i) => (
+                  <CTableHeaderCell key={i}>
+                    {key}
+                  </CTableHeaderCell>
                 ))}
-              </CTableBody>
-            </CTable>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+                <CTableHeaderCell >
+                  Actions
+                </CTableHeaderCell>
+              </>
+              : <CTableHeaderCell className="text-center">
+                No Data to Show
+              </CTableHeaderCell>
+            }
+          </CTableRow>
+        </CTableHead>
+
+        <CTableBody>
+          {data?.map((record, i) => (
+            <CTableRow key={i}>
+              {Object?.keys(record).filter(key => keyFilter(key))?.map((key, y) => (
+                <CTableDataCell key={y}>{record[key]}</CTableDataCell>
+              ))}
+              <CTableDataCell >
+                <CButtonGroup role="group" size='sm'>
+                  <CButton onClick={() => onActionSelection('view', record)} color='info' className='text-white'>
+                    View
+                  </CButton>
+
+                  <CButton onClick={() => onActionSelection('create', record)} color='success' className='text-white'>
+                    Duplicate
+                  </CButton>
+
+                  <CButton onClick={() => onActionSelection('update', record)} color='warning' className='text-white'>
+                    Edit
+                  </CButton>
+
+                  <CButton onClick={() => onActionSelection('delete', record)} color='danger' className='text-white'>
+                    Delete
+                  </CButton>
+                </CButtonGroup>
+              </CTableDataCell>
+            </CTableRow>
+          ))}
+        </CTableBody>
+      </CTable>
+    </CollapseCard>
   )
 }
 
