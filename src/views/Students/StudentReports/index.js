@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Col, Row } from 'src/components/Root/Grid';
-import TemplatePage from '../templatePage';
+import TemplatePage from '../../templatePage';
 import reportsDemoData from './demoData';
 
 const StudentReports = () => {
