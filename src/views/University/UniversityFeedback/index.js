@@ -164,11 +164,11 @@ const UniversityFeedback = () => {
       title: "Ratings",
       type: "pie",
       data: {
-        "5": feedbackList.filter(rep => rep.rating === 5)?.length,
-        "4": feedbackList.filter(rep => rep.rating === 4)?.length,
-        "3": feedbackList.filter(rep => rep.rating === 3)?.length,
-        "2": feedbackList.filter(rep => rep.rating === 2)?.length,
-        "1": feedbackList.filter(rep => rep.rating === 1)?.length,
+        "5-Star": feedbackList.filter(rep => rep.rating === 5)?.length,
+        "4-Star": feedbackList.filter(rep => rep.rating === 4)?.length,
+        "3-Star": feedbackList.filter(rep => rep.rating === 3)?.length,
+        "2-Star": feedbackList.filter(rep => rep.rating === 2)?.length,
+        "1-Star": feedbackList.filter(rep => rep.rating === 1)?.length,
       }
     }
   ]

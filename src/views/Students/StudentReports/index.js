@@ -30,11 +30,18 @@ const StudentReports = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, student: e.target.value })),
       options: students.map(student => ({ title: student.name, value: student.id }))
+    },
+    {
+      title: "Star Rating",
+      name: "rating",
+      type: "rating",
+      required: true,
+      value: report.rating,
+      onChange: e => setReport(current => ({ ...current, rating: e }))
     },
     {
       title: "Report Type",

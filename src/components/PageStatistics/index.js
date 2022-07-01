@@ -31,7 +31,7 @@ const rgbColors = color => {
 
 const length = count => {
   switch (count) {
-    case 1: return 12;
+    case 1: return 6;
     case 2: return 6;
     case 3: return 4;
     default: return 3;
