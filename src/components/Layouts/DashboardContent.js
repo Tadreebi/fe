@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { CContainer, CSpinner } from '@coreui/react'
 
 // routes config
-import routes from 'src/routes'
+import routes from 'src/Routes/dashboard'
 
 const DashboardContent = () => {
   return (

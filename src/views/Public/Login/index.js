@@ -49,9 +49,11 @@ const Login = () => {
 
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="success" className="px-4">
-                          Login
-                        </CButton>
+                        <Link to="/dashboard">
+                          <CButton color="success" className="px-4">
+                            Login
+                          </CButton>
+                        </Link>
                       </CCol>
 
                       <CCol xs={6} className="text-right">

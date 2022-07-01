@@ -7,7 +7,7 @@ const PasswordChange = React.lazy(() => import('../views/Public/PasswordChange')
 const StudentRegister = React.lazy(() => import('../views/Public/StudentRegister'))
 const UniversityRegister = React.lazy(() => import('../views/Public/UniversityRegister'))
 const CompanyRegister = React.lazy(() => import('../views/Public/CompanyRegister'))
-const Page404 = React.lazy(() => import('../views/template/pages/page404/Page404'))
+const Page404 = React.lazy(() => import('../views/template/pages/page404'))
 const Page500 = React.lazy(() => import('../views/template/pages/page500/Page500'))
 
 const routes = [

@@ -6,19 +6,16 @@ const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
   </div>
-)
-
-const JWT = false;
+);
 
 // Containers
-const DashboardLayout = React.lazy(() => import('./Layouts/DashboardLayout'))
-const PublicLayout = React.lazy(() => import('./Layouts/PublicLayout'))
+const DashboardLayout = React.lazy(() => import('./Layouts/DashboardLayout'));
+const PublicLayout = React.lazy(() => import('./Layouts/PublicLayout'));
 
 // Pages
-const Login = React.lazy(() => import('./views/Public/Login'))
-const Register = React.lazy(() => import('./views/template/pages/register/Register'))
-const Page404 = React.lazy(() => import('./views/template/pages/page404/Page404'))
-const Page500 = React.lazy(() => import('./views/template/pages/page500/Page500'))
+const Landing = React.lazy(() => import('./views/Public/Landing'));
+
+const JWT = true;
 
 class App extends Component {
   render() {
@@ -26,6 +23,8 @@ class App extends Component {
       <BrowserRouter>
         <Suspense fallback={loading}>
           <Routes>
+            <Route path="/" exact name="Landing" element={<Landing />} />
+
             {JWT ? (
               <Route path="*" name="Home" element={<DashboardLayout />} />
             ) : (
