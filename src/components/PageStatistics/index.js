@@ -1,5 +1,6 @@
 import { CWidgetStatsA } from '@coreui/react';
 import { getStyle } from '@coreui/utils';
+import { faSquareRootVariable } from '@fortawesome/free-solid-svg-icons';
 import CollapseCard from '../CollapseCard';
 import { BarChart, LineChart } from '../Root/Charts';
 import { Col, Row } from '../Root/Grid';
@@ -26,7 +27,7 @@ const length = count => {
 
 const PageStatistics = ({ title = "Statistics", statistics = statisticsDemoData }) => {
   return (
-    <CollapseCard title={title}>
+    <CollapseCard title={title} icon={faSquareRootVariable}>
       <Row>
         {statistics?.map((statistic, i) => (
           <Col sm={6} lg={length(statistics.length)} key={i}>
