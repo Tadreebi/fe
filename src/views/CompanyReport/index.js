@@ -150,14 +150,14 @@ const CompanyReports = () => {
 
   const statisticsData = [
     {
-      title: "Submitted Reports",
+      title: "Student Reports",
       number: reportsList.length,
       chart: {
         type: "bar",
         data: {
-          "Pending Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
-          "Accepted Reports": reportsList.filter(rep => rep.accepted === true)?.length,
-          "Rejected Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
+          "Periodical Reports": reportsList.filter(rep => !rep.remarks?.length && rep.periodical !== true)?.length,
+          "Complain Reports": reportsList.filter(rep => rep.Complain === true)?.length,
+          "Final Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
         },
         fill: true
       }
@@ -199,21 +199,21 @@ const CompanyReports = () => {
       type: "bar",
       data: [
         {
-          title: "Pending Reports",
+          title: "Final Reports",
           color: "warning",
           data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         {
-          title: "Accepted Reports",
+          title: "Periodical Reports",
           color: "success",
           data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
           }), {}),
         },
         {
-          title: "Rejected Reports",
+          title: "Complain Reports",
           color: "danger",
           data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
@@ -226,21 +226,21 @@ const CompanyReports = () => {
       type: "line",
       data: [
         {
-          title: "Pending Reports",
+          title: "Complain Reports",
           color: "warning",
           data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         {
-          title: "Accepted Reports",
+          title: "Periodical Reports",
           color: "success",
           data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
           }), {}),
         },
         {
-          title: "Rejected Reports",
+          title: "Complain Reports",
           color: "danger",
           data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
@@ -261,18 +261,18 @@ const CompanyReports = () => {
       title: "Submitted Reports",
       type: "pie",
       data: {
-        "Pending Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
-        "Accepted Reports": reportsList.filter(rep => rep.accepted === true)?.length,
-        "Rejected Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
+        "Periodical Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
+        "Final Reports": reportsList.filter(rep => rep.accepted === true)?.length,
+        "Complain Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
       }
     },
     {
       title: "Submitted Reports",
       type: "polar",
       data: {
-        "Pending Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
-        "Accepted Reports": reportsList.filter(rep => rep.accepted === true)?.length,
-        "Rejected Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
+        "Final Reports": reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
+        "Periodical Reports": reportsList.filter(rep => rep.accepted === true)?.length,
+        "Complain Reports": reportsList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
       }
     },
     {
@@ -280,26 +280,26 @@ const CompanyReports = () => {
       type: "radar",
       data: [
         {
-          title: "Pending Reports",
+          title: "Attendance Report",
           color: "warning",
           data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
-        {
-          title: "Accepted Reports",
-          color: "success",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Rejected Reports",
-          color: "danger",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
-          }), {}),
-        }
+        // {
+        //   title: "Attendance Report",
+        //   color: "success",
+        //   data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+        //     ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
+        //   }), {}),
+        // },
+        // {
+        //   title: "Rejected Reports",
+        //   color: "danger",
+        //   data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+        //     ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
+        //   }), {}),
+        // }
       ]
     },
   ];
@@ -320,11 +320,11 @@ const CompanyReports = () => {
       selector: row => `${new Date(row.startDate).toLocaleDateString('en-GB')} to ${new Date(row.endDate).toLocaleDateString('en-GB')}`,
       sortable: true
     },
-    {
-      name: "Accepted By Supervisor",
-      selector: row => row.accepted ? "True" : "False",
-      sortable: true
-    }
+    // {
+    //   name: "Accepted By Supervisor",
+    //   selector: row => row.accepted ? "True" : "False",
+    //   sortable: true
+    // }
   ];
 
   return (
