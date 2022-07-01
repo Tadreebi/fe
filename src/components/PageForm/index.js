@@ -1,9 +1,11 @@
+import { faClockRotateLeft, faEdit, faList, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import CollapseCard from '../CollapseCard';
 import { Button, ButtonGroup } from '../Root/Buttons';
 import Form from '../Root/Form';
 import { Col, Row } from '../Root/Grid';
 import { Boolean, CheckList, Input, Option, Select, Textarea } from '../Root/InputFields';
 import Label from '../Root/Label';
+import Icon from '../Root/Icon';
 
 const inputsDemo = [
   {
@@ -106,10 +108,32 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
     }
   };
 
+  const submitIconDecider = () => {
+    switch (currentAction) {
+      case "create": return faPlus;
+      case "update": return faEdit;
+      case "delete": return faTrash;
+      default: return faPlus;
+    }
+  };
+
+  const submitColorDecider = () => {
+    switch (currentAction) {
+      case "create": return "success";
+      case "update": return "warning";
+      case "delete": return "danger";
+      default: return "success";
+    }
+  };
+
   return (
-    <CollapseCard title={title}>
+    <CollapseCard title={title} icon={faList}>
       <Form onSubmit={onSubmit}>
         <Row>
+          <Col xs={12} className={`text-${submitColorDecider()} text-center`}>
+            <h5><Icon icon={submitIconDecider()} /> {`${submitTextDecider()} Data`}</h5>
+          </Col>
+
           {inputs?.map((input, i) => (
             <Col md={input.fullwidth ? 12 : input.double ? 8 : length(inputs.length)} className="py-3" key={i}>
               <Label>
@@ -123,7 +147,7 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   required={input.required}
                   value={input.value}
                   onChange={input.onChange}
-                  disabled={input.disabled || currentAction === "view"}
+                  disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
                   multiple={input.multiple}
                 >
                   <Option>Please Select...</Option>
@@ -139,7 +163,7 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   required={input.required}
                   value={input.value}
                   onChange={input.onChange}
-                  disabled={input.disabled || currentAction === "view"}
+                  disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
                   readOnly={input.readOnly}
                   multiple={input.multiple}
                 />
@@ -155,7 +179,7 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                           label={option.title}
                           required={input.required}
                           onChange={input.onChange}
-                          disabled={input.disabled || currentAction === "view"}
+                          disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
                         />
                       </Col>
                     ))}
@@ -168,7 +192,7 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   size={input.size || "lg"}
                   checked={input.value}
                   onChange={input.onChange}
-                  disabled={input.disabled || currentAction === "view"}
+                  disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
                 />
               ) : (
                 <Input
@@ -179,7 +203,7 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   required={input.required}
                   value={input.value}
                   onChange={input.onChange}
-                  disabled={input.disabled || currentAction === "view"}
+                  disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
                   readOnly={input.readOnly}
                   multiple={input.multiple}
                 />
@@ -190,12 +214,12 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
             <ButtonGroup role="group" style={{ float: 'right' }}>
               {onReset && (
                 <Button onClick={onReset} color='warning' className='text-white'>
-                  Reset
+                  <Icon icon={faClockRotateLeft} /> Reset
                 </Button>
               )}
               {currentAction !== "view" && (
                 <Button type="submit" color='success' className='text-white'>
-                  {SubmitText || submitTextDecider()}
+                  <Icon icon={submitIconDecider()} /> {SubmitText || submitTextDecider()}
                 </Button>
               )}
             </ButtonGroup>

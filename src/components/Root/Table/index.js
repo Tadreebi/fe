@@ -1,8 +1,8 @@
 import { faCopy, faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DataTable from 'react-data-table-component';
 import { Button, ButtonGroup } from '../Buttons';
 import { Col, Row } from '../Grid';
+import Icon from '../Icon';
 
 const Table = ({ columns, data, expandedComponent, onActionSelection }) => {
 
@@ -26,19 +26,19 @@ const Table = ({ columns, data, expandedComponent, onActionSelection }) => {
         cell: row => (
           <ButtonGroup size="sm">
             <Button color="info" className="text-white" onClick={() => onActionSelection("view", row)}>
-              <FontAwesomeIcon icon={faEye} />
+              <Icon icon={faEye} />
             </Button>
 
             <Button color="success" className="text-white" onClick={() => onActionSelection("create", row)}>
-              <FontAwesomeIcon icon={faCopy} />
+              <Icon icon={faCopy} />
             </Button>
 
             <Button color="warning" className="text-white" onClick={() => onActionSelection("update", row)}>
-              <FontAwesomeIcon icon={faEdit} />
+              <Icon icon={faEdit} />
             </Button>
 
             <Button color="danger" className="text-white" onClick={() => onActionSelection("delete", row)}>
-              <FontAwesomeIcon icon={faTrash} />
+              <Icon icon={faTrash} />
             </Button>
           </ButtonGroup>
         )
