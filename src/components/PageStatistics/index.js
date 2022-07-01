@@ -25,6 +25,8 @@ const length = count => {
 };
 
 const PageStatistics = ({ title = "Statistics", statistics = statisticsDemoData }) => {
+
+
   return (
     <CollapseCard title={title}>
       <Row>

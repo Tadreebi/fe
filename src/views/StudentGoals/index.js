@@ -124,6 +124,7 @@ const StudentGoals = () => {
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Goals List"}
+        tableColumns={[]}
         tableData={goals}
         onActionSelection={onActionSelection}
         currentAction={action}
