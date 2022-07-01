@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
@@ -9,19 +9,16 @@ import Icon from '../Root/Icon'
 import { Sidebar, SidebarBrand, SidebarNav, SidebarToggler } from '../Root/Sidebar'
 import { DashboardSidebarNav } from './DashboardSidebarNav'
 
-const DashboardSidebar = () => {
+const DashboardSidebar = ({ sidebarShow, setSidebarShow }) => {
+  const [unfoldable, setUnfoldable] = useState(false)
   const dispatch = useDispatch()
-  const unfoldable = useSelector((state) => state.sidebarUnfoldable)
-  const sidebarShow = useSelector((state) => state.sidebarShow)
 
   return (
     <Sidebar
       position="fixed"
       unfoldable={unfoldable}
       visible={sidebarShow}
-      onVisibleChange={(visible) => {
-        dispatch({ type: 'setSideBar', sidebarShow: visible })
-      }}
+      onVisibleChange={(visible) => setSidebarShow(visible)}
     >
       <SidebarBrand className="d-none d-md-flex" to="/">
         <Icon className="sidebar-brand-full" icon={logoNegative} height={35} />
@@ -36,7 +33,7 @@ const DashboardSidebar = () => {
 
       <SidebarToggler
         className="d-none d-lg-flex"
-        onClick={() => dispatch({ type: 'setSideBar', sidebarUnfoldable: !unfoldable })}
+        onClick={() => setUnfoldable(current => !current)}
       />
     </Sidebar>
   )

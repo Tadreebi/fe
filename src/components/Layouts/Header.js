@@ -9,9 +9,8 @@ import Icon from '../Root/Icon'
 import { NavItem, NavLink as NavRootLink } from '../Root/Nav'
 import HeaderDropdown from "./HeaderDropdown"
 
-const HeaderComp = ({ notDashboard }) => {
+const HeaderComp = ({ notDashboard, sidebarShow, setSidebarShow }) => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const navLinks = [
     { title: "Home", link: "/" },
@@ -23,7 +22,7 @@ const HeaderComp = ({ notDashboard }) => {
         {!notDashboard && (
           <HeaderToggler
             className="ps-1"
-            onClick={() => dispatch({ type: 'setSideBar', sidebarShow: !sidebarShow })}
+            onClick={() => setSidebarShow(current => !current)}
           >
             <Icon icon={faBars} size="lg" />
           </HeaderToggler>
