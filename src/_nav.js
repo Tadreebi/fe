@@ -1,24 +1,19 @@
-import {
-  cilCalculator,
-  cilChartPie, cilDrop, cilPencil,
-  cilPuzzle,
-  cilSpeedometer
-} from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+import { fa1, faBuilding, faBuildingColumns, faBullseye, faClipboardQuestion, faCommentDots, faCommentMedical, faDashboard, faFileLines, faFilePen, faFingerprint, faFire, faGraduationCap, faIdBadge, faLockOpen, faNewspaper, faUnlock, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const _nav = [
   {
     component: CNavItem,
     name: 'Dashboard',
     to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <FontAwesomeIcon icon={faDashboard} className="px-1" />,
   },
   {
     component: CNavItem,
     name: 'Template Page',
     to: '/example',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <FontAwesomeIcon icon={fa1} className="px-1" />,
     badge: {
       color: 'danger',
       text: 'Check',
@@ -27,43 +22,49 @@ const _nav = [
   {
     component: CNavTitle,
     name: 'Model Pages',
+    icon: <FontAwesomeIcon icon={faGraduationCap} className="px-1" />,
   },
   {
     component: CNavGroup,
     name: 'Students',
     to: '/students',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    icon: <FontAwesomeIcon icon={faGraduationCap} className="px-1" />,
     items: [
       {
         component: CNavItem,
         name: 'Student Reports',
         to: '/students/reports',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+        icon: <FontAwesomeIcon icon={faNewspaper} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'Student Goals',
         to: '/students/goals',
+        icon: <FontAwesomeIcon icon={faBullseye} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'Student Profile',
         to: '/students/profile',
+        icon: <FontAwesomeIcon icon={faIdBadge} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'Student Application',
         to: '/students/application',
+        icon: <FontAwesomeIcon icon={faFilePen} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'Student Proposals',
         to: '/students/proposals',
+        icon: <FontAwesomeIcon icon={faClipboardQuestion} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'Student Experience',
         to: '/students/experiences',
+        icon: <FontAwesomeIcon icon={faFire} className="px-1" />,
       },
     ]
   },
@@ -71,12 +72,13 @@ const _nav = [
     component: CNavGroup,
     name: 'Company',
     to: '/company',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    icon: <FontAwesomeIcon icon={faBuilding} className="px-1" />,
     items: [
       {
         component: CNavItem,
         name: 'Opportunity Posts',
         to: '/company/opportunity-posts',
+        icon: <FontAwesomeIcon icon={faFileLines} className="px-1" />,
       },
     ]
   },
@@ -84,13 +86,13 @@ const _nav = [
     component: CNavGroup,
     name: 'Univeristy',
     to: '/staff',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    icon: <FontAwesomeIcon icon={faBuildingColumns} className="px-1" />,
     items: [
       {
         component: CNavItem,
         name: 'University Feedback',
         to: '/staff/feedback',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+        icon: <FontAwesomeIcon icon={faCommentDots} className="px-1" />,
       },
     ]
   },
@@ -98,43 +100,45 @@ const _nav = [
     component: CNavGroup,
     name: 'Auth Pages',
     to: '/auth',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    icon: <FontAwesomeIcon icon={faFingerprint} className="px-1" />,
     items: [
       {
         component: CNavItem,
         name: 'Reset Password',
         to: '/password/reset',
+        icon: <FontAwesomeIcon icon={faUnlockKeyhole} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'Student Register',
         to: '/register/student',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+        icon: <FontAwesomeIcon icon={faLockOpen} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'Change Password',
         to: '/password/change',
+        icon: <FontAwesomeIcon icon={faUnlock} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'University Register',
         to: '/register/university',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+        icon: <FontAwesomeIcon icon={faLockOpen} className="px-1" />,
       },
       {
         component: CNavItem,
         name: 'Company Register',
         to: '/register/company',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+        icon: <FontAwesomeIcon icon={faLockOpen} className="px-1" />,
       },
     ]
   },
   {
     component: CNavItem,
     name: 'University Tips',
-    to: '/university-tips',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    to: '/university/tips',
+    icon: <FontAwesomeIcon icon={faCommentMedical} className="px-1" />,
   },
   {
     component: CNavTitle,
@@ -144,19 +148,16 @@ const _nav = [
     component: CNavGroup,
     name: 'Components',
     to: '/base',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Colors',
         to: '/theme/colors',
-        icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
       },
       {
         component: CNavItem,
         name: 'Typography',
         to: '/theme/typography',
-        icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       },
       {
         component: CNavItem,
@@ -287,7 +288,6 @@ const _nav = [
         component: CNavItem,
         name: 'Charts',
         to: '/charts',
-        icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
       },
       {
         component: CNavItem,
@@ -332,7 +332,6 @@ const _nav = [
         component: CNavItem,
         name: 'Widgets',
         to: '/widgets',
-        icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
         badge: {
           color: 'info',
           text: 'NEW',
@@ -344,7 +343,6 @@ const _nav = [
     component: CNavGroup,
     name: 'Pages',
     to: '/base',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,

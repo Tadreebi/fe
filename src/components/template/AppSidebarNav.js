@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -27,8 +27,8 @@ export const AppSidebarNav = ({ items }) => {
       <Component
         {...(rest.to &&
           !rest.items && {
-            component: NavLink,
-          })}
+          component: NavLink,
+        })}
         key={index}
         {...rest}
       >
@@ -55,10 +55,10 @@ export const AppSidebarNav = ({ items }) => {
   }
 
   return (
-    <React.Fragment>
+    <Fragment>
       {items &&
         items.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}
-    </React.Fragment>
+    </Fragment>
   )
 }
 
