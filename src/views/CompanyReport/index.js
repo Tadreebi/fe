@@ -57,21 +57,14 @@ const CompanyReports = () => {
         { title: "Final Report", value: "Final" }
       ]
     },
+
     {
-      title: "Start Date of Report",
-      name: "startDate",
+      title: " Date of Report",
+      name: "date",
       type: "date",
       required: true,
-      value: report.startDate,
-      onChange: e => setReport(current => ({ ...current, startDate: e.target.value }))
-    },
-    {
-      title: "End Date of Report",
-      name: "endDate",
-      type: "date",
-      required: true,
-      value: report.endDate,
-      onChange: e => setReport(current => ({ ...current, endDate: e.target.value }))
+      value: report.date,
+      onChange: e => setReport(current => ({ ...current, date: e.target.value }))
     },
     {
       title: "Report Introduction",
@@ -100,15 +93,7 @@ const CompanyReports = () => {
       value: report.remarks,
       onChange: e => setReport(current => ({ ...current, remarks: e.target.value }))
     },
-    {
-      title: "Accepted",
-      name: "accepted",
-      type: "switch",
-      fullwidth: true,
-      required: true,
-      value: report.accepted,
-      onChange: e => setReport(current => ({ ...current, accepted: e.target.checked }))
-    },
+ 
     {
       title: "Attendance",
       name: "attendance",
