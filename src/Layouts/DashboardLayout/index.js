@@ -1,16 +1,16 @@
 import React from 'react'
-import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/template/index'
+import { DashboardContent, DashboardSidebar, Footer, Header } from '../../components/Layouts'
 
 const DashboardLayout = () => {
   return (
     <div>
-      <AppSidebar />
+      <DashboardSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
-        <AppHeader />
+        <Header />
         <div className="body flex-grow-1 px-3">
-          <AppContent />
+          <DashboardContent />
         </div>
-        <AppFooter />
+        <Footer />
       </div>
     </div>
   )

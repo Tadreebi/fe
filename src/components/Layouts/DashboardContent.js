@@ -5,7 +5,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 // routes config
 import routes from 'src/routes'
 
-const AppContent = () => {
+const DashboardContent = () => {
   return (
     <CContainer lg>
       <Suspense fallback={<CSpinner color="primary" />}>
@@ -30,4 +30,4 @@ const AppContent = () => {
   )
 }
 
-export default React.memo(AppContent)
+export default React.memo(DashboardContent)

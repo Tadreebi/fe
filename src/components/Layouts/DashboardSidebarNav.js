@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { CBadge } from '@coreui/react'
 
-export const AppSidebarNav = ({ items }) => {
+export const DashboardSidebarNav = ({ items }) => {
   const location = useLocation()
   const navLink = (name, icon, badge) => {
     return (
@@ -62,6 +62,6 @@ export const AppSidebarNav = ({ items }) => {
   )
 }
 
-AppSidebarNav.propTypes = {
+DashboardSidebarNav.propTypes = {
   items: PropTypes.arrayOf(PropTypes.any).isRequired,
 }

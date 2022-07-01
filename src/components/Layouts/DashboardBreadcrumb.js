@@ -5,7 +5,7 @@ import routes from 'src/routes'
 
 import { CBreadcrumb, CBreadcrumbItem } from '@coreui/react'
 
-const AppBreadcrumb = () => {
+const DashboardBreadcrumb = () => {
   const currentLocation = useLocation().pathname
 
   const getRouteName = (pathname, routes) => {
@@ -48,4 +48,4 @@ const AppBreadcrumb = () => {
   )
 }
 
-export default React.memo(AppBreadcrumb)
+export default React.memo(DashboardBreadcrumb)

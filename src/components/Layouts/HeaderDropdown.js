@@ -24,7 +24,7 @@ import CIcon from '@coreui/icons-react'
 
 import avatar8 from 'src/assets/images/avatars/8.jpg'
 
-const AppHeaderDropdown = () => {
+const HeaderDropdown = () => {
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -93,4 +93,4 @@ const AppHeaderDropdown = () => {
   )
 }
 
-export default AppHeaderDropdown
+export default HeaderDropdown;

@@ -9,7 +9,8 @@ const loading = (
 )
 
 // Containers
-const DashboardLayout = React.lazy(() => import('./layout/DashboardLayout'))
+const DashboardLayout = React.lazy(() => import('./Layouts/DashboardLayout'))
+const PublicLayout = React.lazy(() => import('./Layouts/PublicLayout'))
 
 // Pages
 const Login = React.lazy(() => import('./views/template/pages/login/Login'))

@@ -12,13 +12,13 @@ import {
   CNavItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import HeaderDropdown from "./HeaderDropdown"
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 
-import { AppBreadcrumb } from './index'
-import { AppHeaderDropdown } from './header/index'
+import { DashboardBreadcrumb } from './index'
 import { logo } from 'src/assets/brand/logo'
 
-const AppHeader = () => {
+const Header = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
@@ -65,15 +65,15 @@ const AppHeader = () => {
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3">
-          <AppHeaderDropdown />
+          <HeaderDropdown />
         </CHeaderNav>
       </CContainer>
       <CHeaderDivider />
       <CContainer fluid>
-        <AppBreadcrumb />
+        <DashboardBreadcrumb />
       </CContainer>
     </CHeader>
   )
 }
 
-export default AppHeader
+export default Header
