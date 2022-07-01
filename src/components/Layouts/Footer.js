@@ -5,16 +5,11 @@ const Footer = () => {
   return (
     <CFooter>
       <div>
+        All Rights Reserved for {" "}
         <a href="https://tadreebi.net" target="_blank" rel="noopener noreferrer">
-          CoreUI
+          Tadreebi
         </a>
-        <span className="ms-1">&copy; 2022 Tadreebi</span>
-      </div>
-      <div className="ms-auto">
-        <span className="me-1">Powered by</span>
-        <a href="https://tadreebi.net/react" target="_blank" rel="noopener noreferrer">
-          CoreUI React Admin &amp; Dashboard Template
-        </a>
+        <span className="ms-1">&copy; {new Date().getFullYear()}</span>
       </div>
     </CFooter>
   )

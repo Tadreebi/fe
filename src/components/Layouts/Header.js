@@ -1,69 +1,47 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-  CContainer,
-  CHeader,
-  CHeaderBrand,
-  CHeaderDivider,
-  CHeaderNav,
-  CHeaderToggler,
-  CNavLink,
-  CNavItem,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import HeaderDropdown from "./HeaderDropdown"
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
-
-import { DashboardBreadcrumb } from './index'
+import CIcon from '@coreui/icons-react'
+import { CContainer, CHeader, CHeaderBrand, CHeaderNav, CHeaderToggler, CNavItem, CNavLink } from '@coreui/react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, NavLink } from 'react-router-dom'
+import HeaderDropdown from "./HeaderDropdown"
 import { logo } from 'src/assets/brand/logo'
 
-const Header = () => {
+const Header = ({ notDashboard }) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  const navLinks = [
+    { title: "Home", link: "/" },
+  ];
 
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
-        <CHeaderToggler
-          className="ps-1"
-          onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
-        >
-          <CIcon icon={cilMenu} size="lg" />
-        </CHeaderToggler>
-        <CHeaderBrand className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} alt="Logo" />
+        {!notDashboard && (
+          <CHeaderToggler
+            className="ps-1"
+            onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+          >
+            <CIcon icon={cilMenu} size="lg" />
+          </CHeaderToggler>
+        )}
+
+        <CHeaderBrand>
+          <Link to="/">
+            <CIcon icon={logo} height={30} alt="Logo" />
+          </Link>
         </CHeaderBrand>
+
         <CHeaderNav className="d-none d-md-flex me-auto">
-          <CNavItem>
-            <CNavLink to="/dashboard" component={NavLink}>
-              Dashboard
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">Users</CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">Settings</CNavLink>
-          </CNavItem>
+          {navLinks.map(({ title, link }, i) => (
+            <CNavItem key={i}>
+              <CNavLink to={link} component={NavLink}>
+                {title}
+              </CNavLink>
+            </CNavItem>
+          ))}
         </CHeaderNav>
-        <CHeaderNav>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
-            </CNavLink>
-          </CNavItem>
-        </CHeaderNav>
+
         <CHeaderNav className="ms-3">
           <HeaderDropdown />
         </CHeaderNav>
