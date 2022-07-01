@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import CollapseCard from 'src/components/CollapseCard';
 import { Card, CardBody, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
-import demoData from "./demoData"
-
+import demoData from "./demoData";
 
 
 const StudentProfile = () => {
