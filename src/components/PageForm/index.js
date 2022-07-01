@@ -3,9 +3,9 @@ import CollapseCard from '../CollapseCard';
 import { Button, ButtonGroup } from '../Root/Buttons';
 import Form from '../Root/Form';
 import { Col, Row } from '../Root/Grid';
-import { Boolean, CheckList, Input, Option, Select, Textarea } from '../Root/InputFields';
-import Label from '../Root/Label';
 import Icon from '../Root/Icon';
+import { Boolean, CheckList, Input, Option, Select, StarRating, Textarea } from '../Root/InputFields';
+import Label from '../Root/Label';
 
 const inputsDemo = [
   {
@@ -167,6 +167,17 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   readOnly={input.readOnly}
                   multiple={input.multiple}
                 />
+              ) : input.type === "rating" ? (
+                <>
+                  <br />
+                  <StarRating
+                    name={input.name}
+                    required={input.required}
+                    value={input.value}
+                    onChange={input.onChange}
+                    disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
+                  />
+                </>
               ) : (input.type === "checkbox" || input.type === "radio") ? (
                 <>
                   <Row>
