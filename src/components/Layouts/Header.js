@@ -1,13 +1,15 @@
-import { cilMenu } from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
-import { CContainer, CHeader, CHeaderBrand, CHeaderDivider, CHeaderNav, CHeaderToggler, CNavItem, CNavLink } from '@coreui/react'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { logo } from 'src/assets/brand/logo'
 import DashboardBreadcrumb from 'src/components/Layouts/DashboardBreadcrumb'
+import Container from '../Root/Container'
+import { Header, HeaderBrand, HeaderDivider, HeaderNav, HeaderToggler } from '../Root/Header'
+import Icon from '../Root/Icon'
+import { NavItem, NavLink as NavRootLink } from '../Root/Nav'
 import HeaderDropdown from "./HeaderDropdown"
 
-const Header = ({ notDashboard }) => {
+const HeaderComp = ({ notDashboard }) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
@@ -16,47 +18,47 @@ const Header = ({ notDashboard }) => {
   ];
 
   return (
-    <CHeader position="sticky" className="mb-4">
-      <CContainer fluid>
+    <Header position="sticky" className="mb-4">
+      <Container fluid>
         {!notDashboard && (
-          <CHeaderToggler
+          <HeaderToggler
             className="ps-1"
             onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
           >
-            <CIcon icon={cilMenu} size="lg" />
-          </CHeaderToggler>
+            <Icon icon={faBars} size="lg" />
+          </HeaderToggler>
         )}
 
-        <CHeaderBrand>
+        <HeaderBrand>
           <Link to="/">
-            <CIcon icon={logo} height={30} alt="Logo" />
+            <Icon icon={logo} height={30} alt="Logo" />
           </Link>
-        </CHeaderBrand>
+        </HeaderBrand>
 
-        <CHeaderNav className="d-none d-md-flex me-auto">
+        <HeaderNav className="d-none d-md-flex me-auto">
           {navLinks.map(({ title, link }, i) => (
-            <CNavItem key={i}>
-              <CNavLink to={link} component={NavLink}>
+            <NavItem key={i}>
+              <NavLink to={link} component={NavRootLink}>
                 {title}
-              </CNavLink>
-            </CNavItem>
+              </NavLink>
+            </NavItem>
           ))}
-        </CHeaderNav>
+        </HeaderNav>
 
-        <CHeaderNav className="ms-3">
+        <HeaderNav className="ms-3">
           <HeaderDropdown />
-        </CHeaderNav>
-      </CContainer>
+        </HeaderNav>
+      </Container>
       {!notDashboard && (
         <>
-          <CHeaderDivider />
-          <CContainer fluid>
+          <HeaderDivider />
+          <Container fluid>
             <DashboardBreadcrumb />
-          </CContainer>
+          </Container>
         </>
       )}
-    </CHeader>
+    </Header>
   )
 };
 
-export default Header
+export default HeaderComp;

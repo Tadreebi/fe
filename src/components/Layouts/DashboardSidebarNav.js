@@ -1,7 +1,7 @@
-import { CBadge } from '@coreui/react'
 import PropTypes from 'prop-types'
 import { Fragment } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import Badge from '../Root/Badge'
 
 export const DashboardSidebarNav = ({ items }) => {
   const location = useLocation()
@@ -11,9 +11,9 @@ export const DashboardSidebarNav = ({ items }) => {
         {icon && icon}
         {name && name}
         {badge && (
-          <CBadge color={badge.color} className="ms-auto">
+          <Badge color={badge.color} className="ms-auto">
             {badge.text}
-          </CBadge>
+          </Badge>
         )}
       </>
     )

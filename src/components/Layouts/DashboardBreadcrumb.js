@@ -1,7 +1,7 @@
-import { CBreadcrumb, CBreadcrumbItem } from '@coreui/react'
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import routes from 'src/Routes/dashboard'
+import { Breadcrumb, BreadcrumbItem } from '../Root/Breadcrumb'
 
 const DashboardBreadcrumb = () => {
   const currentLocation = useLocation().pathname
@@ -30,19 +30,19 @@ const DashboardBreadcrumb = () => {
   const breadcrumbs = getBreadcrumbs(currentLocation)
 
   return (
-    <CBreadcrumb className="m-0 ms-2">
-      <CBreadcrumbItem href="/">Home</CBreadcrumbItem>
+    <Breadcrumb className="m-0 ms-2">
+      <BreadcrumbItem href="/">Home</BreadcrumbItem>
       {breadcrumbs.map((breadcrumb, index) => {
         return (
-          <CBreadcrumbItem
+          <BreadcrumbItem
             {...(breadcrumb.active ? { active: true } : { href: breadcrumb.pathname })}
             key={index}
           >
             {breadcrumb.name}
-          </CBreadcrumbItem>
+          </BreadcrumbItem>
         )
       })}
-    </CBreadcrumb>
+    </Breadcrumb>
   )
 }
 

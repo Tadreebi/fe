@@ -1,9 +1,9 @@
-import { CFooter } from '@coreui/react';
-import React from 'react';
+import { memo } from 'react';
+import Footer from '../Root/Footer';
 
-const Footer = () => {
+const FooterCom = () => {
   return (
-    <CFooter>
+    <Footer>
       <div>
         All Rights Reserved for {" "}
         <a href="https://tadreebi.net" target="_blank" rel="noopener noreferrer">
@@ -11,8 +11,8 @@ const Footer = () => {
         </a>
         <span className="ms-1">&copy; {new Date().getFullYear()}</span>
       </div>
-    </CFooter>
+    </Footer>
   )
 };
 
-export default React.memo(Footer)
+export default memo(FooterCom)
