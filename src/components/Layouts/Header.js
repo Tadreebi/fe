@@ -23,7 +23,7 @@ const HeaderComp = ({ notDashboard }) => {
         {!notDashboard && (
           <HeaderToggler
             className="ps-1"
-            onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+            onClick={() => dispatch({ type: 'setSideBar', sidebarShow: !sidebarShow })}
           >
             <Icon icon={faBars} size="lg" />
           </HeaderToggler>

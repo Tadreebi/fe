@@ -20,7 +20,7 @@ const DashboardSidebar = () => {
       unfoldable={unfoldable}
       visible={sidebarShow}
       onVisibleChange={(visible) => {
-        dispatch({ type: 'set', sidebarShow: visible })
+        dispatch({ type: 'setSideBar', sidebarShow: visible })
       }}
     >
       <SidebarBrand className="d-none d-md-flex" to="/">
@@ -36,7 +36,7 @@ const DashboardSidebar = () => {
 
       <SidebarToggler
         className="d-none d-lg-flex"
-        onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
+        onClick={() => dispatch({ type: 'setSideBar', sidebarUnfoldable: !unfoldable })}
       />
     </Sidebar>
   )
