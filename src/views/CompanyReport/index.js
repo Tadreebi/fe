@@ -52,8 +52,8 @@ const CompanyReports = () => {
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
       options: [
-        { title: "Weekly Report", value: "Weekly" },
-        { title: "Monthly Report", value: "Monthly" },
+        { title: "Periodical Report", value: "Periodical" },
+        { title: "Complain Report", value: "Complain" },
         { title: "Final Report", value: "Final" }
       ]
     },
@@ -183,8 +183,8 @@ const CompanyReports = () => {
       chart: {
         type: "bar",
         data: {
-          "Monthly Report": reportsList.filter(rep => rep.type === "Monthly Report")?.length,
-          "Weekly Report": reportsList.filter(rep => rep.type === "Weekly Report")?.length,
+          "Complain Report": reportsList.filter(rep => rep.type === "Complain Report")?.length,
+          "Periodical Report": reportsList.filter(rep => rep.type === "Periodical Report")?.length,
           "Final Report": reportsList.filter(rep => rep.type === "Final Report")?.length,
         },
       }
@@ -267,8 +267,8 @@ const CompanyReports = () => {
       title: "Submitted Reports",
       type: "doughnut",
       data: {
-        "Monthly Report": reportsList.filter(rep => rep.type === "Monthly Report")?.length,
-        "Weekly Report": reportsList.filter(rep => rep.type === "Weekly Report")?.length,
+        "Complain Report": reportsList.filter(rep => rep.type === "Complain Report")?.length,
+        "Periodical Report": reportsList.filter(rep => rep.type === "Periodical Report")?.length,
         "Final Report": reportsList.filter(rep => rep.type === "Final Report")?.length,
       }
     },

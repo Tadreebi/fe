@@ -2,7 +2,7 @@ const reportsDemoData = [
   {
     title: "Report 1",
     company: "Raghad",
-    type: "Weekly Report",
+    type: "Final Report",
     startDate: "2022-6-05",
     endDate: "2022-06-09",
     intro: "this the  company's  Weekly report",
@@ -13,7 +13,7 @@ const reportsDemoData = [
   {
     title: "Report 1",
     company: "Emad",
-    type: "Monthly Report",
+    type: "Periodical Report",
     startDate: "2022-6-05",
     endDate: "2022-07-05",
     intro: "this the  company's Monthly report ",
@@ -24,7 +24,7 @@ const reportsDemoData = [
   {
     title: "Report 2",
     company: "Suhaib",
-    type: "Weekly Report",
+    type: "Complain Report",
     startDate: "2022-6-12",
     endDate: "2022-06-16",
     intro: "this the  company's  report ",
@@ -35,7 +35,7 @@ const reportsDemoData = [
   {
     title: "Report 1",
     company: "Moayad",
-    type: "Monthly Report",
+    type: "Final Report",
     startDate: "2022-6-05",
     endDate: "2022-07-05",
     intro: "this the company's  Monthly report ",
