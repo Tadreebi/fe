@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import TemplatePage from '../templatePage'
+import applicationData from './applicationData';
 
 
 const StudentApplication = () => {
-  const [applications, setApplications] = useState([]);
+  const [applicationsList, setApplicationsList] = useState([...applicationData]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
 
@@ -63,7 +64,7 @@ const StudentApplication = () => {
       onChange: e => setApplication(current => ({ ...current, homeFullAddress: e.target.value }))
     },
     {
-      title: "Preferable Internship Type",
+      title: "Preferable Internship Location",
       name: "location",
       type: "select",
       required: true,
@@ -94,7 +95,7 @@ const StudentApplication = () => {
     {
       title: "Resume",
       name: "resume",
-      type: "textarea",
+      type: "file",
       fullwidth: true,
       required: true,
       value: application.resume,
@@ -125,37 +126,125 @@ const StudentApplication = () => {
   };
 
   const onDataCreate = () => {
-    setApplications(current => [...current, { ...application, id: current.length }]);
+    setApplicationsList(current => [...current, { ...application, id: current.length }]);
     setApplication({});
     setAction("create");
     console.log('Form Data Created');
   };
 
   const onDataEdit = () => {
-    setApplications(current => [...current.filter(rep => rep.id !== application.id), application]);
+    setApplicationsList(current => [...current.filter(rep => rep.id !== application.id), application]);
     setApplication({});
     setAction("create");
     console.log('Form Data Updated');
   };
 
   const onDataDelete = () => {
-    setApplications(current => [...current.filter(rep => rep.id !== application.id)]);
+    setApplicationsList(current => [...current.filter(rep => rep.id !== application.id)]);
     setApplication({});
     setAction("create");
     console.log('Form Data Deleted');
   };
+  const statisticsData = [
+    {
+      title: "Internship Type",
+      number: applicationsList.map(intern => intern.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Full Time": applicationsList.filter(intern => intern.type === "Full Time")?.length,
+          "Part Time": applicationsList.filter(intern => intern.type === "Part Time")?.length,
+        },
+      }
+    },
+    {
+      title: "Preferable Internship Location",
+      number: applicationsList.map(intern => intern.location).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Remote": applicationsList.filter(intern => intern.location === "Remote")?.length,
+          "OnSite": applicationsList.filter(intern => intern.location === "OnSite")?.length,
+        },
+      }
+    },
+    {
+      title: "Expected Salary",
+      number: applicationsList.map(intern => intern.expected_salary).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Less than 100": applicationsList.filter(intern => intern.expected_salary < 100)?.length,
+          "Greater than 100": applicationsList.filter(intern => intern.expected_salary > 100)?.length,
+        },
+      }
+    },
+  ]
+  const chartsData = [
+    {
+      title: "Internship Type",
+      type: "doughnut",
+      data: {
+        "Full Time": applicationsList.filter(intern => intern.type === "Full Time")?.length,
+        "Part Time": applicationsList.filter(intern => intern.type === "Part Time")?.length,
+      },
+    },
+    {
+      title: "Preferable Internship Location",
+      type: "doughnut",
+      data: {
+        "Remote": applicationsList.filter(intern => intern.location === "Remote")?.length,
+        "OnSite": applicationsList.filter(intern => intern.location === "OnSite")?.length,
+      },
+    },
+    {
+      title: "Expected Salary",
+      type: "polar",
+      data:{
+        "Less than 100": applicationsList.filter(intern => intern.expected_salary < 100)?.length,
+        "Greater than 100": applicationsList.filter(intern => intern.expected_salary > 100)?.length,
+      },
+    },
+  ]
 
+  const tableColumns = [
+    {
+      name: "Student",
+      selector: row => row.student,
+      sortable: true
+    },
+    {
+      name: "Internship",
+      selector: row => row.internship,
+      sortable: true
+    },
+    {
+      name: "Preferable Internship Type",
+      selector: row => row.location,
+      sortable: true
+    },
+    {
+      name: "Internship Hours",
+      selector: row => row.type,
+      sortable: true
+    },
+
+  ];
   return (
     <>
       <TemplatePage
         pageTitle={"Student Applications"}
         pageDescrbition={"For student to apply for a specific internship posted by the company"}
+        statisticsData={statisticsData}
+        chartsData={chartsData}
         formTitle={"CRUD Applications"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Applications List"}
-        tableData={applications}
+        tableColumns={tableColumns}
+        tableRowDetails={true}
+        tableData={applicationsList}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
