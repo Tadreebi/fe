@@ -32,7 +32,7 @@ const CompanyReports = () => {
       required: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      // options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "company",
@@ -42,7 +42,7 @@ const CompanyReports = () => {
       required: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, company: e.target.value })),
-      options: companies.map(student => ({ title: company.name, value: company.id }))
+      options: company.map(student => ({ title: company.name, value: company.id }))
     },
     {
       title: "Report Type",
@@ -93,7 +93,7 @@ const CompanyReports = () => {
       value: report.remarks,
       onChange: e => setReport(current => ({ ...current, remarks: e.target.value }))
     },
- 
+
     {
       title: "Attendance",
       name: "attendance",
@@ -351,4 +351,4 @@ const CompanyReports = () => {
   )
 }
 
-export default y
+export default CompanyReports
