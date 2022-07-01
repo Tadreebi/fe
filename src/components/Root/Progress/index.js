@@ -1,9 +1,12 @@
-import { CProgress } from '@coreui/react';
+import { CProgress, CProgressBar } from '@coreui/react';
 
-const Progress = ({ children, ...rest }) => {
+const Progress = ({ children, value, text, ...rest }) => {
   return (
-    <CProgress {...rest}>
-      {children}
+    <CProgress className="m-3">
+      <CProgressBar value={value} variant="striped" {...rest}>
+        {text}
+        {children}
+      </CProgressBar>
     </CProgress>
   )
 }

@@ -2,6 +2,7 @@ import { faSquareRootVariable } from '@fortawesome/free-solid-svg-icons';
 import CollapseCard from '../CollapseCard';
 import { BarChart, LineChart } from '../Root/Charts';
 import { Col, Row } from '../Root/Grid';
+import Progress from '../Root/Progress';
 import StatsWidget from '../Root/StatsWidget';
 import statisticsDemoData from './demoData';
 
@@ -123,7 +124,7 @@ const PageStatistics = ({ title = "Statistics", statistics = statisticsDemoData 
                           },
                         }}
                       />
-                    ) : statistic.chart.type === "bar" && (
+                    ) : statistic.chart.type === "bar" ? (
                       <BarChart
                         className="mt-3 mx-3"
                         data={{
@@ -168,6 +169,8 @@ const PageStatistics = ({ title = "Statistics", statistics = statisticsDemoData 
                           },
                         }}
                       />
+                    ) : statistic.chart.type === "progress" && (
+                      <Progress {...statistic.chart} />
                     )}
                   </>
                 )

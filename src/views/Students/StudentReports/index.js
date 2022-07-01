@@ -164,12 +164,10 @@ const StudentReports = () => {
       title: "Types of Reports Submitted",
       number: reportsList.map(rep => rep.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
       chart: {
-        type: "bar",
-        data: {
-          "Monthly Report": reportsList.filter(rep => rep.type === "Monthly Report")?.length,
-          "Weekly Report": reportsList.filter(rep => rep.type === "Weekly Report")?.length,
-          "Final Report": reportsList.filter(rep => rep.type === "Final Report")?.length,
-        },
+        type: "progress",
+        value: 25,
+        text: "25%",
+        color: "success"
       }
     },
     {
