@@ -1,12 +1,13 @@
-import { CCol, CContainer, CRow } from '@coreui/react'
 import { Link } from 'react-router-dom'
+import Container from 'src/components/Root/Container'
+import { Col, Row } from 'src/components/Root/Grid'
 
 const Page404 = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={6}>
+      <Container>
+        <Row className="justify-content-center">
+          <Col md={6}>
             <div className="clearfix">
               <h1 className="float-start display-3 me-4">
                 404
@@ -27,9 +28,9 @@ const Page404 = () => {
                 </Link>
               </h5>
             </div>
-          </CCol>
-        </CRow>
-      </CContainer>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }
