@@ -53,6 +53,24 @@ const postsDemoData = [
     supervisor_phone_number: "077",
     endDate: "2022-6-05",
   },
+  {
+    company: "Facebook",
+    position: "Senior developer",
+    paid: "Paid Internship",
+    type: "Full Time",
+    experience: "Two Years",
+    education: "Phd",
+    industry: "Education",
+    salary: 150,
+    city: "Amman",
+    location: "Mecca Street",
+    vacancies: 5,
+    description: "Full Time senior developer with two year experience",
+    supervisor_Name: "Gheed",
+    subervisor_position: "Team Lead Tech",
+    supervisor_phone_number: "077",
+    endDate: "2022-6-05",
+  },
 ];
 
 export default postsDemoData;
