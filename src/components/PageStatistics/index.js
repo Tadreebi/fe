@@ -1,9 +1,8 @@
-import { CWidgetStatsA } from '@coreui/react';
-import { getStyle } from '@coreui/utils';
 import { faSquareRootVariable } from '@fortawesome/free-solid-svg-icons';
 import CollapseCard from '../CollapseCard';
 import { BarChart, LineChart } from '../Root/Charts';
 import { Col, Row } from '../Root/Grid';
+import StatsWidget from '../Root/StatsWidget';
 import statisticsDemoData from './demoData';
 
 const colors = [
@@ -15,6 +14,19 @@ const colors = [
   "dark",
   "secondary"
 ];
+
+const rgbColors = color => {
+  switch (color) {
+    case "primary": return "50, 31, 219";
+    case "info": return "51, 153, 255";
+    case "success": return "46, 184, 92";
+    case "danger": return "229, 83, 83";
+    case "warning": return "249, 177, 21";
+    case "dark": return "79, 93, 115";
+    case "secondary": return "157, 165, 177";
+    default: return "51, 153, 255";
+  }
+};
 
 const length = count => {
   switch (count) {
@@ -31,7 +43,7 @@ const PageStatistics = ({ title = "Statistics", statistics = statisticsDemoData 
       <Row>
         {statistics?.map((statistic, i) => (
           <Col sm={6} lg={length(statistics.length)} key={i}>
-            <CWidgetStatsA
+            <StatsWidget
               className={`mb-4 ${statistic.chart ? "" : "pb-5"}`}
               color={statistic.color || colors[i % (colors.length - 1)]}
               value={statistic.number}
@@ -59,7 +71,7 @@ const PageStatistics = ({ title = "Statistics", statistics = statisticsDemoData 
                               // label: 'My First dataset',
                               backgroundColor: statistic.chart.fill ? 'rgba(255,255,255,.2)' : 'transparent',
                               borderColor: 'rgba(255,255,255,.55)',
-                              pointBackgroundColor: getStyle(`--cui-${statistic.color || colors[i % (colors.length - 1)]}`),
+                              pointBackgroundColor: `rgba(${rgbColors(statistic.color || colors[i % (colors.length - 1)])},1)`,
                               data: Object.values(statistic.chart.data),
                               fill: statistic.chart.fill,
                             },

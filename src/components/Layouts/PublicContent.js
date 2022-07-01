@@ -1,12 +1,13 @@
-import { CContainer, CSpinner } from '@coreui/react';
 import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import routes from 'src/Routes/public';
+import Container from '../Root/Container';
+import Spinner from '../Root/Spinner';
 
 const PublicContent = () => {
   return (
-    <CContainer lg>
-      <Suspense fallback={<CSpinner color="primary" />}>
+    <Container lg>
+      <Suspense fallback={<Spinner color="primary" />}>
         <Routes>
           {routes.map((route, idx) => {
             return (
@@ -24,7 +25,7 @@ const PublicContent = () => {
           <Route path="/" element={<Navigate to="dashboard" replace />} />
         </Routes>
       </Suspense>
-    </CContainer>
+    </Container>
   )
 };
 
