@@ -1,31 +1,23 @@
-import React from 'react'
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCol,
-  CContainer,
-  CForm,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import { Button } from 'src/components/Root/Buttons/'
 import { Link } from 'react-router-dom'
+import { Button } from 'src/components/Root/Buttons/'
+import { Card, CardBody } from 'src/components/Root/Cards'
+import Container from 'src/components/Root/Container'
+import Form from 'src/components/Root/Form'
 import { Col, Row } from 'src/components/Root/Grid'
+import Icon from 'src/components/Root/Icon'
+import { Input } from 'src/components/Root/InputFields'
+import Label from 'src/components/Root/Label'
 
 const Register = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={9} lg={7} xl={6}>
-            <CCard className="mx-4">
-              <CCardBody className="p-4">
-                <CForm>
+      <Container>
+        <Row className="justify-content-center">
+          <Col md={9} lg={7} xl={6}>
+            <Card className="mx-4">
+              <CardBody className="p-4">
+                <Form>
                   <Row>
                     <Col md={9}>
                       <h2>Student Register</h2>
@@ -41,69 +33,53 @@ const Register = () => {
                     </Col>
                   </Row>
 
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput placeholder="Username" autoComplete="username" />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>@</CInputGroupText>
-                    <CFormInput placeholder="Email" autoComplete="email" />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput placeholder="Name" autoComplete="name" />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput placeholder="Phone" autoComplete="phone" />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput placeholder="GPA" autoComplete="GPA" />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="new-password"
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Repeat password"
-                      autoComplete="new-password"
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <p className="text-medium-emphasis">Faculty</p>
-                    </CInputGroupText>
-                    {/* <CFormSelect options={["Not a Student", "IT", "Engineering", "Science", "Business", "Medicine", "Pharmacy", "Law", "Letreture", "Arts", "Humanities", "Religions"]} /> */}
-                  </CInputGroup>
+                  <Label>
+                    <Icon icon={cilUser} />
+                  </Label>
+                  <Input placeholder="Username" autoComplete="username" />
+                  <Label>@</Label>
+                  <Input placeholder="Email" autoComplete="email" />
+                  <Label>
+                    <Icon icon={cilUser} />
+                  </Label>
+                  <Input placeholder="Name" autoComplete="name" />
+                  <Label>
+                    <Icon icon={cilUser} />
+                  </Label>
+                  <Input placeholder="Phone" autoComplete="phone" />
+                  <Label>
+                    <Icon icon={cilUser} />
+                  </Label>
+                  <Input placeholder="GPA" autoComplete="GPA" />
+                  <Label>
+                    <Icon icon={cilLockLocked} />
+                  </Label>
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="new-password"
+                  />
+                  <Label>
+                    <Icon icon={cilLockLocked} />
+                  </Label>
+                  <Input
+                    type="password"
+                    placeholder="Repeat password"
+                    autoComplete="new-password"
+                  />
+                  <Label>
+                    <p className="text-medium-emphasis">Faculty</p>
+                  </Label>
+                  {/* <FormSelect options={["Not a Student", "IT", "Engineering", "Science", "Business", "Medicine", "Pharmacy", "Law", "Letreture", "Arts", "Humanities", "Religions"]} /> */}
                   <div className="d-grid">
-                    <CButton color="success">Create Account</CButton>
+                    <Button color="success">Create Account</Button>
                   </div>
-                </CForm>
-              </CCardBody>
-            </CCard>
-          </CCol>
-        </CRow>
-      </CContainer>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }

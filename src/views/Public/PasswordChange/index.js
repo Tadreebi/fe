@@ -1,68 +1,56 @@
-import React from 'react'
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCol,
-  CContainer,
-  CForm,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+import { cilLockLocked } from '@coreui/icons'
+import { Button } from 'src/components/Root/Buttons/'
+import { Card, CardBody } from 'src/components/Root/Cards'
+import Container from 'src/components/Root/Container'
+import Form from 'src/components/Root/Form'
+import { Col, Row } from 'src/components/Root/Grid'
+import Icon from 'src/components/Root/Icon'
+import { Input } from 'src/components/Root/InputFields'
+import Label from 'src/components/Root/Label'
 
 const Register = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={9} lg={7} xl={6}>
-            <CCard className="mx-4">
-              <CCardBody className="p-4">
-                <CForm>
+      <Container>
+        <Row className="justify-content-center">
+          <Col md={9} lg={7} xl={6}>
+            <Card className="mx-4">
+              <CardBody className="p-4">
+                <Form>
                   <h1>Password Change</h1>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Old Password"
-                      autoComplete="old-password"
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="New Password"
-                      autoComplete="new-password"
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Repeat password"
-                      autoComplete="new-password"
-                    />
-                  </CInputGroup>
+                  <Label>
+                    <Icon icon={cilLockLocked} />
+                  </Label>
+                  <Input
+                    type="password"
+                    placeholder="Old Password"
+                    autoComplete="old-password"
+                  />
+                  <Label>
+                    <Icon icon={cilLockLocked} />
+                  </Label>
+                  <Input
+                    type="password"
+                    placeholder="New Password"
+                    autoComplete="new-password"
+                  />
+                  <Label>
+                    <Icon icon={cilLockLocked} />
+                  </Label>
+                  <Input
+                    type="password"
+                    placeholder="Repeat password"
+                    autoComplete="new-password"
+                  />
                   <div className="d-grid">
-                    <CButton color="success">Change Password</CButton>
+                    <Button color="success">Change Password</Button>
                   </div>
-                </CForm>
-              </CCardBody>
-            </CCard>
-          </CCol>
-        </CRow>
-      </CContainer>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }

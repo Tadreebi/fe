@@ -1,51 +1,19 @@
 
-import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa, cibFacebook, cibGoogle, cibLinkedin, cibTwitter, cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs, cilCloudDownload,
-  cilPeople,
-  cilUser,
-  cilUserFemale
-} from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
-import {
-  CAvatar,
-  CButton,
-  CButtonGroup,
-  CCard,
-  CCardBody,
-  CCardFooter,
-  CCardHeader,
-  CCol,
-  CProgress,
-  CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow
-} from '@coreui/react'
-import { CChartLine } from '@coreui/react-chartjs'
-import { getStyle, hexToRgba } from '@coreui/utils'
-
-import avatar1 from 'src/assets/images/avatars/1.jpg'
-import avatar2 from 'src/assets/images/avatars/2.jpg'
-import avatar3 from 'src/assets/images/avatars/3.jpg'
-import avatar4 from 'src/assets/images/avatars/4.jpg'
-import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
-
-import WidgetsBrand from '../template/widgets/WidgetsBrand'
-import WidgetsDropdown from '../template/widgets/WidgetsDropdown'
+import { cibCcAmex, cibCcApplePay, cibCcMastercard, cibCcPaypal, cibCcStripe, cibCcVisa, cibFacebook, cibGoogle, cibLinkedin, cibTwitter, cifBr, cifEs, cifFr, cifIn, cifPl, cifUs, cilCloudDownload, cilUser, cilUserFemale } from '@coreui/icons';
+import avatar1 from 'src/assets/images/avatars/1.jpg';
+import avatar2 from 'src/assets/images/avatars/2.jpg';
+import avatar3 from 'src/assets/images/avatars/3.jpg';
+import avatar4 from 'src/assets/images/avatars/4.jpg';
+import avatar5 from 'src/assets/images/avatars/5.jpg';
+import avatar6 from 'src/assets/images/avatars/6.jpg';
+import { Button, ButtonGroup } from 'src/components/Root/Buttons';
+import { Card, CardBody, CardFooter, CardHeader } from 'src/components/Root/Cards';
+import { LineChart } from 'src/components/Root/Charts';
+import { Col, Row } from 'src/components/Root/Grid';
+import Icon from 'src/components/Root/Icon';
+import Progress from 'src/components/Root/Progress';
+import WidgetsBrand from '../template/widgets/WidgetsBrand';
+import WidgetsDropdown from '../template/widgets/WidgetsDropdown';
 
 const Dashboard = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
@@ -174,43 +142,43 @@ const Dashboard = () => {
   return (
     <>
       <WidgetsDropdown />
-      <CCard className="mb-4">
-        <CCardBody>
-          <CRow>
-            <CCol sm={5}>
+      <Card className="mb-4">
+        <CardBody>
+          <Row>
+            <Col sm={5}>
               <h4 id="traffic" className="card-title mb-0">
                 Traffic
               </h4>
               <div className="small text-medium-emphasis">January - July 2021</div>
-            </CCol>
-            <CCol sm={7} className="d-none d-md-block">
-              <CButton color="primary" className="float-end">
-                <CIcon icon={cilCloudDownload} />
-              </CButton>
-              <CButtonGroup className="float-end me-3">
+            </Col>
+            <Col sm={7} className="d-none d-md-block">
+              <Button color="primary" className="float-end">
+                <Icon icon={cilCloudDownload} />
+              </Button>
+              <ButtonGroup className="float-end me-3">
                 {['Day', 'Month', 'Year'].map((value, i) => (
-                  <CButton
+                  <Button
                     color="outline-secondary"
                     className="mx-0"
                     active={value === 'Month'}
                     key={i}
                   >
                     {value}
-                  </CButton>
+                  </Button>
                 ))}
-              </CButtonGroup>
-            </CCol>
-          </CRow>
-          <CChartLine
+              </ButtonGroup>
+            </Col>
+          </Row>
+          <LineChart
             style={{ height: '300px', marginTop: '40px' }}
             data={{
               labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
               datasets: [
                 {
                   label: 'My First dataset',
-                  backgroundColor: hexToRgba(getStyle('--cui-info'), 10),
-                  borderColor: getStyle('--cui-info'),
-                  pointHoverBackgroundColor: getStyle('--cui-info'),
+                  backgroundColor: "rgba(255,13,13,1)",
+                  borderColor: "rgba(255,13,13,1)",
+                  pointHoverBackgroundColor: "rgba(255,13,13,1)",
                   borderWidth: 2,
                   data: [
                     random(50, 200),
@@ -226,8 +194,8 @@ const Dashboard = () => {
                 {
                   label: 'My Second dataset',
                   backgroundColor: 'transparent',
-                  borderColor: getStyle('--cui-success'),
-                  pointHoverBackgroundColor: getStyle('--cui-success'),
+                  borderColor: "rgba(255,13,13,1)",
+                  pointHoverBackgroundColor: "rgba(255,13,13,1)",
                   borderWidth: 2,
                   data: [
                     random(50, 200),
@@ -242,8 +210,8 @@ const Dashboard = () => {
                 {
                   label: 'My Third dataset',
                   backgroundColor: 'transparent',
-                  borderColor: getStyle('--cui-danger'),
-                  pointHoverBackgroundColor: getStyle('--cui-danger'),
+                  borderColor: "rgba(255,13,13,1)",
+                  pointHoverBackgroundColor: "rgba(255,13,13,1)",
                   borderWidth: 1,
                   borderDash: [8, 5],
                   data: [65, 65, 65, 65, 65, 65, 65],
@@ -285,45 +253,45 @@ const Dashboard = () => {
               },
             }}
           />
-        </CCardBody>
-        <CCardFooter>
-          <CRow xs={{ cols: 1 }} md={{ cols: 5 }} className="text-center">
+        </CardBody>
+        <CardFooter>
+          <Row xs={{ cols: 1 }} md={{ cols: 5 }} className="text-center">
             {progressExample.map((item, index) => (
-              <CCol className="mb-sm-2 mb-0" key={index}>
+              <Col className="mb-sm-2 mb-0" key={index}>
                 <div className="text-medium-emphasis">{item.title}</div>
                 <strong>
                   {item.value} ({item.percent}%)
                 </strong>
-                <CProgress thin className="mt-2" color={item.color} value={item.percent} />
-              </CCol>
+                <Progress thin className="mt-2" color={item.color} value={item.percent} />
+              </Col>
             ))}
-          </CRow>
-        </CCardFooter>
-      </CCard>
+          </Row>
+        </CardFooter>
+      </Card>
 
       <WidgetsBrand withCharts />
 
-      <CRow>
-        <CCol xs>
-          <CCard className="mb-4">
-            <CCardHeader>Traffic {' & '} Sales</CCardHeader>
-            <CCardBody>
-              <CRow>
-                <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol sm={6}>
+      <Row>
+        <Col xs>
+          <Card className="mb-4">
+            <CardHeader>Traffic {' & '} Sales</CardHeader>
+            <CardBody>
+              <Row>
+                <Col xs={12} md={6} xl={6}>
+                  <Row>
+                    <Col sm={6}>
                       <div className="border-start border-start-4 border-start-info py-1 px-3">
                         <div className="text-medium-emphasis small">New Clients</div>
                         <div className="fs-5 fw-semibold">9,123</div>
                       </div>
-                    </CCol>
-                    <CCol sm={6}>
+                    </Col>
+                    <Col sm={6}>
                       <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                         <div className="text-medium-emphasis small">Recurring Clients</div>
                         <div className="fs-5 fw-semibold">22,643</div>
                       </div>
-                    </CCol>
-                  </CRow>
+                    </Col>
+                  </Row>
 
                   <hr className="mt-0" />
                   {progressGroupExample1.map((item, index) => (
@@ -332,40 +300,40 @@ const Dashboard = () => {
                         <span className="text-medium-emphasis small">{item.title}</span>
                       </div>
                       <div className="progress-group-bars">
-                        <CProgress thin color="info" value={item.value1} />
-                        <CProgress thin color="danger" value={item.value2} />
+                        <Progress thin color="info" value={item.value1} />
+                        <Progress thin color="danger" value={item.value2} />
                       </div>
                     </div>
                   ))}
-                </CCol>
+                </Col>
 
-                <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol sm={6}>
+                <Col xs={12} md={6} xl={6}>
+                  <Row>
+                    <Col sm={6}>
                       <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
                         <div className="text-medium-emphasis small">Pageviews</div>
                         <div className="fs-5 fw-semibold">78,623</div>
                       </div>
-                    </CCol>
-                    <CCol sm={6}>
+                    </Col>
+                    <Col sm={6}>
                       <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
                         <div className="text-medium-emphasis small">Organic</div>
                         <div className="fs-5 fw-semibold">49,123</div>
                       </div>
-                    </CCol>
-                  </CRow>
+                    </Col>
+                  </Row>
 
                   <hr className="mt-0" />
 
                   {progressGroupExample2.map((item, index) => (
                     <div className="progress-group mb-4" key={index}>
                       <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
+                        <Icon className="me-2" icon={item.icon} size="lg" />
                         <span>{item.title}</span>
                         <span className="ms-auto fw-semibold">{item.value}%</span>
                       </div>
                       <div className="progress-group-bars">
-                        <CProgress thin color="warning" value={item.value} />
+                        <Progress thin color="warning" value={item.value} />
                       </div>
                     </div>
                   ))}
@@ -375,7 +343,7 @@ const Dashboard = () => {
                   {progressGroupExample3.map((item, index) => (
                     <div className="progress-group" key={index}>
                       <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
+                        <Icon className="me-2" icon={item.icon} size="lg" />
                         <span>{item.title}</span>
                         <span className="ms-auto fw-semibold">
                           {item.value}{' '}
@@ -383,70 +351,16 @@ const Dashboard = () => {
                         </span>
                       </div>
                       <div className="progress-group-bars">
-                        <CProgress thin color="success" value={item.percent} />
+                        <Progress thin color="success" value={item.percent} />
                       </div>
                     </div>
                   ))}
-                </CCol>
-              </CRow>
-
-              <br />
-
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead color="light">
-                  <CTableRow>
-                    <CTableHeaderCell className="text-center">
-                      <CIcon icon={cilPeople} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell>User</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Country</CTableHeaderCell>
-                    <CTableHeaderCell>Usage</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Payment Method</CTableHeaderCell>
-                    <CTableHeaderCell>Activity</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {tableExample.map((item, index) => (
-                    <CTableRow v-for="item in tableItems" key={index}>
-                      <CTableDataCell className="text-center">
-                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div>{item.user.name}</div>
-                        <div className="small text-medium-emphasis">
-                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
-                          {item.user.registered}
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="clearfix">
-                          <div className="float-start">
-                            <strong>{item.usage.value}%</strong>
-                          </div>
-                          <div className="float-end">
-                            <small className="text-medium-emphasis">{item.usage.period}</small>
-                          </div>
-                        </div>
-                        <CProgress thin color={item.usage.color} value={item.usage.value} />
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.payment.icon} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="small text-medium-emphasis">Last login</div>
-                        <strong>{item.activity}</strong>
-                      </CTableDataCell>
-                    </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
     </>
   )
 }

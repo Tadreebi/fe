@@ -1,36 +1,39 @@
-import { CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CRow } from '@coreui/react'
 import { Link } from 'react-router-dom';
+import { Button } from 'src/components/Root/Buttons/';
+import { Card, CardBody, CardGroup } from 'src/components/Root/Cards';
+import Container from 'src/components/Root/Container';
+import { Col, Row } from 'src/components/Root/Grid';
 
 const Landing = () => {
   const JWT = true;
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={4}>
-            <CCardGroup>
-              <CCard className="p-4">
-                <CCardBody className='text-center'>
+      <Container>
+        <Row className="justify-content-center">
+          <Col md={4}>
+            <CardGroup>
+              <Card className="p-4">
+                <CardBody className='text-center'>
                   {JWT ? (
                     <Link to="/dashboard">
-                      <CButton color="success" className="px-4">
+                      <Button color="success" className="px-4">
                         Dashboard
-                      </CButton>
+                      </Button>
                     </Link>
                   ) : (
                     <Link to="/login">
-                      <CButton color="success" className="px-4">
+                      <Button color="success" className="px-4">
                         Login
-                      </CButton>
+                      </Button>
                     </Link>
                   )}
-                </CCardBody>
-              </CCard>
-            </CCardGroup>
-          </CCol>
-        </CRow>
-      </CContainer>
+                </CardBody>
+              </Card>
+            </CardGroup>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }

@@ -1,73 +1,61 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardGroup,
-  CCol,
-  CContainer,
-  CForm,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { Link } from 'react-router-dom'
 import { Button } from 'src/components/Root/Buttons/'
+import { Card, CardBody, CardGroup } from 'src/components/Root/Cards'
+import Container from 'src/components/Root/Container'
+import Form from 'src/components/Root/Form'
+import { Col, Row } from 'src/components/Root/Grid'
+import Icon from 'src/components/Root/Icon'
+import { Input } from 'src/components/Root/InputFields'
+import Label from 'src/components/Root/Label'
 
 const Login = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={8}>
-            <CCardGroup>
-              <CCard className="p-4">
-                <CCardBody>
-                  <CForm>
+      <Container>
+        <Row className="justify-content-center">
+          <Col md={8}>
+            <CardGroup>
+              <Card className="p-4">
+                <CardBody>
+                  <Form>
                     <h2>Login</h2>
                     <p className="text-medium-emphasis">Sign In to your account</p>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupText>
-                        <CIcon icon={cilUser} />
-                      </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
-                    </CInputGroup>
+                    <Label>
+                      <Icon icon={cilUser} />
+                    </Label>
+                    <Input placeholder="Username" autoComplete="username" />
 
-                    <CInputGroup className="mb-4">
-                      <CInputGroupText>
-                        <CIcon icon={cilLockLocked} />
-                      </CInputGroupText>
-                      <CFormInput
-                        type="password"
-                        placeholder="Password"
-                        autoComplete="current-password"
-                      />
-                    </CInputGroup>
+                    <Label>
+                      <Icon icon={cilLockLocked} />
+                    </Label>
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      autoComplete="current-password"
+                    />
 
-                    <CRow>
-                      <CCol xs={6}>
+                    <Row>
+                      <Col xs={6}>
                         <Link to="/dashboard">
-                          <CButton color="success" className="px-4">
+                          <Button color="success" className="px-4">
                             Login
-                          </CButton>
+                          </Button>
                         </Link>
-                      </CCol>
+                      </Col>
 
-                      <CCol xs={6} className="text-right">
-                        <CButton color="link" className="px-0">
+                      <Col xs={6} className="text-right">
+                        <Button color="link" className="px-0">
                           Forgot password?
-                        </CButton>
-                      </CCol>
-                    </CRow>
-                  </CForm>
-                </CCardBody>
-              </CCard>
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Form>
+                </CardBody>
+              </Card>
 
-              <CCard className="text-white bg-success py-5" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
+              <Card className="text-white bg-success py-5" style={{ width: '44%' }}>
+                <CardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>
                     <p>
@@ -93,12 +81,12 @@ const Login = () => {
                       </Button>
                     </Link>
                   </div>
-                </CCardBody>
-              </CCard>
-            </CCardGroup>
-          </CCol>
-        </CRow>
-      </CContainer>
+                </CardBody>
+              </Card>
+            </CardGroup>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }
