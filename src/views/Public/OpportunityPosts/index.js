@@ -7,7 +7,7 @@ import demoData from "./demoData";
 
 const OpportunityPosts = () => {
   const [posts, setPosts] = useState(demoData)
-  const [post, setPost] = useState({})
+  const [pickedPost, setPickedPost] = useState({})
 
   return (
     <Container>
@@ -19,8 +19,8 @@ const OpportunityPosts = () => {
 
           <CardBody>
             {posts?.map((post, i) => (
-              <Row key={i} className="my-4">
-                <Col md={3} onClick={() => setPost(post)}>
+              <Row key={i} className={`py-4 ${post.id === pickedPost.id ? "bg-light" : ""}`}>
+                <Col md={3} onClick={() => pickedPost.id === post.id ? setPickedPost({}) : setPickedPost(post)}>
                   <img src={post.image} width="100%" />
 
                   <p className='text-center'>
@@ -50,67 +50,67 @@ const OpportunityPosts = () => {
           </CardHeader>
 
           <CardBody>
-            {post.company ? (
-              <Row className="my-4" onClick={() => setPost(post)}>
+            {pickedPost.company ? (
+              <Row className="my-4">
                 <Col md={3}>
-                  <img src={post.image} width="100%" />
+                  <img src={pickedPost.image} width="100%" />
 
                   <p className='text-center'>
-                    {post.company}
+                    {pickedPost.company}
                   </p>
                 </Col>
 
                 <Col md={9} className="p-2">
                   <h5>
-                    {post.position}
+                    {pickedPost.position}
                   </h5>
 
                   <p>
-                    {post.type}
+                    {pickedPost.type}
                     <br />
-                    {post.location}, {post.city}
+                    {pickedPost.location}, {pickedPost.city}
                   </p>
                 </Col>
 
                 <Col md={12} className="p-2">
                   <h5>
-                    {post.description}
+                    {pickedPost.description}
                   </h5>
 
                   <p>
-                    {post.company}
+                    {pickedPost.company}
                     <br />
-                    {post.image}
+                    {pickedPost.image}
                     <br />
-                    {post.position}
+                    {pickedPost.position}
                     <br />
-                    {post.type}
+                    {pickedPost.type}
                     <br />
-                    {post.location}
+                    {pickedPost.location}
                     <br />
-                    {post.education}
+                    {pickedPost.education}
                     <br />
-                    {post.industry}
+                    {pickedPost.industry}
                     <br />
-                    {post.experience}
+                    {pickedPost.experience}
                     <br />
-                    {post.paid}
+                    {pickedPost.paid}
                     <br />
-                    {post.salary}
+                    {pickedPost.salary}
                     <br />
-                    {post.city}
+                    {pickedPost.city}
                     <br />
-                    {post.location}
+                    {pickedPost.location}
                     <br />
-                    {post.vacancies}
+                    {pickedPost.vacancies}
                     <br />
-                    {post.description}
+                    {pickedPost.description}
                     <br />
-                    {post.supervisor_Name}
+                    {pickedPost.supervisor_Name}
                     <br />
-                    {post.supervisor_phone_number}
+                    {pickedPost.supervisor_phone_number}
                     <br />
-                    {post.subervisor_position}
+                    {pickedPost.subervisor_position}
                   </p>
                 </Col>
               </Row>

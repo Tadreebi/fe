@@ -1,5 +1,6 @@
 const postsDemoData = [
   {
+    id: 1,
     company: "Company z",
     image: "https://waterfountain.no/wp-content/uploads/2019/11/placeholder.png",
     position: "Web Dev",
@@ -19,6 +20,7 @@ const postsDemoData = [
     subervisor_position: "Tech Lead"
   },
   {
+    id: 2,
     company: "Company y",
     image: "https://waterfountain.no/wp-content/uploads/2019/11/placeholder.png",
     position: "Web Dev",
@@ -38,7 +40,48 @@ const postsDemoData = [
     subervisor_position: "Tech Lead"
   },
   {
+    id: 3,
     company: "Company X",
+    image: "https://waterfountain.no/wp-content/uploads/2019/11/placeholder.png",
+    position: "Web Dev",
+    type: "Full Time",
+    location: "Onsite",
+    education: "CS",
+    industry: "IT",
+    experience: "5 years",
+    paid: true,
+    salary: 500,
+    city: "Amman",
+    location: "Mecca St.",
+    vacancies: 5,
+    description: "Desc",
+    supervisor_Name: "Ahmad Hamadah",
+    supervisor_phone_number: "+601128094801",
+    subervisor_position: "Tech Lead"
+  },
+  {
+    id: 4,
+    company: "Company a",
+    image: "https://waterfountain.no/wp-content/uploads/2019/11/placeholder.png",
+    position: "Web Dev",
+    type: "Full Time",
+    location: "Onsite",
+    education: "CS",
+    industry: "IT",
+    experience: "5 years",
+    paid: true,
+    salary: 500,
+    city: "Amman",
+    location: "Mecca St.",
+    vacancies: 5,
+    description: "Desc",
+    supervisor_Name: "Ahmad Hamadah",
+    supervisor_phone_number: "+601128094801",
+    subervisor_position: "Tech Lead"
+  },
+  {
+    id: 5,
+    company: "Company b",
     image: "https://waterfountain.no/wp-content/uploads/2019/11/placeholder.png",
     position: "Web Dev",
     type: "Full Time",
