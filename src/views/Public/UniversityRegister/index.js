@@ -13,6 +13,9 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { Button } from 'src/components/Root/Buttons/'
+import { Link } from 'react-router-dom'
+import { Col, Row } from 'src/components/Root/Grid'
 
 const Register = () => {
   return (
@@ -23,8 +26,21 @@ const Register = () => {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>
-                  <h1>Student Register</h1>
-                  <p className="text-medium-emphasis">Create your account</p>
+                  <Row>
+                    <Col md={9}>
+                      <h2>University Register</h2>
+                      <p className="text-medium-emphasis text-justify">This is for illustration purposes only. In actual app use, staff data will be retrieved from university system.</p>
+                    </Col>
+
+                    <Col md={3}>
+                      <Link to="/login" style={{ float: "right" }}>
+                        <Button color="light" className="mt-3" >
+                          OR Login
+                        </Button>
+                      </Link>
+                    </Col>
+                  </Row>
+
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
@@ -49,12 +65,6 @@ const Register = () => {
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput placeholder="GPA" autoComplete="GPA" />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
                       <CIcon icon={cilLockLocked} />
                     </CInputGroupText>
                     <CFormInput
@@ -72,12 +82,6 @@ const Register = () => {
                       placeholder="Repeat password"
                       autoComplete="new-password"
                     />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <p className="text-medium-emphasis">Faculty</p>
-                    </CInputGroupText>
-                    {/* <CFormSelect options={["Not a Student", "IT", "Engineering", "Science", "Business", "Medicine", "Pharmacy", "Law", "Letreture", "Arts", "Humanities", "Religions"]} /> */}
                   </CInputGroup>
                   <div className="d-grid">
                     <CButton color="success">Create Account</CButton>

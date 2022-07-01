@@ -8,12 +8,14 @@ const loading = (
   </div>
 )
 
+const JWT = false;
+
 // Containers
 const DashboardLayout = React.lazy(() => import('./Layouts/DashboardLayout'))
 const PublicLayout = React.lazy(() => import('./Layouts/PublicLayout'))
 
 // Pages
-const Login = React.lazy(() => import('./views/template/pages/login/Login'))
+const Login = React.lazy(() => import('./views/Public/Login'))
 const Register = React.lazy(() => import('./views/template/pages/register/Register'))
 const Page404 = React.lazy(() => import('./views/template/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/template/pages/page500/Page500'))
@@ -24,11 +26,11 @@ class App extends Component {
       <BrowserRouter>
         <Suspense fallback={loading}>
           <Routes>
-            <Route exact path="/login" name="Login Page" element={<Login />} />
-            <Route exact path="/register" name="Register Page" element={<Register />} />
-            <Route exact path="/404" name="Page 404" element={<Page404 />} />
-            <Route exact path="/500" name="Page 500" element={<Page500 />} />
-            <Route path="*" name="Home" element={<DashboardLayout />} />
+            {JWT ? (
+              <Route path="*" name="Home" element={<DashboardLayout />} />
+            ) : (
+              <Route path="*" name="Home" element={<PublicLayout />} />
+            )}
           </Routes>
         </Suspense>
       </BrowserRouter>

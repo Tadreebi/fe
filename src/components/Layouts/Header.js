@@ -68,10 +68,6 @@ const Header = () => {
           <HeaderDropdown />
         </CHeaderNav>
       </CContainer>
-      <CHeaderDivider />
-      <CContainer fluid>
-        <DashboardBreadcrumb />
-      </CContainer>
     </CHeader>
   )
 }
