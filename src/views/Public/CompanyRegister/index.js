@@ -7,6 +7,7 @@ import Form from 'src/components/Root/Form';
 import { Col, Row } from 'src/components/Root/Grid';
 import Icon from 'src/components/Root/Icon';
 import { Input } from 'src/components/Root/InputFields';
+import Label from 'src/components/Root/Label';
 
 const Register = () => {
   return (
@@ -32,64 +33,63 @@ const Register = () => {
                     </Col>
                   </Row>
 
-                  <InputGroup className="mb-3">
-                    <InputGroupText>
-                      <Icon icon={cilUser} />
-                    </InputGroupText>
-                    <Input placeholder="Username" autoComplete="username" />
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <InputGroupText>@</InputGroupText>
-                    <Input placeholder="Email" autoComplete="email" />
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <InputGroupText>
-                      <Icon icon={cilUser} />
-                    </InputGroupText>
-                    <Input placeholder="Name" autoComplete="name" />
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <InputGroupText>
-                      <Icon icon={cilUser} />
-                    </InputGroupText>
-                    <Input placeholder="Phone" autoComplete="phone" />
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <InputGroupText>
-                      <Icon icon={cilLockLocked} />
-                    </InputGroupText>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="new-password"
-                    />
-                  </InputGroup>
-                  <InputGroup className="mb-4">
-                    <InputGroupText>
-                      <Icon icon={cilLockLocked} />
-                    </InputGroupText>
-                    <Input
-                      type="password"
-                      placeholder="Repeat password"
-                      autoComplete="new-password"
-                    />
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <InputGroupText>
-                      <p className="text-medium-emphasis">About</p>
-                    </InputGroupText>
-                    <Input placeholder="About" autoComplete="about" />
-                  </InputGroup>
+
+                  <Label>
+                    <Icon icon={cilUser} />
+                  </Label>
+                  <Input placeholder="Username" autoComplete="username" />
+
+
+                  <Label>@</Label>
+                  <Input placeholder="Email" autoComplete="email" />
+
+
+                  <Label>
+                    <Icon icon={cilUser} />
+                  </Label>
+                  <Input placeholder="Name" autoComplete="name" />
+
+
+                  <Label>
+                    <Icon icon={cilUser} />
+                  </Label>
+                  <Input placeholder="Phone" autoComplete="phone" />
+
+
+                  <Label>
+                    <Icon icon={cilLockLocked} />
+                  </Label>
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="new-password"
+                  />
+
+                  <Label>
+                    <Icon icon={cilLockLocked} />
+                  </Label>
+                  <Input
+                    type="password"
+                    placeholder="Repeat password"
+                    autoComplete="new-password"
+                  />
+
+
+                  <Label>
+                    <p className="text-medium-emphasis">About</p>
+                  </Label>
+                  <Input placeholder="About" autoComplete="about" />
+
                   <div className="d-grid">
                     <Button color="success">Create Account</Button>
                   </div>
                 </Form>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+              </CardBody >
+            </Card >
+          </Col >
+        </Row >
+      </Container >
+    </div >
   )
 }
 

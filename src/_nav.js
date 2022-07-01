@@ -10,16 +10,6 @@ const _nav = [
     icon: <Icon icon={faDashboard} className="px-1" />,
   },
   {
-    component: NavItem,
-    name: 'Template Page',
-    to: '/example',
-    icon: <Icon icon={fa1} className="px-1" />,
-    badge: {
-      color: 'danger',
-      text: 'Check',
-    },
-  },
-  {
     component: NavTitle,
     name: 'Model Pages',
     icon: <Icon icon={faGraduationCap} className="px-1" />,

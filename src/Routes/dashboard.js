@@ -28,8 +28,6 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
 
   // Modules
-  { path: '/example', name: 'Template Page', element: TemplatePage },
-
   //// Students
   { path: '/students/reports', name: 'Student Reports', element: StudentReports },
   { path: '/students/goals', name: 'Student Goals', element: StudentGoals },
