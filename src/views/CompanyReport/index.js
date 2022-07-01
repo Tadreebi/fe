@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Col, Row } from 'src/components/Root/Grid';
 import TemplatePage from '../templatePage';
-import reportsDemoData from './demoData';
+// import reportsDemoData from './demoData';
 
 const CompanyReports = () => {
-  const [reportsList, setReportsList] = useState([...reportsDemoData]);
+  const [reportsList, setReportsList] = useState([]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
 

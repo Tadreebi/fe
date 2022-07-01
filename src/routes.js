@@ -18,6 +18,7 @@ const PasswordChange = React.lazy(() => import('./views/PasswordChange'))
 const StudentRegister = React.lazy(() => import('./views/StudentRegister'))
 const UniversityRegister = React.lazy(() => import('./views/UniversityRegister'))
 const CompanyRegister = React.lazy(() => import('./views/CompanyRegister'))
+const CompanyReport = React.lazy(() => import('./views/CompanyReport'))
 
 // Template
 const Colors = React.lazy(() => import('./views/template/theme/colors/Colors'))
@@ -85,7 +86,7 @@ const routes = [
   { path: '/register/student', name: 'Student Register', element: StudentRegister },
   { path: '/register/university', name: 'University Register', element: UniversityRegister },
   { path: '/register/company', name: 'Company Register', element: CompanyRegister },
-
+  { path: '/company/report', name: 'Company Register', element: CompanyReport },
   // Template
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },

@@ -65,6 +65,7 @@ const _nav = [
         name: 'Student Experience',
         to: '/students/experiences',
       },
+
     ]
   },
   {
@@ -77,6 +78,11 @@ const _nav = [
         component: CNavItem,
         name: 'Opportunity Posts',
         to: '/company/opportunity-posts',
+      },
+      {
+        component: CNavItem,
+        name: 'Company Report ',
+        to: '/company/report',
       },
     ]
   },
