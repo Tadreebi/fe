@@ -70,7 +70,7 @@ const routes = [
   { path: '/students/profile', name: 'Student Profile', element: StudentProfile },
   { path: '/students/application', name: 'Student Application', element: StudentApplication },
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
-  { path: '/students/experiences', name: 'Student Reports', element: StudentExperiences },
+  { path: '/students/experiences', name: 'Experiences', element: StudentExperiences },
 
   // Univerity
   { path: '/staff/tips', name: 'University Tips', element: UniversityTips },
