@@ -1,5 +1,4 @@
-import React from 'react'
-import { PublicContent, Footer, Header } from '../../components/Layouts'
+import { Footer, Header, PublicContent } from '../../components/Layouts'
 
 const PublicLayout = () => {
   return (
@@ -13,6 +12,6 @@ const PublicLayout = () => {
       </div>
     </>
   )
-}
+};
 
-export default PublicLayout
+export default PublicLayout;

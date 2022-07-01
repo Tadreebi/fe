@@ -1,8 +1,7 @@
-import React, { Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import { CContainer, CSpinner } from '@coreui/react'
-
-import routes from 'src/Routes/public'
+import { CContainer, CSpinner } from '@coreui/react';
+import React, { Suspense } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import routes from 'src/Routes/public';
 
 const PublicContent = () => {
   return (
@@ -27,6 +26,6 @@ const PublicContent = () => {
       </Suspense>
     </CContainer>
   )
-}
+};
 
 export default React.memo(PublicContent)

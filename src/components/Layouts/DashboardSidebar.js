@@ -1,19 +1,13 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-
-import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
-import { DashboardSidebarNav } from './DashboardSidebarNav'
-
-import { logoNegative } from 'src/assets/brand/logo-negative'
-import { sygnet } from 'src/assets/brand/sygnet'
-
+import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
+import { memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
-
-// sidebar nav config
+import { logoNegative } from 'src/assets/brand/logo-negative'
+import { sygnet } from 'src/assets/brand/sygnet'
 import navigation from 'src/_nav'
+import { DashboardSidebarNav } from './DashboardSidebarNav'
 
 const DashboardSidebar = () => {
   const dispatch = useDispatch()
@@ -33,11 +27,13 @@ const DashboardSidebar = () => {
         <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
         <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
       </CSidebarBrand>
+
       <CSidebarNav>
         <SimpleBar>
           <DashboardSidebarNav items={navigation} />
         </SimpleBar>
       </CSidebarNav>
+
       <CSidebarToggler
         className="d-none d-lg-flex"
         onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
@@ -46,4 +42,4 @@ const DashboardSidebar = () => {
   )
 }
 
-export default React.memo(DashboardSidebar)
+export default memo(DashboardSidebar)

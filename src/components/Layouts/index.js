@@ -1,10 +1,11 @@
 import DashboardBreadcrumb from './DashboardBreadcrumb'
 import DashboardContent from './DashboardContent'
-import PublicContent from './PublicContent'
+import DashboardSidebar from './DashboardSidebar'
 import Footer from './Footer'
 import Header from './Header'
 import HeaderDropdown from './HeaderDropdown'
-import DashboardSidebar from './DashboardSidebar'
+import PublicContent from './PublicContent'
+
 export {
   DashboardBreadcrumb,
   DashboardContent,

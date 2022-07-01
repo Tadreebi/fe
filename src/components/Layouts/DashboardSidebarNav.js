@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
 import { CBadge } from '@coreui/react'
+import PropTypes from 'prop-types'
+import { Fragment } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 
 export const DashboardSidebarNav = ({ items }) => {
   const location = useLocation()

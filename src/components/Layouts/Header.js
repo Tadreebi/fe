@@ -1,11 +1,11 @@
-import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
+import { cilMenu } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
-import { CContainer, CHeader, CHeaderBrand, CHeaderNav, CHeaderDivider, CHeaderToggler, CNavItem, CNavLink } from '@coreui/react'
+import { CContainer, CHeader, CHeaderBrand, CHeaderDivider, CHeaderNav, CHeaderToggler, CNavItem, CNavLink } from '@coreui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
-import HeaderDropdown from "./HeaderDropdown"
 import { logo } from 'src/assets/brand/logo'
 import DashboardBreadcrumb from 'src/components/Layouts/DashboardBreadcrumb'
+import HeaderDropdown from "./HeaderDropdown"
 
 const Header = ({ notDashboard }) => {
   const dispatch = useDispatch()
@@ -57,6 +57,6 @@ const Header = ({ notDashboard }) => {
       )}
     </CHeader>
   )
-}
+};
 
 export default Header

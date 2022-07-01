@@ -1,5 +1,4 @@
 import { DashboardContent, DashboardSidebar, Footer, Header } from '../../components/Layouts'
-import { CContainer, CHeaderDivider } from '@coreui/react'
 
 const DashboardLayout = () => {
   return (
@@ -14,6 +13,6 @@ const DashboardLayout = () => {
       </div>
     </>
   )
-}
+};
 
-export default DashboardLayout
+export default DashboardLayout;

@@ -20,13 +20,6 @@ const UniversityFeedback = React.lazy(() => import('../views/UniversityFeedback'
 //// Company
 const OpportunityPosts = React.lazy(() => import('../views/OpportunityPosts'));
 
-//// Auth
-const PasswordReset = React.lazy(() => import('../views/Public/PasswordReset'));
-const PasswordChange = React.lazy(() => import('../views/Public/PasswordChange'));
-const StudentRegister = React.lazy(() => import('../views/Public/StudentRegister'));
-const UniversityRegister = React.lazy(() => import('../views/Public/UniversityRegister'));
-const CompanyRegister = React.lazy(() => import('../views/Public/CompanyRegister'));
-
 // Errors
 const Page404 = React.lazy(() => import('../views/template/pages/page404'));
 
@@ -51,13 +44,6 @@ const routes = [
 
   //// Company
   { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },
-
-  //// Auth
-  { path: '/password/reset', name: 'Reset Password', element: PasswordReset },
-  { path: '/password/change', name: 'Change Password', element: PasswordChange },
-  { path: '/register/student', name: 'Student Register', element: StudentRegister },
-  { path: '/register/university', name: 'University Register', element: UniversityRegister },
-  { path: '/register/company', name: 'Company Register', element: CompanyRegister },
 
   //// Errors
   { path: '*', name: 'Error 404', element: Page404 },

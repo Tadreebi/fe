@@ -1,6 +1,4 @@
-import { cilArrowCircleBottom, cilArrowCircleRight } from '@coreui/icons';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { Card, CardBody, CardHeader } from '../Root/Cards';
 import Collapse from '../Root/Collapse';
@@ -12,10 +10,10 @@ const CollapseCard = ({ title, open, icon = faPlusCircle, children }) => {
   return (
     <Card className="mb-4">
       <CardHeader onClick={() => setVisible(current => !current)} className="p-3">
-        <FontAwesomeIcon icon={icon} />{" "} {title}
+        <Icon icon={icon} />{" "} {title}
 
         <div style={{ float: "right" }}>
-          <Icon icon={visible ? cilArrowCircleBottom : cilArrowCircleRight} />
+          <Icon icon={visible ? faMinusCircle : faPlusCircle} />
         </div>
       </CardHeader>
 

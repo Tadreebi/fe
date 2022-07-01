@@ -1,11 +1,11 @@
 import { faClockRotateLeft, faEdit, faList, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CollapseCard from '../CollapseCard';
 import { Button, ButtonGroup } from '../Root/Buttons';
 import Form from '../Root/Form';
 import { Col, Row } from '../Root/Grid';
 import { Boolean, CheckList, Input, Option, Select, Textarea } from '../Root/InputFields';
 import Label from '../Root/Label';
+import Icon from '../Root/Icon';
 
 const inputsDemo = [
   {
@@ -131,7 +131,7 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
       <Form onSubmit={onSubmit}>
         <Row>
           <Col xs={12} className={`text-${submitColorDecider()} text-center`}>
-            <h5><FontAwesomeIcon icon={submitIconDecider()} /> {`${submitTextDecider()} Data`}</h5>
+            <h5><Icon icon={submitIconDecider()} /> {`${submitTextDecider()} Data`}</h5>
           </Col>
 
           {inputs?.map((input, i) => (
@@ -214,12 +214,12 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
             <ButtonGroup role="group" style={{ float: 'right' }}>
               {onReset && (
                 <Button onClick={onReset} color='warning' className='text-white'>
-                  <FontAwesomeIcon icon={faClockRotateLeft} /> Reset
+                  <Icon icon={faClockRotateLeft} /> Reset
                 </Button>
               )}
               {currentAction !== "view" && (
                 <Button type="submit" color='success' className='text-white'>
-                  <FontAwesomeIcon icon={submitIconDecider()} /> {SubmitText || submitTextDecider()}
+                  <Icon icon={submitIconDecider()} /> {SubmitText || submitTextDecider()}
                 </Button>
               )}
             </ButtonGroup>
