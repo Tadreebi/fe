@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Col, Row } from 'src/components/Root/Grid';
 import TemplatePage from '../templatePage';
-// import reportsDemoData from './demoData';
+import reportsDemoData from './demoData';
 
 const CompanyReports = () => {
-  const [reportsList, setReportsList] = useState([]);
+  const [reportsList, setReportsList] = useState([...reportsDemoData]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
 
@@ -345,8 +345,8 @@ const CompanyReports = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Reports"}
-        pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
+        pageTitle={"Company Reports"}
+        pageDescrbition={"For company to submit periodical & final reports to university supervisor"}
         statisticsData={statisticsData} // New
         chartsData={chartsData} // New
         formInputs={inputs}
