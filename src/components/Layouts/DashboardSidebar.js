@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
-import navigation from 'src/Navs'
+import Navigation from 'src/Navs'
 import { Sidebar, SidebarBrand, SidebarNav, SidebarToggler } from '../Root/Sidebar'
 import { DashboardSidebarNav } from './DashboardSidebarNav'
 
@@ -27,7 +27,7 @@ const DashboardSidebar = ({ sidebarShow, setSidebarShow }) => {
 
       <SidebarNav>
         <SimpleBar>
-          <DashboardSidebarNav items={navigation} />
+          <DashboardSidebarNav items={Navigation} />
         </SimpleBar>
       </SidebarNav>
 
