@@ -1,12 +1,14 @@
+import { faCheck, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import InputsPicker from 'src/components/PageForm/InputsPicker';
-import { Button } from 'src/components/Root/Buttons/';
+import { Button, ButtonGroup } from 'src/components/Root/Buttons/';
 import { Card, CardBody, CardGroup } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import Form from 'src/components/Root/Form';
 import { Col, Row } from 'src/components/Root/Grid';
+import Icon from 'src/components/Root/Icon';
 
-const AuthTemplate = ({ title, inputs, description, loginButton, onSubmit, additionCard }) => {
+const AuthTemplate = ({ title, inputs, description, loginButton, onSubmit, onReset, additionCard }) => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <Container>
@@ -31,7 +33,23 @@ const AuthTemplate = ({ title, inputs, description, loginButton, onSubmit, addit
                       </Col>
                     </Row>
 
-                    <InputsPicker inputs={inputs} />
+                    <Row>
+                      <InputsPicker inputs={inputs} />
+                    </Row>
+
+                    <Col xs={12} >
+                      <ButtonGroup role="group" style={{ float: 'right' }}>
+                        {onReset && (
+                          <Button onClick={onReset} color='warning' className='text-white'>
+                            <Icon icon={faClockRotateLeft} /> Reset
+                          </Button>
+                        )}
+
+                        <Button type="submit" color='success' className='text-white'>
+                          <Icon icon={faCheck} /> Submit
+                        </Button>
+                      </ButtonGroup>
+                    </Col>
                   </Form>
                 </CardBody >
               </Card >
