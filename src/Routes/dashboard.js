@@ -15,6 +15,8 @@ const StudentExperiences = React.lazy(() => import('../views/Students/StudentExp
 //// University
 const UniversityTips = React.lazy(() => import('../views/University/UniversityTips'));
 const UniversityFeedback = React.lazy(() => import('../views/University/UniversityFeedback'));
+const Faculty = React.lazy(() => import('../views/University/Faculty'));
+const SupervisedBy = React.lazy(() => import('../views/University/SupervisedBy'));
 
 //// Company
 const OpportunityPosts = React.lazy(() => import('../views/Company/OpportunityPosts'));
@@ -39,6 +41,8 @@ const routes = [
   //// Univerity
   { path: '/staff/tips', name: 'University Tips', element: UniversityTips },
   { path: '/staff/feedback', name: 'University Feedback', element: UniversityFeedback },
+  { path: '/faculty', name: 'Faculty', element: Faculty },
+  { path: '/supervised-by', name: 'Supervised By', element: SupervisedBy },
 
   //// Company
   { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },

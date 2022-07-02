@@ -90,6 +90,18 @@ const _nav = [
         to: '/staff/tips',
         icon: <Icon icon={faCommentMedical} className="px-1" />,
       },
+      {
+        component: NavItem,
+        name: 'Faculty',
+        to: '/faculty',
+        icon: <Icon icon={faFire} className="px-1" />,
+      },
+      {
+        component: NavItem,
+        name: 'Supervised By',
+        to: '/supervised-by',
+        icon: <Icon icon={faFire} className="px-1" />,
+      },
     ]
   },
 ];
