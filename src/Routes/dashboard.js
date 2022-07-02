@@ -9,6 +9,7 @@ const StudentReports = lazy(() => import('../views/Students/StudentReports'));
 const StudentGoals = lazy(() => import('../views/Students/StudentGoals'));
 const StudentProfile = lazy(() => import('src/views/Public/StudentProfile'));
 const StudentApplication = lazy(() => import('../views/Students/StudentApplication'));
+const CompanyRating = lazy(() => import('../views/Students/CompanyRating'));
 const StudentProposals = lazy(() => import('../views/Students/StudentProposals'));
 const StudentExperiences = lazy(() => import('../views/Students/StudentExperience'));
 
@@ -35,6 +36,7 @@ const routes = [
   { path: '/students/goals', name: 'Student Goals', element: StudentGoals },
   { path: '/profile', name: 'Student Profile', element: StudentProfile },
   { path: '/students/application', name: 'Student Application', element: StudentApplication },
+  { path: '/students/company-rating', name: 'Company Rating', element: CompanyRating },
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
   { path: '/students/experiences', name: 'Student Reports', element: StudentExperiences },
 
