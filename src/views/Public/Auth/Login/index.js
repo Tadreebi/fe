@@ -7,7 +7,8 @@ import AuthTemplate from '../'
 const Login = () => {
   const [loginData, setLoginData] = useState({});
 
-  const onLogin = () => {
+  const onLogin = e => {
+    e.preventDefault();
     console.log("Loggin In", loginData)
   };
 
@@ -25,7 +26,7 @@ const Login = () => {
     {
       title: "Password",
       name: "password",
-      type: "text",
+      type: "password",
       placeholder: "Password",
       required: true,
       fullwidth: true,

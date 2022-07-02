@@ -4,7 +4,8 @@ import AuthTemplate from '../'
 const CompanyRegister = () => {
   const [regData, setRegData] = useState({});
 
-  const onRegister = () => {
+  const onRegister = e => {
+    e.preventDefault();
     console.log("Registering", regData)
   };
 

@@ -11,7 +11,8 @@ const faculties = [
 const StudentRegister = () => {
   const [regData, setRegData] = useState({});
 
-  const onRegister = () => {
+  const onRegister = e => {
+    e.preventDefault();
     console.log("Registering", regData)
   };
 
@@ -66,10 +67,9 @@ const StudentRegister = () => {
       title: "Faculty",
       name: "faculty",
       type: "select",
-      double: true,
       required: true,
       value: regData.faculty,
-      onChange: e => setApplication(current => ({ ...current, faculty: e.target.value })),
+      onChange: e => setRegData(current => ({ ...current, faculty: e.target.value })),
       options: faculties.map(faculty => ({ title: faculty.name, value: faculty.id }))
     },
     {

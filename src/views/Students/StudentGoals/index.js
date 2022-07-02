@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import TemplatePage from '../../templatePage'
+import { useState } from 'react';
+import TemplatePage from '../../templatePage';
 import goalsDemoData from './demoData';
 
 const StudentGoals = () => {
