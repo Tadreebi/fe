@@ -41,6 +41,7 @@ const Login = () => {
       description={"Sign in to your account to access the dashboard"}
       inputs={inputs}
       onSubmit={onLogin}
+      resetPassword
       additionCard={
         <Card className="text-white bg-success py-5" style={{ width: '44%' }}>
           <CardBody className="text-center">

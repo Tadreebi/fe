@@ -8,7 +8,7 @@ import Form from 'src/components/Root/Form';
 import { Col, Row } from 'src/components/Root/Grid';
 import Icon from 'src/components/Root/Icon';
 
-const AuthTemplate = ({ title, inputs, description, loginButton, onSubmit, onReset, additionCard }) => {
+const AuthTemplate = ({ title, inputs, description, loginButton, onSubmit, onReset, resetPassword, additionCard }) => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <Container>
@@ -25,11 +25,13 @@ const AuthTemplate = ({ title, inputs, description, loginButton, onSubmit, onRes
                       </Col>
 
                       <Col md={3}>
-                        {loginButton && (<Link to="/login" style={{ float: "right" }}>
-                          <Button color="light" className="mt-3" >
-                            OR Login
-                          </Button>
-                        </Link>)}
+                        {loginButton && (
+                          <Link to="/login" style={{ float: "right" }}>
+                            <Button color="light" className="mt-3" >
+                              OR Login
+                            </Button>
+                          </Link>
+                        )}
                       </Col>
                     </Row>
 
@@ -39,6 +41,14 @@ const AuthTemplate = ({ title, inputs, description, loginButton, onSubmit, onRes
 
                     <Col xs={12} >
                       <ButtonGroup role="group" style={{ float: 'right' }}>
+                        {resetPassword && (
+                          <Button color='info' >
+                            <Link to={"/password/reset"} className='text-white'>
+                              <Icon icon={faClockRotateLeft} /> Forgot Password
+                            </Link>
+                          </Button>
+                        )}
+
                         {onReset && (
                           <Button onClick={onReset} color='warning' className='text-white'>
                             <Icon icon={faClockRotateLeft} /> Reset
