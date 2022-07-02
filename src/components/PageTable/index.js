@@ -1,3 +1,4 @@
+import { faTable } from '@fortawesome/free-solid-svg-icons';
 import CollapseCard from '../CollapseCard';
 import Table from '../Root/Table';
 
@@ -31,7 +32,7 @@ const keyFilter = key => {
 
 const PageTable = ({ title = "Table", columns, data, expandedComponent, onActionSelection = action => console.log("Selecting Action", action) }) => {
   return (
-    <CollapseCard title={title} open>
+    <CollapseCard title={title} icon={faTable} open>
       <Table
         columns={columns}
         data={data}
