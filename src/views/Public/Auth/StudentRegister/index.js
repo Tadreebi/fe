@@ -1,87 +1,107 @@
-import { cilLockLocked, cilUser } from '@coreui/icons'
-import { Link } from 'react-router-dom'
-import { Button } from 'src/components/Root/Buttons/'
-import { Card, CardBody } from 'src/components/Root/Cards'
-import Container from 'src/components/Root/Container'
-import Form from 'src/components/Root/Form'
-import { Col, Row } from 'src/components/Root/Grid'
-import Icon from 'src/components/Root/Icon'
-import { Input } from 'src/components/Root/InputFields'
-import Label from 'src/components/Root/Label'
+import { useState } from 'react'
+import AuthTemplate from '../'
 
-const Register = () => {
+const faculties = [
+  { id: 1, name: "IT" },
+  { id: 2, name: "Eng" },
+  { id: 3, name: "Med" },
+  { id: 4, name: "Edu" },
+];
+
+const StudentRegister = () => {
+  const [regData, setRegData] = useState({});
+
+  const onRegister = () => {
+    console.log("Registering", regData)
+  };
+
+  const inputs = [
+    {
+      title: "Username",
+      name: "username",
+      type: "text",
+      placeholder: "Username",
+      required: true,
+      value: regData.username,
+      onChange: e => setRegData(current => ({ ...current, username: e.target.value }))
+    },
+    {
+      title: "Email",
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      required: true,
+      value: regData.email,
+      onChange: e => setRegData(current => ({ ...current, email: e.target.value }))
+    },
+    {
+      title: "Name",
+      name: "name",
+      type: "text",
+      placeholder: "Name",
+      required: true,
+      value: regData.name,
+      onChange: e => setRegData(current => ({ ...current, name: e.target.value }))
+    },
+    {
+      title: "Phone No",
+      name: "phone",
+      type: "text",
+      placeholder: "Phone No",
+      required: true,
+      value: regData.phone,
+      onChange: e => setRegData(current => ({ ...current, phone: e.target.value }))
+    },
+    {
+      title: "GPA",
+      name: "gpa",
+      type: "number",
+      step: 0.1,
+      placeholder: "GPA",
+      required: true,
+      value: regData.gpa,
+      onChange: e => setRegData(current => ({ ...current, gpa: e.target.value }))
+    },
+    {
+      title: "Faculty",
+      name: "faculty",
+      type: "select",
+      double: true,
+      required: true,
+      value: regData.faculty,
+      onChange: e => setApplication(current => ({ ...current, faculty: e.target.value })),
+      options: faculties.map(faculty => ({ title: faculty.name, value: faculty.id }))
+    },
+    {
+      title: "Password",
+      name: "password",
+      type: "password",
+      placeholder: "Password",
+      required: true,
+      value: regData.password,
+      onChange: e => setRegData(current => ({ ...current, password: e.target.value }))
+    },
+    {
+      title: "Repeat Password",
+      name: "passwordRepeat",
+      type: "password",
+      placeholder: "passwordRepeat",
+      required: true,
+      value: regData.passwordRepeat,
+      onChange: e => setRegData(current => ({ ...current, passwordRepeat: e.target.value }))
+    },
+  ];
+
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <Container>
-        <Row className="justify-content-center">
-          <Col md={9} lg={7} xl={6}>
-            <Card className="mx-4">
-              <CardBody className="p-4">
-                <Form>
-                  <Row>
-                    <Col md={9}>
-                      <h2>Student Register</h2>
-                      <p className="text-medium-emphasis text-justify">This is for illustration purposes only. In actual app use, student data will be retrieved from university system.</p>
-                    </Col>
-
-                    <Col md={3}>
-                      <Link to="/login" style={{ float: "right" }}>
-                        <Button color="light" className="mt-3" >
-                          OR Login
-                        </Button>
-                      </Link>
-                    </Col>
-                  </Row>
-
-                  <Label>
-                    <Icon icon={cilUser} />
-                  </Label>
-                  <Input placeholder="Username" autoComplete="username" />
-                  <Label>@</Label>
-                  <Input placeholder="Email" autoComplete="email" />
-                  <Label>
-                    <Icon icon={cilUser} />
-                  </Label>
-                  <Input placeholder="Name" autoComplete="name" />
-                  <Label>
-                    <Icon icon={cilUser} />
-                  </Label>
-                  <Input placeholder="Phone" autoComplete="phone" />
-                  <Label>
-                    <Icon icon={cilUser} />
-                  </Label>
-                  <Input placeholder="GPA" autoComplete="GPA" />
-                  <Label>
-                    <Icon icon={cilLockLocked} />
-                  </Label>
-                  <Input
-                    type="password"
-                    placeholder="Password"
-                    autoComplete="new-password"
-                  />
-                  <Label>
-                    <Icon icon={cilLockLocked} />
-                  </Label>
-                  <Input
-                    type="password"
-                    placeholder="Repeat password"
-                    autoComplete="new-password"
-                  />
-                  <Label>
-                    <p className="text-medium-emphasis">Faculty</p>
-                  </Label>
-                  {/* <FormSelect options={["Not a Student", "IT", "Engineering", "Science", "Business", "Medicine", "Pharmacy", "Law", "Letreture", "Arts", "Humanities", "Religions"]} /> */}
-                  <div className="d-grid">
-                    <Button color="success">Create Account</Button>
-                  </div>
-                </Form>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <AuthTemplate
+      title={"Student Register"}
+      description={"This is for illustration purposes only. In actual app use, student data will be retrieved from university system."}
+      loginButton
+      inputs={inputs}
+      onSubmit={onRegister}
+      onReset={() => setLoginData({})}
+    />
   )
-}
+};
 
-export default Register
+export default StudentRegister;
