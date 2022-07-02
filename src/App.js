@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react'
+import React, { Component, Suspense, lazy } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
 
@@ -9,11 +9,11 @@ const loading = (
 );
 
 // Containers
-const DashboardLayout = React.lazy(() => import('./Layouts/DashboardLayout'));
-const PublicLayout = React.lazy(() => import('./Layouts/PublicLayout'));
+const DashboardLayout = lazy(() => import('./Layouts/DashboardLayout'));
+const PublicLayout = lazy(() => import('./Layouts/PublicLayout'));
 
 // Pages
-const Landing = React.lazy(() => import('./views/Public/Landing'));
+const Landing = lazy(() => import('./views/Public/Landing'));
 
 const JWT = true;
 
