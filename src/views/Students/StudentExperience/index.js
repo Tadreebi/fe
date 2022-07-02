@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import ExperiencesDemoData from './demoData'
 import TemplatePage from '../../templatePage'
 
 
 const StudentExperience = () => {
-  const [experiences, setExperiences] = useState([]);
+  const [experiences, setExperiences] = useState([...ExperiencesDemoData]);
   const [experience, setExperience] = useState({});
   const [action, setAction] = useState("create");
 
@@ -25,12 +26,12 @@ const StudentExperience = () => {
   const inputs = [
     {
       title: "Title",
-      name: "Experience", // should match the property name in the backend model
+      name: "Experience",
       type: "text",
       placeholder: "Experience Title",
       required: true,
-      value: experience.title, // should match the property name in the backend model
-      onChange: e => setExperience(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
+      value: experience.title,
+      onChange: e => setExperience(current => ({ ...current, title: e.target.value }))
     },
     {
       title: "Student",
@@ -48,7 +49,7 @@ const StudentExperience = () => {
       type: "select",
       double: true,
       required: true,
-      value: experience.student,
+      value: experience.company,
       onChange: e => setExperience(current => ({ ...current, company: e.target.value })),
       options: companies.map(company => ({ title: company.name, value: company.id }))
     },
@@ -133,16 +134,87 @@ const StudentExperience = () => {
     console.log('Form Data Deleted');
   };
 
+  const tableColumns = [
+    {
+      name: "Title",
+      selector: row => row.title,
+      sortable: true
+    },
+    {
+      name: "Student",
+      selector: row => row.student,
+      sortable: true
+    },
+    {
+      name: "Company",
+      selector: row => row.company,
+      sortable: true
+    },
+    {
+      name: "Improved Aspects",
+      selector: row => row.improved_aspects,
+      sortable: true
+    },
+    {
+      name: "Missed Aspects",
+      selector: row => row.missed_aspects,
+      sortable: true
+    },
+    {
+      name: "get_hired",
+      selector: row => row.get_hired,
+      sortable: true
+    },
+    {
+      name: "More",
+      selector: row => row.more,
+      sortable: true
+    }
+  ];
+
+  const statisticsData = [
+    {
+      title: "Submitted experiences",
+      number: experiences.length,
+      chart: {
+        type: "bar",
+        data: {
+
+          "experiences": experiences.length,
+        },
+        fill: true
+      }
+    },
+    {
+      title: "Users",
+      number: "26",
+      chart: {
+        type: "line",
+        data: {
+          "Label 1": 70,
+          "Label 2": 60,
+          "Label 3": 40,
+          "Label 4": 50
+        },
+      }
+    },
+
+  ];
+
+
   return (
     <>
       <TemplatePage
         pageTitle={"Student Experiences"}
         pageDescrbition={"student Experience during an internship"}
+        statisticsData={statisticsData}
         formTitle={"CRUD Experiences"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Experiences List"}
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={experiences}
         onActionSelection={onActionSelection}
         currentAction={action}
