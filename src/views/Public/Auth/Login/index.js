@@ -8,7 +8,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState({});
 
   const onLogin = () => {
-    console.log("Loggin In")
+    console.log("Loggin In", loginData)
   };
 
   const inputs = [
@@ -37,19 +37,14 @@ const Login = () => {
   return (
     <AuthTemplate
       title={"Login"}
-      inputs={inputs}
       description={"Sign in to your account to access the dashboard"}
-      loginButton
+      inputs={inputs}
       onSubmit={onLogin}
       additionCard={
         <Card className="text-white bg-success py-5" style={{ width: '44%' }}>
           <CardBody className="text-center">
             <div>
               <h2>Sign up</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.
-              </p>
 
               <Link to="/register/student">
                 <Button color="light" className="mt-3" >
