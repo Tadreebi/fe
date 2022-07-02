@@ -102,7 +102,7 @@ const StudentGoals = () => {
       }
     },
     {
-      title: "Execution Percentage",
+      title: "Accomplished Goals",
       number: goals.filter(rep => rep.done !== true)?.length,
       chart: {
         type: "progress",
