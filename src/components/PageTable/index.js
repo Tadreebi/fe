@@ -1,15 +1,6 @@
-import {
-  CButton, CButtonGroup, CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CTable,
-  CTableBody, CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow
-} from '@coreui/react'
+import { faTable } from '@fortawesome/free-solid-svg-icons';
+import CollapseCard from '../CollapseCard';
+import Table from '../Root/Table';
 
 const dataDemo = [
   {
@@ -39,73 +30,17 @@ const keyFilter = key => {
   }
 }
 
-const Tables = ({ title, data = dataDemo, onActionSelection = action => console.log("Selecting Action", action) }) => {
+const PageTable = ({ title = "Table", columns, data, expandedComponent, onActionSelection = action => console.log("Selecting Action", action) }) => {
   return (
-    <CRow>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          {title && (
-            <CCardHeader>
-              {title}
-            </CCardHeader>
-          )}
-
-          <CCardBody>
-            <CTable striped hover>
-              <CTableHead>
-                <CTableRow>
-                  {data.length > 0 ?
-                    <>
-                      {Object.keys(data[0]).filter(key => keyFilter(key)).map((key, i) => (
-                        <CTableHeaderCell key={i}>
-                          {key}
-                        </CTableHeaderCell>
-                      ))}
-                      <CTableHeaderCell >
-                        Actions
-                      </CTableHeaderCell>
-                    </>
-                    : <CTableHeaderCell className="text-center">
-                      No Data to Show
-                    </CTableHeaderCell>
-                  }
-                </CTableRow>
-              </CTableHead>
-
-              <CTableBody>
-                {data?.map((record, i) => (
-                  <CTableRow key={i}>
-                    {Object?.keys(record).filter(key => keyFilter(key))?.map((key, y) => (
-                      <CTableDataCell key={y}>{record[key]}</CTableDataCell>
-                    ))}
-                    <CTableDataCell >
-                      <CButtonGroup role="group" size='sm'>
-                        <CButton onClick={() => onActionSelection('view', record)} color='info' className='text-white'>
-                          View
-                        </CButton>
-
-                        <CButton onClick={() => onActionSelection('create', record)} color='success' className='text-white'>
-                          Duplicate
-                        </CButton>
-
-                        <CButton onClick={() => onActionSelection('update', record)} color='warning' className='text-white'>
-                          Edit
-                        </CButton>
-
-                        <CButton onClick={() => onActionSelection('delete', record)} color='danger' className='text-white'>
-                          Delete
-                        </CButton>
-                      </CButtonGroup>
-                    </CTableDataCell>
-                  </CTableRow>
-                ))}
-              </CTableBody>
-            </CTable>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+    <CollapseCard title={title} icon={faTable} open>
+      <Table
+        columns={columns}
+        data={data}
+        expandedComponent={expandedComponent}
+        onActionSelection={onActionSelection}
+      />
+    </CollapseCard>
   )
 }
 
-export default Tables
+export default PageTable

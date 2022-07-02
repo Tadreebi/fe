@@ -1,9 +1,12 @@
-import {
-  CButton, CButtonGroup, CCard,
-  CCardBody,
-  CCardHeader,
-  CCol, CForm, CFormCheck, CFormInput, CFormLabel, CFormSelect, CFormSwitch, CFormTextarea, CRow
-} from '@coreui/react';
+import { faClockRotateLeft, faEdit, faList, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import CollapseCard from '../CollapseCard';
+import { Button, ButtonGroup } from '../Root/Buttons';
+import Form from '../Root/Form';
+import { Col, Row } from '../Root/Grid';
+import Icon from '../Root/Icon';
+import { Boolean, CheckList, Input, Option, Select, StarRating, Textarea } from '../Root/InputFields';
+import Label from '../Root/Label';
+import InputsPicker from './InputsPicker';
 
 const inputsDemo = [
   {
@@ -95,7 +98,7 @@ const length = count => {
   }
 };
 
-const PageForm = ({ title, inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction }) => {
+const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction }) => {
 
   const submitTextDecider = () => {
     switch (currentAction) {
@@ -106,109 +109,51 @@ const PageForm = ({ title, inputs = inputsDemo, SubmitText, onSubmit, onReset, c
     }
   };
 
+  const submitIconDecider = () => {
+    switch (currentAction) {
+      case "create": return faPlus;
+      case "update": return faEdit;
+      case "delete": return faTrash;
+      default: return faPlus;
+    }
+  };
+
+  const submitColorDecider = () => {
+    switch (currentAction) {
+      case "create": return "success";
+      case "update": return "warning";
+      case "delete": return "danger";
+      default: return "success";
+    }
+  };
+
   return (
-    <CCard className="mb-4">
-      {title && (
-        <CCardHeader>
-          {title}
-        </CCardHeader>
-      )}
+    <CollapseCard title={title} icon={faList}>
+      <Form onSubmit={onSubmit}>
+        <Row>
+          <Col xs={12} className={`text-${submitColorDecider()} text-center`}>
+            <h5><Icon icon={submitIconDecider()} /> {`${submitTextDecider()} Data`}</h5>
+          </Col>
 
-      <CCardBody>
-        <CForm onSubmit={onSubmit}>
-          <CRow>
-            {inputs?.map((input, i) => (
-              <CCol md={input.fullwidth ? 12 : input.double ? 8 : length(inputs.length)} className="py-3" key={i}>
-                <CFormLabel>
-                  {input.title || "Title"} {input.required ? <span className='text-danger'>*</span> : ""}
-                </CFormLabel>
+          <InputsPicker inputs={inputs} currentAction={currentAction} />
 
-                {input.type === "select" ? (
-                  <CFormSelect
-                    name={input.name}
-                    size={input.size || "md"}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    multiple={input.multiple}
-                  >
-                    <option>Please Select...</option>
-
-                    {input.options?.map((option, i) => (
-                      <option value={option.value} key={i}>{option.title}</option>
-                    ))}
-                  </CFormSelect>
-                ) : input.type === "textarea" ? (
-                  <CFormTextarea
-                    name={input.name}
-                    placeholder={input.placeholder || input.title}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    readOnly={input.readOnly}
-                    multiple={input.multiple}
-                  />
-                ) : (input.type === "checkbox" || input.type === "radio") ? (
-                  <>
-                    <CRow>
-                      {input.options?.map((option, i) => (
-                        <CCol md={length(input.options.length)} className="py-3" key={i}>
-                          <CFormCheck
-                            name={input.name}
-                            type={input.type}
-                            value={option.value}
-                            label={option.title}
-                            required={input.required}
-                            onChange={input.onChange}
-                            disabled={input.disabled || currentAction === "view"}
-                          />
-                        </CCol>
-                      ))}
-                    </CRow>
-                  </>
-                ) : input.type === "switch" ? (
-                  <CFormSwitch
-                    label={input.title}
-                    name={input.name}
-                    size={input.size || "lg"}
-                    checked={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                  />
-                ) : (
-                  <CFormInput
-                    name={input.name}
-                    size={input.size}
-                    type={input.type}
-                    placeholder={input.placeholder || input.title}
-                    required={input.required}
-                    value={input.value}
-                    onChange={input.onChange}
-                    disabled={input.disabled || currentAction === "view"}
-                    readOnly={input.readOnly}
-                    multiple={input.multiple}
-                  />
-                )}
-              </CCol>
-            ))}
-            <CCol xs={12} >
-              <CButtonGroup role="group">
-                {onReset && (
-                  <CButton onClick={onReset} color='warning' className='text-white'>
-                    Reset
-                  </CButton>
-                )}
-                {currentAction !== "view" && (<CButton type="submit" color='success' className='text-white'>
-                  {SubmitText || submitTextDecider()}
-                </CButton>)}
-              </CButtonGroup>
-            </CCol>
-          </CRow>
-        </CForm>
-      </CCardBody>
-    </CCard>
+          <Col xs={12} >
+            <ButtonGroup role="group" style={{ float: 'right' }}>
+              {onReset && (
+                <Button onClick={onReset} color='warning' className='text-white'>
+                  <Icon icon={faClockRotateLeft} /> Reset
+                </Button>
+              )}
+              {currentAction !== "view" && (
+                <Button type="submit" color='success' className='text-white'>
+                  <Icon icon={submitIconDecider()} /> {SubmitText || submitTextDecider()}
+                </Button>
+              )}
+            </ButtonGroup>
+          </Col>
+        </Row>
+      </Form>
+    </CollapseCard>
   )
 }
 
