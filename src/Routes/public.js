@@ -6,7 +6,7 @@ const PasswordReset = lazy(() => import('../views/Public/PasswordReset'));
 const PasswordChange = lazy(() => import('../views/Public/PasswordChange'));
 const StudentRegister = lazy(() => import('../views/Public/StudentRegister'));
 const UniversityRegister = lazy(() => import('../views/Public/UniversityRegister'));
-const CompanyRegister = lazy(() => import('../views/Public/CompanyRegister'));
+const CompanyRegister = lazy(() => import('../views/Public/Auth/CompanyRegister'));
 const StudentProfile = lazy(() => import('src/views/Public/StudentProfile'));
 const OpportunityPosts = lazy(() => import('src/views/Public/OpportunityPosts'));
 
