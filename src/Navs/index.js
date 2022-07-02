@@ -1,6 +1,6 @@
 import { faBuilding, faBuildingColumns, faBullseye, faClipboardQuestion, faCommentDots, faCommentMedical, faDashboard, faFileLines, faFilePen, faFire, faGraduationCap, faIdBadge, faNewspaper } from '@fortawesome/free-solid-svg-icons';
-import Icon from './components/Root/Icon';
-import { NavGroup, NavItem, NavTitle } from './components/Root/Nav';
+import Icon from '../components/Root/Icon';
+import { NavGroup, NavItem, NavTitle } from '../components/Root/Nav';
 
 const _nav = [
   {
@@ -31,12 +31,6 @@ const _nav = [
         name: 'Student Goals',
         to: '/students/goals',
         icon: <Icon icon={faBullseye} className="px-1" />,
-      },
-      {
-        component: NavItem,
-        name: 'Student Profile',
-        to: '/students/profile',
-        icon: <Icon icon={faIdBadge} className="px-1" />,
       },
       {
         component: NavItem,

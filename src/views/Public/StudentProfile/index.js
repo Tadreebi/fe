@@ -1,12 +1,14 @@
 import { useState } from 'react';
+import { Button, ButtonGroup } from 'src/components/Root/Buttons';
 import { Card, CardBody, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
-import demoData from "./demoData";
+import profileDemoData from "./demoData";
 
 
-const StudentProfile = () => {
-  const [profile, setProfile] = useState(demoData)
+const StudentProfile = ({ editable = false }) => {
+  const [profile, setProfile] = useState(profileDemoData)
+  const [editing, setEditing] = useState(false)
 
   return (
     <Container>
@@ -14,7 +16,35 @@ const StudentProfile = () => {
         <Col xs={12}>
           <Card>
             <CardHeader>
-              Student Profile Example
+              <Row>
+                <Col md={9}>
+                  <h4>
+                    Student Profile Example
+                  </h4>
+                </Col>
+
+                <Col md={3}>
+                  {editable && (
+                    <>
+                      {editing ? (
+                        <ButtonGroup style={{ float: "right" }} >
+                          <Button color="danger" className="text-white" onClick={() => setEditing(false)}>
+                            Cancel
+                          </Button>
+
+                          <Button color="success" className="text-white" onClick={() => setEditing(false)}>
+                            Submit
+                          </Button>
+                        </ButtonGroup>
+                      ) : (
+                        <Button color="warning" style={{ float: "right" }} onClick={() => setEditing(true)}>
+                          Edit Profile
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </Col>
+              </Row>
             </CardHeader>
 
             <CardBody>

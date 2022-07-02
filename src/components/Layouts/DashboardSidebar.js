@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
-import navigation from 'src/_nav'
+import navigation from 'src/Navs'
 import { Sidebar, SidebarBrand, SidebarNav, SidebarToggler } from '../Root/Sidebar'
 import { DashboardSidebarNav } from './DashboardSidebarNav'
 
