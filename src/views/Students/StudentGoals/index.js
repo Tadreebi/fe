@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import TemplatePage from '../../templatePage'
-
+import goalsDemoData from './demoData';
 
 const StudentGoals = () => {
-  const [goals, setGoals] = useState([]);
+  const [goals, setGoals] = useState(goalsDemoData || []);
   const [goal, setGoal] = useState({});
   const [action, setAction] = useState("create");
 
@@ -27,16 +27,6 @@ const StudentGoals = () => {
       onChange: e => setGoal(current => ({ ...current, title: e.target.value }))
     },
     {
-      title: "Student",
-      name: "student",
-      type: "select",
-      fullwidth: true,
-      required: true,
-      value: goal.student,
-      onChange: e => setGoal(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
-    },
-    {
       title: "Goal Description",
       name: "describtion",
       type: "textarea",
@@ -52,22 +42,6 @@ const StudentGoals = () => {
       required: true,
       value: goal.done,
       onChange: e => setGoal(current => ({ ...current, done: e.target.checked }))
-    },
-    {
-      title: "Goal Created Date",
-      name: "timestamp",
-      type: "date",
-      required: true,
-      value: goal.timestamp,
-      onChange: e => setGoal(current => ({ ...current, timestamp: e.target.value }))
-    },
-    {
-      title: "Goal Updated Date",
-      name: "updated",
-      type: "date",
-      required: true,
-      value: goal.updated,
-      onChange: e => setGoal(current => ({ ...current, updated: e.target.value }))
     },
   ];
 
@@ -114,16 +88,62 @@ const StudentGoals = () => {
     console.log('Form Data Deleted');
   };
 
+  const statisticsData = [
+    {
+      title: "Goals Set",
+      number: goals.length,
+      chart: {
+        type: "bar",
+        data: {
+          "Done": goals.filter(rep => rep.done !== true)?.length,
+          "Not Done": goals.filter(rep => rep.done === true)?.length,
+        },
+        fill: true
+      }
+    },
+    {
+      title: "Execution Percentage",
+      number: goals.filter(rep => rep.done !== true)?.length,
+      chart: {
+        type: "progress",
+        value: (goals.filter(rep => rep.done !== true)?.length / goals?.length * 100),
+        text: `${(goals.filter(rep => rep.done !== true)?.length / goals?.length * 100)}%`,
+        color: "success"
+      }
+    },
+  ];
+
+  const tableColumns = [
+    {
+      name: "Title",
+      selector: row => row.title,
+      sortable: true
+    },
+    {
+      name: "Desc",
+      selector: row => row.describtion,
+      sortable: true
+    },
+    {
+      name: "Done",
+      selector: row => row.done ? "True" : "False",
+      sortable: true
+    }
+  ];
+
   return (
     <>
       <TemplatePage
         pageTitle={"Student Goals"}
         pageDescrbition={"For student to add their goals"}
+        statisticsData={statisticsData}
         formTitle={"CRUD Goals"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Goals List"}
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={goals}
         onActionSelection={onActionSelection}
         currentAction={action}
