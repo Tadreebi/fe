@@ -1,10 +1,9 @@
-import CIcon from '@coreui/icons-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Icon = ({ ...rest }) => {
-
+const Icon = ({ icon, ...rest }) => {
   return (
-    <CIcon {...rest} />
+    <FontAwesomeIcon icon={icon} {...rest} />
   )
-}
+};
 
 export default Icon
