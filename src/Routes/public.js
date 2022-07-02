@@ -1,11 +1,11 @@
 import { lazy } from 'react';
 
 // Modules
-const Login = lazy(() => import('../views/Public/Login'));
-const PasswordReset = lazy(() => import('../views/Public/PasswordReset'));
-const PasswordChange = lazy(() => import('../views/Public/PasswordChange'));
-const StudentRegister = lazy(() => import('../views/Public/StudentRegister'));
-const UniversityRegister = lazy(() => import('../views/Public/UniversityRegister'));
+const Login = lazy(() => import('../views/Public/Auth/Login'));
+const PasswordReset = lazy(() => import('../views/Public/Auth/PasswordReset'));
+const PasswordChange = lazy(() => import('../views/Public/Auth/PasswordChange'));
+const StudentRegister = lazy(() => import('../views/Public/Auth/StudentRegister'));
+const UniversityRegister = lazy(() => import('../views/Public/Auth/UniversityRegister'));
 const CompanyRegister = lazy(() => import('../views/Public/Auth/CompanyRegister'));
 const StudentProfile = lazy(() => import('src/views/Public/StudentProfile'));
 const OpportunityPosts = lazy(() => import('src/views/Public/OpportunityPosts'));
