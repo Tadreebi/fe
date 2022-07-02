@@ -88,6 +88,31 @@ const StudentGoals = () => {
     console.log('Form Data Deleted');
   };
 
+  const statisticsData = [
+    {
+      title: "Goals Set",
+      number: goals.length,
+      chart: {
+        type: "bar",
+        data: {
+          "Done": goals.filter(rep => rep.done !== true)?.length,
+          "Not Done": goals.filter(rep => rep.done === true)?.length,
+        },
+        fill: true
+      }
+    },
+    {
+      title: "Execution Percentage",
+      number: goals.filter(rep => rep.done !== true)?.length,
+      chart: {
+        type: "progress",
+        value: (goals.filter(rep => rep.done !== true)?.length / goals?.length * 100),
+        text: `${(goals.filter(rep => rep.done !== true)?.length / goals?.length * 100)}%`,
+        color: "success"
+      }
+    },
+  ];
+
   const tableColumns = [
     {
       name: "Title",
@@ -111,13 +136,14 @@ const StudentGoals = () => {
       <TemplatePage
         pageTitle={"Student Goals"}
         pageDescrbition={"For student to add their goals"}
+        statisticsData={statisticsData}
         formTitle={"CRUD Goals"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Goals List"}
-        tableColumns={tableColumns} // New
-        tableRowDetails={true} // New
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={goals}
         onActionSelection={onActionSelection}
         currentAction={action}
