@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import TemplatePage from '../../templatePage'
+import detailsDemoData from "./demoData"
 
 
 const UniversityTips = () => {
-  const [tips, setTips] = useState([]);
+  const [tips, setTips] = useState(detailsDemoData);
   const [tip, setTip] = useState({});
   const [action, setAction] = useState("create");
 
@@ -60,22 +61,6 @@ const UniversityTips = () => {
       value: tip.details,
       onChange: e => setTip(current => ({ ...current, details: e.target.value }))
     },
-    {
-      title: "Added At",
-      name: "timestamp",
-      type: "date",
-      required: true,
-      value: tip.timestamp,
-      onChange: e => setTip(current => ({ ...current, timestamp: e.target.value }))
-    },
-    {
-      title: "Updated At",
-      name: "updated",
-      type: "date",
-      required: true,
-      value: tip.updated,
-      onChange: e => setTip(current => ({ ...current, updated: e.target.value }))
-    },
   ];
 
   const onFormSubmit = e => {
@@ -121,6 +106,24 @@ const UniversityTips = () => {
     console.log('Form Data Deleted');
   };
 
+  const tableColumns = [
+    {
+      name: "Title",
+      selector: row => row.title,
+      sortable: true
+    },
+    {
+      name: "Topic",
+      selector: row => row.topic,
+      sortable: true
+    },
+    {
+      name: "Type",
+      selector: row => row.type,
+      sortable: true
+    },
+  ];
+
   return (
     <>
       <TemplatePage
@@ -132,6 +135,8 @@ const UniversityTips = () => {
         onFormReset={onFormReset}
         tableTitle={"Student Tips List"}
         tableData={tips}
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
