@@ -1,9 +1,10 @@
-import { useState } from 'react'
-import TemplatePage from '../../templatePage'
+import { useState } from "react";
+import TemplatePage from "../../templatePage";
+import postsDemoData from "./postsData";
 
 
 const opportunityPosts = () => {
-  const [posts, setPosts] = useState([]);
+  const [postsList, setPostsList] = useState([...postsDemoData]);
   const [post, setPost] = useState({});
   const [action, setAction] = useState("create");
 
@@ -19,13 +20,17 @@ const opportunityPosts = () => {
     // Company Name -> From another model
     {
       title: "Company",
-      name: "student",
+      name: "company",
       type: "select",
       fullwidth: true,
       required: true,
-      value: post.student,
-      onChange: e => setPost(current => ({ ...current, student: e.target.value })),
-      options: companies.map(student => ({ title: student.name, value: student.id }))
+      value: post.company,
+      onChange: (e) =>
+        setPost((current) => ({ ...current, company: e.target.value })),
+      options: companies.map((company) => ({
+        title: company.name,
+        value: company.id,
+      })),
     },
     {
       title: "Position",
@@ -35,7 +40,8 @@ const opportunityPosts = () => {
       fullwidth: true,
       required: true,
       value: post.position,
-      onChange: e => setPost(current => ({ ...current, position: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({ ...current, position: e.target.value })),
     },
     {
       title: "Internship Type",
@@ -43,15 +49,17 @@ const opportunityPosts = () => {
       type: "select",
       required: true,
       value: post.type,
-      onChange: e => setPost(current => ({ ...current, paid: e.target.value })),
+      onChange: (e) =>
+        setPost((current) => ({ ...current, paid: e.target.value })),
       options: [
         { title: "Paid Internship", value: "Paid Internship" },
-        { title: "Partially-paid Internship", value: "Partially-paid Internship" },
+        {
+          title: "Partially-paid Internship",
+          value: "Partially-paid Internship",
+        },
         { title: "Unpaid Internship", value: "Unpaid Internship" },
         { title: "Virtual Internship", value: "Virtual Internship" },
-
-
-      ]
+      ],
     },
     {
       title: "Internship Hours",
@@ -59,11 +67,12 @@ const opportunityPosts = () => {
       type: "select",
       required: true,
       value: post.type,
-      onChange: e => setPost(current => ({ ...current, type: e.target.value })),
+      onChange: (e) =>
+        setPost((current) => ({ ...current, type: e.target.value })),
       options: [
         { title: "Full Time", value: "Full Time" },
         { title: "Part Time", value: "Part Time" },
-      ]
+      ],
     },
     {
       title: "Experience",
@@ -71,13 +80,14 @@ const opportunityPosts = () => {
       type: "select",
       required: true,
       value: post.experience,
-      onChange: e => setPost(current => ({ ...current, experience: e.target.value })),
+      onChange: (e) =>
+        setPost((current) => ({ ...current, experience: e.target.value })),
       options: [
         { title: "No Experience", value: "No Experience" },
         { title: "One Year", value: "One Year" },
         { title: "Two Years", value: "Two Years" },
         { title: "Three Years and Above", value: "Three Years and Above" },
-      ]
+      ],
     },
     {
       title: "Education",
@@ -85,12 +95,13 @@ const opportunityPosts = () => {
       type: "select",
       required: true,
       value: post.education,
-      onChange: e => setPost(current => ({ ...current, education: e.target.value })),
+      onChange: (e) =>
+        setPost((current) => ({ ...current, education: e.target.value })),
       options: [
         { title: "Bachelors", value: "Bachelors" },
         { title: "Masters", value: "Masters" },
         { title: "Phd", value: "Phd" },
-      ]
+      ],
     },
     {
       title: "Industry",
@@ -98,7 +109,8 @@ const opportunityPosts = () => {
       type: "select",
       required: true,
       value: post.industry,
-      onChange: e => setPost(current => ({ ...current, industry: e.target.value })),
+      onChange: (e) =>
+        setPost((current) => ({ ...current, industry: e.target.value })),
       options: [
         { title: "Business", value: "Business" },
         { title: "It", value: "It" },
@@ -107,8 +119,7 @@ const opportunityPosts = () => {
         { title: "Engineering", value: "Engineering" },
         { title: "Medical", value: "Medical" },
         { title: "Others", value: "Others" },
-
-      ]
+      ],
     },
     {
       title: "Salary",
@@ -116,7 +127,8 @@ const opportunityPosts = () => {
       type: "number",
       required: true,
       value: post.salary,
-      onChange: e => setPost(current => ({ ...current, salary: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({ ...current, salary: e.target.value })),
     },
     {
       title: "City",
@@ -125,7 +137,8 @@ const opportunityPosts = () => {
       required: true,
       fullwidth: true,
       value: post.city,
-      onChange: e => setPost(current => ({ ...current, city: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({ ...current, city: e.target.value })),
     },
     {
       title: "Location",
@@ -134,7 +147,8 @@ const opportunityPosts = () => {
       required: true,
       fullwidth: true,
       value: post.location,
-      onChange: e => setPost(current => ({ ...current, location: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({ ...current, location: e.target.value })),
     },
     {
       title: "Vacancies",
@@ -142,7 +156,8 @@ const opportunityPosts = () => {
       type: "number",
       required: true,
       value: post.vacancies,
-      onChange: e => setPost(current => ({ ...current, vacancies: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({ ...current, vacancies: e.target.value })),
     },
     {
       title: "Internship Overview",
@@ -151,7 +166,8 @@ const opportunityPosts = () => {
       required: true,
       fullwidth: true,
       value: post.description,
-      onChange: e => setPost(current => ({ ...current, description: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({ ...current, description: e.target.value })),
     },
     {
       title: "Supervisor Name",
@@ -160,7 +176,8 @@ const opportunityPosts = () => {
       required: true,
       fullwidth: true,
       value: post.supervisor_Name,
-      onChange: e => setPost(current => ({ ...current, supervisor_Name: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({ ...current, supervisor_Name: e.target.value })),
     },
     {
       title: "Supervisor Position",
@@ -169,7 +186,11 @@ const opportunityPosts = () => {
       required: true,
       fullwidth: true,
       value: post.subervisor_position,
-      onChange: e => setPost(current => ({ ...current, subervisor_position: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({
+          ...current,
+          subervisor_position: e.target.value,
+        })),
     },
     {
       title: "Supervisor Phone Number",
@@ -178,7 +199,11 @@ const opportunityPosts = () => {
       required: true,
       fullwidth: true,
       value: post.supervisor_phone_number,
-      onChange: e => setPost(current => ({ ...current, supervisor_phone_number: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({
+          ...current,
+          supervisor_phone_number: e.target.value,
+        })),
     },
     {
       title: "End Date of Application",
@@ -186,25 +211,25 @@ const opportunityPosts = () => {
       type: "date",
       required: true,
       value: post.endDate,
-      onChange: e => setPost(current => ({ ...current, endDate: e.target.value }))
+      onChange: (e) =>
+        setPost((current) => ({ ...current, endDate: e.target.value })),
     },
   ];
 
-  const onFormSubmit = e => {
+  const onFormSubmit = (e) => {
     e.preventDefault();
 
-    action === "create" ?
-      onDataCreate()
-      : action === "update" ?
-        onDataEdit()
-        : action === "delete" &&
-        onDataDelete()
+    action === "create"
+      ? onDataCreate()
+      : action === "update"
+        ? onDataEdit()
+        : action === "delete" && onDataDelete();
   };
 
   const onFormReset = () => {
-    setPost({})
+    setPost({});
     setAction("create");
-    console.log("Form was reset")
+    console.log("Form was reset");
   };
 
   const onActionSelection = (action, data) => {
@@ -213,37 +238,171 @@ const opportunityPosts = () => {
   };
 
   const onDataCreate = () => {
-    setPosts(current => [...current, { ...post, id: current.length }]);
+    setPostsList((current) => [...current, { ...post, id: current.length }]);
     setPost({});
     setAction("create");
-    console.log('Form Data Created');
+    console.log("Form Data Created");
   };
 
   const onDataEdit = () => {
-    setPosts(current => [...current.filter(rep => rep.id !== post.id), post]);
+    setPostsList((current) => [
+      ...current.filter((rep) => rep.id !== post.id),
+      post,
+    ]);
     setPost({});
     setAction("create");
-    console.log('Form Data Updated');
+    console.log("Form Data Updated");
   };
 
   const onDataDelete = () => {
-    setPosts(current => [...current.filter(rep => rep.id !== post.id)]);
+    setPostsList((current) => [...current.filter((rep) => rep.id !== post.id)]);
     setPost({});
     setAction("create");
-    console.log('Form Data Deleted');
+    console.log("Form Data Deleted");
   };
 
+  const statisticsData = [
+    {
+      title: "Internships Hours",
+      number: postsList.map(intern => intern.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Full Time": postsList.filter(intern => intern.type === "Full Time")?.length,
+          "Part Time": postsList.filter(intern => intern.type === "Part Time")?.length,
+        },
+      }
+    },
+    {
+      title: "Internships Type",
+      number: postsList.map(intern => intern.paid).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Paid Internship": postsList.filter(intern => intern.paid === "Paid Internship")?.length,
+          "Partially-paid Internship": postsList.filter(intern => intern.paid === "Partially-paid Internship")?.length,
+          "Unpaid Internship": postsList.filter(intern => intern.paid === "Unpaid Internship")?.length,
+          "Virtual Internship": postsList.filter(intern => intern.paid === "Virtual Internship")?.length,
+        },
+      }
+    },
+    {
+      title: "Education",
+      number: postsList.map(intern => intern.education).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Bachelors": postsList.filter(intern => intern.education === "Bachelors")?.length,
+          "Masters": postsList.filter(intern => intern.education === "Masters")?.length,
+          "Phd": postsList.filter(intern => intern.education === "Phd")?.length,
+        },
+      }
+    },
+    {
+      title: "Indsutry",
+      number: postsList.map(intern => intern.industry).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      chart: {
+        type: "bar",
+        data: {
+          "Business": postsList.filter(intern => intern.industry === "Business")?.length,
+          "It": postsList.filter(intern => intern.industry === "It")?.length,
+          "Banking": postsList.filter(intern => intern.industry === "Banking")?.length,
+          "Education": postsList.filter(intern => intern.industry === "Education")?.length,
+          "Engineering": postsList.filter(intern => intern.industry === "Engineering")?.length,
+          "Medical": postsList.filter(intern => intern.industry === "Medical")?.length,
+          "Others": postsList.filter(intern => intern.industry === "Others")?.length,
+        },
+      }
+    },
+  ];
+  const chartsData = [
+    {
+      title: "Internship Hours",
+      type: "doughnut",
+      data:
+      {
+        "Part Time": postsList.filter(intern => intern.type === "Part Time")?.length,
+        "Full Time": postsList.filter(intern => intern.type === "Full Time")?.length,
+      },
+    },
+    {
+      title: "Industry",
+      type: "doughnut",
+      data:
+      {
+        "Business": postsList.filter(intern => intern.industry === "Business")?.length,
+        "It": postsList.filter(intern => intern.industry === "It")?.length,
+        "Banking": postsList.filter(intern => intern.industry === "Banking")?.length,
+        "Education": postsList.filter(intern => intern.industry === "Education")?.length,
+        "Engineering": postsList.filter(intern => intern.industry === "Engineering")?.length,
+        "Medical": postsList.filter(intern => intern.industry === "Medical")?.length,
+        "Others": postsList.filter(intern => intern.industry === "Others")?.length,
+      },
+    },
+    {
+      title: "Education",
+      type: "doughnut",
+      data:
+      {
+        "Bachelors": postsList.filter(intern => intern.education === "Bachelors")?.length,
+        "Masters": postsList.filter(intern => intern.education === "Masters")?.length,
+        "Phd": postsList.filter(intern => intern.education === "Phd")?.length,
+      },
+    },
+    {
+      title: "Internship Type",
+      type: "doughnut",
+      data:
+      {
+        "Paid Internship": postsList.filter(intern => intern.paid === "Paid Internship")?.length,
+        "Partially-paid Internship": postsList.filter(intern => intern.paid === "Partially-paid Internship")?.length,
+        "Unpaid Internship": postsList.filter(intern => intern.paid === "Unpaid Internship")?.length,
+        "Virtual Internship": postsList.filter(intern => intern.paid === "Virtual Internship")?.length,
+      },
+    },
+  ]
+
+  const tableColumns = [
+    {
+      name: "Company",
+      selector: (row) => row.company,
+      sortable: true,
+    },
+    {
+      name: "Position",
+      selector: (row) => row.position,
+      sortable: true,
+    },
+    {
+      name: "Vacancies",
+      selector: (row) => row.vacancies,
+      sortable: true,
+    },
+    {
+      name: "End Date of Application",
+      selector: (row) => row.endDate,
+      sortable: true,
+    },
+  ];
+
+  // const chartsData = [];
   return (
     <>
       <TemplatePage
         pageTitle={"Internship Opportunity"}
-        pageDescrbition={"For company to submit details of an internship opportunity"}
+        pageDescrbition={
+          "For company to submit details of an internship opportunity"
+        }
+        statisticsData={statisticsData}
+        chartsData={chartsData}
         formTitle={"CRUD Posts"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Internship Opportunity Details"}
-        tableData={posts}
+        tableColumns={tableColumns}
+        tableRowDetails={true}
+        tableData={postsList}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
@@ -251,7 +410,7 @@ const opportunityPosts = () => {
         onDataDelete={onDataDelete}
       />
     </>
-  )
-}
+  );
+};
 
-export default opportunityPosts
+export default opportunityPosts;

@@ -1,29 +1,29 @@
-import React from 'react'
+import { lazy } from 'react';
 
 // Basic Pages
-const Dashboard = React.lazy(() => import('../views/dashboard'));
+const Dashboard = lazy(() => import('../views/dashboard'));
 
 // Modules
 //// Students
-const StudentReports = React.lazy(() => import('../views/Students/StudentReports'));
-const StudentGoals = React.lazy(() => import('../views/Students/StudentGoals'));
-const StudentProfile = React.lazy(() => import('../views/Students/StudentProfile'));
-const StudentApplication = React.lazy(() => import('../views/Students/StudentApplication'));
-const StudentProposals = React.lazy(() => import('../views/Students/StudentProposals'));
-const StudentExperiences = React.lazy(() => import('../views/Students/StudentExperience'));
+const StudentReports = lazy(() => import('../views/Students/StudentReports'));
+const StudentGoals = lazy(() => import('../views/Students/StudentGoals'));
+const StudentProfile = lazy(() => import('src/views/Public/StudentProfile'));
+const StudentApplication = lazy(() => import('../views/Students/StudentApplication'));
+const StudentProposals = lazy(() => import('../views/Students/StudentProposals'));
+const StudentExperiences = lazy(() => import('../views/Students/StudentExperience'));
 
 //// University
-const UniversityTips = React.lazy(() => import('../views/University/UniversityTips'));
-const UniversityFeedback = React.lazy(() => import('../views/University/UniversityFeedback'));
-const Faculty = React.lazy(() => import('../views/University/Faculty'));
-const SupervisedBy = React.lazy(() => import('../views/University/SupervisedBy'));
+const Faculty = lazy(() => import('../views/University/Faculty'));
+const SupervisedBy = lazy(() => import('../views/University/SupervisedBy'));
+const UniversityTips = lazy(() => import('../views/University/UniversityTips'));
+const UniversityFeedback = lazy(() => import('../views/University/UniversityFeedback'));
 
 //// Company
-const OpportunityPosts = React.lazy(() => import('../views/Company/OpportunityPosts'));
+const OpportunityPosts = lazy(() => import('../views/Company/OpportunityPosts'));
 
 // Errors
-const Page404 = React.lazy(() => import('../views/Errors/404'));
-const Page500 = React.lazy(() => import('../views/Errors/500'));
+const Page404 = lazy(() => import('../views/Errors/404'));
+const Page500 = lazy(() => import('../views/Errors/500'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -33,7 +33,7 @@ const routes = [
   //// Students
   { path: '/students/reports', name: 'Student Reports', element: StudentReports },
   { path: '/students/goals', name: 'Student Goals', element: StudentGoals },
-  { path: '/students/profile', name: 'Student Profile', element: StudentProfile },
+  { path: '/profile', name: 'Student Profile', element: StudentProfile },
   { path: '/students/application', name: 'Student Application', element: StudentApplication },
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
   { path: '/students/experiences', name: 'Student Reports', element: StudentExperiences },
