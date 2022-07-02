@@ -21,6 +21,7 @@ const UniversityFeedback = lazy(() => import('../views/University/UniversityFeed
 
 //// Company
 const OpportunityPosts = lazy(() => import('../views/Company/OpportunityPosts'));
+const CompanyReport = lazy(() => import('../views/Company/CompanyReport'));
 
 // Errors
 const Page404 = lazy(() => import('../views/Errors/404'));
@@ -48,6 +49,7 @@ const routes = [
 
   //// Company
   { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },
+  { path: '/company/reports', name: 'Company Reports', element: CompanyReport },
 
   //// Errors
   { path: '*', name: 'Error 404', element: Page404 },

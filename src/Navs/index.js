@@ -70,6 +70,12 @@ const _nav = [
         to: '/company/opportunity-posts',
         icon: <Icon icon={faFileLines} className="px-1" />,
       },
+      {
+        component: NavItem,
+        name: 'Opportunity Reports',
+        to: '/company/reports',
+        icon: <Icon icon={faFileLines} className="px-1" />,
+      },
     ]
   },
   {
