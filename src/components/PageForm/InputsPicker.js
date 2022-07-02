@@ -1,9 +1,4 @@
-import { faClockRotateLeft, faEdit, faList, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import CollapseCard from '../CollapseCard';
-import { Button, ButtonGroup } from '../Root/Buttons';
-import Form from '../Root/Form';
 import { Col, Row } from '../Root/Grid';
-import Icon from '../Root/Icon';
 import { Boolean, CheckList, Input, Option, Select, StarRating, Textarea } from '../Root/InputFields';
 import Label from '../Root/Label';
 
@@ -19,89 +14,91 @@ const length = count => {
 const InputsPicker = ({ inputs = inputsDemo, currentAction }) => {
   return (
     <>
-      {inputs?.map((input, i) => (
-        <Col md={input.fullwidth ? 12 : input.double ? 8 : length(inputs.length)} className="py-3" key={i}>
+      {inputs?.map(({ fullwidth, double, title, required, type, name, size, value, onChange, disabled, options, placeholder, ...rest }, i) => (
+        <Col md={fullwidth ? 12 : double ? 8 : length(inputs.length)} className="py-3" key={i}>
           <Label>
-            {input.title || "Title"} {input.required ? <span className='text-danger'>*</span> : ""}
+            {title || "Title"} {required ? <span className='text-danger'>*</span> : ""}
           </Label>
 
-          {input.type === "select" ? (
+          {type === "select" ? (
             <Select
-              name={input.name}
-              size={input.size || "md"}
-              required={input.required}
-              value={input.value}
-              onChange={input.onChange}
-              disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
-              multiple={input.multiple}
+              name={name}
+              size={size || "md"}
+              required={required}
+              value={value}
+              onChange={onChange}
+              disabled={disabled || currentAction === "view" || currentAction === "delete"}
+              {...rest}
             >
               <Option>Please Select...</Option>
 
-              {input.options?.map((option, i) => (
+              {options?.map((option, i) => (
                 <Option value={option.value} key={i}>{option.title}</Option>
               ))}
             </Select>
-          ) : input.type === "textarea" ? (
+          ) : type === "textarea" ? (
             <Textarea
-              name={input.name}
-              placeholder={input.placeholder || input.title}
-              required={input.required}
-              value={input.value}
-              onChange={input.onChange}
-              disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
-              readOnly={input.readOnly}
-              multiple={input.multiple}
+              name={name}
+              required={required}
+              placeholder={placeholder || title}
+              value={value}
+              onChange={onChange}
+              disabled={disabled || currentAction === "view" || currentAction === "delete"}
+              {...rest}
             />
-          ) : input.type === "rating" ? (
+          ) : type === "rating" ? (
             <>
               <br />
               <StarRating
-                name={input.name}
-                required={input.required}
-                value={input.value}
-                onChange={input.onChange}
-                disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
+                name={name}
+                required={required}
+                value={value}
+                onChange={onChange}
+                disabled={disabled || currentAction === "view" || currentAction === "delete"}
+                {...rest}
               />
             </>
-          ) : (input.type === "checkbox" || input.type === "radio") ? (
+          ) : (type === "checkbox" || type === "radio") ? (
             <>
               <Row>
-                {input.options?.map((option, i) => (
-                  <Col md={length(input.options.length)} className="py-3" key={i}>
+                {options?.map((option, i) => (
+                  <Col md={length(options.length)} className="py-3" key={i}>
                     <CheckList
-                      name={input.name}
-                      multiple={input.type === "checkbox"}
+                      name={name}
+                      required={required}
+                      multiple={type === "checkbox"}
                       value={option.value}
                       label={option.title}
-                      required={input.required}
-                      onChange={input.onChange}
-                      disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
+                      onChange={onChange}
+                      disabled={disabled || currentAction === "view" || currentAction === "delete"}
+                      {...rest}
                     />
                   </Col>
                 ))}
               </Row>
             </>
-          ) : input.type === "switch" ? (
+          ) : type === "switch" ? (
             <Boolean
-              label={input.title}
-              name={input.name}
-              size={input.size || "lg"}
-              checked={input.value}
-              onChange={input.onChange}
-              disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
+              label={title}
+              name={name}
+              required={required}
+              size={size || "lg"}
+              checked={value}
+              onChange={onChange}
+              disabled={disabled || currentAction === "view" || currentAction === "delete"}
+              {...rest}
             />
           ) : (
             <Input
-              name={input.name}
-              size={input.size}
-              type={input.type}
-              placeholder={input.placeholder || input.title}
-              required={input.required}
-              value={input.value}
-              onChange={input.onChange}
-              disabled={input.disabled || currentAction === "view" || currentAction === "delete"}
-              readOnly={input.readOnly}
-              multiple={input.multiple}
+              name={name}
+              required={required}
+              type={type}
+              size={size}
+              placeholder={placeholder || title}
+              value={value}
+              onChange={onChange}
+              disabled={disabled || currentAction === "view" || currentAction === "delete"}
+              {...rest}
             />
           )}
         </Col>
