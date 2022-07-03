@@ -1,15 +1,20 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'src/components/Root/Buttons/'
 import { Card, CardBody } from 'src/components/Root/Cards'
 import AuthTemplate from '../'
 
 const Login = () => {
+  let navigate = useNavigate();
+  const dispatch = useDispatch()
   const [loginData, setLoginData] = useState({});
 
   const onLogin = e => {
     e.preventDefault();
     console.log("Loggin In", loginData)
+    dispatch({ type: 'setJWT', JWT: true })
+    navigate("/dashboard")
   };
 
   const inputs = [
