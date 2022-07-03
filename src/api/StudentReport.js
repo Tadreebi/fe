@@ -21,7 +21,7 @@ const updateReport = (id, data) => {
   return api.put(`${path}reports/update/${id}`, data);
 };
 
-const removeReport = id => {
+const deleteReport = id => {
   return api.delete(`${path}reports/delete/${id}`);
 };
 
@@ -43,7 +43,7 @@ const updateRemark = (id, data) => {
   return api.put(`${path}remarks/update/${id}`, data);
 };
 
-const removeRemark = id => {
+const deleteRemark = id => {
   return api.delete(`${path}remarks/delete/${id}`);
 };
 
@@ -65,7 +65,7 @@ const updateSkill = (id, data) => {
   return api.put(`${path}skills/update/${id}`, data);
 };
 
-const removeSkill = id => {
+const deleteSkill = id => {
   return api.delete(`${path}skills/delete/${id}`);
 };
 
@@ -87,7 +87,7 @@ const updateAchievement = (id, data) => {
   return api.put(`${path}achievements/update/${id}`, data);
 };
 
-const removeAchievement = id => {
+const deleteAchievement = id => {
   return api.delete(`${path}achievements/delete/${id}`);
 };
 
@@ -96,20 +96,20 @@ export default {
   getReport,
   createReport,
   updateReport,
-  removeReport,
+  deleteReport,
   getAllRemarks,
   getRemark,
   createRemark,
   updateRemark,
-  removeRemark,
+  deleteRemark,
   getAllSkills,
   getSkill,
   createSkill,
   updateSkill,
-  removeSkill,
+  deleteSkill,
   getAllAchievements,
   getAchievement,
   createAchievement,
   updateAchievement,
-  removeAchievement
+  deleteAchievement
 };
