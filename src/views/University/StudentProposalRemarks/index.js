@@ -224,7 +224,13 @@ const StudentProposals = () => {
       name: "remarks",
       selector: row => row.remarks,
       sortable: true
+    },
+    {
+      name: "Accepted By University",
+      selector: row => row.accepted ? "True" : "False",
+      sortable: true
     }
+
   ];
 
 

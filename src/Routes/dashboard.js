@@ -20,7 +20,7 @@ const SupervisedBy = lazy(() => import('../views/University/SupervisedBy'));
 const UniversityTips = lazy(() => import('../views/University/UniversityTips'));
 const UniversityFeedback = lazy(() => import('../views/University/UniversityFeedback'));
 const StudentReportRemarks = lazy(() => import('../views/University/StudentReportRemarks'));
-const UniversityProposalRemarks = lazy(() => import('../views/University/UniversityProposalRemarks'));
+const UniversityProposalRemarks = lazy(() => import('../views/University/StudentProposalRemarks'));
 
 
 //// Company
