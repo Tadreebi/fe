@@ -97,7 +97,7 @@ const StudentReports = () => {
       fullwidth: true,
       required: true,
       value: report.remarks,
-      onChange: e => setReport(current => ({ ...current, remarks: e.target.value }))
+      disabled: true
     },
     {
       title: "Accepted",
@@ -106,7 +106,7 @@ const StudentReports = () => {
       fullwidth: true,
       required: true,
       value: report.accepted,
-      onChange: e => setReport(current => ({ ...current, accepted: e.target.checked }))
+      disabled: true
     },
   ];
 
