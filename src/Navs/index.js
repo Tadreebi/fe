@@ -98,6 +98,12 @@ const _nav = [
       },
       {
         component: NavItem,
+        name: 'Student Report Remarks',
+        to: '/university/report-remarks',
+        icon: <Icon icon={faFileLines} className="px-1" />,
+      },
+      {
+        component: NavItem,
         name: 'Faculty',
         to: '/faculty',
         icon: <Icon icon={faFire} className="px-1" />,
