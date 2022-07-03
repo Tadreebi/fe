@@ -78,6 +78,12 @@ const _nav = [
       },
       {
         component: NavItem,
+        name: 'Company App Response',
+        to: '/company/response',
+        icon: <Icon icon={faFileLines} className="px-1" />,
+      },
+      {
+        component: NavItem,
         name: 'Opportunity Reports',
         to: '/company/reports',
         icon: <Icon icon={faFileLines} className="px-1" />,
