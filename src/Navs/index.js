@@ -34,6 +34,12 @@ const _nav = [
       },
       {
         component: NavItem,
+        name: 'Opportunity Posts',
+        to: '/opportunity-posts',
+        icon: <Icon icon={faFilePen} className="px-1" />,
+      },
+      {
+        component: NavItem,
         name: 'Student Application',
         to: '/students/application',
         icon: <Icon icon={faFilePen} className="px-1" />,
