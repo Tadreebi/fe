@@ -1,12 +1,13 @@
 import { createStore } from 'redux'
 
 const initialState = {
-  JWT: false,
+  JWT: localStorage.getItem("JWT") || false,
 }
 
 const changeState = (state = initialState, { type, JWT }) => {
   switch (type) {
     case 'setJWT':
+      localStorage.setItem("JWT", JWT)
       return { ...state, JWT }
     default:
       return state
