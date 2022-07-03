@@ -238,9 +238,9 @@ const StudentProposals = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Proposals"}
-        pageDescrbition={"Students to submit and university to approve proposed internship vacancies to fulfill"}
-        formTitle={"CRUD Proposals"}
+        pageTitle={"Student Proposals Remarks"}
+        pageDescrbition={"for university to remark student submitted proposal"}
+        formTitle={"Form"}
         statisticsData={statisticsData}
         chartsData={chartsData}
         formInputs={inputs}

@@ -78,7 +78,7 @@ const StudentProposals = () => {
       fullwidth: true,
       required: true,
       value: proposal.remarks,
-      onChange: e => setproposal(current => ({ ...current, remarks: e.target.value }))
+      disabled: true
     },
     {
       title: "Accepted",
@@ -87,7 +87,7 @@ const StudentProposals = () => {
       fullwidth: true,
       required: true,
       value: proposal.accepted,
-      onChange: e => setproposal(current => ({ ...current, accepted: e.target.checked }))
+      disabled: true
     },
   ];
 
@@ -227,6 +227,11 @@ const StudentProposals = () => {
       name: "remarks",
       selector: row => row.remarks,
       sortable: true
+    },
+    {
+      name: "Accepted By University",
+      selector: row => row.accepted ? "True" : "False",
+      sortable: true
     }
   ];
 
@@ -235,9 +240,9 @@ const StudentProposals = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Proposals"}
+        pageTitle={"Student Proposals Remarks"}
         pageDescrbition={"Students to submit and university to approve proposed internship vacancies to fulfill"}
-        formTitle={"CRUD Proposals"}
+        formTitle={"Form"}
         statisticsData={statisticsData}
         chartsData={chartsData}
         formInputs={inputs}
