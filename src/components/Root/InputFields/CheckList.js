@@ -5,7 +5,7 @@ const CheckList = ({ name, multiple, value, title, required, onChange, disabled,
     <CFormCheck
       name={name}
       type={multiple ? "checkbox" : "radio"}
-      value={value}
+      value={value || ""}
       label={title}
       required={required}
       onChange={onChange}

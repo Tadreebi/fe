@@ -7,7 +7,7 @@ const Input = ({ name, type, placeholder, title, required, value, onChange, disa
       type={type}
       placeholder={placeholder || title}
       required={required}
-      value={value}
+      value={value || ""}
       onChange={onChange}
       disabled={disabled}
       {...rest}
