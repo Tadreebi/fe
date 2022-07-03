@@ -20,6 +20,8 @@ const SupervisedBy = lazy(() => import('../views/University/SupervisedBy'));
 const UniversityTips = lazy(() => import('../views/University/UniversityTips'));
 const UniversityFeedback = lazy(() => import('../views/University/UniversityFeedback'));
 const StudentReportRemarks = lazy(() => import('../views/University/StudentReportRemarks'));
+const UniversityProposalRemarks = lazy(() => import('../views/University/StudentProposalRemarks'));
+
 
 //// Company
 const OpportunityPosts = lazy(() => import('../views/Company/OpportunityPosts'));
@@ -52,6 +54,7 @@ const routes = [
   { path: '/faculty', name: 'Faculty', element: Faculty },
   { path: '/supervised-by', name: 'Supervised By', element: SupervisedBy },
   { path: '/university/report-remarks', name: 'Student Report Remarks', element: StudentReportRemarks },
+  { path: '/university/proposal-remarks', name: 'Student Proposal Remarks', element: UniversityProposalRemarks },
 
   //// Company
   { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },

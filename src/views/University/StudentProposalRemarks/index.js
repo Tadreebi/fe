@@ -39,7 +39,7 @@ const StudentProposals = () => {
       placeholder: "Proposal Title",
       required: true,
       value: proposal.title, // should match the property name in the backend model
-      onChange: e => setproposal(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
+      disabled: true
     },
     {
       title: "Student",
@@ -48,8 +48,7 @@ const StudentProposals = () => {
       double: true,
       required: true,
       value: proposal.student,
-      onChange: e => setproposal(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      disabled: true
     },
     {
       title: "Companies",
@@ -58,8 +57,7 @@ const StudentProposals = () => {
       double: true,
       required: true,
       value: proposal.company,
-      onChange: e => setproposal(current => ({ ...current, company: e.target.value })),
-      options: companies.map(company => ({ title: company.name, value: company.id }))
+      disabled: true
     },
     {
       title: "Internship",
@@ -68,8 +66,7 @@ const StudentProposals = () => {
       double: true,
       required: true,
       value: proposal.internship_application,
-      onChange: e => setproposal(current => ({ ...current, inter: e.target.value })),
-      options: InternshipApp.map(inter => ({ title: inter.name, value: inter.id }))
+      disabled: true
     },
     {
       title: "Remarks",
@@ -78,7 +75,7 @@ const StudentProposals = () => {
       fullwidth: true,
       required: true,
       value: proposal.remarks,
-      disabled: true
+      onChange: e => setproposal(current => ({ ...current, remarks: e.target.value }))
     },
     {
       title: "Accepted",
@@ -87,7 +84,7 @@ const StudentProposals = () => {
       fullwidth: true,
       required: true,
       value: proposal.accepted,
-      disabled: true
+      onChange: e => setproposal(current => ({ ...current, accepted: e.target.checked }))
     },
   ];
 
@@ -233,6 +230,7 @@ const StudentProposals = () => {
       selector: row => row.accepted ? "True" : "False",
       sortable: true
     }
+
   ];
 
 
@@ -241,7 +239,7 @@ const StudentProposals = () => {
     <>
       <TemplatePage
         pageTitle={"Student Proposals Remarks"}
-        pageDescrbition={"Students to submit and university to approve proposed internship vacancies to fulfill"}
+        pageDescrbition={"for university to remark student submitted proposal"}
         formTitle={"Form"}
         statisticsData={statisticsData}
         chartsData={chartsData}
