@@ -19,27 +19,29 @@ const OpportunityPosts = () => {
 
           <CardBody>
             {posts?.map((post, i) => (
-              <Row key={i} className={`py-4 ${post.id === pickedPost.id ? "bg-light" : ""}`}>
-                <Col md={3} onClick={() => pickedPost.id === post.id ? setPickedPost({}) : setPickedPost(post)}>
-                  <img src={post.image} width="100%" />
+              <div key={i} onClick={() => pickedPost.id === post.id ? setPickedPost({}) : setPickedPost(post)}>
+                <Row className={`py-4 ${post.id === pickedPost.id ? "bg-light" : ""}`}>
+                  <Col md={3} >
+                    <img src={post.image} width="100%" />
 
-                  <p className='text-center'>
-                    {post.company}
-                  </p>
-                </Col>
+                    <p className='text-center'>
+                      {post.company}
+                    </p>
+                  </Col>
 
-                <Col md={9} className="p-2">
-                  <h5>
-                    {post.position}
-                  </h5>
+                  <Col md={9} className="p-2">
+                    <h5>
+                      {post.position}
+                    </h5>
 
-                  <p>
-                    {post.type}
-                    <br />
-                    {post.location}, {post.city}
-                  </p>
-                </Col>
-              </Row>
+                    <p>
+                      {post.type}
+                      <br />
+                      {post.location}, {post.city}
+                    </p>
+                  </Col>
+                </Row>
+              </div>
             ))}
           </CardBody>
         </Card>
@@ -120,7 +122,7 @@ const OpportunityPosts = () => {
           </CardBody>
         </Card>
       </CardGroup>
-    </Container>
+    </Container >
   )
 }
 
