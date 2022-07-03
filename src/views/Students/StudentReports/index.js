@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Col, Row } from 'src/components/Root/Grid';
+import { useEffect, useState } from 'react';
+import StudentReportAPI from 'src/api/StudentReport'; // Import API Calls
 import TemplatePage from '../../templatePage';
 import reportsDemoData from './demoData';
 
@@ -7,6 +7,23 @@ const StudentReports = () => {
   const [reportsList, setReportsList] = useState([...reportsDemoData]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false); // New
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.getAllReports() // Call the relevant api call
+      .then(res => {
+        console.log("Called Data", res.data);
+        setReportsList(res.data); // Assign the response data to proper state
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const students = [
     { id: 1, name: "Emad" },
@@ -16,15 +33,19 @@ const StudentReports = () => {
     { id: 5, name: "Suhaib" },
   ];
 
+  useEffect(() => { // Create UseEffect
+    callData();
+  }, []);
+
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Report Title",
       required: true,
-      value: report.title, // should match the property name in the backend model
-      onChange: e => setReport(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
+      value: report.title,
+      onChange: e => setReport(current => ({ ...current, title: e.target.value }))
     },
     {
       title: "Student",
@@ -113,12 +134,13 @@ const StudentReports = () => {
   const onFormSubmit = e => {
     e.preventDefault();
 
-    action === "create" ?
+    action === "create" ? (
       onDataCreate()
-      : action === "update" ?
-        onDataEdit()
-        : action === "delete" &&
-        onDataDelete()
+    ) : action === "update" ? (
+      onDataEdit()
+    ) : action === "delete" && (
+      onDataDelete()
+    );
   };
 
   const onFormReset = () => {
@@ -132,25 +154,58 @@ const StudentReports = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setReportsList(current => [...current, { ...report, id: current.length }]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => { // Async
+    setLoading(true);
+
+    await StudentReportAPI.createReport(report) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setReport({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setReportsList(current => [...current.filter(rep => rep.id !== report.id), report]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => { // Async
+    setLoading(true);
+
+    await StudentReportAPI.updateReport(report.id, report) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setReport({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setReportsList(current => [...current.filter(rep => rep.id !== report.id)]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => { // Async
+    setLoading(true);
+
+    await StudentReportAPI.deleteReport(report.id) // Call the relevant api call
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setReport({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const statisticsData = [
@@ -335,14 +390,15 @@ const StudentReports = () => {
       <TemplatePage
         pageTitle={"Student Reports"}
         pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
-        statisticsData={statisticsData} // New
-        chartsData={chartsData} // New
+        loading={loading} // New
+        statisticsData={statisticsData}
+        chartsData={chartsData}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Reports List"}
-        tableColumns={tableColumns} // New
-        tableRowDetails={true} // New
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={reportsList}
         onActionSelection={onActionSelection}
         currentAction={action}
