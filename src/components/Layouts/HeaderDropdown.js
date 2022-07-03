@@ -18,7 +18,7 @@ const HeaderDropdown = () => {
           Account
         </DropdownHeader>
 
-        <DropdownItem href="#">
+        <DropdownItem href="#" disabled>
           <Icon icon={faBell} className="me-2" />
           Updates
           <Badge color="info" className="ms-2">
@@ -26,7 +26,7 @@ const HeaderDropdown = () => {
           </Badge>
         </DropdownItem>
 
-        <DropdownItem href="#">
+        <DropdownItem href="#" disabled >
           <Icon icon={faSquareEnvelope} className="me-2" />
           Messages
           <Badge color="success" className="ms-2">
@@ -34,7 +34,7 @@ const HeaderDropdown = () => {
           </Badge>
         </DropdownItem>
 
-        <DropdownItem href="#">
+        <DropdownItem href="#" disabled>
           <Icon icon={faCheckCircle} className="me-2" />
           Tasks
           <Badge color="danger" className="ms-2">
@@ -42,7 +42,7 @@ const HeaderDropdown = () => {
           </Badge>
         </DropdownItem>
 
-        <DropdownItem href="#">
+        <DropdownItem href="#" disabled>
           <Icon icon={faComments} className="me-2" />
           Comments
           <Badge color="warning" className="ms-2">
@@ -61,12 +61,12 @@ const HeaderDropdown = () => {
           </DropdownItem>
         </Link>
 
-        <DropdownItem href="#">
+        <DropdownItem href="#" disabled>
           <Icon icon={faGear} className="me-2" />
           Settings
         </DropdownItem>
 
-        <DropdownItem href="#">
+        <DropdownItem href="#" disabled>
           <Icon icon={faLock} className="me-2" />
           Lock Account
         </DropdownItem>
