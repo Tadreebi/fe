@@ -9,10 +9,10 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
-    const { jwtToken } = store.getState().user;
-    if (jwtToken) {
-      config.headers["Authorization"] = `Bearer ${jwtToken}`;
-    }
+    // const { jwtToken } = store.getState().user;
+    // if (jwtToken) {
+    //   config.headers["Authorization"] = `Bearer ${jwtToken}`;
+    // }
     return config;
   },
   error => {
