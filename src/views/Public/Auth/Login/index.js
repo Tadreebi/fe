@@ -8,12 +8,12 @@ import AuthTemplate from '../'
 const Login = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch()
-  const [loginData, setLoginData] = useState({});
+  const [loginData, setLoginData] = useState({ username: "admin", password: "132" });
 
   const onLogin = e => {
     e.preventDefault();
     console.log("Loggin In", loginData)
-    dispatch({ type: 'setJWT', JWT: true })
+    dispatch({ type: 'setJWT', JWT: "QwErTy12345" })
     navigate("/dashboard")
   };
 

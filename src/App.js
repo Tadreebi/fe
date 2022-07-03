@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/" exact name="Landing" element={<Landing />} />
 
-          {JWT ? (
+          {JWT?.length > 10 ? (
             <Route path="*" name="Home" element={<DashboardLayout />} />
           ) : (
             <Route path="*" name="Home" element={<PublicLayout />} />

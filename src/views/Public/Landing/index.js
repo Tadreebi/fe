@@ -16,7 +16,7 @@ const Landing = () => {
             <CardGroup>
               <Card className="p-4">
                 <CardBody className='text-center'>
-                  {JWT ? (
+                  {JWT?.length > 10 ? (
                     <Link to="/dashboard">
                       <Button color="success" className="px-4">
                         Dashboard
