@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ExperiencesDemoData from './demoData'
-import TemplatePage from '../../templatePage'
+import TemplatePage from '../..'
 
 
 const StudentExperience = () => {

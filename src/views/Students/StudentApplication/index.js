@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import applicationData from './applicationData';
-import TemplatePage from '../../templatePage'
+import TemplatePage from '../..'
 
 
 const StudentApplication = () => {
