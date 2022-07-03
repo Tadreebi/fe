@@ -1,13 +1,13 @@
 import { createStore } from 'redux'
 
 const initialState = {
-  sidebarShow: true,
+  JWT: false,
 }
 
-const changeState = (state = initialState, { type, ...rest }) => {
+const changeState = (state = initialState, { type, JWT }) => {
   switch (type) {
-    case 'setSideBar':
-      return { ...state, ...rest }
+    case 'setJWT':
+      return { ...state, JWT }
     default:
       return state
   }
