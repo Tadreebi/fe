@@ -94,6 +94,12 @@ const _nav = [
         to: '/company/reports',
         icon: <Icon icon={faFileLines} className="px-1" />,
       },
+      {
+        component: NavItem,
+        name: 'Company Reports',
+        to: '/company/reports',
+        icon: <Icon icon={faCommentDots} className="px-1" />,
+      },
     ]
   },
   {
