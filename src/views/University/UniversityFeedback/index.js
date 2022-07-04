@@ -42,6 +42,12 @@ const UniversityFeedback = () => {
     { id: 5, name: "5" },
   ];
 
+  const Reports = [
+    { id: 1, name: "report1" },
+    { id: 2, name: "report2" },
+    { id: 3, name: "report3" },
+  ]
+
   useEffect(() => {
     callData();
   }, []);
@@ -55,15 +61,25 @@ const UniversityFeedback = () => {
       required: true,
       value: feedback.student,
       onChange: e => setFeedback(current => ({ ...current, student: parseInt(e.target.value) })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students.map(theStudent => ({ title: theStudent.name, value: theStudent.id }))
+    },
+    {
+      title: "Report",
+      name: "report",
+      type: "select",
+      double: true,
+      required: true,
+      value: feedback.report,
+      onChange: e => setFeedback(current => ({ ...current, report: parseInt(e.target.value) })),
+      options: Reports.map(theReport => ({ title: theReport.name, value: theReport.id }))
     },
     {
       title: "Date of Feedback",
-      name: "Date",
+      name: "timestamp",
       type: "date",
       required: true,
-      value: feedback.date,
-      onChange: e => setFeedback(current => ({ ...current, date: e.target.value }))
+      value: feedback.timestamp,
+      onChange: e => setFeedback(current => ({ ...current, timestamp: e.target.value }))
     },
     {
       title: "Title",
@@ -123,7 +139,7 @@ const UniversityFeedback = () => {
   const onDataCreate = async () => {
     setLoading(true);
 
-    await UniversityFeedbackAPI.createUniversityFeedback(report)
+    await UniversityFeedbackAPI.createUniversityFeedback(feedback)
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -141,7 +157,7 @@ const UniversityFeedback = () => {
   const onDataEdit = async () => { // Async
     setLoading(true);
 
-    await UniversityFeedbackAPI.updateUniversityFeedback(report.id, report) // Call the relevant api call
+    await UniversityFeedbackAPI.updateUniversityFeedback(feedback.id, feedback) // Call the relevant api call
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -159,7 +175,7 @@ const UniversityFeedback = () => {
   const onDataDelete = async () => { // Async
     setLoading(true);
 
-    await UniversityFeedbackAPI.deleteUniversityFeedback(report.id) // Call the relevant api call
+    await UniversityFeedbackAPI.deleteUniversityFeedback(feedback.id) // Call the relevant api call
       .then(res => {
         console.log("Data Deleted Successfully");
         setFeedback({});
@@ -182,8 +198,13 @@ const UniversityFeedback = () => {
       sortable: true
     },
     {
+      name: "Report",
+      selector: row => row.report,
+      sortable: true
+    },
+    {
       name: "Date",
-      selector: row => row.date,
+      selector: row => row.timestamp,
       sortable: true
     },
     {
