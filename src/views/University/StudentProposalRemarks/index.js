@@ -1,4 +1,4 @@
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import poposalsDemoData from './demoData';
 import TemplatePage from '../../templatePage'
 import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
@@ -10,9 +10,9 @@ const StudentProposals = () => {
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false); // New
-  const [ProposalsResponses , setProposalsResponses]= useState([]);
+  const [ProposalsResponses, setProposalsResponses] = useState([]);
   const [Response, setResponse] = useState({});
-  let alldata=[]
+  let alldata = []
 
 
   const callData = async () => {
@@ -140,7 +140,7 @@ const StudentProposals = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -174,12 +174,12 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await UniversityProposalResponseAPI.updateResponse(Response.id, Response) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setResponse({});
         setAction("create");
@@ -327,13 +327,13 @@ const StudentProposals = () => {
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Proposals List"}
-        tableData= {proposals.map(data => ({...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal)}))}
+        tableData={proposals.map(data => ({ ...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal) }))}
         tableColumns={tableColumns}
         tableRowDetails={true}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

@@ -134,7 +134,7 @@ const StudentApplication = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -168,12 +168,12 @@ const StudentApplication = () => {
       });
   };
 
-  const onDataEdit = async () => {
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await StudentApplicationAPI.updateApplication(application.id, application)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setApplication({});
         setAction("create");
@@ -308,7 +308,7 @@ const StudentApplication = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

@@ -65,7 +65,7 @@ const SupervisedBy = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -88,7 +88,7 @@ const SupervisedBy = () => {
     console.log('Form Data Created');
   };
 
-  const onDataEdit = () => {
+  const onDataUpdate = () => {
     setSupervisedByList(current => [...current.filter(rep => rep.id !== supervisedBy.id), supervisedBy]);
     setSupervisedBy({});
     setAction("create");
@@ -156,7 +156,7 @@ const SupervisedBy = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

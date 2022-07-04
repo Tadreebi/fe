@@ -1,4 +1,4 @@
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import ExperiencesDemoData from './demoData'
 import TemplatePage from '../../templatePage'
 import StudentExperienceAPI from 'src/api/StudentExperience';
@@ -35,7 +35,7 @@ const StudentExperience = () => {
   ];
 
   const companies = [
-    { id: 3, name:3 },
+    { id: 3, name: 3 },
     { id: 2, name: "Ghaida' company" },
     { id: 3, name: "Moayad company" },
     { id: 4, name: "Raghad company" },
@@ -94,7 +94,7 @@ const StudentExperience = () => {
       value: experience.get_hired,
       onChange: e => setExperience(current => ({ ...current, get_hired: e.target.value }))
     },
-    
+
     {
       title: "more",
       name: "more",
@@ -112,7 +112,7 @@ const StudentExperience = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -146,12 +146,12 @@ const StudentExperience = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await StudentExperienceAPI.updateExperience(experience.id, experience) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setExperience({});
         setAction("create");
@@ -263,7 +263,7 @@ const StudentExperience = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

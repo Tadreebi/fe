@@ -24,7 +24,7 @@ const StudentReports = () => {
         setLoading(false);
       });
   };
-// 
+  //
   const students = [
     { id: 1, name: "Emad" },
     { id: 2, name: "Ghaida'" },
@@ -137,7 +137,7 @@ const StudentReports = () => {
     action === "create" ? (
       onDataCreate()
     ) : action === "update" ? (
-      onDataEdit()
+      onDataUpdate()
     ) : action === "delete" && (
       onDataDelete()
     );
@@ -172,12 +172,12 @@ const StudentReports = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await StudentReportAPI.updateReport(report.id, report) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setReport({});
         setAction("create");
@@ -403,7 +403,7 @@ const StudentReports = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

@@ -161,7 +161,7 @@ const CompanyRating = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -195,7 +195,7 @@ const CompanyRating = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await CompanyRatingAPI.updateScore(score.id, { ...score, score: (score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5 })
@@ -281,7 +281,7 @@ const CompanyRating = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

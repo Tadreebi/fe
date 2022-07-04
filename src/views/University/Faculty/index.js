@@ -43,7 +43,7 @@ const TrainingDuration = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -66,7 +66,7 @@ const TrainingDuration = () => {
     console.log('Form Data Created');
   };
 
-  const onDataEdit = () => {
+  const onDataUpdate = () => {
     setFacultyList(current => [...current.filter(rep => rep.id !== faculty.id), faculty]);
     setFaculty({});
     setAction("create");
@@ -117,7 +117,7 @@ const TrainingDuration = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

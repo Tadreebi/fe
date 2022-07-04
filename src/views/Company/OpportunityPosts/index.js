@@ -243,7 +243,7 @@ const opportunityPosts = () => {
     action === "create"
       ? onDataCreate()
       : action === "update"
-        ? onDataEdit()
+        ? onDataUpdate()
         : action === "delete" && onDataDelete();
   };
 
@@ -276,12 +276,12 @@ const opportunityPosts = () => {
       });
   };
 
-  const onDataEdit = async () => {
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await CompanyPostAPI.updatePost(post.id, post)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setPost({});
         setAction("create");
@@ -458,7 +458,7 @@ const opportunityPosts = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

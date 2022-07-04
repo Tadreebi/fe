@@ -8,7 +8,7 @@ const CompanyReports = () => {
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
-  
+
   const callData = async () => {
     setLoading(true);
 
@@ -132,7 +132,7 @@ const CompanyReports = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -166,12 +166,12 @@ const CompanyReports = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await CompanyReportAPI.updateReport(report.id, report)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setReport({});
         setAction("create");
@@ -399,7 +399,7 @@ const CompanyReports = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

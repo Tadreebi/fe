@@ -109,7 +109,7 @@ const StudentReportRemarks = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -132,7 +132,7 @@ const StudentReportRemarks = () => {
     console.log('Form Data Created');
   };
 
-  const onDataEdit = () => {
+  const onDataUpdate = () => {
     setRemarksList(current => [...current.filter(rep => rep.id !== remark.id), remark]);
     setRemark({});
     setAction("create");
@@ -340,7 +340,7 @@ const StudentReportRemarks = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

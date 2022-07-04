@@ -1,4 +1,4 @@
-import { useState , useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import poposalsDemoData from './demoData';
 import TemplatePage from '../../templatePage'
 import StudentProposalAPI from 'src/api/StudentProposal';
@@ -120,7 +120,7 @@ const StudentProposals = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -141,7 +141,7 @@ const StudentProposals = () => {
 
     await StudentProposalAPI.createProposal(proposal) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setproposal({});
         setAction("create");
@@ -154,12 +154,12 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await StudentProposalAPI.updateProposal(proposal.id, proposal) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setproposal({});
         setAction("create");
@@ -312,7 +312,7 @@ const StudentProposals = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

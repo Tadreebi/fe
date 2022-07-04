@@ -91,7 +91,7 @@ const UniversityTips = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -125,12 +125,12 @@ const UniversityTips = () => {
       });
   };
 
-  const onDataEdit = async () => {
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await UniversityTipsAPI.updateTip(tip.id, tip)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setTip({});
         setAction("create");
@@ -196,7 +196,7 @@ const UniversityTips = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>
