@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CompanyPostAPI from 'src/api/OpportunityPost';
 import TemplatePage from "../../templatePage";
 import postsDemoData from "./postsData";
 
@@ -7,7 +8,23 @@ const opportunityPosts = () => {
   const [postsList, setPostsList] = useState([...postsDemoData]);
   const [post, setPost] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
 
+  const callData = async () => {
+    setLoading(true);
+
+    await CompanyPostAPI.getAllPosts()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setPostsList(res.data[0]);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   const companies = [
     { id: 1, name: "ASAC" },
     { id: 2, name: "CSS" },
@@ -15,6 +32,10 @@ const opportunityPosts = () => {
     { id: 4, name: "Amazon" },
     { id: 5, name: "Google" },
   ];
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const inputs = [
     // Company Name -> From another model
@@ -48,7 +69,7 @@ const opportunityPosts = () => {
       name: "paid",
       type: "select",
       required: true,
-      value: post.type,
+      value: post.paid,
       onChange: (e) =>
         setPost((current) => ({ ...current, paid: e.target.value })),
       options: [
@@ -237,28 +258,58 @@ const opportunityPosts = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setPostsList((current) => [...current, { ...post, id: current.length }]);
-    setPost({});
-    setAction("create");
-    console.log("Form Data Created");
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await CompanyPostAPI.createPost(post)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setPost({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setPostsList((current) => [
-      ...current.filter((rep) => rep.id !== post.id),
-      post,
-    ]);
-    setPost({});
-    setAction("create");
-    console.log("Form Data Updated");
+  const onDataEdit = async () => {
+    setLoading(true);
+
+    await CompanyPostAPI.updatePost(post.id, post)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setPost({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setPostsList((current) => [...current.filter((rep) => rep.id !== post.id)]);
-    setPost({});
-    setAction("create");
-    console.log("Form Data Deleted");
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await CompanyPostAPI.deleteReport(post.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setPost({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const statisticsData = [
@@ -393,6 +444,7 @@ const opportunityPosts = () => {
         pageDescrbition={
           "For company to submit details of an internship opportunity"
         }
+        loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
         formTitle={"CRUD Posts"}
