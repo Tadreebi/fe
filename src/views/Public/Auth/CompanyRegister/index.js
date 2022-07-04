@@ -38,6 +38,14 @@ const CompanyRegister = () => {
       onChange: e => setRegData(current => ({ ...current, name: e.target.value }))
     },
     {
+      title: "Address",
+      name: "address",
+      type: "text",
+      required: true,
+      value: regData.address,
+      onChange: e => setRegData(current => ({ ...current, address: e.target.value }))
+    },
+    {
       title: "Phone No",
       name: "phone",
       type: "text",
@@ -45,6 +53,14 @@ const CompanyRegister = () => {
       required: true,
       value: regData.phone,
       onChange: e => setRegData(current => ({ ...current, phone: e.target.value }))
+    },
+    {
+      title: "About Company",
+      name: "about",
+      type: "textarea",
+      required: true,
+      value: regData.about,
+      onChange: e => setRegData(current => ({ ...current, about: e.target.value }))
     },
     {
       title: "Password",
