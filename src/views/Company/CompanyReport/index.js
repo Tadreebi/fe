@@ -1,25 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import CompanyReportAPI from 'src/api/CompanyReport';
 import TemplatePage from '../../templatePage';
 import reportsDemoData from './demoData';
 
 const CompanyReports = () => {
-  const [reportsList, setReportsList] = useState([...reportsDemoData]);
+  const [reportsList, setReportsList] = useState([]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+  
+  const callData = async () => {
+    setLoading(true);
 
+    await CompanyReportAPI.getAllReports()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setReportsList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   const company = [
     { id: 1, name: "Socium" },
     { id: 2, name: "ASAC'" },
   ];
 
+  useEffect(() => {
+    callData();
+  }, []);
+
+
+
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Report Title",
       required: true,
-      value: report.title, // should match the property name in the backend model
+      value: report.title,
       onChange: e => setReport(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
     },
     {
@@ -30,7 +53,7 @@ const CompanyReports = () => {
       required: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, student: e.target.value })),
-      // options: students.map(student => ({ title: student.name, value: student.id }))
+
     },
     {
       title: "company",
@@ -125,25 +148,58 @@ const CompanyReports = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setReportsList(current => [...current, { ...report, id: current.length }]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => { // Async
+    setLoading(true);
+
+    await CompanyReportAPI.createReport(report)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setReport({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setReportsList(current => [...current.filter(rep => rep.id !== report.id), report]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => { // Async
+    setLoading(true);
+
+    await CompanyReportAPI.updateReport(report.id, report)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setReport({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setReportsList(current => [...current.filter(rep => rep.id !== report.id)]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => { // Async
+    setLoading(true);
+
+    await CompanyReportAPI.deleteReport(report.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setReport({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const statisticsData = [
@@ -330,14 +386,15 @@ const CompanyReports = () => {
       <TemplatePage
         pageTitle={"Company Reports"}
         pageDescrbition={"For company to submit periodical & final reports to university supervisor"}
-        statisticsData={statisticsData} // New
-        chartsData={chartsData} // New
+        loading={loading}
+        statisticsData={statisticsData}
+        chartsData={chartsData}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Company Reports List"}
-        tableColumns={tableColumns} // New
-        tableRowDetails={true} // New
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={reportsList}
         onActionSelection={onActionSelection}
         currentAction={action}
