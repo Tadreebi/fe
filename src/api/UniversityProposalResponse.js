@@ -1,37 +1,37 @@
 import api from ".";
 
 const path = "university/proposals-response/"; // To EXACTLY MATCH the relevant URL in BE file of "tadreebi/urls.py"
-const ProposalsPath = 'students/proposals/'
+
 // List all urls of BE's "app/urls/StudentReport.py"
 
 //// Reports
-const getAllProposals = params => { // Don't forget to export it in the bottom of this file
+const getAllResponses = params => { // Don't forget to export it in the bottom of this file
   return api.get(`${path}`, { params }); // To EXACTLY MATCH the relevant URL in BE file of "app/urls/StudentReport.py"
 };
 
-const getProposal = id => {
+const getResponse = id => {
   return api.get(`${path}${id}`);
 };
 
-const createProposal = data => {
+const createResponse = data => {
   return api.post(`${path}create/`, data);
 };
 
-const updateProposal = (id, data) => {
+const updateResponse = (id, data) => {
   return api.put(`${path}update/${id}`, data);
 };
 
-const deleteProposal = id => {
+const deleteResponse = id => {
   return api.delete(`${path}delete/${id}`);
 };
 
 
 
 export default {
-  getAllProposals,
-  getProposal,
-  createProposal,
-  updateProposal,
-  deleteProposal,
+  getAllResponses,
+  getResponse,
+  createResponse,
+  updateResponse,
+  deleteResponse,
 
 };

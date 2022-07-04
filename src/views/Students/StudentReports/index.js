@@ -4,7 +4,7 @@ import TemplatePage from '../../templatePage';
 import reportsDemoData from './demoData';
 
 const StudentReports = () => {
-  const [reportsList, setReportsList] = useState([...reportsDemoData]);
+  const [reportsList, setReportsList] = useState([]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false); // New
