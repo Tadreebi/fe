@@ -40,6 +40,12 @@ const _nav = [
       },
       {
         component: NavItem,
+        name: 'Experiences',
+        to: '/experiences-posts',
+        icon: <Icon icon={faFilePen} className="px-1" />,
+      },
+      {
+        component: NavItem,
         name: 'Student Application',
         to: '/students/application',
         icon: <Icon icon={faFilePen} className="px-1" />,
