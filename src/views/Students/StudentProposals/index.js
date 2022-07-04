@@ -1,12 +1,31 @@
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 import poposalsDemoData from './demoData';
 import TemplatePage from '../../templatePage'
+import StudentProposalAPI from 'src/api/StudentProposal';
+
 
 
 const StudentProposals = () => {
-  const [proposals, setproposals] = useState([...poposalsDemoData]);
+  const [proposals, setproposals] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false); // New
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentProposalAPI.getAllProposals() // Call the relevant api call
+      .then(res => {
+        console.log("Called Data", res.data);
+        setproposals(res.data); // Assign the response data to proper state
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const students = [
     { id: 1, name: "Emad" },
@@ -30,6 +49,10 @@ const StudentProposals = () => {
     { id: 4, name: "Raghad Company" },
     { id: 5, name: "Suhaib Company" },
   ];
+
+  useEffect(() => { // Create UseEffect
+    callData();
+  }, []);
 
   const inputs = [
     {
@@ -113,25 +136,58 @@ const StudentProposals = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setproposals(current => [...current, { ...proposal, id: current.length }]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => { // Async
+    setLoading(true);
+
+    await StudentProposalAPI.createProposal(proposal) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setproposal({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setproposals(current => [...current.filter(pro => pro.id !== proposal.id), proposal]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => { // Async
+    setLoading(true);
+
+    await StudentProposalAPI.updateProposal(proposal.id, proposal) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setproposal({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setproposals(current => [...current.filter(pro => pro.id !== proposal.id)]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => { // Async
+    setLoading(true);
+
+    await StudentProposalAPI.deleteProposal(proposal.id) // Call the relevant api call
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setproposal({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const chartsData = [
@@ -245,6 +301,7 @@ const StudentProposals = () => {
         formTitle={"Form"}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        loading={loading}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}

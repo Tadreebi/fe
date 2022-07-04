@@ -98,7 +98,7 @@ const length = count => {
   }
 };
 
-const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction }) => {
+const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction, loading }) => {
 
   const submitTextDecider = () => {
     switch (currentAction) {
@@ -140,12 +140,12 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
           <Col xs={12} >
             <ButtonGroup role="group" style={{ float: 'right' }}>
               {onReset && (
-                <Button onClick={onReset} color='warning' className='text-white'>
+                <Button onClick={onReset} color='warning' className='text-white' disabled={loading}>
                   <Icon icon={faClockRotateLeft} /> Reset
                 </Button>
               )}
               {currentAction !== "view" && (
-                <Button type="submit" color='success' className='text-white'>
+                <Button type="submit" color='success' className='text-white' disabled={loading}>
                   <Icon icon={submitIconDecider()} /> {SubmitText || submitTextDecider()}
                 </Button>
               )}

@@ -1,13 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import CompanyAppResponseAPI from 'src/api/CompanyAppResponse';
 import applicationData from './applicationData';
 import TemplatePage from '../../templatePage'
 
 
 const StudentApplication = () => {
-  const [applicationsList, setApplicationsList] = useState([...applicationData]);
+  const [applicationsList, setApplicationsList] = useState([]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
 
+  const callData = async () => {
+    setLoading(true);
+
+    await CompanyAppResponseAPI.getAllAppResponses()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setApplicationsList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   const students = [
     { id: 1, name: "Emad" },
     { id: 2, name: "Ghaida'" },
@@ -22,6 +39,12 @@ const StudentApplication = () => {
     { id: 4, name: "Amazon" },
     { id: 5, name: "Google" },
   ];
+
+
+  useEffect(() => { // Create UseEffect
+    callData();
+  }, []);
+
   const inputs = [
     {
       title: "Student",
@@ -96,7 +119,7 @@ const StudentApplication = () => {
       disabled: true
     },
     {
-      title: "Report Remarks",
+      title: "Remarks",
       name: "remarks",
       type: "textarea",
       fullwidth: true,
@@ -137,26 +160,60 @@ const StudentApplication = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setApplicationsList(current => [...current, { ...application, id: current.length }]);
-    setApplication({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => { // Async
+    setLoading(true);
+
+    await CompanyAppResponseAPI.createAppResponse(application) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setApplication({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setApplicationsList(current => [...current.filter(rep => rep.id !== application.id), application]);
-    setApplication({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => { // Async
+    setLoading(true);
+
+    await CompanyAppResponseAPI.updateAppResponse(application.id, application) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setApplication({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setApplicationsList(current => [...current.filter(rep => rep.id !== application.id)]);
-    setApplication({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => { // Async
+    setLoading(true);
+
+    await CompanyAppResponseAPI.deleteAppResponse(application.id) // Call the relevant api call
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setApplication({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
+
   const statisticsData = [
     {
       title: "Internship Type",
@@ -226,18 +283,8 @@ const StudentApplication = () => {
       sortable: true
     },
     {
-      name: "Internship",
-      selector: row => row.internship,
-      sortable: true
-    },
-    {
-      name: "Preferable Internship Type",
-      selector: row => row.location,
-      sortable: true
-    },
-    {
-      name: "Internship Hours",
-      selector: row => row.type,
+      name: "Remarks",
+      selector: row => row.remarks,
       sortable: true
     },
     {
@@ -252,6 +299,7 @@ const StudentApplication = () => {
       <TemplatePage
         pageTitle={"Student Applications"}
         pageDescrbition={"For student to apply for a specific internship posted by the company"}
+        loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
         formTitle={"CRUD Applications"}
