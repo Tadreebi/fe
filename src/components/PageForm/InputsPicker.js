@@ -1,5 +1,5 @@
 import { Col, Row } from '../Root/Grid';
-import { Boolean, CheckList, Input, Option, Select, StarRating, Textarea } from '../Root/InputFields';
+import { Boolean, CheckList, Input, List, Option, Select, StarRating, Textarea } from '../Root/InputFields';
 import Label from '../Root/Label';
 
 
@@ -14,7 +14,7 @@ const length = count => {
 const InputsPicker = ({ inputs = inputsDemo, currentAction }) => {
   return (
     <>
-      {inputs?.map(({ fullwidth, double, title, required, type, name, size, value, onChange, disabled, options, placeholder, ...rest }, i) => (
+      {inputs?.map(({ fullwidth, double, title, required, type, name, size, value, onChange, disabled, options, placeholder, fields, ...rest }, i) => (
         <Col md={fullwidth ? 12 : double ? 8 : length(inputs.length)} className="py-3" key={i}>
           <Label>
             {title || "Title"} {required ? <span className='text-danger'>*</span> : ""}
@@ -87,6 +87,12 @@ const InputsPicker = ({ inputs = inputsDemo, currentAction }) => {
               onChange={onChange}
               disabled={disabled || currentAction === "view" || currentAction === "delete"}
               {...rest}
+            />
+          ) : type === "list" ? (
+            <List
+              title={title}
+              fields={fields}
+              currentAction={currentAction}
             />
           ) : (
             <Input

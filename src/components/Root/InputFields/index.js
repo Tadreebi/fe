@@ -4,6 +4,7 @@ import Input from "./Input";
 import { Option, Select } from "./Select";
 import StarRating from "./StarRating";
 import Textarea from "./Textarea";
+import List from "./List";
 
 export {
   Boolean,
@@ -12,6 +13,7 @@ export {
   Option,
   Select,
   StarRating,
-  Textarea
+  Textarea,
+  List
 };
 

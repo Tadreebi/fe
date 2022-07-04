@@ -5,6 +5,7 @@ import reportsDemoData from './demoData';
 
 const StudentReports = () => {
   const [reportsList, setReportsList] = useState([...reportsDemoData]);
+  const [skills, setSkills] = useState([]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false); // New
@@ -128,6 +129,38 @@ const StudentReports = () => {
       required: true,
       value: report.accepted,
       disabled: true
+    },
+    {
+      title: "Skills",
+      type: "list",
+      fullwidth: true,
+      value: skills,
+      setValue: setSkills,
+      fields: [
+        {
+          title: "Title",
+          name: "title",
+          type: "text",
+          required: true,
+          onChange: e => setReport(current => ({ ...current, title: e.target.value }))
+        },
+        {
+          title: "Details",
+          name: "details",
+          type: "textarea",
+          required: true,
+          onChange: e => setReport(current => ({ ...current, details: e.target.value }))
+        },
+        {
+          title: "Include in Public Profile?",
+          name: "profile",
+          type: "switch",
+          fullwidth: true,
+          required: true,
+          disabled: true
+        },
+      ],
+
     },
   ];
 
@@ -371,6 +404,11 @@ const StudentReports = () => {
     {
       name: "Student",
       selector: row => row.student,
+      sortable: true
+    },
+    {
+      name: "Report Type",
+      selector: row => row.type,
       sortable: true
     },
     {
