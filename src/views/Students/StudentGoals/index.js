@@ -1,11 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import StudentGoalAPI from 'src/api/StudentGoal';
 import TemplatePage from '../../templatePage';
 import goalsDemoData from './demoData';
 
 const StudentGoals = () => {
-  const [goals, setGoals] = useState(goalsDemoData || []);
+  const [goals, setGoals] = useState([]);
   const [goal, setGoal] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentGoalAPI.getAllGoals()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setGoals(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const students = [
     { id: 1, name: "Emad" },
@@ -67,25 +89,58 @@ const StudentGoals = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setGoals(current => [...current, { ...goal, id: current.length }]);
-    setGoal({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => { // Async
+    setLoading(true);
+
+    await StudentGoalAPI.createGoal(goal) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setGoal({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setGoals(current => [...current.filter(rep => rep.id !== goal.id), goal]);
-    setGoal({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => { // Async
+    setLoading(true);
+
+    await StudentGoalAPI.updateGoal(goal.id, goal) // Call the relevant api call
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setGoal({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setGoals(current => [...current.filter(rep => rep.id !== goal.id)]);
-    setGoal({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => { // Async
+    setLoading(true);
+
+    await StudentGoalAPI.deleteGoal(goal.id) // Call the relevant api call
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setGoal({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const statisticsData = [
@@ -136,6 +191,7 @@ const StudentGoals = () => {
       <TemplatePage
         pageTitle={"Student Goals"}
         pageDescrbition={"For student to add their goals"}
+        loading={loading} // New
         statisticsData={statisticsData}
         formTitle={"CRUD Goals"}
         formInputs={inputs}
