@@ -24,7 +24,7 @@ const StudentReports = () => {
         setLoading(false);
       });
   };
-
+// 
   const students = [
     { id: 1, name: "Emad" },
     { id: 2, name: "Ghaida'" },
@@ -72,9 +72,9 @@ const StudentReports = () => {
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
       options: [
-        { title: "Weekly Report", value: 1 },
-        { title: "Monthly Report", value: 2 },
-        { title: "Final Report", value: 3 }
+        { title: "Weekly Report", value: "Weekly" },
+        { title: "Monthly Report", value: "Monthly" },
+        { title: "Final Report", value: "Final" }
       ]
     },
     {
