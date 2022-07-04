@@ -9,6 +9,8 @@ const UniversityRegister = lazy(() => import('../views/Public/Auth/UniversityReg
 const CompanyRegister = lazy(() => import('../views/Public/Auth/CompanyRegister'));
 const StudentProfile = lazy(() => import('src/views/Public/StudentProfile'));
 const OpportunityPosts = lazy(() => import('src/views/Public/OpportunityPosts'));
+const ExperiencesList = lazy(() => import('src/views/Public/Experiences'));
+
 
 // Errors
 const Page404 = lazy(() => import('../views/Errors/404'));
@@ -21,6 +23,7 @@ const routes = [
   { path: '/login', name: 'Home', element: Login },
   { path: '/profile', name: 'Profile', element: StudentProfile },
   { path: '/posts', name: 'Opportunity Posts', element: OpportunityPosts },
+  { path: '/posts', name: 'Experiences Posts', element: ExperiencesList },
   { path: '/password/reset', name: 'Reset Password', element: PasswordReset },
   { path: '/password/change', name: 'Change Password', element: PasswordChange },
   { path: '/register/student', name: 'Student Register', element: StudentRegister },
