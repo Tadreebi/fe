@@ -94,6 +94,7 @@ const StudentExperience = () => {
       value: experience.get_hired,
       onChange: e => setExperience(current => ({ ...current, get_hired: e.target.value }))
     },
+    
     {
       title: "more",
       name: "more",
