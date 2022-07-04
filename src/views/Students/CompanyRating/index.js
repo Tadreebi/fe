@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import CompanyRatingAPI from 'src/api/CompanyRating';
-import TemplatePage from '../../templatePage'
-import demoData from './demoData'
+import TemplatePage from '../../templatePage';
 
 
 const CompanyRating = () => {
-  const [scores, setScores] = useState(demoData);
+  const [scores, setScores] = useState([]);
   const [score, setScore] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
