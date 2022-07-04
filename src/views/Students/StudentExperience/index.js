@@ -27,7 +27,7 @@ const StudentExperience = () => {
   };
 
   const students = [
-    { id: 1, name: "Emad" },
+    { id: 2, name: 2 },
     { id: 2, name: "Ghaida'" },
     { id: 3, name: "Moayad" },
     { id: 4, name: "Raghad" },
@@ -35,7 +35,7 @@ const StudentExperience = () => {
   ];
 
   const companies = [
-    { id: 1, name: "Emad company" },
+    { id: 3, name:3 },
     { id: 2, name: "Ghaida' company" },
     { id: 3, name: "Moayad company" },
     { id: 4, name: "Raghad company" },

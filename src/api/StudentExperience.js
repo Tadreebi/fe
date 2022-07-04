@@ -14,6 +14,7 @@ const getExperience = id => {
 };
 
 const createExperience = data => {
+  console.log(data)
   return api.post(`${path}create/`, data);
 };
 
