@@ -1,12 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import UniversityTipsAPI from 'src/api/UniversityTip';
 import TemplatePage from '../../templatePage'
 import detailsDemoData from "./demoData"
 
 
 const UniversityTips = () => {
-  const [tips, setTips] = useState(detailsDemoData);
+  const [tips, setTipsList] = useState([]);
   const [tip, setTip] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await UniversityTipsAPI.getAllTips()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setTipsList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const topics = [
     { id: 1, name: "Motivational" },
@@ -23,6 +41,10 @@ const UniversityTips = () => {
     { id: 5, name: "Event" },
 
   ];
+  useEffect(() => { // Create UseEffect
+    callData();
+  }, []);
+
   const inputs = [
     {
       title: "Title",
@@ -85,25 +107,58 @@ const UniversityTips = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setTips(current => [...current, { ...tip, id: current.length }]);
-    setTip({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await UniversityTipsAPI.createTip(tip)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setTip({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setTips(current => [...current.filter(rep => rep.id !== tip.id), tip]);
-    setTip({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => {
+    setLoading(true);
+
+    await UniversityTipsAPI.updateTip(tip.id, tip)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setTip({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setTips(current => [...current.filter(rep => rep.id !== tip.id)]);
-    setTip({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await UniversityTipsAPI.deleteTip(tip.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setTip({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const tableColumns = [
@@ -129,6 +184,7 @@ const UniversityTips = () => {
       <TemplatePage
         pageTitle={"Student Tips"}
         pageDescrbition={"For companies to submit tips for students"}
+        loading={loading}
         formTitle={"CRUD Tips"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
