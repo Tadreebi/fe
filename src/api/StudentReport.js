@@ -1,28 +1,47 @@
 import api from ".";
 
-const path = "students/"; // To EXACTLY MATCH the relevant URL in BE file of "tadreebi/urls.py"
-
-// List all urls of BE's "app/urls/StudentReport.py"
+const path = "students/reports/";
 
 //// Reports
-const getAllReports = params => { // Don't forget to export it in the bottom of this file
-  return api.get(`${path}reports/`, { params }); // To EXACTLY MATCH the relevant URL in BE file of "app/urls/StudentReport.py"
+const getAllReports = params => {
+  return api.get(`${path}`, { params });
 };
 
 const getReport = id => {
-  return api.get(`${path}reports/${id}`);
+  return api.get(`${path}${id}`);
 };
 
 const createReport = data => {
-  return api.post(`${path}reports/create/`, data);
+  return api.post(`${path}create/`, data);
 };
 
 const updateReport = (id, data) => {
-  return api.put(`${path}reports/update/${id}`, data);
+  return api.put(`${path}update/${id}`, data);
 };
 
 const deleteReport = id => {
-  return api.delete(`${path}reports/delete/${id}`);
+  return api.delete(`${path}delete/${id}`);
+};
+
+//// Report Types
+const getAllReportTypes = params => {
+  return api.get(`${path}types/`, { params });
+};
+
+const getReportType = id => {
+  return api.get(`${path}types/${id}`);
+};
+
+const createReportType = data => {
+  return api.post(`${path}types/create/`, data);
+};
+
+const updateReportType = (id, data) => {
+  return api.put(`${path}types/update/${id}`, data);
+};
+
+const deleteReportType = id => {
+  return api.delete(`${path}types/delete/${id}`);
 };
 
 
@@ -91,12 +110,18 @@ const deleteAchievement = id => {
   return api.delete(`${path}achievements/delete/${id}`);
 };
 
+
 export default {
   getAllReports,
   getReport,
   createReport,
   updateReport,
   deleteReport,
+  getAllReportTypes,
+  getReportType,
+  createReportType,
+  updateReportType,
+  deleteReportType,
   getAllRemarks,
   getRemark,
   createRemark,

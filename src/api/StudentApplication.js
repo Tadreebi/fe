@@ -1,6 +1,6 @@
 import api from ".";
 
-const path = "opportunity-applications/"; 
+const path = "opportunity-applications/";
 
 //// Applications
 const getAllApplications = params => {
@@ -44,8 +44,6 @@ const updateResponse = (id, data) => {
 const deleteResponse = id => {
   return api.delete(`${path}responses/delete/${id}`);
 };
-
-
 
 
 export default {
