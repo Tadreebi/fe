@@ -1,15 +1,33 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import ExperiencesDemoData from './demoData'
 import TemplatePage from '../../templatePage'
+import StudentExperienceAPI from 'src/api/StudentExperience';
 
 
 const StudentExperience = () => {
-  const [experiences, setExperiences] = useState([...ExperiencesDemoData]);
+  const [experiences, setExperiences] = useState([]);
   const [experience, setExperience] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false); // New
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentExperienceAPI.getAllExperience() // Call the relevant api call
+      .then(res => {
+        console.log("Called Data", res.data);
+        setExperiences(res.data); // Assign the response data to proper state
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const students = [
-    { id: 1, name: "Emad" },
+    { id: 2, name: 2 },
     { id: 2, name: "Ghaida'" },
     { id: 3, name: "Moayad" },
     { id: 4, name: "Raghad" },
@@ -17,22 +35,18 @@ const StudentExperience = () => {
   ];
 
   const companies = [
-    { id: 1, name: "Emad company" },
+    { id: 3, name:3 },
     { id: 2, name: "Ghaida' company" },
     { id: 3, name: "Moayad company" },
     { id: 4, name: "Raghad company" },
     { id: 5, name: "Suhaib company" },
   ];
+
+  useEffect(() => { // Create UseEffect
+    callData();
+  }, []);
+
   const inputs = [
-    {
-      title: "Title",
-      name: "Experience",
-      type: "text",
-      placeholder: "Experience Title",
-      required: true,
-      value: experience.title,
-      onChange: e => setExperience(current => ({ ...current, title: e.target.value }))
-    },
     {
       title: "Student",
       name: "student",
@@ -80,6 +94,7 @@ const StudentExperience = () => {
       value: experience.get_hired,
       onChange: e => setExperience(current => ({ ...current, get_hired: e.target.value }))
     },
+    
     {
       title: "more",
       name: "more",
@@ -113,33 +128,61 @@ const StudentExperience = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setExperiences(current => [...current, { ...experience, id: current.length }]);
-    setExperience({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => { // Async
+    setLoading(true);
+
+    await StudentExperienceAPI.createExperience(experience) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setExperience({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setExperiences(current => [...current.filter(exp => exp.id !== experience.id), experience]);
-    setExperience({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => { // Async
+    setLoading(true);
+
+    await StudentExperienceAPI.updateExperience(experience.id, experience) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setExperience({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setExperiences(current => [...current.filter(exp => exp.id !== experience.id)]);
-    setExperience({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => { // Async
+    setLoading(true);
+
+    await StudentExperienceAPI.deleteExperience(experience.id) // Call the relevant api call
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setExperience({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const tableColumns = [
-    {
-      name: "Title",
-      selector: row => row.title,
-      sortable: true
-    },
     {
       name: "Student",
       selector: row => row.student,
@@ -207,6 +250,7 @@ const StudentExperience = () => {
       <TemplatePage
         pageTitle={"Student Experiences"}
         pageDescrbition={"student Experience during an internship"}
+        loading={loading}
         statisticsData={statisticsData}
         formTitle={"CRUD Experiences"}
         formInputs={inputs}

@@ -13,6 +13,8 @@ const CompanyRating = lazy(() => import('../views/Students/CompanyRating'));
 const StudentProposals = lazy(() => import('../views/Students/StudentProposals'));
 const StudentExperiences = lazy(() => import('../views/Students/StudentExperience'));
 const OpportunityPostsList = lazy(() => import('src/views/Public/OpportunityPosts'));
+const ExperiencesList = lazy(() => import('src/views/Public/Experiences'));
+
 
 //// University
 const Faculty = lazy(() => import('../views/University/Faculty'));
@@ -45,8 +47,9 @@ const routes = [
   { path: '/students/application', name: 'Student Application', element: StudentApplication },
   { path: '/students/company-rating', name: 'Company Rating', element: CompanyRating },
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
-  { path: '/students/experiences', name: 'Student Reports', element: StudentExperiences },
+  { path: '/students/experiences', name: 'Student Experiences', element: StudentExperiences },
   { path: '/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPostsList },
+  { path: '/experiences-posts', name: 'Experiences Posts', element: ExperiencesList },
 
   //// Univerity
   { path: '/staff/tips', name: 'University Tips', element: UniversityTips },
