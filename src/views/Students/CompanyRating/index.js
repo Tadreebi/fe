@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import CompanyRatingAPI from 'src/api/CompanyRating';
 import TemplatePage from '../../templatePage'
 import demoData from './demoData'
 
@@ -7,6 +8,27 @@ const CompanyRating = () => {
   const [scores, setScores] = useState(demoData);
   const [score, setScore] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await CompanyRatingAPI.getAllScores()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setScores(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const inputs = [
     {
@@ -148,25 +170,58 @@ const CompanyRating = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setScores(current => [...current, { ...score, id: current.length }]);
-    setScore({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await CompanyRatingAPI.createScore(score)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setScore({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setScores(current => [...current.filter(rep => rep.id !== score.id), score]);
-    setScore({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => { // Async
+    setLoading(true);
+
+    await CompanyRatingAPI.updateScore(score.id, score)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setScore({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setScores(current => [...current.filter(rep => rep.id !== score.id)]);
-    setScore({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => { // Async
+    setLoading(true);
+
+    await CompanyRatingAPI.deleteScore(score.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setScore({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const tableColumns = [
@@ -207,13 +262,14 @@ const CompanyRating = () => {
       <TemplatePage
         pageTitle={"Company Rating"}
         pageDescrbition={"Here you can rate the training program and the proposing company."}
+        loading={loading}
         formTitle={"Answer the below questions please!"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"company rating restlts"}
-        tableColumns={tableColumns} // New
-        tableRowDetails={true} // New
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={scores}
         onActionSelection={onActionSelection}
         currentAction={action}
