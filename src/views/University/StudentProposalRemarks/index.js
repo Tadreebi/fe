@@ -1,13 +1,51 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import poposalsDemoData from './demoData';
 import TemplatePage from '../../templatePage'
+import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
+import StudentProposalAPI from 'src/api/StudentProposal';
 
 
 const StudentProposals = () => {
-  const [proposals, setproposals] = useState([...poposalsDemoData]);
+  const [proposals, setproposals] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false); // New
+  const [ProposalsResponses , setProposalsResponses]= useState([]);
+  const [Response, setResponse] = useState({});
+  let alldata=[]
 
+
+  const callData = async () => {
+    setLoading(true);
+
+    await UniversityProposalResponseAPI.getAllResponses() // Call the relevant api call
+      .then(res => {
+        console.log("Called Data", res.data);
+        setProposalsResponses(res.data); // Assign the response data to proper state
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const callproposalsData = async () => {
+    setLoading(true);
+
+    await StudentProposalAPI.getAllProposals() // Call the relevant api call
+      .then(res => {
+        console.log("Called proposal Data", res.data);
+        setproposals(res.data); // Assign the response data to proper state
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   const students = [
     { id: 1, name: "Emad" },
     { id: 2, name: "Ghaida'" },
@@ -30,6 +68,15 @@ const StudentProposals = () => {
     { id: 4, name: "Raghad Company" },
     { id: 5, name: "Suhaib Company" },
   ];
+
+  useEffect(() => { // Create UseEffect
+    callData();
+  }, []);
+
+  useEffect(() => { // Create UseEffect
+    callproposalsData();
+  }, []);
+
 
   const inputs = [
     {
@@ -74,17 +121,16 @@ const StudentProposals = () => {
       type: "textarea",
       fullwidth: true,
       required: true,
-      value: proposal.remarks,
-      onChange: e => setproposal(current => ({ ...current, remarks: e.target.value }))
+      value: Response.remarks,
+      onChange: e => setResponse(current => ({ ...current, remarks: e.target.value }))
     },
     {
       title: "Accepted",
       name: "accepted",
       type: "switch",
       fullwidth: true,
-      required: true,
-      value: proposal.accepted,
-      onChange: e => setproposal(current => ({ ...current, accepted: e.target.checked }))
+      value: Response.accepted,
+      onChange: e => setResponse(current => ({ ...current, accepted: e.target.checked }))
     },
   ];
 
@@ -100,7 +146,7 @@ const StudentProposals = () => {
   };
 
   const onFormReset = () => {
-    setproposal({})
+    setResponse({})
     setAction("create");
     console.log("Form was reset")
   };
@@ -110,25 +156,58 @@ const StudentProposals = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setproposals(current => [...current, { ...proposal, id: current.length }]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => { // Async
+    setLoading(true);
+
+    await UniversityProposalResponseAPI.createResponse(Response) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setResponse({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setproposals(current => [...current.filter(pro => pro.id !== proposal.id), proposal]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataEdit = async () => { // Async
+    setLoading(true);
+
+    await UniversityProposalResponseAPI.updateResponse(Response.id, Response) // Call the relevant api call
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setResponse({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setproposals(current => [...current.filter(pro => pro.id !== proposal.id)]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => { // Async
+    setLoading(true);
+
+    await UniversityProposalResponseAPI.deleteResponse(Response.id) // Call the relevant api call
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setResponse({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const chartsData = [
@@ -242,12 +321,13 @@ const StudentProposals = () => {
         pageDescrbition={"for university to remark student submitted proposal"}
         formTitle={"Form"}
         statisticsData={statisticsData}
+        loading={loading} // New
         chartsData={chartsData}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Proposals List"}
-        tableData={proposals}
+        tableData= {proposals.map(data => ({...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal)}))}
         tableColumns={tableColumns}
         tableRowDetails={true}
         onActionSelection={onActionSelection}
