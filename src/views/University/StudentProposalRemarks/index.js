@@ -1,13 +1,50 @@
 import { useState } from 'react'
 import poposalsDemoData from './demoData';
 import TemplatePage from '../../templatePage'
+import UniversityProposalResponse from 'src/api/UniversityProposalResponse';
+import StudentProposalAPI from 'src/api/StudentProposal';
 
 
 const StudentProposals = () => {
   const [proposals, setproposals] = useState([...poposalsDemoData]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false); // New
+  const [ProposalsResponse , setProposalsResponse]= useState([]);
+  const [Response, setResponse] = useState({});
 
+
+  // const callData = async () => {
+  //   setLoading(true);
+
+  //   await UniversityProposalResponse.getAllProposals() // Call the relevant api call
+  //     .then(res => {
+  //       console.log("Called Data", res.data);
+  //       setproposals(res.data); // Assign the response data to proper state
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // };
+
+  // const callproposalsData = async () => {
+  //   setLoading(true);
+
+  //   await StudentProposalAPI.getAllProposals() // Call the relevant api call
+  //     .then(res => {
+  //       console.log("Called Data", res.data);
+  //       setproposals(res.data); // Assign the response data to proper state
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // };
   const students = [
     { id: 1, name: "Emad" },
     { id: 2, name: "Ghaida'" },
@@ -30,6 +67,11 @@ const StudentProposals = () => {
     { id: 4, name: "Raghad Company" },
     { id: 5, name: "Suhaib Company" },
   ];
+
+  // useEffect(() => { // Create UseEffect
+  //   callData();
+  // }, []);
+
 
   const inputs = [
     {
