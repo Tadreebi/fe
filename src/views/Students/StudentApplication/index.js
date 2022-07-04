@@ -6,7 +6,7 @@ import TemplatePage from '../../templatePage'
 
 
 const StudentApplication = () => {
-  const [applicationsList, setApplicationsList] = useState([...applicationData]);
+  const [applicationsList, setApplicationsList] = useState([]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
@@ -34,6 +34,7 @@ const StudentApplication = () => {
     { id: 4, name: "Raghad" },
     { id: 5, name: "Suhaib" },
   ];
+
   const internships = [
     { id: 1, name: "ASAC" },
     { id: 2, name: "CSS" },
