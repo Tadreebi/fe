@@ -104,10 +104,11 @@ const StudentApplication = () => {
     {
       title: "Resume Link",
       name: "resume",
-      type: "text",
+      type: "url",
       fullwidth: true,
       required: true,
       value: application.resume,
+      onChange: e => setApplication(current => ({ ...current, resume: e.target.value }))
     },
   ];
 

@@ -38,8 +38,8 @@ const CompanyRating = () => {
       value: score.company,
       onChange: e => setScore(current => ({ ...current, company: e.target.value })),
       options: [
-        { title: "Socium", value: 1 },
-        { title: "ASAC", value: 2 },
+        { title: "Socium", value: 3 },
+        { title: "ASAC", value: 4 },
 
       ]
     },
@@ -176,10 +176,14 @@ const CompanyRating = () => {
     setAction(action);
   };
 
+  const calculateScore = () => {
+    return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5) % 10
+  }
+
   const onDataCreate = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.createScore({ ...score, score: (score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5 })
+    await CompanyRatingAPI.createScore({ ...score, score: calculateScore() })
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -197,7 +201,7 @@ const CompanyRating = () => {
   const onDataUpdate = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.updateScore(score.id, { ...score, score: (score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5 })
+    await CompanyRatingAPI.updateScore(score.id, { ...score, score: calculateScore() })
       .then(res => {
         console.log("Data Updated Successfully");
         callData();

@@ -31,8 +31,8 @@ const StudentExperience = () => {
   ];
 
   const companies = [
-    { id: 1, name: "Moayad company" },
-    { id: 2, name: "Suhaib company" },
+    { id: 3, name: "Moayad company" },
+    { id: 4, name: "Suhaib company" },
   ];
 
   useEffect(() => {

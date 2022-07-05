@@ -103,9 +103,9 @@ const opportunityPosts = () => {
       onChange: (e) =>
         setPost(current => ({ ...current, education: e.target.value })),
       options: [
-        { title: "Bachelors", value: "Bachelors" },
-        { title: "Masters", value: "Masters" },
-        { title: "Phd", value: "Phd" },
+        { title: "Bachelors", value: "BACHELORS" },
+        { title: "Masters", value: "MASTERS" },
+        { title: "Phd", value: "PHD" },
       ],
     },
     {

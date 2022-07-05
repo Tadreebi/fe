@@ -32,7 +32,7 @@ const StudentProposals = () => {
 
   const companies = [
     { id: 1, name: "Emad Company" },
-    { id: 2, name: "Raghad Company" },
+    { id: 4, name: "Raghad Company" },
   ];
 
   const internshipApps = [

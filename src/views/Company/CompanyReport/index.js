@@ -25,8 +25,8 @@ const CompanyReports = () => {
   };
 
   const companies = [
-    { id: 1, name: "Socium" },
-    { id: 2, name: "ASAC'" },
+    { id: 2, name: "Socium" },
+    { id: 4, name: "ASAC'" },
   ];
 
   const students = [
@@ -62,7 +62,7 @@ const CompanyReports = () => {
     {
       title: "company",
       name: "company",
-      type: "textarea",
+      type: "select",
       double: true,
       required: true,
       value: report.company,
@@ -77,9 +77,9 @@ const CompanyReports = () => {
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
       options: [
-        { title: "Periodical Report", value: "Periodical" },
-        { title: "Complain Report", value: "Complain" },
-        { title: "Final Report", value: "Final" }
+        { title: "Periodical Report", value: "Periodical Report" },
+        { title: "Complain Report", value: "Complain Report" },
+        { title: "Final Report", value: "Final Report" }
       ]
     },
     {
