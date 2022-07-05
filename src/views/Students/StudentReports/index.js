@@ -76,6 +76,7 @@ const StudentReports = () => {
       name: "endDate",
       type: "date",
       required: true,
+      double: true,
       value: report.endDate,
       onChange: e => setReport(current => ({ ...current, endDate: e.target.value }))
     },
@@ -371,10 +372,11 @@ const StudentReports = () => {
     <>
       <TemplatePage
         pageTitle={"Student Reports"}
-        pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
+        pageDescrbition={"Students to submit periodical & final reports to university supervisor"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        formTitle={"CRUD Reports"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}

@@ -44,7 +44,6 @@ const StudentExperience = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: experience.student,
       onChange: e => setExperience(current => ({ ...current, student: e.target.value })),
@@ -240,7 +239,7 @@ const StudentExperience = () => {
     <>
       <TemplatePage
         pageTitle={"Student Experiences"}
-        pageDescrbition={"student Experience during an internship"}
+        pageDescrbition={"Students to share own experiences during an internship"}
         loading={loading}
         statisticsData={statisticsData}
         formTitle={"CRUD Experiences"}

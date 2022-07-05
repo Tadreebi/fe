@@ -273,11 +273,11 @@ const CompanyRating = () => {
         pageTitle={"Company Rating"}
         pageDescrbition={"Here you can rate the training program and the proposing company."}
         loading={loading}
-        formTitle={"Answer the below questions please!"}
+        formTitle={"Rating Form"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"company rating restlts"}
+        tableTitle={"Submitted Ratings List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
         tableData={scores}

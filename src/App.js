@@ -17,7 +17,7 @@ const PublicLayout = lazy(() => import('./Layouts/PublicLayout'));
 const Landing = lazy(() => import('./views/Public/Landing'));
 
 function App() {
-  const { JWT } = useSelector(_ => _);
+  const JWT = "useSelector(_ => _)";
 
   return (
     <BrowserRouter>

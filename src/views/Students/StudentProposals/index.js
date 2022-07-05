@@ -3,7 +3,7 @@ import StudentProposalAPI from 'src/api/StudentProposal';
 import TemplatePage from '../..';
 
 
-const StudentProposals = () => {
+const StudentProposalRemarks = () => {
   const [proposals, setproposals] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
@@ -49,7 +49,6 @@ const StudentProposals = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: proposal.student,
       onChange: e => setproposal(current => ({ ...current, student: e.target.value })),
@@ -59,7 +58,6 @@ const StudentProposals = () => {
       title: "Company",
       name: "company",
       type: "select",
-      double: true,
       required: true,
       value: proposal.company,
       onChange: e => setproposal(current => ({ ...current, company: e.target.value })),
@@ -69,7 +67,6 @@ const StudentProposals = () => {
       title: "Internship",
       name: "internship_application",
       type: "select",
-      double: true,
       required: true,
       value: proposal.internship_application,
       onChange: e => setproposal(current => ({ ...current, internship_application: e.target.value })),
@@ -272,12 +269,12 @@ const StudentProposals = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Proposals Remarks"}
-        pageDescrbition={"Students to submit and university to approve proposed internship vacancies to fulfill"}
-        formTitle={"Form"}
+        pageTitle={"Student Proposals"}
+        pageDescrbition={"Students to submit proposed internship vacancies to fulfill to university supervisor"}
         statisticsData={statisticsData}
         chartsData={chartsData}
         loading={loading}
+        formTitle={"CRUD Proposals"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
@@ -295,4 +292,4 @@ const StudentProposals = () => {
   )
 }
 
-export default StudentProposals
+export default StudentProposalRemarks

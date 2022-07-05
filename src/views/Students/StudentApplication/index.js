@@ -44,24 +44,23 @@ const StudentApplication = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: application.student,
       onChange: e => setApplication(current => ({ ...current, student: e.target.value })),
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Internship",
+      title: "Internship Oppertunity",
       name: "internship",
       type: "select",
-      double: true,
       required: true,
+      double: true,
       value: application.internship,
       onChange: e => setApplication(current => ({ ...current, internship: e.target.value })),
       options: internships.map(internship => ({ title: internship.name, value: internship.id }))
     },
     {
-      title: "Internship Hours",
+      title: "Preferable Internship Hours",
       name: "type",
       type: "select",
       required: true,
@@ -277,7 +276,7 @@ const StudentApplication = () => {
     <>
       <TemplatePage
         pageTitle={"Student Applications"}
-        pageDescrbition={"For student to apply for a specific internship posted by the company"}
+        pageDescrbition={"Students to apply for specific internships posted by companies"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
