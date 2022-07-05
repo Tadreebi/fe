@@ -9,7 +9,7 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
-    const JWT = store.getState().user;
+    const JWT = store.getState().JWT;
     if (JWT) {
       config.headers["Authorization"] = `Bearer ${JWT}`;
     }
