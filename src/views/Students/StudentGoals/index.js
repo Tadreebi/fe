@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import StudentGoalsAPI from 'src/api/StudentGoals';
 import TemplatePage from '../../templatePage';
-import goalsDemoData from './demoData';
 
 const StudentGoals = () => {
-  const [goals, setGoalsList] = useState(goalsDemoData || []);
+  const [goals, setGoalsList] = useState([]);
   const [goal, setGoal] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);

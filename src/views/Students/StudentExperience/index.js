@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
-import ExperiencesDemoData from './demoData'
-import TemplatePage from '../../templatePage'
+import { useEffect, useState } from 'react';
 import StudentExperienceAPI from 'src/api/StudentExperience';
+import TemplatePage from '../../templatePage';
 
 
 const StudentExperience = () => {

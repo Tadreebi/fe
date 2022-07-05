@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import TemplatePage from '../../templatePage';
-// import feedbackDemoData from './demoData';
 import UniversityFeedbackAPI from 'src/api/UniversityFeedback';
 
 

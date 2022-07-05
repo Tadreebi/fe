@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import TemplatePage from '../../templatePage';
-import reportsDemoData from './demoData';
 
 const StudentReportRemarks = () => {
-  const [remarksList, setRemarksList] = useState([...reportsDemoData]);
+  const [remarksList, setRemarksList] = useState([]);
   const [remark, setRemark] = useState({});
   const [action, setAction] = useState("create");
 

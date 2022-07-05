@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport'; // Import API Calls
 import TemplatePage from '../../templatePage';
-import reportsDemoData from './demoData';
 
 const StudentReports = () => {
   const [reportsList, setReportsList] = useState([]);

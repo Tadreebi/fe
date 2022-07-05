@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import CompanyPostAPI from 'src/api/OpportunityPost';
 import TemplatePage from "../../templatePage";
-import postsDemoData from "./postsData";
 
 
 const opportunityPosts = () => {
-  const [postsList, setPostsList] = useState([...postsDemoData]);
+  const [postsList, setPostsList] = useState([]);
   const [post, setPost] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
