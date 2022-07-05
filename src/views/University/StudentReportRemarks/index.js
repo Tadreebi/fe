@@ -1,10 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TemplatePage from '../../templatePage';
+import StudentReportAPI from 'src/api/StudentReport';
 
 const StudentReportRemarks = () => {
   const [remarksList, setRemarksList] = useState([]);
   const [remark, setRemark] = useState({});
+  const [loading, setLoading] = useState(false);
   const [action, setAction] = useState("create");
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.getAllRemarks()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setRemarksList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const students = [
     { id: 1, name: "Moayad" },
@@ -318,6 +340,7 @@ const StudentReportRemarks = () => {
         pageDescrbition={"For university supervisor to remark submitted student reports"}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        loading={loading}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
