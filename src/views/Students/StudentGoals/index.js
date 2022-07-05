@@ -26,11 +26,8 @@ const StudentGoals = () => {
   };
 
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Raghad" },
+    { id: 2, name: "Suhaib" },
   ];
 
   useEffect(() => { // Create UseEffect
@@ -42,18 +39,26 @@ const StudentGoals = () => {
       title: "Title",
       name: "title",
       type: "text",
-      placeholder: "Goal Title",
       required: true,
       fullwidth: true,
       value: goal.title,
       onChange: e => setGoal(current => ({ ...current, title: e.target.value }))
     },
     {
+      title: "Student",
+      name: "student",
+      type: "select",
+      double: true,
+      required: true,
+      value: experience.student,
+      onChange: e => setExperience(current => ({ ...current, student: e.target.value })),
+      options: students.map(student => ({ title: student.name, value: student.id }))
+    },
+    {
       title: "Goal Description",
       name: "describtion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: goal.describtion,
       onChange: e => setGoal(current => ({ ...current, describtion: e.target.value }))
     },
