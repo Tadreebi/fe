@@ -174,11 +174,6 @@ const StudentExperience = () => {
 
   const tableColumns = [
     {
-      name: "Student",
-      selector: row => row.student,
-      sortable: true
-    },
-    {
       name: "Company",
       selector: row => row.company,
       sortable: true
@@ -186,22 +181,14 @@ const StudentExperience = () => {
     {
       name: "Improved Aspects",
       selector: row => row.improved_aspects,
-      sortable: true
     },
     {
       name: "Missed Aspects",
       selector: row => row.missed_aspects,
-      sortable: true
     },
     {
       name: "get_hired",
       selector: row => row.get_hired,
-      sortable: true
-    },
-    {
-      name: "More",
-      selector: row => row.more,
-      sortable: true
     }
   ];
 

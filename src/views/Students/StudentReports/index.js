@@ -352,8 +352,8 @@ const StudentReports = () => {
       sortable: true
     },
     {
-      name: "Student",
-      selector: row => row.student,
+      name: "Type",
+      selector: row => row.type,
       sortable: true
     },
     {
@@ -363,7 +363,7 @@ const StudentReports = () => {
     },
     {
       name: "Accepted By Supervisor",
-      selector: row => row.accepted ? "True" : "False",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
   ];

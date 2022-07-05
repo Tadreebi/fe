@@ -368,7 +368,7 @@ const CompanyReports = () => {
     },
     {
       name: "Student Attendance",
-      selector: row => `${row.attendance}%`,
+      selector: row => `${row.attendace}%`,
       sortable: true
     }
   ];

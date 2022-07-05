@@ -399,22 +399,17 @@ const opportunityPosts = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: (row) => row.company,
+      selector: row => row.company,
       sortable: true,
     },
     {
       name: "Position",
-      selector: (row) => row.position,
-      sortable: true,
-    },
-    {
-      name: "Vacancies",
-      selector: (row) => row.vacancies,
+      selector: row => row.position,
       sortable: true,
     },
     {
       name: "End Date of Application",
-      selector: (row) => row.endDate,
+      selector: row => row.endDate,
       sortable: true,
     },
   ];

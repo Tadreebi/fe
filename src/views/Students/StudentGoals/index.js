@@ -182,7 +182,7 @@ const StudentGoals = () => {
     },
     {
       name: "Done",
-      selector: row => row.done ? "True" : "False",
+      selector: row => row.done ? "Yes" : "No",
       sortable: true
     }
   ];

@@ -247,15 +247,9 @@ const StudentProposalsRes = () => {
         },
       }
     },
-
   ];
 
   const tableColumns = [
-    {
-      name: "Title",
-      selector: row => row.title,
-      sortable: true
-    },
     {
       name: "Student",
       selector: row => row.student,
@@ -278,7 +272,7 @@ const StudentProposalsRes = () => {
     },
     {
       name: "Accepted By University",
-      selector: row => row.accepted ? "True" : "False",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
 

@@ -185,18 +185,8 @@ const UniversityFeedback = () => {
       sortable: true
     },
     {
-      name: "Date",
-      selector: row => row.timestamp,
-      sortable: true
-    },
-    {
       name: "Title",
       selector: row => row.title,
-      sortable: true
-    },
-    {
-      name: "Feedback",
-      selector: row => row.feedback,
       sortable: true
     },
     {
@@ -239,7 +229,7 @@ const UniversityFeedback = () => {
     <>
       <TemplatePage
         pageTitle={"University Feedback"}
-        pageDescrbition={"University  supervisors to submit on-need feedbacks to students"}
+        pageDescrbition={"University supervisors to submit on-need feedbacks to students"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}

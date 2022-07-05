@@ -238,11 +238,6 @@ const StudentProposalRemarks = () => {
 
   const tableColumns = [
     {
-      name: "Student",
-      selector: row => row.student,
-      sortable: true
-    },
-    {
       name: "Company",
       selector: row => row.company,
       sortable: true
@@ -259,7 +254,7 @@ const StudentProposalRemarks = () => {
     },
     {
       name: "Accepted By University",
-      selector: row => row.accepted ? "True" : "False",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
   ];

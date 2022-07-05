@@ -236,35 +236,15 @@ const CompanyRating = () => {
 
   const tableColumns = [
     {
-      name: "company_name",
-      selector: row => row.company_name,
+      name: "Company Name",
+      selector: row => row.company,
       sortable: true
     },
     {
-      name: "useful_train",
-      selector: row => row.useful_train,
+      name: "Evalutation",
+      selector: row => row.score,
       sortable: true
     },
-    {
-      name: "student_allowed",
-      selector: row => row.student_allowed,
-      sortable: true
-    },
-    {
-      name: "support",
-      selector: row => row.support,
-      sortable: true
-    },
-    {
-      name: "improvement",
-      selector: row => row.improvement,
-      sortable: true
-    },
-    {
-      name: "recomended",
-      selector: row => row.recomended,
-      sortable: true
-    }
   ];
 
   return (

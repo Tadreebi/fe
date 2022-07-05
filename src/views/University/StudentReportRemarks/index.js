@@ -327,7 +327,7 @@ const StudentReportRemarks = () => {
     },
     {
       name: "Accepted By Supervisor",
-      selector: row => row.accepted ? "True" : "False",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
   ];
