@@ -29,6 +29,11 @@ const CompanyReports = () => {
     { id: 2, name: "ASAC'" },
   ];
 
+  const students = [
+    { id: 1, name: "Emad" },
+    { id: 2, name: "Suhaib" },
+  ];
+
   useEffect(() => {
     callData();
   }, []);
@@ -51,6 +56,7 @@ const CompanyReports = () => {
       required: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, student: e.target.value })),
+      options: students.map(student => ({ title: student.name, value: student.id }))
 
     },
     {
@@ -103,12 +109,12 @@ const CompanyReports = () => {
     },
     {
       title: "Attendance",
-      name: "attendance",
+      name: "attendace",
       type: "number",
       fullwidth: true,
       required: true,
-      value: report.attendance,
-      onChange: e => setReport(current => ({ ...current, attendance: e.target.value }))
+      value: report.attendace,
+      onChange: e => setReport(current => ({ ...current, attendace: e.target.value }))
     },
   ];
 
