@@ -27,7 +27,7 @@ const Experiences = () => {
       });
   };
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 

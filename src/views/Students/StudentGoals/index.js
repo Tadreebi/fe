@@ -29,7 +29,7 @@ const StudentGoals = () => {
     { id: 2, name: "Suhaib" },
   ];
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 
@@ -93,7 +93,7 @@ const StudentGoals = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
     await StudentGoalsAPI.createGoal(goal)
@@ -111,7 +111,7 @@ const StudentGoals = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await StudentGoalsAPI.updateGoal(goal.id, goal)
@@ -129,7 +129,7 @@ const StudentGoals = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
     await StudentGoalsAPI.deleteGoal(goal.id)

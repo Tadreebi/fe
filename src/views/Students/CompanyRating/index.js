@@ -194,7 +194,7 @@ const CompanyRating = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await CompanyRatingAPI.updateScore(score.id, { ...score, score: (score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5 })
@@ -212,7 +212,7 @@ const CompanyRating = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
     await CompanyRatingAPI.deleteScore(score.id)

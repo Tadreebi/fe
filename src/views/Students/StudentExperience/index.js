@@ -35,7 +35,7 @@ const StudentExperience = () => {
     { id: 2, name: "Suhaib company" },
   ];
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 
@@ -119,7 +119,7 @@ const StudentExperience = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
     await StudentExperienceAPI.createExperience(experience)
@@ -137,7 +137,7 @@ const StudentExperience = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await StudentExperienceAPI.updateExperience(experience.id, experience)
@@ -155,7 +155,7 @@ const StudentExperience = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
     await StudentExperienceAPI.deleteExperience(experience.id)

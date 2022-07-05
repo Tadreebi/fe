@@ -38,7 +38,7 @@ const UniversityTips = () => {
     { id: 5, name: "Event" },
 
   ];
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 

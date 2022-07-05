@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import StudentReportAPI from 'src/api/StudentReport'; // Import API Calls
+import StudentReportAPI from 'src/api/StudentReport';
 import TemplatePage from '../../templatePage';
 
 const StudentReports = () => {
@@ -23,13 +23,13 @@ const StudentReports = () => {
         setLoading(false);
       });
   };
-  //
+
   const students = [
     { id: 1, name: "Moayad" },
     { id: 2, name: "Suhaib" },
   ];
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 
@@ -136,7 +136,7 @@ const StudentReports = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
     await StudentReportAPI.createReport(report)
@@ -154,7 +154,7 @@ const StudentReports = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await StudentReportAPI.updateReport(report.id, report)
@@ -172,7 +172,7 @@ const StudentReports = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
     await StudentReportAPI.deleteReport(report.id)

@@ -36,7 +36,7 @@ const StudentApplicationRes = () => {
   ];
 
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 
@@ -92,7 +92,7 @@ const StudentApplicationRes = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
     await CompanyAppResponseAPI.createAppResponse(application)
@@ -110,7 +110,7 @@ const StudentApplicationRes = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await CompanyAppResponseAPI.updateAppResponse(application.id, application)
@@ -128,7 +128,7 @@ const StudentApplicationRes = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
     await CompanyAppResponseAPI.deleteAppResponse(application.id)

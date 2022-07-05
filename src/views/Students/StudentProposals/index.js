@@ -40,7 +40,7 @@ const StudentProposals = () => {
     { id: 2, name: "Suhaib Company" },
   ];
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 
@@ -117,7 +117,7 @@ const StudentProposals = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
     await StudentProposalAPI.createProposal(proposal)
@@ -135,7 +135,7 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await StudentProposalAPI.updateProposal(proposal.id, proposal)
@@ -153,7 +153,7 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
     await StudentProposalAPI.deleteProposal(proposal.id)
