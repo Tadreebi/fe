@@ -45,27 +45,20 @@ const StudentProposals = () => {
         setLoading(false);
       });
   };
+
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Moayad" },
+    { id: 2, name: "Raghad" },
   ];
+
   const companies = [
     { id: 1, name: "Emad Company" },
-    { id: 2, name: "Ghaida' Company" },
-    { id: 3, name: "Moayad Company" },
-    { id: 4, name: "Raghad Company" },
-    { id: 5, name: "Suhaib Company" },
+    { id: 2, name: "Suhaib Company" },
   ];
 
   const InternshipApp = [
     { id: 1, name: "Emad Company" },
-    { id: 2, name: "Ghaida' Company" },
-    { id: 3, name: "Moayad Company" },
-    { id: 4, name: "Raghad Company" },
-    { id: 5, name: "Suhaib Company" },
+    { id: 2, name: "Suhaib Company" },
   ];
 
   useEffect(() => { // Create UseEffect

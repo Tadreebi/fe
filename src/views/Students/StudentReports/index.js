@@ -25,11 +25,8 @@ const StudentReports = () => {
   };
   //
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Moayad" },
+    { id: 2, name: "Suhaib" },
   ];
 
   useEffect(() => { // Create UseEffect

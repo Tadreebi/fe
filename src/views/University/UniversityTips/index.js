@@ -58,7 +58,16 @@ const UniversityTips = () => {
       required: true,
       value: tip.topic,
       onChange: e => setTip(current => ({ ...current, topic: e.target.value })),
-      options: topics.map(topic => ({ title: topic.name, value: topic.name }))
+      options: topics.map(topic => ({ title: topic.name, value: topic.id }))
+    },
+    {
+      title: "Type",
+      name: "type",
+      type: "select",
+      required: true,
+      value: tip.type,
+      onChange: e => setTip(current => ({ ...current, type: e.target.value })),
+      options: types.map(type => ({ title: type.name, value: type.name }))
     },
     {
       title: "Details",
