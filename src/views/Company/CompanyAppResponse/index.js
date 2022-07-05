@@ -95,7 +95,7 @@ const StudentApplicationRes = () => {
   const onDataCreate = async () => { // Async
     setLoading(true);
 
-    await CompanyAppResponseAPI.createAppResponse(application) // Call the relevant api call
+    await CompanyAppResponseAPI.createAppResponse(application)
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -113,7 +113,7 @@ const StudentApplicationRes = () => {
   const onDataUpdate = async () => { // Async
     setLoading(true);
 
-    await CompanyAppResponseAPI.updateAppResponse(application.id, application) // Call the relevant api call
+    await CompanyAppResponseAPI.updateAppResponse(application.id, application)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -131,7 +131,7 @@ const StudentApplicationRes = () => {
   const onDataDelete = async () => { // Async
     setLoading(true);
 
-    await CompanyAppResponseAPI.deleteAppResponse(application.id) // Call the relevant api call
+    await CompanyAppResponseAPI.deleteAppResponse(application.id)
       .then(res => {
         console.log("Data Deleted Successfully");
         setApplication({});

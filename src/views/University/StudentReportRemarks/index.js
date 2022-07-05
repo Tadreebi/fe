@@ -316,14 +316,14 @@ const StudentReportRemarks = () => {
       <TemplatePage
         pageTitle={"Student Report Remarks"}
         pageDescrbition={"For university supervisor to remark submitted student reports"}
-        statisticsData={statisticsData} // New
-        chartsData={chartsData} // New
+        statisticsData={statisticsData}
+        chartsData={chartsData}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Report Remarks List"}
-        tableColumns={tableColumns} // New
-        tableRowDetails={true} // New
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={remarksList}
         onActionSelection={onActionSelection}
         currentAction={action}

@@ -7,15 +7,15 @@ const StudentExperience = () => {
   const [experiences, setExperiences] = useState([]);
   const [experience, setExperience] = useState({});
   const [action, setAction] = useState("create");
-  const [loading, setLoading] = useState(false); // New
+  const [loading, setLoading] = useState(false);
 
   const callData = async () => {
     setLoading(true);
 
-    await StudentExperienceAPI.getAllExperience() // Call the relevant api call
+    await StudentExperienceAPI.getAllExperience()
       .then(res => {
         console.log("Called Data", res.data);
-        setExperiences(res.data); // Assign the response data to proper state
+        setExperiences(res.data);
       })
       .catch(e => {
         console.log(e);
@@ -122,7 +122,7 @@ const StudentExperience = () => {
   const onDataCreate = async () => { // Async
     setLoading(true);
 
-    await StudentExperienceAPI.createExperience(experience) // Call the relevant api call
+    await StudentExperienceAPI.createExperience(experience)
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -140,7 +140,7 @@ const StudentExperience = () => {
   const onDataUpdate = async () => { // Async
     setLoading(true);
 
-    await StudentExperienceAPI.updateExperience(experience.id, experience) // Call the relevant api call
+    await StudentExperienceAPI.updateExperience(experience.id, experience)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -158,7 +158,7 @@ const StudentExperience = () => {
   const onDataDelete = async () => { // Async
     setLoading(true);
 
-    await StudentExperienceAPI.deleteExperience(experience.id) // Call the relevant api call
+    await StudentExperienceAPI.deleteExperience(experience.id)
       .then(res => {
         console.log("Data Deleted Successfully");
         setExperience({});
