@@ -29,7 +29,7 @@ const StudentGoals = () => {
     { id: 2, name: "Suhaib" },
   ];
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 
@@ -49,8 +49,8 @@ const StudentGoals = () => {
       type: "select",
       double: true,
       required: true,
-      value: experience.student,
-      onChange: e => setExperience(current => ({ ...current, student: e.target.value })),
+      value: goal.student,
+      onChange: e => setGoal(current => ({ ...current, student: e.target.value })),
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
@@ -65,7 +65,6 @@ const StudentGoals = () => {
       title: "Done",
       name: "done",
       type: "switch",
-      required: true,
       value: goal.done,
       onChange: e => setGoal(current => ({ ...current, done: e.target.checked }))
     },
@@ -93,7 +92,7 @@ const StudentGoals = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
     await StudentGoalsAPI.createGoal(goal)
@@ -111,7 +110,7 @@ const StudentGoals = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await StudentGoalsAPI.updateGoal(goal.id, goal)
@@ -129,7 +128,7 @@ const StudentGoals = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
     await StudentGoalsAPI.deleteGoal(goal.id)

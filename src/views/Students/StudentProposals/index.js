@@ -7,15 +7,15 @@ const StudentProposals = () => {
   const [proposals, setproposals] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
-  const [loading, setLoading] = useState(false); // New
+  const [loading, setLoading] = useState(false);
 
   const callData = async () => {
     setLoading(true);
 
-    await StudentProposalAPI.getAllProposals() // Call the relevant api call
+    await StudentProposalAPI.getAllProposals()
       .then(res => {
         console.log("Called Data", res.data);
-        setproposals(res.data); // Assign the response data to proper state
+        setproposals(res.data);
       })
       .catch(e => {
         console.log(e);
@@ -32,7 +32,7 @@ const StudentProposals = () => {
 
   const companies = [
     { id: 1, name: "Emad Company" },
-    { id: 2, name: "Raghad Company" },
+    { id: 4, name: "Raghad Company" },
   ];
 
   const internshipApps = [
@@ -40,7 +40,7 @@ const StudentProposals = () => {
     { id: 2, name: "Suhaib Company" },
   ];
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 
@@ -117,10 +117,10 @@ const StudentProposals = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
-    await StudentProposalAPI.createProposal(proposal) // Call the relevant api call
+    await StudentProposalAPI.createProposal(proposal)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -135,10 +135,10 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
-    await StudentProposalAPI.updateProposal(proposal.id, proposal) // Call the relevant api call
+    await StudentProposalAPI.updateProposal(proposal.id, proposal)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -153,10 +153,10 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
-    await StudentProposalAPI.deleteProposal(proposal.id) // Call the relevant api call
+    await StudentProposalAPI.deleteProposal(proposal.id)
       .then(res => {
         console.log("Data Deleted Successfully");
         setproposal({});
@@ -240,11 +240,6 @@ const StudentProposals = () => {
   ];
 
   const tableColumns = [
-    {
-      name: "Title",
-      selector: row => row.title,
-      sortable: true
-    },
     {
       name: "Student",
       selector: row => row.student,

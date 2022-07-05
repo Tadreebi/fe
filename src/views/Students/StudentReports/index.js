@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
-import StudentReportAPI from 'src/api/StudentReport'; // Import API Calls
+import StudentReportAPI from 'src/api/StudentReport';
 import TemplatePage from '../../templatePage';
 
 const StudentReports = () => {
   const [reportsList, setReportsList] = useState([]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
-  const [loading, setLoading] = useState(false); // New
+  const [loading, setLoading] = useState(false);
 
   const callData = async () => {
     setLoading(true);
 
-    await StudentReportAPI.getAllReports() // Call the relevant api call
+    await StudentReportAPI.getAllReports()
       .then(res => {
         console.log("Called Data", res.data);
-        setReportsList(res.data); // Assign the response data to proper state
+        setReportsList(res.data);
       })
       .catch(e => {
         console.log(e);
@@ -23,13 +23,13 @@ const StudentReports = () => {
         setLoading(false);
       });
   };
-  //
+
   const students = [
     { id: 1, name: "Moayad" },
     { id: 2, name: "Suhaib" },
   ];
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
   }, []);
 
@@ -136,10 +136,10 @@ const StudentReports = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
-    await StudentReportAPI.createReport(report) // Call the relevant api call
+    await StudentReportAPI.createReport(report)
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -154,10 +154,10 @@ const StudentReports = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
-    await StudentReportAPI.updateReport(report.id, report) // Call the relevant api call
+    await StudentReportAPI.updateReport(report.id, report)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -172,10 +172,10 @@ const StudentReports = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
-    await StudentReportAPI.deleteReport(report.id) // Call the relevant api call
+    await StudentReportAPI.deleteReport(report.id)
       .then(res => {
         console.log("Data Deleted Successfully");
         setReport({});
@@ -372,7 +372,7 @@ const StudentReports = () => {
       <TemplatePage
         pageTitle={"Student Reports"}
         pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
-        loading={loading} // New
+        loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
         formInputs={inputs}

@@ -4,23 +4,21 @@ import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
 import TemplatePage from '../../templatePage';
 
 
-const StudentProposals = () => {
+const StudentProposalsRes = () => {
   const [proposals, setproposals] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
-  const [loading, setLoading] = useState(false); // New
+  const [loading, setLoading] = useState(false);
   const [ProposalsResponses, setProposalsResponses] = useState([]);
   const [Response, setResponse] = useState({});
-  let alldata = []
-
 
   const callData = async () => {
     setLoading(true);
 
-    await UniversityProposalResponseAPI.getAllResponses() // Call the relevant api call
+    await UniversityProposalResponseAPI.getAllResponses()
       .then(res => {
         console.log("Called Data", res.data);
-        setProposalsResponses(res.data); // Assign the response data to proper state
+        setProposalsResponses(res.data);
       })
       .catch(e => {
         console.log(e);
@@ -33,10 +31,10 @@ const StudentProposals = () => {
   const callproposalsData = async () => {
     setLoading(true);
 
-    await StudentProposalAPI.getAllProposals() // Call the relevant api call
+    await StudentProposalAPI.getAllProposals()
       .then(res => {
         console.log("Called proposal Data", res.data);
-        setproposals(res.data); // Assign the response data to proper state
+        setproposals(res.data);
       })
       .catch(e => {
         console.log(e);
@@ -61,24 +59,13 @@ const StudentProposals = () => {
     { id: 2, name: "Suhaib Company" },
   ];
 
-  useEffect(() => { // Create UseEffect
+  useEffect(() => {
     callData();
-  }, []);
-
-  useEffect(() => { // Create UseEffect
     callproposalsData();
   }, []);
 
 
   const inputs = [
-    {
-      title: "Title",
-      name: "title",
-      type: "text",
-      placeholder: "Proposal Title",
-      value: proposal.title,
-      disabled: true
-    },
     {
       title: "Student",
       name: "student",
@@ -144,10 +131,10 @@ const StudentProposals = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
-    await UniversityProposalResponseAPI.createResponse(Response) // Call the relevant api call
+    await UniversityProposalResponseAPI.createResponse(Response)
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -162,10 +149,10 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
-    await UniversityProposalResponseAPI.updateResponse(Response.id, Response) // Call the relevant api call
+    await UniversityProposalResponseAPI.updateResponse(Response.id, Response)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -180,10 +167,10 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
-    await UniversityProposalResponseAPI.deleteResponse(Response.id) // Call the relevant api call
+    await UniversityProposalResponseAPI.deleteResponse(Response.id)
       .then(res => {
         console.log("Data Deleted Successfully");
         setResponse({});
@@ -309,7 +296,7 @@ const StudentProposals = () => {
         pageDescrbition={"for university to remark student submitted proposal"}
         formTitle={"Form"}
         statisticsData={statisticsData}
-        loading={loading} // New
+        loading={loading}
         chartsData={chartsData}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
@@ -328,4 +315,4 @@ const StudentProposals = () => {
   )
 }
 
-export default StudentProposals
+export default StudentProposalsRes

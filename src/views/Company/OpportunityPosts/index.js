@@ -27,7 +27,7 @@ const opportunityPosts = () => {
 
   const companies = [
     { id: 1, name: "ASAC" },
-    { id: 2, name: "CSS" },
+    { id: 4, name: "CSS" },
   ];
 
   useEffect(() => {
@@ -42,13 +42,10 @@ const opportunityPosts = () => {
       type: "select",
       fullwidth: true,
       required: true,
-      value: post.company,
+      value: post.company || post.company_id,
       onChange: (e) =>
         setPost(current => ({ ...current, company: e.target.value })),
-      options: companies.map((company) => ({
-        title: company.name,
-        value: company.id,
-      })),
+      options: companies.map((company) => ({ title: company.name, value: company.id })),
     },
     {
       title: "Position",
@@ -65,7 +62,6 @@ const opportunityPosts = () => {
       title: "Payment",
       name: "paid",
       type: "switch",
-      required: true,
       value: post.paid,
       onChange: (e) =>
         setPost(current => ({ ...current, paid: e.target.checked })),
@@ -107,9 +103,9 @@ const opportunityPosts = () => {
       onChange: (e) =>
         setPost(current => ({ ...current, education: e.target.value })),
       options: [
-        { title: "Bachelors", value: "Bachelors" },
-        { title: "Masters", value: "Masters" },
-        { title: "Phd", value: "Phd" },
+        { title: "Bachelors", value: "BACHELORS" },
+        { title: "Masters", value: "MASTERS" },
+        { title: "Phd", value: "PHD" },
       ],
     },
     {
@@ -134,6 +130,7 @@ const opportunityPosts = () => {
       title: "Salary",
       name: "salary",
       type: "number",
+      min: 0,
       required: true,
       value: post.salary,
       onChange: (e) =>
@@ -288,7 +285,7 @@ const opportunityPosts = () => {
   const onDataDelete = async () => {
     setLoading(true);
 
-    await CompanyPostAPI.deleteReport(post.id)
+    await CompanyPostAPI.deletePost(post.id)
       .then(res => {
         console.log("Data Deleted Successfully");
         setPost({});

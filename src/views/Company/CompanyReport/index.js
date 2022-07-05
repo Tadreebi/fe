@@ -25,8 +25,13 @@ const CompanyReports = () => {
   };
 
   const companies = [
-    { id: 1, name: "Socium" },
-    { id: 2, name: "ASAC'" },
+    { id: 2, name: "Socium" },
+    { id: 4, name: "ASAC'" },
+  ];
+
+  const students = [
+    { id: 1, name: "Emad" },
+    { id: 2, name: "Suhaib" },
   ];
 
   useEffect(() => {
@@ -51,12 +56,13 @@ const CompanyReports = () => {
       required: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, student: e.target.value })),
+      options: students.map(student => ({ title: student.name, value: student.id }))
 
     },
     {
       title: "company",
       name: "company",
-      type: "textarea",
+      type: "select",
       double: true,
       required: true,
       value: report.company,
@@ -71,9 +77,9 @@ const CompanyReports = () => {
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
       options: [
-        { title: "Periodical Report", value: "Periodical" },
-        { title: "Complain Report", value: "Complain" },
-        { title: "Final Report", value: "Final" }
+        { title: "Periodical Report", value: "Periodical Report" },
+        { title: "Complain Report", value: "Complain Report" },
+        { title: "Final Report", value: "Final Report" }
       ]
     },
     {
@@ -103,12 +109,12 @@ const CompanyReports = () => {
     },
     {
       title: "Attendance",
-      name: "attendance",
+      name: "attendace",
       type: "number",
       fullwidth: true,
       required: true,
-      value: report.attendance,
-      onChange: e => setReport(current => ({ ...current, attendance: e.target.value }))
+      value: report.attendace,
+      onChange: e => setReport(current => ({ ...current, attendace: e.target.value }))
     },
   ];
 

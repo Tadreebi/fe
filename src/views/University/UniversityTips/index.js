@@ -32,13 +32,14 @@ const UniversityTips = () => {
 
   const types = [
     { id: 1, name: "File" },
-    { id: 2, name: "Multimedia" },
-    { id: 3, name: "Book" },
-    { id: 4, name: "Article" },
-    { id: 5, name: "Event" },
+    { id: 2, name: "Image" },
+    { id: 3, name: "Video" },
+    { id: 4, name: "Event" },
+    { id: 5, name: "Text" },
 
   ];
-  useEffect(() => { // Create UseEffect
+
+  useEffect(() => {
     callData();
   }, []);
 

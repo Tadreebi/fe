@@ -138,10 +138,10 @@ const UniversityFeedback = () => {
       });
   };
 
-  const onDataUpdate = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
-    await UniversityFeedbackAPI.updateUniversityFeedback(feedback.id, feedback) // Call the relevant api call
+    await UniversityFeedbackAPI.updateUniversityFeedback(feedback.id, feedback)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -156,10 +156,10 @@ const UniversityFeedback = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
-    await UniversityFeedbackAPI.deleteUniversityFeedback(feedback.id) // Call the relevant api call
+    await UniversityFeedbackAPI.deleteUniversityFeedback(feedback.id)
       .then(res => {
         console.log("Data Deleted Successfully");
         setFeedback({});
