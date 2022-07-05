@@ -84,7 +84,6 @@ const StudentProposals = () => {
       name: "title", // should match the property name in the backend model
       type: "text",
       placeholder: "Proposal Title",
-      required: true,
       value: proposal.title, // should match the property name in the backend model
       disabled: true
     },
@@ -93,7 +92,6 @@ const StudentProposals = () => {
       name: "student",
       type: "select",
       double: true,
-      required: true,
       value: proposal.student,
       disabled: true
     },
@@ -102,7 +100,6 @@ const StudentProposals = () => {
       name: "company",
       type: "select",
       double: true,
-      required: true,
       value: proposal.company,
       disabled: true
     },
@@ -111,7 +108,6 @@ const StudentProposals = () => {
       name: "internship_application",
       type: "select",
       double: true,
-      required: true,
       value: proposal.internship_application,
       disabled: true
     },
