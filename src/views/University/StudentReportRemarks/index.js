@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import TemplatePage from '../../templatePage';
+import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport';
+import TemplatePage from '../..';
 
 const StudentReportRemarks = () => {
   const [remarksList, setRemarksList] = useState([]);

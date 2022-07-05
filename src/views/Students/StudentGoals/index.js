@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import StudentGoalsAPI from 'src/api/StudentGoals';
-import TemplatePage from '../../templatePage';
+import TemplatePage from '../..';
 
 const StudentGoals = () => {
   const [goals, setGoalsList] = useState([]);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import StudentProposalAPI from 'src/api/StudentProposal';
-import TemplatePage from '../../templatePage';
+import TemplatePage from '../..';
 
 
 const StudentProposals = () => {

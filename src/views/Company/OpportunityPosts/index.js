@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CompanyPostAPI from 'src/api/OpportunityPost';
-import TemplatePage from "../../templatePage";
+import TemplatePage from "../..";
 
 
 const opportunityPosts = () => {

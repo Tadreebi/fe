@@ -1,5 +1,4 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { logo } from 'src/assets/brand/logo'
 import DashboardBreadcrumb from 'src/components/Layouts/DashboardBreadcrumb'
@@ -10,8 +9,6 @@ import { NavItem, NavLink as NavRootLink } from '../Root/Nav'
 import HeaderDropdown from "./HeaderDropdown"
 
 const HeaderComp = ({ notDashboard, sidebarShow, setSidebarShow }) => {
-  const dispatch = useDispatch()
-
   const navLinks = [
     { title: "Home", link: "/" },
   ];
