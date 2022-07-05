@@ -3,7 +3,7 @@ import StudentProposalAPI from 'src/api/StudentProposal';
 import TemplatePage from '../..';
 
 
-const StudentProposals = () => {
+const StudentProposalRemarks = () => {
   const [proposals, setproposals] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
@@ -36,8 +36,8 @@ const StudentProposals = () => {
   ];
 
   const internshipApps = [
-    { id: 1, name: "Emad Company" },
-    { id: 2, name: "Suhaib Company" },
+    { id: 3, name: "Emad Company" },
+    { id: 4, name: "Suhaib Company" },
   ];
 
   useEffect(() => {
@@ -49,7 +49,6 @@ const StudentProposals = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: proposal.student,
       onChange: e => setproposal(current => ({ ...current, student: e.target.value })),
@@ -59,7 +58,6 @@ const StudentProposals = () => {
       title: "Company",
       name: "company",
       type: "select",
-      double: true,
       required: true,
       value: proposal.company,
       onChange: e => setproposal(current => ({ ...current, company: e.target.value })),
@@ -69,7 +67,6 @@ const StudentProposals = () => {
       title: "Internship",
       name: "internship_application",
       type: "select",
-      double: true,
       required: true,
       value: proposal.internship_application,
       onChange: e => setproposal(current => ({ ...current, internship_application: e.target.value })),
@@ -241,18 +238,13 @@ const StudentProposals = () => {
 
   const tableColumns = [
     {
-      name: "Student",
-      selector: row => row.student,
-      sortable: true
-    },
-    {
       name: "Company",
-      selector: row => row.company,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true
     },
     {
       name: "Internship",
-      selector: row => row.internship_application,
+      selector: row => internshipApps.find(app => app.id === row.internship_application)?.name,
       sortable: true
     },
     {
@@ -262,7 +254,7 @@ const StudentProposals = () => {
     },
     {
       name: "Accepted By University",
-      selector: row => row.accepted ? "True" : "False",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
   ];
@@ -272,12 +264,12 @@ const StudentProposals = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Proposals Remarks"}
-        pageDescrbition={"Students to submit and university to approve proposed internship vacancies to fulfill"}
-        formTitle={"Form"}
+        pageTitle={"Student Proposals"}
+        pageDescrbition={"Students to submit proposed internship vacancies to fulfill to university supervisor"}
         statisticsData={statisticsData}
         chartsData={chartsData}
         loading={loading}
+        formTitle={"CRUD Proposals"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
@@ -295,4 +287,4 @@ const StudentProposals = () => {
   )
 }
 
-export default StudentProposals
+export default StudentProposalRemarks

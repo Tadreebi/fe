@@ -358,7 +358,7 @@ const CompanyReports = () => {
     },
     {
       name: "Student",
-      selector: row => row.student,
+      selector: row => students.find(student => student.id === row.student)?.name,
       sortable: true
     },
     {
@@ -368,7 +368,7 @@ const CompanyReports = () => {
     },
     {
       name: "Student Attendance",
-      selector: row => `${row.attendance}%`,
+      selector: row => `${row.attendace}%`,
       sortable: true
     }
   ];
@@ -377,10 +377,11 @@ const CompanyReports = () => {
     <>
       <TemplatePage
         pageTitle={"Company Reports"}
-        pageDescrbition={"For company to submit periodical & final reports to university supervisor"}
+        pageDescrbition={"Companies to submit stand-along, periodical & final reports to university supervisor"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        formTitle={"CRUD Reports"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}

@@ -29,6 +29,11 @@ const StudentReports = () => {
     { id: 2, name: "Suhaib" },
   ];
 
+  const reportTypes = [
+    { name: "Weekly Report", id: 1 },
+    { name: "Monthly Report", id: 2 },
+  ];
+
   useEffect(() => {
     callData();
   }, []);
@@ -58,10 +63,7 @@ const StudentReports = () => {
       required: true,
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
-      options: [
-        { title: "Weekly Report", value: 1 },
-        { title: "Monthly Report", value: 2 },
-      ]
+      options: reportTypes.map(report => ({ title: report.name, value: report.id }))
     },
     {
       title: "Start Date of Report",
@@ -76,6 +78,7 @@ const StudentReports = () => {
       name: "endDate",
       type: "date",
       required: true,
+      double: true,
       value: report.endDate,
       onChange: e => setReport(current => ({ ...current, endDate: e.target.value }))
     },
@@ -351,8 +354,8 @@ const StudentReports = () => {
       sortable: true
     },
     {
-      name: "Student",
-      selector: row => row.student,
+      name: "Type",
+      selector: row => reportTypes.find(type => type.id === row.type)?.name,
       sortable: true
     },
     {
@@ -362,7 +365,7 @@ const StudentReports = () => {
     },
     {
       name: "Accepted By Supervisor",
-      selector: row => row.accepted ? "True" : "False",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
   ];
@@ -371,10 +374,11 @@ const StudentReports = () => {
     <>
       <TemplatePage
         pageTitle={"Student Reports"}
-        pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
+        pageDescrbition={"Students to submit periodical & final reports to university supervisor"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        formTitle={"CRUD Reports"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}

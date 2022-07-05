@@ -29,6 +29,11 @@ const CompanyRating = () => {
     callData();
   }, []);
 
+  const companies = [
+    { id: 2, name: "Socium" },
+    { id: 4, name: "ASAC'" },
+  ];
+
   const inputs = [
     {
       title: "Company Name",
@@ -37,11 +42,7 @@ const CompanyRating = () => {
       required: true,
       value: score.company,
       onChange: e => setScore(current => ({ ...current, company: e.target.value })),
-      options: [
-        { title: "Socium", value: 3 },
-        { title: "ASAC", value: 4 },
-
-      ]
+      options: companies.map(company => ({ value: company.id, title: company.name }))
     },
     {
       title: "Does the training program covers it's description?",
@@ -236,35 +237,15 @@ const CompanyRating = () => {
 
   const tableColumns = [
     {
-      name: "company_name",
-      selector: row => row.company_name,
+      name: "Company Name",
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true
     },
     {
-      name: "useful_train",
-      selector: row => row.useful_train,
+      name: "Evalutation",
+      selector: row => row.score,
       sortable: true
     },
-    {
-      name: "student_allowed",
-      selector: row => row.student_allowed,
-      sortable: true
-    },
-    {
-      name: "support",
-      selector: row => row.support,
-      sortable: true
-    },
-    {
-      name: "improvement",
-      selector: row => row.improvement,
-      sortable: true
-    },
-    {
-      name: "recomended",
-      selector: row => row.recomended,
-      sortable: true
-    }
   ];
 
   return (
@@ -273,11 +254,11 @@ const CompanyRating = () => {
         pageTitle={"Company Rating"}
         pageDescrbition={"Here you can rate the training program and the proposing company."}
         loading={loading}
-        formTitle={"Answer the below questions please!"}
+        formTitle={"Rating Form"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"company rating restlts"}
+        tableTitle={"Submitted Ratings List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
         tableData={scores}

@@ -126,18 +126,6 @@ const _nav = [
         to: '/university/proposal-remarks',
         icon: <Icon icon={faFileLines} className="px-1" />,
       },
-      {
-        component: NavItem,
-        name: 'Faculty',
-        to: '/faculty',
-        icon: <Icon icon={faFire} className="px-1" />,
-      },
-      {
-        component: NavItem,
-        name: 'Supervised By',
-        to: '/supervised-by',
-        icon: <Icon icon={faFire} className="px-1" />,
-      },
     ]
   },
 ];

@@ -26,8 +26,8 @@ const StudentApplicationRes = () => {
   };
 
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Suhaib" },
+    { id: 3, name: "Emad" },
+    { id: 4, name: "Suhaib" },
   ];
 
   const applications = [
@@ -45,7 +45,7 @@ const StudentApplicationRes = () => {
       title: "Student Application",
       name: "applications",
       type: "text",
-      double: true,
+      fullwidth: true,
       required: true,
       value: application.applications,
       disabled: true
@@ -64,7 +64,6 @@ const StudentApplicationRes = () => {
       name: "accepted",
       type: "switch",
       fullwidth: true,
-      required: true,
       value: application.accepted,
       onChange: e => setApplication(current => ({ ...current, accepted: e.target.checked }))
     },
@@ -211,7 +210,7 @@ const StudentApplicationRes = () => {
   const tableColumns = [
     {
       name: "Student",
-      selector: row => row.student,
+      selector: row => students.find(student => student.id === row.student)?.name,
       sortable: true
     },
     {
@@ -221,7 +220,7 @@ const StudentApplicationRes = () => {
     },
     {
       name: "Accepted By Company",
-      selector: row => row.accepted ? "True" : "False",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
 
@@ -229,8 +228,8 @@ const StudentApplicationRes = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Applications"}
-        pageDescrbition={"For student to apply for a specific internship posted by the company"}
+        pageTitle={"Student Application Responses"}
+        pageDescrbition={"Companies to view & respond to student applications for offered internships"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}

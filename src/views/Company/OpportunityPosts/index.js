@@ -35,16 +35,15 @@ const opportunityPosts = () => {
   }, []);
 
   const inputs = [
-    // Company Name -> From another model
+    // Companies List API
     {
       title: "Company",
-      name: "company",
+      name: "company_id",
       type: "select",
-      fullwidth: true,
       required: true,
-      value: post.company || post.company_id,
+      value: post.company_id,
       onChange: (e) =>
-        setPost(current => ({ ...current, company: e.target.value })),
+        setPost(current => ({ ...current, company_id: e.target.value })),
       options: companies.map((company) => ({ title: company.name, value: company.id })),
     },
     {
@@ -52,7 +51,6 @@ const opportunityPosts = () => {
       name: "position",
       type: "text",
       placeholder: "Internship Position",
-      fullwidth: true,
       required: true,
       value: post.position,
       onChange: (e) =>
@@ -150,7 +148,7 @@ const opportunityPosts = () => {
       name: "location",
       type: "select",
       required: true,
-      fullwidth: true,
+      double: true,
       value: post.location,
       onChange: (e) =>
         setPost(current => ({ ...current, location: e.target.value })),
@@ -183,7 +181,6 @@ const opportunityPosts = () => {
       name: "supervisor_Name",
       type: "text",
       required: true,
-      fullwidth: true,
       value: post.supervisor_Name,
       onChange: (e) =>
         setPost(current => ({ ...current, supervisor_Name: e.target.value })),
@@ -193,7 +190,6 @@ const opportunityPosts = () => {
       name: "subervisor_position",
       type: "text",
       required: true,
-      fullwidth: true,
       value: post.subervisor_position,
       onChange: (e) =>
         setPost(current => ({
@@ -206,7 +202,6 @@ const opportunityPosts = () => {
       name: "supervisor_phone_number",
       type: "text",
       required: true,
-      fullwidth: true,
       value: post.supervisor_phone_number,
       onChange: (e) =>
         setPost(current => ({
@@ -404,22 +399,17 @@ const opportunityPosts = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: (row) => row.company,
+      selector: row => companies.find(company => company.id === row.company_id)?.name,
       sortable: true,
     },
     {
       name: "Position",
-      selector: (row) => row.position,
-      sortable: true,
-    },
-    {
-      name: "Vacancies",
-      selector: (row) => row.vacancies,
+      selector: row => row.position,
       sortable: true,
     },
     {
       name: "End Date of Application",
-      selector: (row) => row.endDate,
+      selector: row => row.endDate,
       sortable: true,
     },
   ];
@@ -428,10 +418,8 @@ const opportunityPosts = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Internship Opportunity"}
-        pageDescrbition={
-          "For company to submit details of an internship opportunity"
-        }
+        pageTitle={"Internship Opportunities"}
+        pageDescrbition={"Companies to post new internship opportunities"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
@@ -439,7 +427,7 @@ const opportunityPosts = () => {
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"Internship Opportunity Details"}
+        tableTitle={"Internship Opportunities List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
         tableData={postsList}

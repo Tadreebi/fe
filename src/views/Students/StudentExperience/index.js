@@ -44,7 +44,6 @@ const StudentExperience = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: experience.student,
       onChange: e => setExperience(current => ({ ...current, student: e.target.value })),
@@ -175,34 +174,21 @@ const StudentExperience = () => {
 
   const tableColumns = [
     {
-      name: "Student",
-      selector: row => row.student,
-      sortable: true
-    },
-    {
       name: "Company",
-      selector: row => row.company,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true
     },
     {
       name: "Improved Aspects",
       selector: row => row.improved_aspects,
-      sortable: true
     },
     {
       name: "Missed Aspects",
       selector: row => row.missed_aspects,
-      sortable: true
     },
     {
       name: "get_hired",
       selector: row => row.get_hired,
-      sortable: true
-    },
-    {
-      name: "More",
-      selector: row => row.more,
-      sortable: true
     }
   ];
 
@@ -240,7 +226,7 @@ const StudentExperience = () => {
     <>
       <TemplatePage
         pageTitle={"Student Experiences"}
-        pageDescrbition={"student Experience during an internship"}
+        pageDescrbition={"Students to share own experiences during an internship"}
         loading={loading}
         statisticsData={statisticsData}
         formTitle={"CRUD Experiences"}

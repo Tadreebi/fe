@@ -38,8 +38,8 @@ const StudentGoals = () => {
       title: "Title",
       name: "title",
       type: "text",
+      double: true,
       required: true,
-      fullwidth: true,
       value: goal.title,
       onChange: e => setGoal(current => ({ ...current, title: e.target.value }))
     },
@@ -47,7 +47,6 @@ const StudentGoals = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: goal.student,
       onChange: e => setGoal(current => ({ ...current, student: e.target.value })),
@@ -183,7 +182,7 @@ const StudentGoals = () => {
     },
     {
       name: "Done",
-      selector: row => row.done ? "True" : "False",
+      selector: row => row.done ? "Yes" : "No",
       sortable: true
     }
   ];
@@ -192,16 +191,16 @@ const StudentGoals = () => {
     <>
       <TemplatePage
         pageTitle={"Student Goals"}
-        pageDescrbition={"For student to add their goals"}
+        pageDescrbition={"Students to add their personal & private goals along the internship and report to self on progess"}
         loading={loading}
         statisticsData={statisticsData}
         formTitle={"CRUD Goals"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"Student Goals List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
+        tableTitle={"Student Goals List"}
         tableData={goals}
         onActionSelection={onActionSelection}
         currentAction={action}

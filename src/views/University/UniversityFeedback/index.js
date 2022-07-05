@@ -49,7 +49,6 @@ const UniversityFeedback = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: feedback.student,
       onChange: e => setFeedback(current => ({ ...current, student: parseInt(e.target.value) })),
@@ -59,7 +58,6 @@ const UniversityFeedback = () => {
       title: "Report",
       name: "report",
       type: "select",
-      double: true,
       required: true,
       value: feedback.report,
       onChange: e => setFeedback(current => ({ ...current, report: parseInt(e.target.value) })),
@@ -87,7 +85,7 @@ const UniversityFeedback = () => {
       title: "Rating",
       name: "rating",
       type: "select",
-      double: true,
+      fullwidth: true,
       required: true,
       value: feedback.rating,
       onChange: e => setFeedback(current => ({ ...current, rating: parseInt(e.target.value) })),
@@ -178,27 +176,17 @@ const UniversityFeedback = () => {
   const tableColumns = [
     {
       name: "Student",
-      selector: row => row.student,
+      selector: row => students.find(student => student.id === row.student)?.name,
       sortable: true
     },
     {
       name: "Report",
-      selector: row => row.report,
-      sortable: true
-    },
-    {
-      name: "Date",
-      selector: row => row.timestamp,
+      selector: row => Reports.find(report => report.id === row.report)?.name,
       sortable: true
     },
     {
       name: "Title",
       selector: row => row.title,
-      sortable: true
-    },
-    {
-      name: "Feedback",
-      selector: row => row.feedback,
       sortable: true
     },
     {
@@ -241,14 +229,15 @@ const UniversityFeedback = () => {
     <>
       <TemplatePage
         pageTitle={"University Feedback"}
-        pageDescrbition={"For univesity to submit periodical feedback to the student"}
+        pageDescrbition={"University supervisors to submit on-need feedbacks to students"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        formTitle={"CRUD Feedbacks"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"University Feedback List"}
+        tableTitle={"Supervisor Feedbacks List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
         tableData={feedbackList}

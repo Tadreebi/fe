@@ -44,29 +44,28 @@ const StudentApplication = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: application.student,
       onChange: e => setApplication(current => ({ ...current, student: e.target.value })),
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Internship",
+      title: "Internship Oppertunity",
       name: "internship",
       type: "select",
-      double: true,
       required: true,
+      double: true,
       value: application.internship,
       onChange: e => setApplication(current => ({ ...current, internship: e.target.value })),
       options: internships.map(internship => ({ title: internship.name, value: internship.id }))
     },
     {
-      title: "Internship Hours",
+      title: "Preferable Internship Hours",
       name: "type",
       type: "select",
       required: true,
       value: application.type,
-      onChange: e => setPost(current => ({ ...current, type: e.target.value })),
+      onChange: e => setApplication(current => ({ ...current, type: e.target.value })),
       options: [
         { title: "Full Time", value: "Full Time" },
         { title: "Part Time", value: "Part Time" },
@@ -252,23 +251,17 @@ const StudentApplication = () => {
 
   const tableColumns = [
     {
-      name: "Student",
-      selector: row => row.student,
-      sortable: true
-    },
-    {
       name: "Internship",
-      selector: row => row.internship,
+      selector: row => internships.find(internship => internship.id === row.internship)?.name,
       sortable: true
     },
     {
-      name: "Preferable Internship Type",
-      selector: row => row.location,
-      sortable: true
+      name: "Cover Letter",
+      selector: row => row.coverletter,
     },
     {
-      name: "Internship Hours",
-      selector: row => row.type,
+      name: "Resume Link",
+      selector: row => <a href={row.resume} target="_blank">Check Here</a>,
       sortable: true
     },
 
@@ -277,7 +270,7 @@ const StudentApplication = () => {
     <>
       <TemplatePage
         pageTitle={"Student Applications"}
-        pageDescrbition={"For student to apply for a specific internship posted by the company"}
+        pageDescrbition={"Students to apply for specific internships posted by companies"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}

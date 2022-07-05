@@ -3,7 +3,7 @@ import api from ".";
 const path = "";
 
 const login = params => {
-  return api.post(`${path}api/token/`, params);
+  return api.post(`${path}token/`, params);
 };
 
 const refresh = params => {
