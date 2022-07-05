@@ -1,13 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
 import demoData from "./demoData";
-
+import CompanyPostAPI from 'src/api/OpportunityPost';
 
 const OpportunityPosts = () => {
-  const [posts, setPosts] = useState(demoData)
+  const [posts, setPosts] = useState([])
   const [pickedPost, setPickedPost] = useState({})
+
+  const callData = async () => {
+    await CompanyPostAPI.getAllPosts()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setPosts(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   return (
     <Container>
