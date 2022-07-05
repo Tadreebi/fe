@@ -107,7 +107,6 @@ const StudentReportRemarks = () => {
       name: "accepted",
       type: "switch",
       fullwidth: true,
-      required: true,
       value: remark.accepted,
       onChange: e => setRemark(current => ({ ...current, accepted: e.target.checked }))
     },
