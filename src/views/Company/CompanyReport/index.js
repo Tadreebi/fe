@@ -377,10 +377,11 @@ const CompanyReports = () => {
     <>
       <TemplatePage
         pageTitle={"Company Reports"}
-        pageDescrbition={"For company to submit periodical & final reports to university supervisor"}
+        pageDescrbition={"Companies to submit stand-along, periodical & final reports to university supervisor"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        formTitle={"CRUD Reports"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}

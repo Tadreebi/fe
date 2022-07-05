@@ -45,7 +45,7 @@ const StudentApplicationRes = () => {
       title: "Student Application",
       name: "applications",
       type: "text",
-      double: true,
+      fullwidth: true,
       required: true,
       value: application.applications,
       disabled: true
@@ -229,8 +229,8 @@ const StudentApplicationRes = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Applications"}
-        pageDescrbition={"For student to apply for a specific internship posted by the company"}
+        pageTitle={"Student Application Responses"}
+        pageDescrbition={"Companies to view & respond to student applications for offered internships"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
