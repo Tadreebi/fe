@@ -65,7 +65,6 @@ const StudentGoals = () => {
       title: "Done",
       name: "done",
       type: "switch",
-      required: true,
       value: goal.done,
       onChange: e => setGoal(current => ({ ...current, done: e.target.checked }))
     },

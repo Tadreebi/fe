@@ -99,9 +99,9 @@ const StudentProfile = ({ editable = false }) => {
             <CardHeader>
               <Row>
                 <Col md={9}>
-                  <h4>
-                    Student Profile Example
-                  </h4>
+                  <h5>
+                    Student {profile.student} Profile
+                  </h5>
                 </Col>
 
                 <Col md={3}>
