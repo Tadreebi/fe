@@ -69,7 +69,7 @@ const opportunityPosts = () => {
       required: true,
       value: post.paid,
       onChange: (e) =>
-        setPost(current => ({ ...current, paid: e.target.value })),
+        setPost(current => ({ ...current, paid: e.target.checked })),
     },
     {
       title: "Internship Hours",

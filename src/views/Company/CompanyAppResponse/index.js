@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import CompanyAppResponseAPI from 'src/api/CompanyAppResponse';
-import applicationData from './applicationData';
-import TemplatePage from '../../templatePage'
+import TemplatePage from '../../templatePage';
 
 
-const StudentApplication = () => {
+const StudentApplicationRes = () => {
   const [applicationsList, setApplicationsList] = useState([]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
@@ -25,19 +24,15 @@ const StudentApplication = () => {
         setLoading(false);
       });
   };
+
   const students = [
     { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 2, name: "Suhaib" },
   ];
-  const internships = [
+
+  const applications = [
     { id: 1, name: "ASAC" },
     { id: 2, name: "CSS" },
-    { id: 3, name: "CC" },
-    { id: 4, name: "Amazon" },
-    { id: 5, name: "Google" },
   ];
 
 
@@ -47,75 +42,12 @@ const StudentApplication = () => {
 
   const inputs = [
     {
-      title: "Student",
-      name: "student",
-      type: "select",
-      double: true,
-      required: true,
-      value: application.student,
-      disabled: true
-
-    },
-    {
-      title: "Internship",
-      name: "internship",
-      type: "select",
-      double: true,
-      required: true,
-      value: application.internship,
-      disabled: true
-
-    },
-    {
-      title: "Internship Hours",
-      name: "type",
-      type: "select",
-      required: true,
-      value: application.type,
-      disabled: true
-
-    },
-    {
-      title: "Home Full Address",
-      name: "homeFullAddress",
+      title: "Student Application",
+      name: "applications",
       type: "text",
+      double: true,
       required: true,
-      value: application.homeFullAddress,
-      disabled: true
-    },
-    {
-      title: "Preferable Internship Location",
-      name: "location",
-      type: "select",
-      required: true,
-      value: application.location,
-      disabled: true
-
-    },
-    {
-      title: "Expected Salary",
-      name: "expected_salary",
-      type: "number",
-      required: true,
-      value: application.expected_salary,
-      disabled: true
-    },
-    {
-      title: "Cover Letter",
-      name: "coverletter",
-      type: "textarea",
-      fullwidth: true,
-      required: true,
-      value: application.coverletter,
-      disabled: true
-    },
-    {
-      title: "Resume",
-      name: "resume",
-      type: "file",
-      fullwidth: true,
-      required: true,
-      value: application.resume,
+      value: application.applications,
       disabled: true
     },
     {
@@ -320,4 +252,4 @@ const StudentApplication = () => {
   )
 }
 
-export default StudentApplication
+export default StudentApplicationRes
