@@ -4,7 +4,7 @@ import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
 import TemplatePage from '../../templatePage';
 
 
-const StudentProposals = () => {
+const StudentProposalsRes = () => {
   const [proposals, setproposals] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
@@ -66,14 +66,6 @@ const StudentProposals = () => {
 
 
   const inputs = [
-    {
-      title: "Title",
-      name: "title",
-      type: "text",
-      placeholder: "Proposal Title",
-      value: proposal.title,
-      disabled: true
-    },
     {
       title: "Student",
       name: "student",
@@ -323,4 +315,4 @@ const StudentProposals = () => {
   )
 }
 
-export default StudentProposals
+export default StudentProposalsRes
