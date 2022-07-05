@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import CompanyAppResponseAPI from 'src/api/CompanyAppResponse';
-import TemplatePage from '../../templatePage';
+import TemplatePage from '../../';
 
 
 const StudentApplicationRes = () => {

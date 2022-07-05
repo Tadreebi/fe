@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import StudentProposalAPI from 'src/api/StudentProposal';
 import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
-import TemplatePage from '../../templatePage';
+import TemplatePage from '../../';
 
 
 const StudentProposalsRes = () => {
