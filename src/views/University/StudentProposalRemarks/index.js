@@ -293,15 +293,15 @@ const StudentProposalsRes = () => {
     <>
       <TemplatePage
         pageTitle={"Student Proposals Remarks"}
-        pageDescrbition={"for university to remark student submitted proposal"}
-        formTitle={"Form"}
+        pageDescrbition={"University supervisors to remark submitted student proposals"}
         statisticsData={statisticsData}
         loading={loading}
         chartsData={chartsData}
+        formTitle={"CRUD Remarks"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"Student Proposals List"}
+        tableTitle={"Proposals & Remarks List"}
         tableData={proposals.map(data => ({ ...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal) }))}
         tableColumns={tableColumns}
         tableRowDetails={true}

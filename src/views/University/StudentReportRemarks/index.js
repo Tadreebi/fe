@@ -336,10 +336,11 @@ const StudentReportRemarks = () => {
     <>
       <TemplatePage
         pageTitle={"Student Report Remarks"}
-        pageDescrbition={"For university supervisor to remark submitted student reports"}
+        pageDescrbition={"University supervisors to remark submitted student reports"}
         statisticsData={statisticsData}
         chartsData={chartsData}
         loading={loading}
+        formTitle={"CRUD Remarks"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}

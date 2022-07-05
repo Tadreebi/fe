@@ -241,14 +241,15 @@ const UniversityFeedback = () => {
     <>
       <TemplatePage
         pageTitle={"University Feedback"}
-        pageDescrbition={"For univesity to submit periodical feedback to the student"}
+        pageDescrbition={"University  supervisors to submit on-need feedbacks to students"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        formTitle={"CRUD Feedbacks"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"University Feedback List"}
+        tableTitle={"Supervisor Feedbacks List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
         tableData={feedbackList}

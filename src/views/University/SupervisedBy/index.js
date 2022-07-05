@@ -144,7 +144,7 @@ const SupervisedBy = () => {
     <>
       <TemplatePage
         pageTitle={"Supervised By"}
-        pageDescrbition={"For univesity to set a supervisor and a company to each student"}
+        pageDescrbition={"For University  to set a supervisor and a company to each student"}
         statisticsData={statisticsData}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}

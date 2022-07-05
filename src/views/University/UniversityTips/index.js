@@ -177,14 +177,14 @@ const UniversityTips = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Student Tips"}
-        pageDescrbition={"For companies to submit tips for students"}
+        pageTitle={"Internship Tips"}
+        pageDescrbition={"University supervisors to submit tips & helpful materials about internship for students"}
         loading={loading}
         formTitle={"CRUD Tips"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"Student Tips List"}
+        tableTitle={"Internship Tips List"}
         tableData={tips}
         tableColumns={tableColumns}
         tableRowDetails={true}
