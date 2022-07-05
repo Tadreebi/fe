@@ -70,7 +70,6 @@ const StudentProposalsRes = () => {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       value: proposal.student,
       disabled: true
     },
@@ -78,7 +77,6 @@ const StudentProposalsRes = () => {
       title: "Companies",
       name: "company",
       type: "select",
-      double: true,
       value: proposal.company,
       disabled: true
     },
@@ -86,7 +84,6 @@ const StudentProposalsRes = () => {
       title: "Internship",
       name: "internship_application",
       type: "select",
-      double: true,
       value: proposal.internship_application,
       disabled: true
     },
