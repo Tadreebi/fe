@@ -27,7 +27,8 @@ const HeaderComp = ({ notDashboard, sidebarShow, setSidebarShow }) => {
 
         <HeaderBrand>
           <Link to="/">
-            <Icon icon={logo} height={30} alt="Logo" />
+            {/* <Icon icon={logo} height={30} alt="Logo" /> */}
+            Logo
           </Link>
         </HeaderBrand>
 
