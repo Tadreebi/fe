@@ -1,28 +1,48 @@
-import { useState } from 'react';
-import TemplatePage from '../..'
-import feedbackDemoData from './demoData';
+import { useEffect, useState } from 'react';
+import UniversityFeedbackAPI from 'src/api/UniversityFeedback';
+import TemplatePage from '../..';
 
 
 const UniversityFeedback = () => {
-  const [feedbackList, setFeedbackList] = useState([...feedbackDemoData]);
+  const [feedbackList, setFeedbackList] = useState([]);
   const [feedback, setFeedback] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await UniversityFeedbackAPI.getAllUniversityFeedback()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setFeedbackList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const students = [
     { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 2, name: "Moayad" },
   ];
 
   const Rating = [
-    { id: 1, name: "1" },
-    { id: 2, name: "2" },
-    { id: 3, name: "3" },
-    { id: 4, name: "4" },
-    { id: 5, name: "5" },
+    { id: 1, name: "1-Star" },
+    { id: 2, name: "2-Star" },
   ];
+
+  const Reports = [
+    { id: 1, name: "report1" },
+    { id: 2, name: "report2" },
+  ]
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const inputs = [
     {
@@ -36,21 +56,23 @@ const UniversityFeedback = () => {
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Date of Feedback",
-      name: "Date",
-      type: "date",
+      title: "Report",
+      name: "report",
+      type: "select",
+      double: true,
       required: true,
-      value: feedback.date,
-      onChange: e => setFeedback(current => ({ ...current, date: e.target.value }))
+      value: feedback.report,
+      onChange: e => setFeedback(current => ({ ...current, report: parseInt(e.target.value) })),
+      options: Reports.map(report => ({ title: report.name, value: report.id }))
     },
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Title of the Feedback",
       required: true,
-      value: feedback.title, // should match the property name in the backend model
-      onChange: e => setFeedback(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
+      value: feedback.title,
+      onChange: e => setFeedback(current => ({ ...current, title: e.target.value }))
     },
     {
       title: "Feedback",
@@ -79,7 +101,7 @@ const UniversityFeedback = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -95,25 +117,61 @@ const UniversityFeedback = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setFeedbackList(current => [...current, { ...feedback, id: current.length }]);
-    setFeedback({});
-    setAction("create");
-    console.log('Form Data Created');
+
+
+
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await UniversityFeedbackAPI.createUniversityFeedback(feedback)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setFeedback({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setFeedbackList(current => [...current.filter(rep => rep.id !== feedback.id), feedback]);
-    setFeedback({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await UniversityFeedbackAPI.updateUniversityFeedback(feedback.id, feedback)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setFeedback({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setFeedbackList(current => [...current.filter(rep => rep.id !== feedback.id)]);
-    setFeedback({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await UniversityFeedbackAPI.deleteUniversityFeedback(feedback.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setFeedback({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
 
@@ -124,8 +182,13 @@ const UniversityFeedback = () => {
       sortable: true
     },
     {
+      name: "Report",
+      selector: row => row.report,
+      sortable: true
+    },
+    {
       name: "Date",
-      selector: row => row.date,
+      selector: row => row.timestamp,
       sortable: true
     },
     {
@@ -179,6 +242,7 @@ const UniversityFeedback = () => {
       <TemplatePage
         pageTitle={"University Feedback"}
         pageDescrbition={"For univesity to submit periodical feedback to the student"}
+        loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
         formInputs={inputs}
@@ -191,7 +255,7 @@ const UniversityFeedback = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

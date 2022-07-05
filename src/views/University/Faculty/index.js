@@ -29,11 +29,11 @@ const TrainingDuration = () => {
     },
     {
       title: "Training Duration",
-      name: "training_duration", // should match the property name in the backend model
+      name: "training_duration",
       type: "integer",
       required: true,
-      value: faculty.training_duration, // should match the property name in the backend model
-      onChange: e => setFaculty(current => ({ ...current, training_duration: e.target.value })) // should match the property name in the backend model
+      value: faculty.training_duration,
+      onChange: e => setFaculty(current => ({ ...current, training_duration: e.target.value }))
     },
   ];
 
@@ -43,7 +43,7 @@ const TrainingDuration = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -66,7 +66,7 @@ const TrainingDuration = () => {
     console.log('Form Data Created');
   };
 
-  const onDataEdit = () => {
+  const onDataUpdate = () => {
     setFacultyList(current => [...current.filter(rep => rep.id !== faculty.id), faculty]);
     setFaculty({});
     setAction("create");
@@ -117,7 +117,7 @@ const TrainingDuration = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

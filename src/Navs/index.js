@@ -34,6 +34,18 @@ const _nav = [
       },
       {
         component: NavItem,
+        name: 'Opportunity Posts',
+        to: '/opportunity-posts',
+        icon: <Icon icon={faFilePen} className="px-1" />,
+      },
+      {
+        component: NavItem,
+        name: 'Experiences',
+        to: '/experiences-posts',
+        icon: <Icon icon={faFilePen} className="px-1" />,
+      },
+      {
+        component: NavItem,
         name: 'Student Application',
         to: '/students/application',
         icon: <Icon icon={faFilePen} className="px-1" />,
@@ -72,9 +84,15 @@ const _nav = [
       },
       {
         component: NavItem,
-        name: 'Opportunity Reports',
-        to: '/company/reports',
+        name: 'Company App Response',
+        to: '/company/response',
         icon: <Icon icon={faFileLines} className="px-1" />,
+      },
+      {
+        component: NavItem,
+        name: 'Company Reports',
+        to: '/company/reports',
+        icon: <Icon icon={faCommentDots} className="px-1" />,
       },
     ]
   },
@@ -100,6 +118,12 @@ const _nav = [
         component: NavItem,
         name: 'Student Report Remarks',
         to: '/university/report-remarks',
+        icon: <Icon icon={faFileLines} className="px-1" />,
+      },
+      {
+        component: NavItem,
+        name: 'Student Proposal Remarks',
+        to: '/university/proposal-remarks',
         icon: <Icon icon={faFileLines} className="px-1" />,
       },
       {

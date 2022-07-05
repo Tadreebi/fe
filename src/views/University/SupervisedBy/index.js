@@ -49,12 +49,12 @@ const SupervisedBy = () => {
     },
     {
       title: "Company",
-      name: "company", // should match the property name in the backend model
+      name: "company",
       type: "select",
       double: true,
       required: true,
-      value: supervisedBy.company, // should match the property name in the backend model
-      onChange: e => setSupervisedBy(current => ({ ...current, company: e.target.value })), // should match the property name in the backend model
+      value: supervisedBy.company,
+      onChange: e => setSupervisedBy(current => ({ ...current, company: e.target.value })),
       options: Companies.map(company => ({ title: company.name, value: company.id }))
     },
   ];
@@ -65,7 +65,7 @@ const SupervisedBy = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -88,7 +88,7 @@ const SupervisedBy = () => {
     console.log('Form Data Created');
   };
 
-  const onDataEdit = () => {
+  const onDataUpdate = () => {
     setSupervisedByList(current => [...current.filter(rep => rep.id !== supervisedBy.id), supervisedBy]);
     setSupervisedBy({});
     setAction("create");
@@ -156,7 +156,7 @@ const SupervisedBy = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

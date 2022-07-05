@@ -1,14 +1,95 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import StudentProfileAPI from 'src/api/StudentProfile';
 import { Button, ButtonGroup } from 'src/components/Root/Buttons';
 import { Card, CardBody, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
-import profileDemoData from "./demoData";
 
 
 const StudentProfile = ({ editable = false }) => {
-  const [profile, setProfile] = useState(profileDemoData)
+  const [profile, setProfile] = useState({})
+  const [skills, setSkills] = useState([])
+  const [experiences, setExperiences] = useState([])
+  const [ahievments, setAchievments] = useState([])
+  const [educations, setEducations] = useState([])
+  const [languages, setLanguages] = useState([])
+  const [contacts, setContacts] = useState([])
   const [editing, setEditing] = useState(false)
+
+  const callData = async () => {
+    await StudentProfileAPI.getProfile(1)
+      .then(res => {
+        console.log("Called Data", res.data);
+        setProfile(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+
+    await StudentProfileAPI.getAllSkills()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setSkills(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+
+    await StudentProfileAPI.getAllExperiences()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setExperiences(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+
+    await StudentProfileAPI.getAllWorks()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setAchievments(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+
+    await StudentProfileAPI.getAllEducations()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setEducations(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+
+    await StudentProfileAPI.getAllLanguages()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setLanguages(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+
+    await StudentProfileAPI.getAllContacts()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setContacts(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    callData();
+  }, [])
 
   return (
     <Container>
@@ -18,9 +99,9 @@ const StudentProfile = ({ editable = false }) => {
             <CardHeader>
               <Row>
                 <Col md={9}>
-                  <h4>
-                    Student Profile Example
-                  </h4>
+                  <h5>
+                    Student {profile.student} Profile
+                  </h5>
                 </Col>
 
                 <Col md={3}>
@@ -53,7 +134,7 @@ const StudentProfile = ({ editable = false }) => {
                   <img src={profile.image} width="100%" />
 
                   <h3 className='text-center'>
-                    {profile.name}
+                    {profile.student}
                   </h3>
 
                   <h5 className='text-center'>
@@ -67,9 +148,11 @@ const StudentProfile = ({ editable = false }) => {
                   </h5>
 
                   <Row>
-                    {profile?.contacts?.map((contact, i) => (
-                      <Col key={i}>
-                        {JSON.stringify(contact)}
+                    {contacts?.map((contact, i) => (
+                      <Col key={i} md={4}>
+                        <a href={contact.link} target="blank">
+                          {contact.title} | {contact.details}
+                        </a>
                       </Col>
                     ))}
                   </Row>
@@ -86,9 +169,9 @@ const StudentProfile = ({ editable = false }) => {
             </CardHeader>
 
             <CardBody>
-              {profile?.skills?.map((skill, i) => (
+              {skills?.map((skill, i) => (
                 <h6 key={i}>
-                  {skill.title}{" "}{skill.content}
+                  {skill.title}{" | "}{skill.details}
                 </h6>
               ))}
             </CardBody>
@@ -102,9 +185,9 @@ const StudentProfile = ({ editable = false }) => {
             </CardHeader>
 
             <CardBody>
-              {profile?.experiences?.map((experience, i) => (
+              {experiences?.map((experience, i) => (
                 <h6 key={i}>
-                  {experience.title}{" "}{experience.content}
+                  {experience.title}{" | "}{experience.details}
                 </h6>
               ))}
             </CardBody>
@@ -118,9 +201,9 @@ const StudentProfile = ({ editable = false }) => {
             </CardHeader>
 
             <CardBody>
-              {profile?.achievements?.map((achievement, i) => (
+              {ahievments?.map((achievement, i) => (
                 <h6 key={i}>
-                  {achievement.title}{" "}{achievement.content}
+                  {achievement.title}{" | "}{achievement.details}
                 </h6>
               ))}
             </CardBody>
@@ -134,9 +217,9 @@ const StudentProfile = ({ editable = false }) => {
             </CardHeader>
 
             <CardBody>
-              {profile?.educations?.map((education, i) => (
+              {educations?.map((education, i) => (
                 <h6 key={i}>
-                  {education.title}{" "}{education.content}
+                  {education.title}{" | "}{education.details}
                 </h6>
               ))}
             </CardBody>
@@ -150,9 +233,9 @@ const StudentProfile = ({ editable = false }) => {
             </CardHeader>
 
             <CardBody>
-              {profile?.languages?.map((language, i) => (
+              {languages?.map((language, i) => (
                 <h6 key={i}>
-                  {language.title}{" "}{language.content}
+                  {language.title}{" | "}{language.details}
                 </h6>
               ))}
             </CardBody>

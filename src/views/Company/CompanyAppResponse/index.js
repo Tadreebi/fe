@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import StudentApplicationAPI from 'src/api/StudentApplication';
-import TemplatePage from '../..';
+import CompanyAppResponseAPI from 'src/api/CompanyAppResponse';
+import TemplatePage from '../../templatePage';
 
 
-const StudentApplication = () => {
+const StudentApplicationRes = () => {
   const [applicationsList, setApplicationsList] = useState([]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
@@ -12,7 +12,7 @@ const StudentApplication = () => {
   const callData = async () => {
     setLoading(true);
 
-    await StudentApplicationAPI.getAllApplications()
+    await CompanyAppResponseAPI.getAllAppResponses()
       .then(res => {
         console.log("Called Data", res.data);
         setApplicationsList(res.data);
@@ -27,13 +27,14 @@ const StudentApplication = () => {
 
   const students = [
     { id: 1, name: "Emad" },
-    { id: 2, name: "Raghad" },
+    { id: 2, name: "Suhaib" },
   ];
 
-  const internships = [
+  const applications = [
     { id: 1, name: "ASAC" },
     { id: 2, name: "CSS" },
   ];
+
 
   useEffect(() => {
     callData();
@@ -41,74 +42,31 @@ const StudentApplication = () => {
 
   const inputs = [
     {
-      title: "Student",
-      name: "student",
-      type: "select",
+      title: "Student Application",
+      name: "applications",
+      type: "text",
       double: true,
       required: true,
-      value: application.student,
-      onChange: e => setApplication(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      value: application.applications,
+      disabled: true
     },
     {
-      title: "Internship",
-      name: "internship",
-      type: "select",
-      double: true,
-      required: true,
-      value: application.internship,
-      onChange: e => setApplication(current => ({ ...current, internship: e.target.value })),
-      options: internships.map(internship => ({ title: internship.name, value: internship.id }))
-    },
-    {
-      title: "Internship Hours",
-      name: "type",
-      type: "select",
-      required: true,
-      value: application.type,
-      onChange: e => setPost(current => ({ ...current, type: e.target.value })),
-      options: [
-        { title: "Full Time", value: "Full Time" },
-        { title: "Part Time", value: "Part Time" },
-      ]
-    },
-    {
-      title: "Preferable Internship Location",
-      name: "location",
-      type: "select",
-      required: true,
-      value: application.location,
-      onChange: e => setApplication(current => ({ ...current, location: e.target.value })),
-      options: [
-        { title: "Remote", value: "Remote" },
-        { title: "On Site", value: "On Site" },
-      ]
-    },
-    {
-      title: "Expected Salary",
-      name: "expected_salary",
-      type: "number",
-      required: true,
-      value: application.expected_salary || 0,
-      onChange: e => setApplication(current => ({ ...current, expected_salary: e.target.value }))
-    },
-    {
-      title: "Cover Letter",
-      name: "coverletter",
+      title: "Remarks",
+      name: "remarks",
       type: "textarea",
       fullwidth: true,
       required: true,
-      value: application.coverletter,
-      onChange: e => setApplication(current => ({ ...current, coverletter: e.target.value }))
+      value: application.remarks,
+      onChange: e => setApplication(current => ({ ...current, remarks: e.target.value }))
     },
     {
-      title: "Resume Link",
-      name: "resume",
-      type: "url",
+      title: "Accepted",
+      name: "accepted",
+      type: "switch",
       fullwidth: true,
       required: true,
-      value: application.resume,
-      onChange: e => setApplication(current => ({ ...current, resume: e.target.value }))
+      value: application.accepted,
+      onChange: e => setApplication(current => ({ ...current, accepted: e.target.checked }))
     },
   ];
 
@@ -137,7 +95,7 @@ const StudentApplication = () => {
   const onDataCreate = async () => {
     setLoading(true);
 
-    await StudentApplicationAPI.createApplication(application)
+    await CompanyAppResponseAPI.createAppResponse(application)
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -155,7 +113,7 @@ const StudentApplication = () => {
   const onDataUpdate = async () => {
     setLoading(true);
 
-    await StudentApplicationAPI.updateApplication(application.id, application)
+    await CompanyAppResponseAPI.updateAppResponse(application.id, application)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -173,7 +131,7 @@ const StudentApplication = () => {
   const onDataDelete = async () => {
     setLoading(true);
 
-    await StudentApplicationAPI.deleteApplication(application.id)
+    await CompanyAppResponseAPI.deleteAppResponse(application.id)
       .then(res => {
         console.log("Data Deleted Successfully");
         setApplication({});
@@ -257,20 +215,15 @@ const StudentApplication = () => {
       sortable: true
     },
     {
-      name: "Internship",
-      selector: row => row.internship,
+      name: "Remarks",
+      selector: row => row.remarks,
       sortable: true
     },
     {
-      name: "Preferable Internship Type",
-      selector: row => row.location,
+      name: "Accepted By Company",
+      selector: row => row.accepted ? "True" : "False",
       sortable: true
-    },
-    {
-      name: "Internship Hours",
-      selector: row => row.type,
-      sortable: true
-    },
+    }
 
   ];
   return (
@@ -299,4 +252,4 @@ const StudentApplication = () => {
   )
 }
 
-export default StudentApplication
+export default StudentApplicationRes

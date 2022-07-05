@@ -1,26 +1,52 @@
-import { useState } from 'react';
-import TemplatePage from '../..'
-import reportsDemoData from './demoData';
+import { useEffect, useState } from 'react';
+import CompanyReportAPI from 'src/api/CompanyReport';
+import TemplatePage from '../..';
 
 const CompanyReports = () => {
-  const [reportsList, setReportsList] = useState([...reportsDemoData]);
+  const [reportsList, setReportsList] = useState([]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
 
-  const company = [
-    { id: 1, name: "Socium" },
-    { id: 2, name: "ASAC'" },
+  const callData = async () => {
+    setLoading(true);
+
+    await CompanyReportAPI.getAllReports()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setReportsList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const companies = [
+    { id: 2, name: "Socium" },
+    { id: 4, name: "ASAC'" },
   ];
+
+  const students = [
+    { id: 1, name: "Emad" },
+    { id: 2, name: "Suhaib" },
+  ];
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Report Title",
       required: true,
-      value: report.title, // should match the property name in the backend model
-      onChange: e => setReport(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
+      value: report.title,
+      onChange: e => setReport(current => ({ ...current, title: e.target.value }))
     },
     {
       title: "Student",
@@ -30,17 +56,18 @@ const CompanyReports = () => {
       required: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, student: e.target.value })),
-      // options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students.map(student => ({ title: student.name, value: student.id }))
+
     },
     {
       title: "company",
       name: "company",
-      type: "textarea",
+      type: "select",
       double: true,
       required: true,
-      value: report.student,
+      value: report.company,
       onChange: e => setReport(current => ({ ...current, company: e.target.value })),
-      options: company.map(student => ({ title: company.name, value: company.id }))
+      options: companies.map(company => ({ title: company.name, value: company.id }))
     },
     {
       title: "Report Type",
@@ -50,56 +77,44 @@ const CompanyReports = () => {
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
       options: [
-        { title: "Periodical Report", value: "Periodical" },
-        { title: "Complain Report", value: "Complain" },
-        { title: "Final Report", value: "Final" }
+        { title: "Periodical Report", value: "Periodical Report" },
+        { title: "Complain Report", value: "Complain Report" },
+        { title: "Final Report", value: "Final Report" }
       ]
-    },
-
-    {
-      title: " Date of Report",
-      name: "date",
-      type: "date",
-      required: true,
-      value: report.date,
-      onChange: e => setReport(current => ({ ...current, date: e.target.value }))
     },
     {
       title: "Report Introduction",
       name: "intro",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.intro,
       onChange: e => setReport(current => ({ ...current, intro: e.target.value }))
+    },
+    {
+      title: "Report Content",
+      name: "report",
+      type: "textarea",
+      fullwidth: true,
+      required: true,
+      value: report.report,
+      onChange: e => setReport(current => ({ ...current, report: e.target.value }))
     },
     {
       title: "Report Conclusion",
       name: "conclusion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.conclusion,
       onChange: e => setReport(current => ({ ...current, conclusion: e.target.value }))
     },
     {
-      title: "Report Remarks",
-      name: "remarks",
-      type: "textarea",
-      fullwidth: true,
-      required: true,
-      value: report.remarks,
-      onChange: e => setReport(current => ({ ...current, remarks: e.target.value }))
-    },
-
-    {
       title: "Attendance",
-      name: "attendance",
+      name: "attendace",
       type: "number",
       fullwidth: true,
       required: true,
-      value: report.accepted,
-      onChange: e => setReport(current => ({ ...current, attendance: e.target.checked }))
+      value: report.attendace,
+      onChange: e => setReport(current => ({ ...current, attendace: e.target.value }))
     },
   ];
 
@@ -109,7 +124,7 @@ const CompanyReports = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -125,25 +140,58 @@ const CompanyReports = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setReportsList(current => [...current, { ...report, id: current.length }]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await CompanyReportAPI.createReport(report)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setReport({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setReportsList(current => [...current.filter(rep => rep.id !== report.id), report]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await CompanyReportAPI.updateReport(report.id, report)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setReport({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setReportsList(current => [...current.filter(rep => rep.id !== report.id)]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await CompanyReportAPI.deleteReport(report.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setReport({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const statisticsData = [
@@ -330,19 +378,20 @@ const CompanyReports = () => {
       <TemplatePage
         pageTitle={"Company Reports"}
         pageDescrbition={"For company to submit periodical & final reports to university supervisor"}
-        statisticsData={statisticsData} // New
-        chartsData={chartsData} // New
+        loading={loading}
+        statisticsData={statisticsData}
+        chartsData={chartsData}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Company Reports List"}
-        tableColumns={tableColumns} // New
-        tableRowDetails={true} // New
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={reportsList}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

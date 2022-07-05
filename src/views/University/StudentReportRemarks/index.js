@@ -1,35 +1,51 @@
-import { useState } from 'react';
-import TemplatePage from '../..'
-import reportsDemoData from './demoData';
+import { useEffect, useState } from 'react';
+import StudentReportAPI from 'src/api/StudentReport';
+import TemplatePage from '../..';
 
 const StudentReportRemarks = () => {
-  const [remarksList, setRemarksList] = useState([...reportsDemoData]);
+  const [remarksList, setRemarksList] = useState([]);
   const [remark, setRemark] = useState({});
+  const [loading, setLoading] = useState(false);
   const [action, setAction] = useState("create");
 
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.getAllRemarks()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setRemarksList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    callData();
+  }, []);
+
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Moayad" },
+    { id: 2, name: "Raghad" },
   ];
 
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Report Title",
-      required: true,
-      value: remark.title, // should match the property name in the backend model
+      value: remark.title,
       disabled: true
     },
     {
       title: "Student",
       name: "student",
       type: "text",
-      required: true,
       value: remark.student,
       disabled: true
     },
@@ -37,7 +53,6 @@ const StudentReportRemarks = () => {
       title: "Star Rating",
       name: "rating",
       type: "rating",
-      required: true,
       value: remark.rating,
       disabled: true
     },
@@ -45,7 +60,6 @@ const StudentReportRemarks = () => {
       title: "Report Type",
       name: "type",
       type: "select",
-      required: true,
       value: remark.type,
       disabled: true
     },
@@ -53,7 +67,6 @@ const StudentReportRemarks = () => {
       title: "Start Date of Report",
       name: "startDate",
       type: "date",
-      required: true,
       value: remark.startDate,
       disabled: true
     },
@@ -61,7 +74,6 @@ const StudentReportRemarks = () => {
       title: "End Date of Report",
       name: "endDate",
       type: "date",
-      required: true,
       value: remark.endDate,
       disabled: true
     },
@@ -70,7 +82,6 @@ const StudentReportRemarks = () => {
       name: "intro",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: remark.intro,
       disabled: true
     },
@@ -79,7 +90,6 @@ const StudentReportRemarks = () => {
       name: "conclusion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: remark.conclusion,
       disabled: true
     },
@@ -97,7 +107,6 @@ const StudentReportRemarks = () => {
       name: "accepted",
       type: "switch",
       fullwidth: true,
-      required: true,
       value: remark.accepted,
       onChange: e => setRemark(current => ({ ...current, accepted: e.target.checked }))
     },
@@ -109,7 +118,7 @@ const StudentReportRemarks = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -132,7 +141,7 @@ const StudentReportRemarks = () => {
     console.log('Form Data Created');
   };
 
-  const onDataEdit = () => {
+  const onDataUpdate = () => {
     setRemarksList(current => [...current.filter(rep => rep.id !== remark.id), remark]);
     setRemark({});
     setAction("create");
@@ -328,19 +337,20 @@ const StudentReportRemarks = () => {
       <TemplatePage
         pageTitle={"Student Report Remarks"}
         pageDescrbition={"For university supervisor to remark submitted student reports"}
-        statisticsData={statisticsData} // New
-        chartsData={chartsData} // New
+        statisticsData={statisticsData}
+        chartsData={chartsData}
+        loading={loading}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Report Remarks List"}
-        tableColumns={tableColumns} // New
-        tableRowDetails={true} // New
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={remarksList}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

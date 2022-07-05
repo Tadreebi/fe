@@ -1,34 +1,53 @@
-import { useState } from 'react'
-import TemplatePage from '../..'
-import detailsDemoData from "./demoData"
+import { useEffect, useState } from 'react';
+import UniversityTipsAPI from 'src/api/UniversityTip';
+import TemplatePage from '../..';
 
 
 const UniversityTips = () => {
-  const [tips, setTips] = useState(detailsDemoData);
+  const [tips, setTipsList] = useState([]);
   const [tip, setTip] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await UniversityTipsAPI.getAllTips()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setTipsList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const topics = [
     { id: 1, name: "Motivational" },
     { id: 2, name: "Skill References'" },
-    { id: 3, name: "Interview References" },
-    { id: 4, name: "Use the Internship Opportunity" },
   ];
 
   const types = [
     { id: 1, name: "File" },
-    { id: 2, name: "Multimedia" },
-    { id: 3, name: "Book" },
-    { id: 4, name: "Article" },
-    { id: 5, name: "Event" },
+    { id: 2, name: "Image" },
+    { id: 3, name: "Video" },
+    { id: 4, name: "Event" },
+    { id: 5, name: "Text" },
 
   ];
+
+  useEffect(() => {
+    callData();
+  }, []);
+
   const inputs = [
     {
       title: "Title",
       name: "title",
       type: "text",
-      placeholder: "University Tip Title",
       required: true,
       value: tip.title,
       onChange: e => setTip(current => ({ ...current, title: e.target.value }))
@@ -40,7 +59,7 @@ const UniversityTips = () => {
       required: true,
       value: tip.topic,
       onChange: e => setTip(current => ({ ...current, topic: e.target.value })),
-      options: topics.map(student => ({ title: student.name, value: student.id }))
+      options: topics.map(topic => ({ title: topic.name, value: topic.id }))
     },
     {
       title: "Type",
@@ -49,14 +68,12 @@ const UniversityTips = () => {
       required: true,
       value: tip.type,
       onChange: e => setTip(current => ({ ...current, type: e.target.value })),
-      options: types.map(type => ({ title: type.name, value: type.id }))
+      options: types.map(type => ({ title: type.name, value: type.name }))
     },
     {
       title: "Details",
       name: "details",
       type: "textarea",
-      placeholder: "University Tip Details",
-      required: true,
       fullwidth: true,
       value: tip.details,
       onChange: e => setTip(current => ({ ...current, details: e.target.value }))
@@ -69,7 +86,7 @@ const UniversityTips = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -85,25 +102,58 @@ const UniversityTips = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setTips(current => [...current, { ...tip, id: current.length }]);
-    setTip({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await UniversityTipsAPI.createTip(tip)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setTip({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setTips(current => [...current.filter(rep => rep.id !== tip.id), tip]);
-    setTip({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await UniversityTipsAPI.updateTip(tip.id, tip)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setTip({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setTips(current => [...current.filter(rep => rep.id !== tip.id)]);
-    setTip({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await UniversityTipsAPI.deleteTip(tip.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setTip({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const tableColumns = [
@@ -129,6 +179,7 @@ const UniversityTips = () => {
       <TemplatePage
         pageTitle={"Student Tips"}
         pageDescrbition={"For companies to submit tips for students"}
+        loading={loading}
         formTitle={"CRUD Tips"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
@@ -140,7 +191,7 @@ const UniversityTips = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>
