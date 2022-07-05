@@ -1,9 +1,9 @@
 import api from ".";
 
-const path = "token/";
+const path = "";
 
 const login = params => {
-  return api.post(`${path}api/token/`, { params });
+  return api.post(`${path}api/token/`, params);
 };
 
 const refresh = params => {

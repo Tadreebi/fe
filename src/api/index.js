@@ -1,5 +1,5 @@
 import axios from "axios";
-// import store from "src/redux/store";
+import store from "src/store";
 
 export const baseURL = process.env.BACKEND_URL || "http://localhost:8000/";
 
@@ -9,10 +9,10 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
-    // const { jwtToken } = store.getState().user;
-    // if (jwtToken) {
-    //   config.headers["Authorization"] = `Bearer ${jwtToken}`;
-    // }
+    const JWT = store.getState().user;
+    if (JWT) {
+      config.headers["Authorization"] = `Bearer ${JWT}`;
+    }
     return config;
   },
   error => {
