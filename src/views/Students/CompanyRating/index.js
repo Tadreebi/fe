@@ -29,6 +29,11 @@ const CompanyRating = () => {
     callData();
   }, []);
 
+  const companies = [
+    { id: 2, name: "Socium" },
+    { id: 4, name: "ASAC'" },
+  ];
+
   const inputs = [
     {
       title: "Company Name",
@@ -37,11 +42,7 @@ const CompanyRating = () => {
       required: true,
       value: score.company,
       onChange: e => setScore(current => ({ ...current, company: e.target.value })),
-      options: [
-        { title: "Socium", value: 3 },
-        { title: "ASAC", value: 4 },
-
-      ]
+      options: companies.map(company => ({ value: company.id, title: company.name }))
     },
     {
       title: "Does the training program covers it's description?",
@@ -237,7 +238,7 @@ const CompanyRating = () => {
   const tableColumns = [
     {
       name: "Company Name",
-      selector: row => row.company,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true
     },
     {

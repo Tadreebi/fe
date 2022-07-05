@@ -176,12 +176,12 @@ const UniversityFeedback = () => {
   const tableColumns = [
     {
       name: "Student",
-      selector: row => row.student,
+      selector: row => students.find(student => student.id === row.student)?.name,
       sortable: true
     },
     {
       name: "Report",
-      selector: row => row.report,
+      selector: row => Reports.find(report => report.id === row.report)?.name,
       sortable: true
     },
     {

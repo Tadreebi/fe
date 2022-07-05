@@ -36,8 +36,8 @@ const StudentProposalRemarks = () => {
   ];
 
   const internshipApps = [
-    { id: 1, name: "Emad Company" },
-    { id: 2, name: "Suhaib Company" },
+    { id: 3, name: "Emad Company" },
+    { id: 4, name: "Suhaib Company" },
   ];
 
   useEffect(() => {
@@ -239,12 +239,12 @@ const StudentProposalRemarks = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: row => row.company,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true
     },
     {
       name: "Internship",
-      selector: row => row.internship_application,
+      selector: row => internshipApps.find(app => app.id === row.internship_application)?.name,
       sortable: true
     },
     {

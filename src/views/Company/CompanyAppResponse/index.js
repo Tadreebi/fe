@@ -26,8 +26,8 @@ const StudentApplicationRes = () => {
   };
 
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Suhaib" },
+    { id: 3, name: "Emad" },
+    { id: 4, name: "Suhaib" },
   ];
 
   const applications = [
@@ -210,7 +210,7 @@ const StudentApplicationRes = () => {
   const tableColumns = [
     {
       name: "Student",
-      selector: row => row.student,
+      selector: row => students.find(student => student.id === row.student)?.name,
       sortable: true
     },
     {

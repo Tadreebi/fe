@@ -164,7 +164,7 @@ const UniversityTips = () => {
     },
     {
       name: "Topic",
-      selector: row => row.topic,
+      selector: row => topics.find(topic => topic.id === row.topic)?.name,
       sortable: true
     },
     {

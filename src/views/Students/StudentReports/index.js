@@ -29,6 +29,11 @@ const StudentReports = () => {
     { id: 2, name: "Suhaib" },
   ];
 
+  const reportTypes = [
+    { name: "Weekly Report", id: 1 },
+    { name: "Monthly Report", id: 2 },
+  ];
+
   useEffect(() => {
     callData();
   }, []);
@@ -58,10 +63,7 @@ const StudentReports = () => {
       required: true,
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
-      options: [
-        { title: "Weekly Report", value: 1 },
-        { title: "Monthly Report", value: 2 },
-      ]
+      options: reportTypes.map(report => ({ title: report.name, value: report.id }))
     },
     {
       title: "Start Date of Report",
@@ -353,7 +355,7 @@ const StudentReports = () => {
     },
     {
       name: "Type",
-      selector: row => row.type,
+      selector: row => reportTypes.find(type => type.id === row.type)?.name,
       sortable: true
     },
     {

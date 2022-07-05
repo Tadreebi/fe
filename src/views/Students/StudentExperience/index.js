@@ -175,7 +175,7 @@ const StudentExperience = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: row => row.company,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true
     },
     {

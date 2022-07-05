@@ -38,12 +38,12 @@ const opportunityPosts = () => {
     // Companies List API
     {
       title: "Company",
-      name: "company",
+      name: "company_id",
       type: "select",
       required: true,
-      value: post.company,
+      value: post.company_id,
       onChange: (e) =>
-        setPost(current => ({ ...current, company: e.target.value })),
+        setPost(current => ({ ...current, company_id: e.target.value })),
       options: companies.map((company) => ({ title: company.name, value: company.id })),
     },
     {
@@ -399,7 +399,7 @@ const opportunityPosts = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: row => row.company,
+      selector: row => companies.find(company => company.id === row.company_id)?.name,
       sortable: true,
     },
     {

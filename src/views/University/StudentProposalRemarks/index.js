@@ -50,13 +50,13 @@ const StudentProposalsRes = () => {
   ];
 
   const companies = [
-    { id: 1, name: "Emad Company" },
-    { id: 2, name: "Suhaib Company" },
+    { id: 3, name: "Emad Company" },
+    { id: 4, name: "Suhaib Company" },
   ];
 
   const InternshipApp = [
-    { id: 1, name: "Emad Company" },
-    { id: 2, name: "Suhaib Company" },
+    { id: 3, name: "Emad Company" },
+    { id: 4, name: "Suhaib Company" },
   ];
 
   useEffect(() => {
@@ -71,21 +71,24 @@ const StudentProposalsRes = () => {
       name: "student",
       type: "select",
       value: proposal.student,
-      disabled: true
+      disabled: true,
+      options: students.map(student => ({ value: student.id, title: student.name }))
     },
     {
       title: "Companies",
       name: "company",
       type: "select",
       value: proposal.company,
-      disabled: true
+      disabled: true,
+      options: companies.map(student => ({ value: student.id, title: student.name }))
     },
     {
       title: "Internship",
       name: "internship_application",
       type: "select",
       value: proposal.internship_application,
-      disabled: true
+      disabled: true,
+      options: InternshipApp.map(app => ({ value: app.id, title: app.name }))
     },
     {
       title: "Remarks",
@@ -252,17 +255,17 @@ const StudentProposalsRes = () => {
   const tableColumns = [
     {
       name: "Student",
-      selector: row => row.student,
+      selector: row => students.find(student => student.id === row.student)?.name,
       sortable: true
     },
     {
       name: "Company",
-      selector: row => row.company,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true
     },
     {
       name: "Internship",
-      selector: row => row.internship_application,
+      selector: row => InternshipApp.find(app => app.id === row.internship_application)?.name,
       sortable: true
     },
     {

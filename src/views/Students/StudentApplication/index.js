@@ -252,7 +252,7 @@ const StudentApplication = () => {
   const tableColumns = [
     {
       name: "Internship",
-      selector: row => row.internship,
+      selector: row => internships.find(internship => internship.id === row.internship)?.name,
       sortable: true
     },
     {
