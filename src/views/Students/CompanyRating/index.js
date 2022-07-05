@@ -149,7 +149,7 @@ const CompanyRating = () => {
       name: "comments",
       type: "textarea",
       fullwidth: true,
-      value: experience.comments,
+      value: score.comments,
       onChange: e => setScore(current => ({ ...current, comments: e.target.value }))
     },
   ];
