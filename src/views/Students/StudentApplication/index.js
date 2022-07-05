@@ -89,7 +89,7 @@ const StudentApplication = () => {
       name: "expected_salary",
       type: "number",
       required: true,
-      value: application.expected_salary,
+      value: application.expected_salary || 0,
       onChange: e => setApplication(current => ({ ...current, expected_salary: e.target.value }))
     },
     {
@@ -102,13 +102,12 @@ const StudentApplication = () => {
       onChange: e => setApplication(current => ({ ...current, coverletter: e.target.value }))
     },
     {
-      title: "Resume",
+      title: "Resume Link",
       name: "resume",
-      type: "file",
+      type: "text",
       fullwidth: true,
       required: true,
       value: application.resume,
-      onChange: e => setApplication(current => ({ ...current, resume: e.target.value }))
     },
   ];
 
