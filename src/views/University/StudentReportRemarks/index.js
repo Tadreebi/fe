@@ -21,7 +21,6 @@ const StudentReportRemarks = () => {
       name: "title", // should match the property name in the backend model
       type: "text",
       placeholder: "Report Title",
-      required: true,
       value: remark.title, // should match the property name in the backend model
       disabled: true
     },
@@ -29,7 +28,6 @@ const StudentReportRemarks = () => {
       title: "Student",
       name: "student",
       type: "text",
-      required: true,
       value: remark.student,
       disabled: true
     },
@@ -37,7 +35,6 @@ const StudentReportRemarks = () => {
       title: "Star Rating",
       name: "rating",
       type: "rating",
-      required: true,
       value: remark.rating,
       disabled: true
     },
@@ -45,7 +42,6 @@ const StudentReportRemarks = () => {
       title: "Report Type",
       name: "type",
       type: "select",
-      required: true,
       value: remark.type,
       disabled: true
     },
@@ -53,7 +49,6 @@ const StudentReportRemarks = () => {
       title: "Start Date of Report",
       name: "startDate",
       type: "date",
-      required: true,
       value: remark.startDate,
       disabled: true
     },
@@ -61,7 +56,6 @@ const StudentReportRemarks = () => {
       title: "End Date of Report",
       name: "endDate",
       type: "date",
-      required: true,
       value: remark.endDate,
       disabled: true
     },
@@ -70,7 +64,6 @@ const StudentReportRemarks = () => {
       name: "intro",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: remark.intro,
       disabled: true
     },
@@ -79,7 +72,6 @@ const StudentReportRemarks = () => {
       name: "conclusion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: remark.conclusion,
       disabled: true
     },
