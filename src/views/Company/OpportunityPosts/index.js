@@ -25,12 +25,10 @@ const opportunityPosts = () => {
         setLoading(false);
       });
   };
+
   const companies = [
     { id: 1, name: "ASAC" },
     { id: 2, name: "CSS" },
-    { id: 3, name: "CC" },
-    { id: 4, name: "Amazon" },
-    { id: 5, name: "Google" },
   ];
 
   useEffect(() => {
@@ -47,7 +45,7 @@ const opportunityPosts = () => {
       required: true,
       value: post.company,
       onChange: (e) =>
-        setPost((current) => ({ ...current, company: e.target.value })),
+        setPost(current => ({ ...current, company: e.target.value })),
       options: companies.map((company) => ({
         title: company.name,
         value: company.id,
@@ -62,25 +60,16 @@ const opportunityPosts = () => {
       required: true,
       value: post.position,
       onChange: (e) =>
-        setPost((current) => ({ ...current, position: e.target.value })),
+        setPost(current => ({ ...current, position: e.target.value })),
     },
     {
-      title: "Internship Type",
+      title: "Payment",
       name: "paid",
-      type: "select",
+      type: "switch",
       required: true,
       value: post.paid,
       onChange: (e) =>
-        setPost((current) => ({ ...current, paid: e.target.value })),
-      options: [
-        { title: "Paid Internship", value: "Paid Internship" },
-        {
-          title: "Partially-paid Internship",
-          value: "Partially-paid Internship",
-        },
-        { title: "Unpaid Internship", value: "Unpaid Internship" },
-        { title: "Virtual Internship", value: "Virtual Internship" },
-      ],
+        setPost(current => ({ ...current, paid: e.target.value })),
     },
     {
       title: "Internship Hours",
@@ -89,7 +78,7 @@ const opportunityPosts = () => {
       required: true,
       value: post.type,
       onChange: (e) =>
-        setPost((current) => ({ ...current, type: e.target.value })),
+        setPost(current => ({ ...current, type: e.target.value })),
       options: [
         { title: "Full Time", value: "Full Time" },
         { title: "Part Time", value: "Part Time" },
@@ -102,7 +91,7 @@ const opportunityPosts = () => {
       required: true,
       value: post.experience,
       onChange: (e) =>
-        setPost((current) => ({ ...current, experience: e.target.value })),
+        setPost(current => ({ ...current, experience: e.target.value })),
       options: [
         { title: "No Experience", value: "No Experience" },
         { title: "One Year", value: "One Year" },
@@ -117,7 +106,7 @@ const opportunityPosts = () => {
       required: true,
       value: post.education,
       onChange: (e) =>
-        setPost((current) => ({ ...current, education: e.target.value })),
+        setPost(current => ({ ...current, education: e.target.value })),
       options: [
         { title: "Bachelors", value: "Bachelors" },
         { title: "Masters", value: "Masters" },
@@ -131,15 +120,15 @@ const opportunityPosts = () => {
       required: true,
       value: post.industry,
       onChange: (e) =>
-        setPost((current) => ({ ...current, industry: e.target.value })),
+        setPost(current => ({ ...current, industry: e.target.value })),
       options: [
-        { title: "Business", value: "Business" },
-        { title: "It", value: "It" },
-        { title: "Banking", value: "Banking" },
-        { title: "Education", value: "Education" },
-        { title: "Engineering", value: "Engineering" },
-        { title: "Medical", value: "Medical" },
-        { title: "Others", value: "Others" },
+        { title: "Business", value: "BUSINESS" },
+        { title: "It", value: "IT" },
+        { title: "Banking", value: "BANKING" },
+        { title: "Education", value: "EDUCATION" },
+        { title: "Engineering", value: "ENGINEERING" },
+        { title: "Medical", value: "MEDICAL" },
+        { title: "Others", value: "OTHERS" },
       ],
     },
     {
@@ -149,27 +138,30 @@ const opportunityPosts = () => {
       required: true,
       value: post.salary,
       onChange: (e) =>
-        setPost((current) => ({ ...current, salary: e.target.value })),
+        setPost(current => ({ ...current, salary: e.target.value })),
     },
     {
       title: "City",
       name: "city",
       type: "text",
       required: true,
-      fullwidth: true,
       value: post.city,
       onChange: (e) =>
-        setPost((current) => ({ ...current, city: e.target.value })),
+        setPost(current => ({ ...current, city: e.target.value })),
     },
     {
       title: "Location",
       name: "location",
-      type: "location",
+      type: "select",
       required: true,
       fullwidth: true,
       value: post.location,
       onChange: (e) =>
-        setPost((current) => ({ ...current, location: e.target.value })),
+        setPost(current => ({ ...current, location: e.target.value })),
+      options: [
+        { title: "On Site", value: "On Site" },
+        { title: "Remote", value: "Remote" },
+      ],
     },
     {
       title: "Vacancies",
@@ -178,7 +170,7 @@ const opportunityPosts = () => {
       required: true,
       value: post.vacancies,
       onChange: (e) =>
-        setPost((current) => ({ ...current, vacancies: e.target.value })),
+        setPost(current => ({ ...current, vacancies: e.target.value })),
     },
     {
       title: "Internship Overview",
@@ -188,7 +180,7 @@ const opportunityPosts = () => {
       fullwidth: true,
       value: post.description,
       onChange: (e) =>
-        setPost((current) => ({ ...current, description: e.target.value })),
+        setPost(current => ({ ...current, description: e.target.value })),
     },
     {
       title: "Supervisor Name",
@@ -198,7 +190,7 @@ const opportunityPosts = () => {
       fullwidth: true,
       value: post.supervisor_Name,
       onChange: (e) =>
-        setPost((current) => ({ ...current, supervisor_Name: e.target.value })),
+        setPost(current => ({ ...current, supervisor_Name: e.target.value })),
     },
     {
       title: "Supervisor Position",
@@ -208,7 +200,7 @@ const opportunityPosts = () => {
       fullwidth: true,
       value: post.subervisor_position,
       onChange: (e) =>
-        setPost((current) => ({
+        setPost(current => ({
           ...current,
           subervisor_position: e.target.value,
         })),
@@ -221,7 +213,7 @@ const opportunityPosts = () => {
       fullwidth: true,
       value: post.supervisor_phone_number,
       onChange: (e) =>
-        setPost((current) => ({
+        setPost(current => ({
           ...current,
           supervisor_phone_number: e.target.value,
         })),
@@ -233,7 +225,7 @@ const opportunityPosts = () => {
       required: true,
       value: post.endDate,
       onChange: (e) =>
-        setPost((current) => ({ ...current, endDate: e.target.value })),
+        setPost(current => ({ ...current, endDate: e.target.value })),
     },
   ];
 
@@ -315,7 +307,7 @@ const opportunityPosts = () => {
   const statisticsData = [
     {
       title: "Internships Hours",
-      number: postsList.map(intern => intern.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: postsList.map(intern => intern.type).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -326,7 +318,7 @@ const opportunityPosts = () => {
     },
     {
       title: "Internships Type",
-      number: postsList.map(intern => intern.paid).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: postsList.map(intern => intern.paid).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -339,7 +331,7 @@ const opportunityPosts = () => {
     },
     {
       title: "Education",
-      number: postsList.map(intern => intern.education).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: postsList.map(intern => intern.education).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -351,7 +343,7 @@ const opportunityPosts = () => {
     },
     {
       title: "Indsutry",
-      number: postsList.map(intern => intern.industry).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: postsList.map(intern => intern.industry).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
