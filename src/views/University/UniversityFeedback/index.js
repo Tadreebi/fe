@@ -28,24 +28,17 @@ const UniversityFeedback = () => {
 
   const students = [
     { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 2, name: "Moayad" },
   ];
 
   const Rating = [
-    { id: 1, name: "1" },
-    { id: 2, name: "2" },
-    { id: 3, name: "3" },
-    { id: 4, name: "4" },
-    { id: 5, name: "5" },
+    { id: 1, name: "1-Star" },
+    { id: 2, name: "2-Star" },
   ];
 
   const Reports = [
     { id: 1, name: "report1" },
     { id: 2, name: "report2" },
-    { id: 3, name: "report3" },
   ]
 
   useEffect(() => {
@@ -61,7 +54,7 @@ const UniversityFeedback = () => {
       required: true,
       value: feedback.student,
       onChange: e => setFeedback(current => ({ ...current, student: parseInt(e.target.value) })),
-      options: students.map(theStudent => ({ title: theStudent.name, value: theStudent.id }))
+      options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Report",
@@ -71,24 +64,16 @@ const UniversityFeedback = () => {
       required: true,
       value: feedback.report,
       onChange: e => setFeedback(current => ({ ...current, report: parseInt(e.target.value) })),
-      options: Reports.map(theReport => ({ title: theReport.name, value: theReport.id }))
-    },
-    {
-      title: "Date of Feedback",
-      name: "timestamp",
-      type: "date",
-      required: true,
-      value: feedback.timestamp,
-      onChange: e => setFeedback(current => ({ ...current, timestamp: e.target.value }))
+      options: Reports.map(report => ({ title: report.name, value: report.id }))
     },
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Title of the Feedback",
       required: true,
-      value: feedback.title, // should match the property name in the backend model
-      onChange: e => setFeedback(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
+      value: feedback.title,
+      onChange: e => setFeedback(current => ({ ...current, title: e.target.value }))
     },
     {
       title: "Feedback",

@@ -18,10 +18,10 @@ const StudentReportRemarks = () => {
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Report Title",
-      value: remark.title, // should match the property name in the backend model
+      value: remark.title,
       disabled: true
     },
     {

@@ -81,10 +81,10 @@ const StudentProposals = () => {
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Proposal Title",
-      value: proposal.title, // should match the property name in the backend model
+      value: proposal.title,
       disabled: true
     },
     {

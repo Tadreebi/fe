@@ -29,11 +29,11 @@ const TrainingDuration = () => {
     },
     {
       title: "Training Duration",
-      name: "training_duration", // should match the property name in the backend model
+      name: "training_duration",
       type: "integer",
       required: true,
-      value: faculty.training_duration, // should match the property name in the backend model
-      onChange: e => setFaculty(current => ({ ...current, training_duration: e.target.value })) // should match the property name in the backend model
+      value: faculty.training_duration,
+      onChange: e => setFaculty(current => ({ ...current, training_duration: e.target.value }))
     },
   ];
 

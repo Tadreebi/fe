@@ -49,12 +49,12 @@ const SupervisedBy = () => {
     },
     {
       title: "Company",
-      name: "company", // should match the property name in the backend model
+      name: "company",
       type: "select",
       double: true,
       required: true,
-      value: supervisedBy.company, // should match the property name in the backend model
-      onChange: e => setSupervisedBy(current => ({ ...current, company: e.target.value })), // should match the property name in the backend model
+      value: supervisedBy.company,
+      onChange: e => setSupervisedBy(current => ({ ...current, company: e.target.value })),
       options: Companies.map(company => ({ title: company.name, value: company.id }))
     },
   ];
