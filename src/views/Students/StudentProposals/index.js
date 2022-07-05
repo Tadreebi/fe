@@ -241,11 +241,6 @@ const StudentProposals = () => {
 
   const tableColumns = [
     {
-      name: "Title",
-      selector: row => row.title,
-      sortable: true
-    },
-    {
       name: "Student",
       selector: row => row.student,
       sortable: true
