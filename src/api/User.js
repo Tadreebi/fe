@@ -1,25 +1,37 @@
 import api from ".";
 
-const path = "api/";
+const path = "token/";
 
 const login = params => {
-  return api.get(`${path}token/`, { params });
+  return api.post(`${path}api/token/`, { params });
 };
 
 const refresh = params => {
-  return api.get(`${path}refresh/`, { params });
+  return api.post(`${path}api/token/refresh/`, { params });
 };
 
-const regStudent = id => {
-  return api.get(`${path}${id}`);
+const regStudent = data => {
+  return api.post(`${path}accounts/signup/student`, data);
 };
 
 const regStaff = data => {
-  return api.post(`${path}create/`, data);
+  return api.post(`${path}accounts/signup/university`, data);
 };
 
-const regCompany = (id, data) => {
-  return api.put(`${path}update/${id}`, data);
+const regCompany = data => {
+  return api.post(`${path}accounts/signup/company`, data);
+};
+
+const getStudent = username => {
+  return api.get(`${path}accounts/student/${username}/`);
+};
+
+const getStaff = username => {
+  return api.post(`${path}accounts/university/${username}/`);
+};
+
+const getCompany = username => {
+  return api.put(`${path}accounts/company/${username}/`);
 };
 
 export default {
@@ -28,4 +40,7 @@ export default {
   regStudent,
   regStaff,
   regCompany,
+  getStudent,
+  getStaff,
+  getCompany
 };

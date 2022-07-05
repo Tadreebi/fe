@@ -1,8 +1,6 @@
-import { useState , useEffect} from 'react'
-import poposalsDemoData from './demoData';
-import TemplatePage from '../../templatePage'
+import { useEffect, useState } from 'react';
 import StudentProposalAPI from 'src/api/StudentProposal';
-
+import TemplatePage from '../../templatePage';
 
 
 const StudentProposals = () => {
@@ -29,25 +27,17 @@ const StudentProposals = () => {
 
   const students = [
     { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
-  ];
-  const companies = [
-    { id: 1, name: "Emad Company" },
-    { id: 2, name: "Ghaida' Company" },
-    { id: 3, name: "Moayad Company" },
-    { id: 4, name: "Raghad Company" },
-    { id: 5, name: "Suhaib Company" },
+    { id: 2, name: "Moayad" },
   ];
 
-  const InternshipApp = [
+  const companies = [
     { id: 1, name: "Emad Company" },
-    { id: 2, name: "Ghaida' Company" },
-    { id: 3, name: "Moayad Company" },
-    { id: 4, name: "Raghad Company" },
-    { id: 5, name: "Suhaib Company" },
+    { id: 2, name: "Raghad Company" },
+  ];
+
+  const internshipApps = [
+    { id: 1, name: "Emad Company" },
+    { id: 2, name: "Suhaib Company" },
   ];
 
   useEffect(() => { // Create UseEffect
@@ -55,15 +45,6 @@ const StudentProposals = () => {
   }, []);
 
   const inputs = [
-    {
-      title: "Title",
-      name: "title", // should match the property name in the backend model
-      type: "text",
-      placeholder: "Proposal Title",
-      required: true,
-      value: proposal.title, // should match the property name in the backend model
-      onChange: e => setproposal(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
-    },
     {
       title: "Student",
       name: "student",
@@ -75,7 +56,7 @@ const StudentProposals = () => {
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Companies",
+      title: "Company",
       name: "company",
       type: "select",
       double: true,
@@ -91,8 +72,8 @@ const StudentProposals = () => {
       double: true,
       required: true,
       value: proposal.internship_application,
-      onChange: e => setproposal(current => ({ ...current, inter: e.target.value })),
-      options: InternshipApp.map(inter => ({ title: inter.name, value: inter.id }))
+      onChange: e => setproposal(current => ({ ...current, internship_application: e.target.value })),
+      options: internshipApps.map(inter => ({ title: inter.name, value: inter.id }))
     },
     {
       title: "Remarks",
@@ -120,7 +101,7 @@ const StudentProposals = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -141,7 +122,7 @@ const StudentProposals = () => {
 
     await StudentProposalAPI.createProposal(proposal) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setproposal({});
         setAction("create");
@@ -154,12 +135,12 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await StudentProposalAPI.updateProposal(proposal.id, proposal) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setproposal({});
         setAction("create");
@@ -312,7 +293,7 @@ const StudentProposals = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

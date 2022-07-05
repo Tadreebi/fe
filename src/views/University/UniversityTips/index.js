@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import UniversityTipsAPI from 'src/api/UniversityTip';
-import TemplatePage from '../../templatePage'
-import detailsDemoData from "./demoData"
+import TemplatePage from '../../templatePage';
 
 
 const UniversityTips = () => {
@@ -29,8 +28,6 @@ const UniversityTips = () => {
   const topics = [
     { id: 1, name: "Motivational" },
     { id: 2, name: "Skill References'" },
-    { id: 3, name: "Interview References" },
-    { id: 4, name: "Use the Internship Opportunity" },
   ];
 
   const types = [
@@ -50,7 +47,6 @@ const UniversityTips = () => {
       title: "Title",
       name: "title",
       type: "text",
-      placeholder: "University Tip Title",
       required: true,
       value: tip.title,
       onChange: e => setTip(current => ({ ...current, title: e.target.value }))
@@ -62,7 +58,7 @@ const UniversityTips = () => {
       required: true,
       value: tip.topic,
       onChange: e => setTip(current => ({ ...current, topic: e.target.value })),
-      options: topics.map(student => ({ title: student.name, value: student.id }))
+      options: topics.map(topic => ({ title: topic.name, value: topic.id }))
     },
     {
       title: "Type",
@@ -71,14 +67,12 @@ const UniversityTips = () => {
       required: true,
       value: tip.type,
       onChange: e => setTip(current => ({ ...current, type: e.target.value })),
-      options: types.map(type => ({ title: type.name, value: type.id }))
+      options: types.map(type => ({ title: type.name, value: type.name }))
     },
     {
       title: "Details",
       name: "details",
       type: "textarea",
-      placeholder: "University Tip Details",
-      required: true,
       fullwidth: true,
       value: tip.details,
       onChange: e => setTip(current => ({ ...current, details: e.target.value }))
@@ -91,7 +85,7 @@ const UniversityTips = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -125,12 +119,12 @@ const UniversityTips = () => {
       });
   };
 
-  const onDataEdit = async () => {
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await UniversityTipsAPI.updateTip(tip.id, tip)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setTip({});
         setAction("create");
@@ -196,7 +190,7 @@ const UniversityTips = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

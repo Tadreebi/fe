@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport'; // Import API Calls
 import TemplatePage from '../../templatePage';
-import reportsDemoData from './demoData';
 
 const StudentReports = () => {
   const [reportsList, setReportsList] = useState([]);
@@ -24,13 +23,10 @@ const StudentReports = () => {
         setLoading(false);
       });
   };
-// 
+  //
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Moayad" },
+    { id: 2, name: "Suhaib" },
   ];
 
   useEffect(() => { // Create UseEffect
@@ -42,7 +38,6 @@ const StudentReports = () => {
       title: "Title",
       name: "title",
       type: "text",
-      placeholder: "Report Title",
       required: true,
       value: report.title,
       onChange: e => setReport(current => ({ ...current, title: e.target.value }))
@@ -57,14 +52,6 @@ const StudentReports = () => {
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Star Rating",
-      name: "rating",
-      type: "rating",
-      required: true,
-      value: report.rating,
-      onChange: e => setReport(current => ({ ...current, rating: e }))
-    },
-    {
       title: "Report Type",
       name: "type",
       type: "select",
@@ -72,9 +59,8 @@ const StudentReports = () => {
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
       options: [
-        { title: "Weekly Report", value: "Weekly" },
-        { title: "Monthly Report", value: "Monthly" },
-        { title: "Final Report", value: "Final" }
+        { title: "Weekly Report", value: 1 },
+        { title: "Monthly Report", value: 2 },
       ]
     },
     {
@@ -98,7 +84,6 @@ const StudentReports = () => {
       name: "intro",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.intro,
       onChange: e => setReport(current => ({ ...current, intro: e.target.value }))
     },
@@ -107,7 +92,6 @@ const StudentReports = () => {
       name: "conclusion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.conclusion,
       onChange: e => setReport(current => ({ ...current, conclusion: e.target.value }))
     },
@@ -116,7 +100,6 @@ const StudentReports = () => {
       name: "remarks",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.remarks,
       disabled: true
     },
@@ -125,7 +108,6 @@ const StudentReports = () => {
       name: "accepted",
       type: "switch",
       fullwidth: true,
-      required: true,
       value: report.accepted,
       disabled: true
     },
@@ -137,7 +119,7 @@ const StudentReports = () => {
     action === "create" ? (
       onDataCreate()
     ) : action === "update" ? (
-      onDataEdit()
+      onDataUpdate()
     ) : action === "delete" && (
       onDataDelete()
     );
@@ -172,12 +154,12 @@ const StudentReports = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await StudentReportAPI.updateReport(report.id, report) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setReport({});
         setAction("create");
@@ -403,7 +385,7 @@ const StudentReports = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

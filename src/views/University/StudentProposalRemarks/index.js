@@ -1,8 +1,7 @@
-import { useState , useEffect } from 'react'
-import poposalsDemoData from './demoData';
-import TemplatePage from '../../templatePage'
-import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
+import { useEffect, useState } from 'react';
 import StudentProposalAPI from 'src/api/StudentProposal';
+import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
+import TemplatePage from '../../templatePage';
 
 
 const StudentProposals = () => {
@@ -10,9 +9,9 @@ const StudentProposals = () => {
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false); // New
-  const [ProposalsResponses , setProposalsResponses]= useState([]);
+  const [ProposalsResponses, setProposalsResponses] = useState([]);
   const [Response, setResponse] = useState({});
-  let alldata=[]
+  let alldata = []
 
 
   const callData = async () => {
@@ -46,27 +45,20 @@ const StudentProposals = () => {
         setLoading(false);
       });
   };
+
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Moayad" },
+    { id: 2, name: "Raghad" },
   ];
+
   const companies = [
     { id: 1, name: "Emad Company" },
-    { id: 2, name: "Ghaida' Company" },
-    { id: 3, name: "Moayad Company" },
-    { id: 4, name: "Raghad Company" },
-    { id: 5, name: "Suhaib Company" },
+    { id: 2, name: "Suhaib Company" },
   ];
 
   const InternshipApp = [
     { id: 1, name: "Emad Company" },
-    { id: 2, name: "Ghaida' Company" },
-    { id: 3, name: "Moayad Company" },
-    { id: 4, name: "Raghad Company" },
-    { id: 5, name: "Suhaib Company" },
+    { id: 2, name: "Suhaib Company" },
   ];
 
   useEffect(() => { // Create UseEffect
@@ -81,11 +73,10 @@ const StudentProposals = () => {
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Proposal Title",
-      required: true,
-      value: proposal.title, // should match the property name in the backend model
+      value: proposal.title,
       disabled: true
     },
     {
@@ -93,7 +84,6 @@ const StudentProposals = () => {
       name: "student",
       type: "select",
       double: true,
-      required: true,
       value: proposal.student,
       disabled: true
     },
@@ -102,7 +92,6 @@ const StudentProposals = () => {
       name: "company",
       type: "select",
       double: true,
-      required: true,
       value: proposal.company,
       disabled: true
     },
@@ -111,7 +100,6 @@ const StudentProposals = () => {
       name: "internship_application",
       type: "select",
       double: true,
-      required: true,
       value: proposal.internship_application,
       disabled: true
     },
@@ -140,7 +128,7 @@ const StudentProposals = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -174,12 +162,12 @@ const StudentProposals = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await UniversityProposalResponseAPI.updateResponse(Response.id, Response) // Call the relevant api call
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setResponse({});
         setAction("create");
@@ -327,13 +315,13 @@ const StudentProposals = () => {
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Proposals List"}
-        tableData= {proposals.map(data => ({...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal)}))}
+        tableData={proposals.map(data => ({ ...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal) }))}
         tableColumns={tableColumns}
         tableRowDetails={true}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

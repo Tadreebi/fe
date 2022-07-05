@@ -27,7 +27,6 @@ const deleteExperience = id => {
 };
 
 
-
 export default {
   getAllExperience,
   getExperience,

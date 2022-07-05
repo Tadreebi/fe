@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import CompanyReportAPI from 'src/api/CompanyReport';
 import TemplatePage from '../../templatePage';
-import reportsDemoData from './demoData';
 
 const CompanyReports = () => {
   const [reportsList, setReportsList] = useState([]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
-  
+
   const callData = async () => {
     setLoading(true);
 
@@ -24,7 +23,8 @@ const CompanyReports = () => {
         setLoading(false);
       });
   };
-  const company = [
+
+  const companies = [
     { id: 1, name: "Socium" },
     { id: 2, name: "ASAC'" },
   ];
@@ -32,8 +32,6 @@ const CompanyReports = () => {
   useEffect(() => {
     callData();
   }, []);
-
-
 
   const inputs = [
     {
@@ -43,7 +41,7 @@ const CompanyReports = () => {
       placeholder: "Report Title",
       required: true,
       value: report.title,
-      onChange: e => setReport(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
+      onChange: e => setReport(current => ({ ...current, title: e.target.value }))
     },
     {
       title: "Student",
@@ -61,9 +59,9 @@ const CompanyReports = () => {
       type: "textarea",
       double: true,
       required: true,
-      value: report.student,
+      value: report.company,
       onChange: e => setReport(current => ({ ...current, company: e.target.value })),
-      options: company.map(student => ({ title: company.name, value: company.id }))
+      options: companies.map(company => ({ title: company.name, value: company.id }))
     },
     {
       title: "Report Type",
@@ -78,51 +76,39 @@ const CompanyReports = () => {
         { title: "Final Report", value: "Final" }
       ]
     },
-
-    {
-      title: " Date of Report",
-      name: "date",
-      type: "date",
-      required: true,
-      value: report.date,
-      onChange: e => setReport(current => ({ ...current, date: e.target.value }))
-    },
     {
       title: "Report Introduction",
       name: "intro",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.intro,
       onChange: e => setReport(current => ({ ...current, intro: e.target.value }))
+    },
+    {
+      title: "Report Content",
+      name: "report",
+      type: "textarea",
+      fullwidth: true,
+      required: true,
+      value: report.report,
+      onChange: e => setReport(current => ({ ...current, report: e.target.value }))
     },
     {
       title: "Report Conclusion",
       name: "conclusion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.conclusion,
       onChange: e => setReport(current => ({ ...current, conclusion: e.target.value }))
     },
-    {
-      title: "Report Remarks",
-      name: "remarks",
-      type: "textarea",
-      fullwidth: true,
-      required: true,
-      value: report.remarks,
-      onChange: e => setReport(current => ({ ...current, remarks: e.target.value }))
-    },
-
     {
       title: "Attendance",
       name: "attendance",
       type: "number",
       fullwidth: true,
       required: true,
-      value: report.accepted,
-      onChange: e => setReport(current => ({ ...current, attendance: e.target.checked }))
+      value: report.attendance,
+      onChange: e => setReport(current => ({ ...current, attendance: e.target.value }))
     },
   ];
 
@@ -132,7 +118,7 @@ const CompanyReports = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -148,7 +134,7 @@ const CompanyReports = () => {
     setAction(action);
   };
 
-  const onDataCreate = async () => { // Async
+  const onDataCreate = async () => {
     setLoading(true);
 
     await CompanyReportAPI.createReport(report)
@@ -166,12 +152,12 @@ const CompanyReports = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await CompanyReportAPI.updateReport(report.id, report)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setReport({});
         setAction("create");
@@ -184,7 +170,7 @@ const CompanyReports = () => {
       });
   };
 
-  const onDataDelete = async () => { // Async
+  const onDataDelete = async () => {
     setLoading(true);
 
     await CompanyReportAPI.deleteReport(report.id)
@@ -399,7 +385,7 @@ const CompanyReports = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

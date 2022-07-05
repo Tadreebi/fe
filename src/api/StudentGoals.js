@@ -1,6 +1,6 @@
 import api from ".";
 
-const path = "univeristy-tips/";
+const path = "students/goals/";
 
 
 //// Goals
@@ -45,7 +45,6 @@ const updateIndicator = (id, data) => {
 const deleteIndicator = id => {
   return api.delete(`${path}indicators/delete/${id}`);
 };
-
 
 
 export default {

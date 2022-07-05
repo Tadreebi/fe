@@ -46,7 +46,6 @@ const deleteTopic = id => {
 };
 
 
-
 export default {
   getAllTips,
   getTip,

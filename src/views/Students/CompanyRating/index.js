@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import CompanyRatingAPI from 'src/api/CompanyRating';
-import TemplatePage from '../../templatePage'
-import demoData from './demoData'
+import TemplatePage from '../../templatePage';
 
 
 const CompanyRating = () => {
-  const [scores, setScores] = useState(demoData);
+  const [scores, setScores] = useState([]);
   const [score, setScore] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
@@ -32,15 +31,15 @@ const CompanyRating = () => {
 
   const inputs = [
     {
-      title: "company_name",
-      name: "company_name",
+      title: "Company Name",
+      name: "company",
       type: "select",
       required: true,
-      value: score.company_name,
-      onChange: e => setScore(current => ({ ...current, company_name: e.target.value })),
+      value: score.company,
+      onChange: e => setScore(current => ({ ...current, company: e.target.value })),
       options: [
-        { title: "Socium", value: "Socium" },
-        { title: "ASAC", value: "ASAC" },
+        { title: "Socium", value: 1 },
+        { title: "ASAC", value: 2 },
 
       ]
     },
@@ -52,16 +51,16 @@ const CompanyRating = () => {
       value: score.useful_train,
       onChange: e => setScore(current => ({ ...current, useful_train: e.target.value })),
       options: [
-        { title: "1 ", value: "1" },
-        { title: "2 ", value: "2" },
-        { title: "3 ", value: "3" },
-        { title: "4", value: "4" },
-        { title: "5 ", value: "5" },
-        { title: "6 ", value: "6" },
-        { title: "7 ", value: "7" },
-        { title: "8 ", value: "8" },
-        { title: "9", value: "9" },
-        { title: "10 ", value: "10" },
+        { title: "1 ", value: 1 },
+        { title: "2 ", value: 2 },
+        { title: "3 ", value: 3 },
+        { title: "4", value: 4 },
+        { title: "5 ", value: 5 },
+        { title: "6 ", value: 6 },
+        { title: "7 ", value: 7 },
+        { title: "8 ", value: 8 },
+        { title: "9", value: 9 },
+        { title: "10 ", value: 10 },
       ]
     },
     {
@@ -72,16 +71,16 @@ const CompanyRating = () => {
       value: score.student_allowed,
       onChange: e => setScore(current => ({ ...current, student_allowed: e.target.value })),
       options: [
-        { title: "1 ", value: "1" },
-        { title: "2 ", value: "2" },
-        { title: "3 ", value: "3" },
-        { title: "4", value: "4" },
-        { title: "5 ", value: "5" },
-        { title: "6 ", value: "6" },
-        { title: "7 ", value: "7" },
-        { title: "8 ", value: "8" },
-        { title: "9", value: "9" },
-        { title: "10 ", value: "10" },
+        { title: "1 ", value: 1 },
+        { title: "2 ", value: 2 },
+        { title: "3 ", value: 3 },
+        { title: "4", value: 4 },
+        { title: "5 ", value: 5 },
+        { title: "6 ", value: 6 },
+        { title: "7 ", value: 7 },
+        { title: "8 ", value: 8 },
+        { title: "9", value: 9 },
+        { title: "10 ", value: 10 },
       ]
     },
     {
@@ -92,16 +91,16 @@ const CompanyRating = () => {
       value: score.support,
       onChange: e => setScore(current => ({ ...current, support: e.target.value })),
       options: [
-        { title: "1 ", value: "1" },
-        { title: "2 ", value: "2" },
-        { title: "3 ", value: "3" },
-        { title: "4", value: "4" },
-        { title: "5 ", value: "5" },
-        { title: "6 ", value: "6" },
-        { title: "7 ", value: "7" },
-        { title: "8 ", value: "8" },
-        { title: "9", value: "9" },
-        { title: "10 ", value: "10" },
+        { title: "1 ", value: 1 },
+        { title: "2 ", value: 2 },
+        { title: "3 ", value: 3 },
+        { title: "4", value: 4 },
+        { title: "5 ", value: 5 },
+        { title: "6 ", value: 6 },
+        { title: "7 ", value: 7 },
+        { title: "8 ", value: 8 },
+        { title: "9", value: 9 },
+        { title: "10 ", value: 10 },
       ]
     },
     // This one needs to be added to the Backend model it is named comments
@@ -113,16 +112,16 @@ const CompanyRating = () => {
       value: score.improvement,
       onChange: e => setScore(current => ({ ...current, improvement: e.target.value })),
       options: [
-        { title: "1 ", value: "1" },
-        { title: "2 ", value: "2" },
-        { title: "3 ", value: "3" },
-        { title: "4", value: "4" },
-        { title: "5 ", value: "5" },
-        { title: "6 ", value: "6" },
-        { title: "7 ", value: "7" },
-        { title: "8 ", value: "8" },
-        { title: "9", value: "9" },
-        { title: "10 ", value: "10" },
+        { title: "1 ", value: 1 },
+        { title: "2 ", value: 2 },
+        { title: "3 ", value: 3 },
+        { title: "4", value: 4 },
+        { title: "5 ", value: 5 },
+        { title: "6 ", value: 6 },
+        { title: "7 ", value: 7 },
+        { title: "8 ", value: 8 },
+        { title: "9", value: 9 },
+        { title: "10 ", value: 10 },
       ]
     },
     {
@@ -133,19 +132,26 @@ const CompanyRating = () => {
       value: score.recomended,
       onChange: e => setScore(current => ({ ...current, recomended: e.target.value })),
       options: [
-        { title: "1 ", value: "1" },
-        { title: "2 ", value: "2" },
-        { title: "3 ", value: "3" },
-        { title: "4", value: "4" },
-        { title: "5 ", value: "5" },
-        { title: "6 ", value: "6" },
-        { title: "7 ", value: "7" },
-        { title: "8 ", value: "8" },
-        { title: "9", value: "9" },
-        { title: "10 ", value: "10" },
+        { title: "1 ", value: 1 },
+        { title: "2 ", value: 2 },
+        { title: "3 ", value: 3 },
+        { title: "4", value: 4 },
+        { title: "5 ", value: 5 },
+        { title: "6 ", value: 6 },
+        { title: "7 ", value: 7 },
+        { title: "8 ", value: 8 },
+        { title: "9", value: 9 },
+        { title: "10 ", value: 10 },
       ]
     },
-
+    {
+      title: "Additional Comments",
+      name: "comments",
+      type: "textarea",
+      fullwidth: true,
+      value: experience.comments,
+      onChange: e => setScore(current => ({ ...current, comments: e.target.value }))
+    },
   ];
 
   const onFormSubmit = e => {
@@ -154,7 +160,7 @@ const CompanyRating = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -173,7 +179,7 @@ const CompanyRating = () => {
   const onDataCreate = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.createScore(score)
+    await CompanyRatingAPI.createScore({ ...score, score: (score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5 })
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -188,12 +194,12 @@ const CompanyRating = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
-    await CompanyRatingAPI.updateScore(score.id, score)
+    await CompanyRatingAPI.updateScore(score.id, { ...score, score: (score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5 })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setScore({});
         setAction("create");
@@ -274,7 +280,7 @@ const CompanyRating = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

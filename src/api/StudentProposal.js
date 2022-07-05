@@ -26,12 +26,10 @@ const deleteProposal = id => {
 };
 
 
-
 export default {
   getAllProposals,
   getProposal,
   createProposal,
   updateProposal,
   deleteProposal,
-
 };

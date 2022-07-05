@@ -26,7 +26,6 @@ const deleteResponse = id => {
 };
 
 
-
 export default {
   getAllResponses,
   getResponse,

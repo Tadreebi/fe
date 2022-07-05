@@ -1,35 +1,29 @@
 import { useState } from 'react';
 import TemplatePage from '../../templatePage';
-import reportsDemoData from './demoData';
 
 const StudentReportRemarks = () => {
-  const [remarksList, setRemarksList] = useState([...reportsDemoData]);
+  const [remarksList, setRemarksList] = useState([]);
   const [remark, setRemark] = useState({});
   const [action, setAction] = useState("create");
 
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Moayad" },
+    { id: 2, name: "Raghad" },
   ];
 
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
       placeholder: "Report Title",
-      required: true,
-      value: remark.title, // should match the property name in the backend model
+      value: remark.title,
       disabled: true
     },
     {
       title: "Student",
       name: "student",
       type: "text",
-      required: true,
       value: remark.student,
       disabled: true
     },
@@ -37,7 +31,6 @@ const StudentReportRemarks = () => {
       title: "Star Rating",
       name: "rating",
       type: "rating",
-      required: true,
       value: remark.rating,
       disabled: true
     },
@@ -45,7 +38,6 @@ const StudentReportRemarks = () => {
       title: "Report Type",
       name: "type",
       type: "select",
-      required: true,
       value: remark.type,
       disabled: true
     },
@@ -53,7 +45,6 @@ const StudentReportRemarks = () => {
       title: "Start Date of Report",
       name: "startDate",
       type: "date",
-      required: true,
       value: remark.startDate,
       disabled: true
     },
@@ -61,7 +52,6 @@ const StudentReportRemarks = () => {
       title: "End Date of Report",
       name: "endDate",
       type: "date",
-      required: true,
       value: remark.endDate,
       disabled: true
     },
@@ -70,7 +60,6 @@ const StudentReportRemarks = () => {
       name: "intro",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: remark.intro,
       disabled: true
     },
@@ -79,7 +68,6 @@ const StudentReportRemarks = () => {
       name: "conclusion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: remark.conclusion,
       disabled: true
     },
@@ -109,7 +97,7 @@ const StudentReportRemarks = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -132,7 +120,7 @@ const StudentReportRemarks = () => {
     console.log('Form Data Created');
   };
 
-  const onDataEdit = () => {
+  const onDataUpdate = () => {
     setRemarksList(current => [...current.filter(rep => rep.id !== remark.id), remark]);
     setRemark({});
     setAction("create");
@@ -340,7 +328,7 @@ const StudentReportRemarks = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import StudentGoalsAPI from 'src/api/StudentGoals';
 import TemplatePage from '../../templatePage';
-import goalsDemoData from './demoData';
 
 const StudentGoals = () => {
-  const [goals, setGoalsList] = useState(goalsDemoData || []);
+  const [goals, setGoalsList] = useState([]);
   const [goal, setGoal] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
@@ -26,11 +25,8 @@ const StudentGoals = () => {
   };
 
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Raghad" },
+    { id: 2, name: "Suhaib" },
   ];
 
   useEffect(() => { // Create UseEffect
@@ -42,18 +38,26 @@ const StudentGoals = () => {
       title: "Title",
       name: "title",
       type: "text",
-      placeholder: "Goal Title",
       required: true,
       fullwidth: true,
       value: goal.title,
       onChange: e => setGoal(current => ({ ...current, title: e.target.value }))
     },
     {
+      title: "Student",
+      name: "student",
+      type: "select",
+      double: true,
+      required: true,
+      value: experience.student,
+      onChange: e => setExperience(current => ({ ...current, student: e.target.value })),
+      options: students.map(student => ({ title: student.name, value: student.id }))
+    },
+    {
       title: "Goal Description",
       name: "describtion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: goal.describtion,
       onChange: e => setGoal(current => ({ ...current, describtion: e.target.value }))
     },
@@ -73,7 +77,7 @@ const StudentGoals = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -107,12 +111,12 @@ const StudentGoals = () => {
       });
   };
 
-  const onDataEdit = async () => { // Async
+  const onDataUpdate = async () => { // Async
     setLoading(true);
 
     await StudentGoalsAPI.updateGoal(goal.id, goal)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setGoal({});
         setAction("create");
@@ -203,7 +207,7 @@ const StudentGoals = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

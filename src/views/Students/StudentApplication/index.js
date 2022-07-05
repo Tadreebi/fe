@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
-import applicationData from './applicationData';
+import { useEffect, useState } from 'react';
 import StudentApplicationAPI from 'src/api/StudentApplication';
-
-import TemplatePage from '../../templatePage'
+import TemplatePage from '../../templatePage';
 
 
 const StudentApplication = () => {
@@ -29,18 +27,12 @@ const StudentApplication = () => {
 
   const students = [
     { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 2, name: "Raghad" },
   ];
 
   const internships = [
     { id: 1, name: "ASAC" },
     { id: 2, name: "CSS" },
-    { id: 3, name: "CC" },
-    { id: 4, name: "Amazon" },
-    { id: 5, name: "Google" },
   ];
 
   useEffect(() => {
@@ -81,14 +73,6 @@ const StudentApplication = () => {
       ]
     },
     {
-      title: "Home Full Address",
-      name: "homeFullAddress",
-      type: "text",
-      required: true,
-      value: application.homeFullAddress,
-      onChange: e => setApplication(current => ({ ...current, homeFullAddress: e.target.value }))
-    },
-    {
       title: "Preferable Internship Location",
       name: "location",
       type: "select",
@@ -97,7 +81,7 @@ const StudentApplication = () => {
       onChange: e => setApplication(current => ({ ...current, location: e.target.value })),
       options: [
         { title: "Remote", value: "Remote" },
-        { title: "OnSite", value: "OnSite" },
+        { title: "On Site", value: "On Site" },
       ]
     },
     {
@@ -134,7 +118,7 @@ const StudentApplication = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -168,12 +152,12 @@ const StudentApplication = () => {
       });
   };
 
-  const onDataEdit = async () => {
+  const onDataUpdate = async () => {
     setLoading(true);
 
     await StudentApplicationAPI.updateApplication(application.id, application)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Data Updated Successfully");
         callData();
         setApplication({});
         setAction("create");
@@ -308,7 +292,7 @@ const StudentApplication = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

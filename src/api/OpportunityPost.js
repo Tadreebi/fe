@@ -24,7 +24,6 @@ const deletePost = id => {
 };
 
 
-
 export default {
   getAllPosts,
   getPost,
