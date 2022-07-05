@@ -27,19 +27,13 @@ const StudentExperience = () => {
   };
 
   const students = [
-    { id: 2, name: 2 },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Moayad" },
+    { id: 2, name: "Raghad" },
   ];
 
   const companies = [
-    { id: 3, name: 3 },
-    { id: 2, name: "Ghaida' company" },
-    { id: 3, name: "Moayad company" },
-    { id: 4, name: "Raghad company" },
-    { id: 5, name: "Suhaib company" },
+    { id: 1, name: "Moayad company" },
+    { id: 2, name: "Suhaib company" },
   ];
 
   useEffect(() => { // Create UseEffect
@@ -86,7 +80,7 @@ const StudentExperience = () => {
       onChange: e => setExperience(current => ({ ...current, missed_aspects: e.target.value }))
     },
     {
-      title: "get hired",
+      title: "How to Get Hired",
       name: "get_hired",
       type: "textarea",
       fullwidth: true,
@@ -94,13 +88,11 @@ const StudentExperience = () => {
       value: experience.get_hired,
       onChange: e => setExperience(current => ({ ...current, get_hired: e.target.value }))
     },
-
     {
-      title: "more",
+      title: "More",
       name: "more",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: experience.more,
       onChange: e => setExperience(current => ({ ...current, more: e.target.value }))
     },
