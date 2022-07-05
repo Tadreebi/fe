@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 
 const initialState = {
-  JWT: localStorage.getItem("JWT") || false,
+  JWT: localStorage.getItem("JWT") || "",
 }
 
 const changeState = (state = initialState, { type, JWT }) => {
