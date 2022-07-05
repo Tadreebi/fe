@@ -64,7 +64,6 @@ const StudentApplicationRes = () => {
       name: "accepted",
       type: "switch",
       fullwidth: true,
-      required: true,
       value: application.accepted,
       onChange: e => setApplication(current => ({ ...current, accepted: e.target.checked }))
     },

@@ -41,7 +41,7 @@ const opportunityPosts = () => {
       name: "company",
       type: "select",
       required: true,
-      value: post.company || post.company_id,
+      value: post.company,
       onChange: (e) =>
         setPost(current => ({ ...current, company: e.target.value })),
       options: companies.map((company) => ({ title: company.name, value: company.id })),

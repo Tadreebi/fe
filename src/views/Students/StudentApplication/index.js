@@ -65,7 +65,7 @@ const StudentApplication = () => {
       type: "select",
       required: true,
       value: application.type,
-      onChange: e => setPost(current => ({ ...current, type: e.target.value })),
+      onChange: e => setApplication(current => ({ ...current, type: e.target.value })),
       options: [
         { title: "Full Time", value: "Full Time" },
         { title: "Part Time", value: "Part Time" },
