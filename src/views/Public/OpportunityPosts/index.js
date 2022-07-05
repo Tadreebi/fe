@@ -80,39 +80,39 @@ const OpportunityPosts = () => {
                   </h5>
 
                   <p>
-                    {pickedPost.company}
+                    company: <b>{pickedPost.company}</b>
                     <br />
-                    {pickedPost.image}
+                    image: <b>{pickedPost.image}</b>
                     <br />
-                    {pickedPost.position}
+                    position: <b>{pickedPost.position}</b>
                     <br />
-                    {pickedPost.type}
+                    type: <b>{pickedPost.type}</b>
                     <br />
-                    {pickedPost.location}
+                    location: <b>{pickedPost.location}</b>
                     <br />
-                    {pickedPost.education}
+                    education: <b>{pickedPost.education}</b>
                     <br />
-                    {pickedPost.industry}
+                    industry: <b>{pickedPost.industry}</b>
                     <br />
-                    {pickedPost.experience}
+                    experience: <b>{pickedPost.experience}</b>
                     <br />
-                    {pickedPost.paid}
+                    paid: <b>{pickedPost.paid}</b>
                     <br />
-                    {pickedPost.salary}
+                    salary: <b>{pickedPost.salary}</b>
                     <br />
-                    {pickedPost.city}
+                    city: <b>{pickedPost.city}</b>
                     <br />
-                    {pickedPost.location}
+                    location: <b>{pickedPost.location}</b>
                     <br />
-                    {pickedPost.vacancies}
+                    vacancies: <b>{pickedPost.vacancies}</b>
                     <br />
-                    {pickedPost.description}
+                    description: <b>{pickedPost.description}</b>
                     <br />
-                    {pickedPost.supervisor_Name}
+                    supervisor_Name: <b>{pickedPost.supervisor_Name}</b>
                     <br />
-                    {pickedPost.supervisor_phone_number}
+                    supervisor_phone_number: <b>{pickedPost.supervisor_phone_number}</b>
                     <br />
-                    {pickedPost.subervisor_position}
+                    subervisor_position: <b>{pickedPost.subervisor_position}</b>
                   </p>
                 </Col>
               </Row>
