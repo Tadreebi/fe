@@ -51,12 +51,6 @@ const _nav = [
         to: '/students/company-rating',
         icon: <Icon icon={faStar} className="px-1" />,
       },
-      {
-        component: NavItem,
-        name: 'Company Ratings',
-        to: '/company/company-rating-view',
-        icon: <Icon icon={faCommentDots} className="px-1" />,
-      },
     ]
   },
   {
@@ -82,6 +76,12 @@ const _nav = [
         name: 'Company Reports',
         to: '',
         icon: <Icon icon={faCommentDots} className="px-1" />,
+      },
+      {
+        component: NavItem,
+        name: 'Company Ratings',
+        to: '/company/company-rating-view',
+        icon: <Icon icon={faStar} className="px-1" />,
       },
     ]
   },

@@ -23,7 +23,7 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Internship Posts Data", res.data);
+        console.log("Called Data", res.data);
         setApplicationsList(res.data);
       })
       .catch(e => {
@@ -43,7 +43,7 @@ const StudentApplication = () => {
   const callListsData = async () => {
     await OpportunityPostAPI.getAllPosts()
       .then(res => {
-        console.log("Called Internships Data", res.data);
+        console.log("Called Internship Posts Data", res.data);
         setInternships(res.data);
       })
       .catch(e => {
@@ -77,7 +77,7 @@ const StudentApplication = () => {
       double: true,
       value: application.internship,
       onChange: e => setApplication(current => ({ ...current, internship: e.target.value })),
-      options: internships?.map(internship => ({ title: internship.id, value: internship.id }))
+      options: internships?.map(internship => ({ title: internship.position, value: internship.id }))
     },
     {
       title: "Preferable Internship Hours",

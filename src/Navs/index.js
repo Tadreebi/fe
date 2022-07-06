@@ -81,7 +81,7 @@ const _nav = [
         component: NavItem,
         name: 'Company Ratings',
         to: '/company/company-rating-view',
-        icon: <Icon icon={faCommentDots} className="px-1" />,
+        icon: <Icon icon={faStar} className="px-1" />,
       },
     ]
   },
