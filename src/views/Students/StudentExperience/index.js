@@ -227,13 +227,13 @@ const StudentExperience = () => {
       >
         <CollapseCard title="Shared Experiences" icon={faPeopleGroup}>
           <Container loading={loading}>
-            <CardGroup >
-              <Card>
+            <CardGroup>
+              <Card style={{ maxHeight: "100vh", overflowY: "scroll" }}>
                 <CardHeader>
                   Posts
                 </CardHeader>
 
-                <CardBody>
+                <CardBody >
                   {experiences?.map((Experience, i) => (
                     <div key={i} onClick={() => pickedExperience.id === Experience.id ? setPickedExperience({}) : setPickedExperience(Experience)}>
                       <Row className={`py-4 ${Experience.id === pickedExperience.id ? "bg-light" : ""}`}>
