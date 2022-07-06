@@ -13,6 +13,7 @@ const HeaderDropdown = () => {
 
   const onSignOut = () => {
     dispatch({ type: 'setJWT', JWT: "" })
+    dispatch({ type: 'setUser', user: {} })
     navigate("/")
   };
 

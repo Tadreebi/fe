@@ -18,6 +18,7 @@ const Login = () => {
       .then(res => {
         console.log("Logged In", res)
         dispatch({ type: 'setJWT', JWT: res.data.access })
+        dispatch({ type: 'setUser', user: res.data.user })
         navigate("/dashboard")
       })
       .catch(e => {
