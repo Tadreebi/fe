@@ -37,7 +37,7 @@ const Experiences = () => {
       <CardGroup >
         <Card>
           <CardHeader>
-            Posts
+            Experiences
           </CardHeader>
 
           <CardBody>
@@ -69,7 +69,7 @@ const Experiences = () => {
 
         <Card>
           <CardHeader>
-            Post Details
+           Experience Details
           </CardHeader>
 
           <CardBody>
@@ -102,11 +102,11 @@ const Experiences = () => {
                   <p>
                     company: <b>{pickedExperience.company}</b>
                     <br />
-                    missed_aspects: <b>{pickedExperience.missed_aspects}</b>
+                    missed aspects: <b>{pickedExperience.missed_aspects}</b>
                     <br />
-                    improved_aspects: <b>{pickedExperience.improved_aspects}</b>
+                    improved aspects: <b>{pickedExperience.improved_aspects}</b>
                     <br />
-                    get_hired: <b>{pickedExperience.get_hired}</b>
+                    got hired: <b>{pickedExperience.get_hired}</b>
                     <br />
                     more: <b>{pickedExperience.more}</b>
 
