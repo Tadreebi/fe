@@ -26,23 +26,6 @@ const visualRepresentations = reportsList => {
         },
       }
     },
-    {
-      title: "Users",
-      number: "26",
-      chart: {
-        type: "line",
-        data: {
-          "Label 1": 70,
-          "Label 2": 60,
-          "Label 3": 40,
-          "Label 4": 50
-        },
-      }
-    },
-    {
-      title: "Users",
-      number: "26",
-    }
   ];
 
   const chartsData = [
