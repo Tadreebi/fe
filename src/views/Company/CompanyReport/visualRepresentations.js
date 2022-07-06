@@ -121,20 +121,6 @@ const visualRepresentations = reportsList => {
             ...final, [student]: reportsList?.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
-        // {
-        //   title: "Attendance Report",
-        //   color: "success",
-        //   data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-        //     ...final, [student]: reportsList?.filter(rep => rep.accepted === true && rep.student === student)?.length,
-        //   }), {}),
-        // },
-        // {
-        //   title: "Rejected Reports",
-        //   color: "danger",
-        //   data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-        //     ...final, [student]: reportsList?.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
-        //   }), {}),
-        // }
       ]
     },
   ];

@@ -6,6 +6,7 @@ import VisualRepresentations from "./visualRepresentations";
 const StudentReports = () => {
   const [reportsList, setReportsList] = useState([]);
   const [report, setReport] = useState({});
+  const [reportTypes, setReportTypes] = useState([]);
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
 
@@ -25,18 +26,22 @@ const StudentReports = () => {
       });
   };
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Moayad" },
     { id: 2, name: "Suhaib" },
   ];
 
-  const reportTypes = [
-    { name: "Weekly Report", id: 1 },
-    { name: "Monthly Report", id: 2 },
-  ];
-
-  useEffect(() => {
+  useEffect(async () => {
     callData();
+
+    await StudentReportAPI.getAllReportTypes()
+      .then(res => {
+        setReportTypes(res.data)
+      })
+      .catch(e => {
+        console.log(e)
+      });
   }, []);
 
   const inputs = [

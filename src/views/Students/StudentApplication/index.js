@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import StudentApplicationAPI from 'src/api/StudentApplication';
 import TemplatePage from '../..';
+import OpportunityPostAPI from 'src/api/OpportunityPost';
 import VisualRepresentations from "./visualRepresentations";
 
 
 const StudentApplication = () => {
   const [applicationsList, setApplicationsList] = useState([]);
+  const [internships, setInternships] = useState([]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
@@ -26,18 +28,26 @@ const StudentApplication = () => {
       });
   };
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Emad" },
     { id: 2, name: "Raghad" },
   ];
 
-  const internships = [
-    { id: 1, name: "ASAC" },
-    { id: 2, name: "CSS" },
-  ];
-
   useEffect(() => {
     callData();
+
+    await OpportunityPostAPI.getAllPosts()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setInternships(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const inputs = [

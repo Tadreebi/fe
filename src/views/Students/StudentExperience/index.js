@@ -26,11 +26,13 @@ const StudentExperience = () => {
       });
   };
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Moayad" },
     { id: 2, name: "Raghad" },
   ];
 
+  // API Call Needed
   const companies = [
     { id: 3, name: "Moayad company" },
     { id: 4, name: "Suhaib company" },

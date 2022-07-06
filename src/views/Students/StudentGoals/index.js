@@ -25,6 +25,7 @@ const StudentGoals = () => {
       });
   };
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Raghad" },
     { id: 2, name: "Suhaib" },

@@ -26,6 +26,7 @@ const opportunityPosts = () => {
       });
   };
 
+  // API Call Needed
   const companies = [
     { id: 1, name: "ASAC" },
     { id: 4, name: "CSS" },
@@ -36,7 +37,6 @@ const opportunityPosts = () => {
   }, []);
 
   const inputs = [
-    // Companies List API
     {
       title: "Company",
       name: "company_id",
@@ -316,7 +316,6 @@ const opportunityPosts = () => {
     },
   ];
 
-  // const chartsData = [];
   return (
     <>
       <TemplatePage

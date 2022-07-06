@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import StudentProposalAPI from 'src/api/StudentProposal';
+import StudentApplicationAPI from 'src/api/StudentApplication';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
 const StudentProposalRemarks = () => {
   const [proposals, setproposals] = useState([]);
+  const [internshipApps, setInternshipApps] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
@@ -25,23 +27,32 @@ const StudentProposalRemarks = () => {
       });
   };
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Emad" },
     { id: 2, name: "Moayad" },
   ];
 
+  // API Call Needed
   const companies = [
     { id: 1, name: "Emad Company" },
     { id: 4, name: "Raghad Company" },
   ];
 
-  const internshipApps = [
-    { id: 3, name: "Emad Company" },
-    { id: 4, name: "Suhaib Company" },
-  ];
-
-  useEffect(() => {
+  useEffect(async () => {
     callData();
+
+    await StudentApplicationAPI.getAllApplications()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setInternshipApps(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const inputs = [

@@ -5,6 +5,7 @@ import TemplatePage from '../..';
 
 const UniversityTips = () => {
   const [tips, setTipsList] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [tip, setTip] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
@@ -25,22 +26,28 @@ const UniversityTips = () => {
       });
   };
 
-  const topics = [
-    { id: 1, name: "Motivational" },
-    { id: 2, name: "Skill References'" },
-  ];
-
   const types = [
     { id: 1, name: "File" },
     { id: 2, name: "Image" },
     { id: 3, name: "Video" },
     { id: 4, name: "Event" },
     { id: 5, name: "Text" },
-
   ];
 
-  useEffect(() => {
+  useEffect(async () => {
     callData();
+
+    await UniversityTipsAPI.getAllTopics()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setTopics(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const inputs = [
