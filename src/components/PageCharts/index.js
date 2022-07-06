@@ -2,7 +2,6 @@ import { faChartPie } from '@fortawesome/free-solid-svg-icons';
 import CollapseCard from '../CollapseCard';
 import { BarChart, DoughnutChart, LineChart, PieChart, PolarChart, RadarChart } from '../Root/Charts';
 import { Col, Row } from '../Root/Grid';
-import chartsDemoData from './demoData';
 
 const colors = [
   "primary",
@@ -27,9 +26,9 @@ const rgbColors = color => {
   }
 };
 
-const PageCharts = ({ title = "Charts", charts = chartsDemoData }) => {
+const PageCharts = ({ title = "Charts", charts, open = false }) => {
   return (
-    <CollapseCard title={title} icon={faChartPie}>
+    <CollapseCard title={title} icon={faChartPie} open={open}>
       <Row>
         {charts?.map((chart, i) => (
           <Col sm={12} lg={6} className="px-5 my-3" key={i}>
