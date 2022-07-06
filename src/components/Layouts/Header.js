@@ -47,14 +47,6 @@ const HeaderComp = ({ notDashboard, sidebarShow, setSidebarShow }) => {
           <HeaderDropdown />
         </HeaderNav>
       </Container>
-      {!notDashboard && (
-        <>
-          <HeaderDivider />
-          <Container fluid>
-            <DashboardBreadcrumb />
-          </Container>
-        </>
-      )}
     </Header>
   )
 };
