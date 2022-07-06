@@ -23,7 +23,7 @@ const Buttons = () => {
               foreground of an experience.
             </p>
             <a href="components/buttons">
-              {['normal', 'active', 'disabled'].map((state, index) => (
+              {['normal', 'active', 'disabled']?.map((state, index) => (
                 <CRow className="align-items-center mb-3" key={index}>
                   <CCol xs={12} xl={2} className="mb-3 mb-xl-0">
                     {state.charAt(0).toUpperCase() + state.slice(1)}
@@ -38,7 +38,7 @@ const Buttons = () => {
                       'info',
                       'light',
                       'dark',
-                    ].map((color, index) => (
+                    ]?.map((color, index) => (
                       <CButton
                         color={color}
                         key={index}
@@ -66,7 +66,7 @@ const Buttons = () => {
               You can combine button with our <a href="https://icons.tadreebi.net/">CoreUI Icons</a>.
             </p>
             <a href="components/buttons">
-              {['normal', 'active', 'disabled'].map((state, index) => (
+              {['normal', 'active', 'disabled']?.map((state, index) => (
                 <CRow className="align-items-center mb-3" key={index}>
                   <CCol xs={12} xl={2} className="mb-3 mb-xl-0">
                     {state.charAt(0).toUpperCase() + state.slice(1)}
@@ -81,7 +81,7 @@ const Buttons = () => {
                       'info',
                       'light',
                       'dark',
-                    ].map((color, index) => (
+                    ]?.map((color, index) => (
                       <CButton
                         color={color}
                         key={index}
@@ -145,7 +145,7 @@ const Buttons = () => {
               <code>variant=&#34;outline&#34;</code> prop to remove all background colors.
             </p>
             <a href="components/buttons#outline-buttons">
-              {['normal', 'active', 'disabled'].map((state, index) => (
+              {['normal', 'active', 'disabled']?.map((state, index) => (
                 <CRow className="align-items-center mb-3" key={index}>
                   <CCol xs={12} xl={2} className="mb-3 mb-xl-0">
                     {state.charAt(0).toUpperCase() + state.slice(1)}
@@ -160,7 +160,7 @@ const Buttons = () => {
                       'info',
                       'light',
                       'dark',
-                    ].map((color, index) => (
+                    ]?.map((color, index) => (
                       <CButton
                         color={color}
                         variant="outline"
@@ -189,7 +189,7 @@ const Buttons = () => {
               to remove all background colors.
             </p>
             <a href="components/buttons#ghost-buttons">
-              {['normal', 'active', 'disabled'].map((state, index) => (
+              {['normal', 'active', 'disabled']?.map((state, index) => (
                 <CRow className="align-items-center mb-3" key={index}>
                   <CCol xs={12} xl={2} className="mb-3 mb-xl-0">
                     {state.charAt(0).toUpperCase() + state.slice(1)}
@@ -204,7 +204,7 @@ const Buttons = () => {
                       'info',
                       'light',
                       'dark',
-                    ].map((color, index) => (
+                    ]?.map((color, index) => (
                       <CButton
                         color={color}
                         variant="ghost"
@@ -267,7 +267,7 @@ const Buttons = () => {
                 'info',
                 'light',
                 'dark',
-              ].map((color, index) => (
+              ]?.map((color, index) => (
                 <CButton color={color} shape="rounded-pill" key={index}>
                   {color.charAt(0).toUpperCase() + color.slice(1)}
                 </CButton>
@@ -292,7 +292,7 @@ const Buttons = () => {
                 'info',
                 'light',
                 'dark',
-              ].map((color, index) => (
+              ]?.map((color, index) => (
                 <CButton color={color} shape="rounded-0" key={index}>
                   {color.charAt(0).toUpperCase() + color.slice(1)}
                 </CButton>

@@ -33,7 +33,6 @@ const Page404 = lazy(() => import('../views/Errors/404'));
 const Page500 = lazy(() => import('../views/Errors/500'));
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
 
   // Modules
@@ -60,7 +59,6 @@ const routes = [
 
   //// Errors
   { path: '*', name: 'Error 404', element: Page404 },
-
 ]
 
 export default routes

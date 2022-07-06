@@ -1,13 +1,22 @@
 import { useEffect, useState } from 'react';
+import OpportunityPostAPI from 'src/api/OpportunityPost';
 import StudentApplicationAPI from 'src/api/StudentApplication';
+import CollapseCard from 'src/components/CollapseCard';
+import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
+import Container from 'src/components/Root/Container';
+import { Col, Row } from 'src/components/Root/Grid';
 import TemplatePage from '../..';
-
+import VisualRepresentations from "./visualRepresentations";
 
 const StudentApplication = () => {
   const [applicationsList, setApplicationsList] = useState([]);
+  const [internships, setInternships] = useState([]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
+  const [pickedPost, setPickedPost] = useState({})
+
+  const image = "http://www.dermalina.com/wp-content/uploads/2020/12/no-image.jpg";
 
   const callData = async () => {
     setLoading(true);
@@ -25,18 +34,29 @@ const StudentApplication = () => {
       });
   };
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Emad" },
     { id: 2, name: "Raghad" },
   ];
 
-  const internships = [
-    { id: 1, name: "ASAC" },
-    { id: 2, name: "CSS" },
-  ];
+  const callListsData = async () => {
+    await OpportunityPostAPI.getAllPosts()
+      .then(res => {
+        console.log("Called Internship Posts Data", res.data);
+        setInternships(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     callData();
+    callListsData();
   }, []);
 
   const inputs = [
@@ -47,7 +67,7 @@ const StudentApplication = () => {
       required: true,
       value: application.student,
       onChange: e => setApplication(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Internship Oppertunity",
@@ -57,7 +77,7 @@ const StudentApplication = () => {
       double: true,
       value: application.internship,
       onChange: e => setApplication(current => ({ ...current, internship: e.target.value })),
-      options: internships.map(internship => ({ title: internship.name, value: internship.id }))
+      options: internships?.map(internship => ({ title: internship.position, value: internship.id }))
     },
     {
       title: "Preferable Internship Hours",
@@ -114,12 +134,13 @@ const StudentApplication = () => {
   const onFormSubmit = e => {
     e.preventDefault();
 
-    action === "create" ?
+    action === "create" ? (
       onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
+    ) : action === "update" ? (
+      onDataUpdate()
+    ) : action === "delete" && (
+      onDataDelete()
+    )
   };
 
   const onFormReset = () => {
@@ -187,72 +208,12 @@ const StudentApplication = () => {
       });
   };
 
-  const statisticsData = [
-    {
-      title: "Internship Type",
-      number: applicationsList.map(intern => intern.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
-      chart: {
-        type: "bar",
-        data: {
-          "Full Time": applicationsList.filter(intern => intern.type === "Full Time")?.length,
-          "Part Time": applicationsList.filter(intern => intern.type === "Part Time")?.length,
-        },
-      }
-    },
-    {
-      title: "Preferable Internship Location",
-      number: applicationsList.map(intern => intern.location).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
-      chart: {
-        type: "bar",
-        data: {
-          "Remote": applicationsList.filter(intern => intern.location === "Remote")?.length,
-          "OnSite": applicationsList.filter(intern => intern.location === "OnSite")?.length,
-        },
-      }
-    },
-    {
-      title: "Expected Salary",
-      number: applicationsList.map(intern => intern.expected_salary).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
-      chart: {
-        type: "bar",
-        data: {
-          "Less than 100": applicationsList.filter(intern => intern.expected_salary < 100)?.length,
-          "Greater than 100": applicationsList.filter(intern => intern.expected_salary > 100)?.length,
-        },
-      }
-    },
-  ]
-  const chartsData = [
-    {
-      title: "Internship Type",
-      type: "doughnut",
-      data: {
-        "Full Time": applicationsList.filter(intern => intern.type === "Full Time")?.length,
-        "Part Time": applicationsList.filter(intern => intern.type === "Part Time")?.length,
-      },
-    },
-    {
-      title: "Preferable Internship Location",
-      type: "doughnut",
-      data: {
-        "Remote": applicationsList.filter(intern => intern.location === "Remote")?.length,
-        "OnSite": applicationsList.filter(intern => intern.location === "OnSite")?.length,
-      },
-    },
-    {
-      title: "Expected Salary",
-      type: "polar",
-      data: {
-        "Less than 100": applicationsList.filter(intern => intern.expected_salary < 100)?.length,
-        "Greater than 100": applicationsList.filter(intern => intern.expected_salary > 100)?.length,
-      },
-    },
-  ]
+  const { statisticsData, chartsData } = VisualRepresentations(applicationsList);
 
   const tableColumns = [
     {
       name: "Internship",
-      selector: row => internships.find(internship => internship.id === row.internship)?.name,
+      selector: row => internships.find(internship => internship.id === row.internship)?.id,
       sortable: true
     },
     {
@@ -287,7 +248,97 @@ const StudentApplication = () => {
         onDataCreate={onDataCreate}
         onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
-      />
+      >
+        <CollapseCard title="Internship Oppertunites">
+          <Container>
+            <CardGroup>
+              <Card style={{ maxHeight: "100vh", overflowY: "scroll" }}>
+                <CardHeader>
+                  Posts
+                </CardHeader>
+
+                <CardBody >
+                  {internships?.map((Experience, i) => (
+                    <div key={i} onClick={() => pickedPost.id === Experience.id ? setPickedPost({}) : setPickedPost(Experience)}>
+                      <Row className={`py-4 ${Experience.id === pickedPost.id ? "bg-light" : ""}`}>
+                        <Col md={3} >
+                          <img src={image} width="100%" />
+
+                          <p className='text-center'>
+                            Company {Experience.company}
+                          </p>
+                        </Col>
+
+                        <Col md={9} className="p-2">
+                          <h5>
+                            Student {Experience.student}
+                          </h5>
+
+                          <p className='text-left'>
+                            {new Date(Experience.created_at).toLocaleDateString('en-GB')}
+                          </p>
+                        </Col>
+                      </Row>
+                    </div>
+                  ))}
+                </CardBody>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  Post Details
+                </CardHeader>
+
+                <CardBody>
+                  {pickedPost.company ? (
+                    <Row className="my-4">
+                      <Col md={4}>
+                        <img src={image} width="100%" />
+
+                        <p className='text-center'>
+                          company {pickedPost.company}
+                        </p>
+                      </Col>
+
+                      <Col md={8} className="p-2">
+                        <h5>
+                          student: <b>{pickedPost.student}</b>
+                        </h5>
+
+                        <p>
+                          improved_aspects: <b>{pickedPost.improved_aspects}</b>
+
+                        </p>
+                      </Col>
+
+                      <Col md={12} className="p-2">
+                        <h5>
+                          student: <b>{pickedPost.student}</b>
+                        </h5>
+
+                        <p>
+                          company: <b>{pickedPost.company}</b>
+                          <br />
+                          missed_aspects: <b>{pickedPost.missed_aspects}</b>
+                          <br />
+                          improved_aspects: <b>{pickedPost.improved_aspects}</b>
+                          <br />
+                          get_hired: <b>{pickedPost.get_hired}</b>
+                          <br />
+                          more: <b>{pickedPost.more}</b>
+
+                        </p>
+                      </Col>
+                    </Row>
+                  ) : (
+                    "Pick Experience"
+                  )}
+                </CardBody>
+              </Card>
+            </CardGroup>
+          </Container >
+        </CollapseCard>
+      </TemplatePage>
     </>
   )
 }

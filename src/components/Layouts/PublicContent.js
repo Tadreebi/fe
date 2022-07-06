@@ -9,7 +9,7 @@ const PublicContent = () => {
     <Container lg>
       <Suspense fallback={<Spinner color="primary" />}>
         <Routes>
-          {routes.map((route, idx) => {
+          {routes?.map((route, idx) => {
             return (
               route.element && (
                 <Route

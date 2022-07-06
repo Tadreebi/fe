@@ -53,7 +53,7 @@ const CompanyRating = () => {
       title: "Company Name",
       name: "company",
       type: "select",
-      required: true,
+      disabled: true,
       value: score.company,
       onChange: e => setScore(current => ({ ...current, company: e.target.value })),
       options: companies?.map(company => ({ value: company.id, title: company.name }))
@@ -62,7 +62,7 @@ const CompanyRating = () => {
       title: "Does the training program covers it's description?",
       name: "useful_train",
       type: "select",
-      required: true,
+      disabled: true,
       value: score.useful_train,
       onChange: e => setScore(current => ({ ...current, useful_train: e.target.value })),
       options: ratingOptions
@@ -71,7 +71,7 @@ const CompanyRating = () => {
       title: "Were you trained  how to use the technologies and tools during the training program?",
       name: "student_allowed",
       type: "select",
-      required: true,
+      disabled: true,
       value: score.student_allowed,
       onChange: e => setScore(current => ({ ...current, student_allowed: e.target.value })),
       options: ratingOptions
@@ -80,7 +80,7 @@ const CompanyRating = () => {
       title: "Did you find sufficient help and support when needed? ",
       name: "support",
       type: "select",
-      required: true,
+      disabled: true,
       value: score.support,
       onChange: e => setScore(current => ({ ...current, support: e.target.value })),
       options: ratingOptions
@@ -89,7 +89,7 @@ const CompanyRating = () => {
       title: "Out of 10, How you would rate your improvement during the training course? ",
       name: "improvement",
       type: "select",
-      required: true,
+      disabled: true,
       value: score.improvement,
       onChange: e => setScore(current => ({ ...current, improvement: e.target.value })),
       options: ratingOptions
@@ -98,7 +98,7 @@ const CompanyRating = () => {
       title: "Do you recommend this training program for other students? ",
       name: "recomended",
       type: "select",
-      required: true,
+      disabled: true,
       value: score.recomended,
       onChange: e => setScore(current => ({ ...current, recomended: e.target.value })),
       options: ratingOptions
@@ -107,6 +107,7 @@ const CompanyRating = () => {
       title: "Additional Comments",
       name: "comments",
       type: "textarea",
+      disabled: true,
       fullwidth: true,
       value: score.comments,
       onChange: e => setScore(current => ({ ...current, comments: e.target.value }))
@@ -136,8 +137,8 @@ const CompanyRating = () => {
   };
 
   const calculateScore = () => {
-    return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5)
-  };
+    return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5) % 10
+  }
 
   const onDataCreate = async () => {
     setLoading(true);
@@ -214,8 +215,8 @@ const CompanyRating = () => {
   return (
     <>
       <TemplatePage
-        pageTitle={"Company Rating"}
-        pageDescrbition={"Here you can rate the training program and the proposing company."}
+        pageTitle={"Company Ratings"}
+        pageDescrbition={"Companies to check submitted reviews"}
         loading={loading}
         formTitle={"Rating Form"}
         formInputs={inputs}
@@ -227,9 +228,6 @@ const CompanyRating = () => {
         tableData={scores}
         onActionSelection={onActionSelection}
         currentAction={action}
-        onDataCreate={onDataCreate}
-        onDataUpdate={onDataUpdate}
-        onDataDelete={onDataDelete}
       />
     </>
   )

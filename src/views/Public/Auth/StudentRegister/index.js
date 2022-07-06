@@ -78,7 +78,7 @@ const StudentRegister = () => {
       required: true,
       value: regData.faculty,
       onChange: e => setRegData(current => ({ ...current, faculty: e.target.value })),
-      options: faculties.map(faculty => ({ title: faculty.name, value: faculty.id }))
+      options: faculties?.map(faculty => ({ title: faculty.name, value: faculty.id }))
     },
     {
       title: "Password",

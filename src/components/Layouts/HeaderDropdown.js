@@ -1,10 +1,10 @@
-import { faBell, faCheckCircle, faComments, faGear, faLock, faSquareEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faCheckCircle, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import avatar8 from 'src/assets/images/avatars/8.jpg';
+import placeholder from "src/assets/images/PortraitPlaceholder.png";
 import Avatar from '../Root/Avatar';
 import Badge from '../Root/Badge';
-import { Dropdown, DropdownHeader, DropdownItem, DropdownMenu, DropdownToggle } from '../Root/Dropdown';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from '../Root/Dropdown';
 import Icon from '../Root/Icon';
 
 const HeaderDropdown = () => {
@@ -13,55 +13,32 @@ const HeaderDropdown = () => {
 
   const onSignOut = () => {
     dispatch({ type: 'setJWT', JWT: "" })
+    dispatch({ type: 'setUser', user: {} })
     navigate("/")
   };
 
   return (
     <Dropdown variant="nav-item">
       <DropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <Avatar src={avatar8} size="md" />
+        <Avatar src={placeholder} size="md" />
       </DropdownToggle>
 
       <DropdownMenu className="pt-0" placement="bottom-end">
-        <DropdownHeader className="bg-light fw-semibold py-2">
-          Account
-        </DropdownHeader>
-
-        <DropdownItem href="#" disabled>
+        <DropdownItem disabled>
           <Icon icon={faBell} className="me-2" />
-          Updates
-          <Badge color="info" className="ms-2">
-            42
-          </Badge>
-        </DropdownItem>
-
-        <DropdownItem href="#" disabled >
-          <Icon icon={faSquareEnvelope} className="me-2" />
-          Messages
-          <Badge color="success" className="ms-2">
-            42
-          </Badge>
-        </DropdownItem>
-
-        <DropdownItem href="#" disabled>
-          <Icon icon={faCheckCircle} className="me-2" />
-          Tasks
-          <Badge color="danger" className="ms-2">
-            42
-          </Badge>
-        </DropdownItem>
-
-        <DropdownItem href="#" disabled>
-          <Icon icon={faComments} className="me-2" />
-          Comments
+          Notifications
           <Badge color="warning" className="ms-2">
-            42
+            soon
           </Badge>
         </DropdownItem>
 
-        <DropdownHeader className="bg-light fw-semibold py-2">
-          Settings
-        </DropdownHeader>
+        <DropdownItem disabled>
+          <Icon icon={faCheckCircle} className="me-2" />
+          Reminders
+          <Badge color="warning" className="ms-2">
+            soon
+          </Badge>
+        </DropdownItem>
 
         <Link to="/profile">
           <DropdownItem>
@@ -69,11 +46,6 @@ const HeaderDropdown = () => {
             Profile
           </DropdownItem>
         </Link>
-
-        <DropdownItem href="#" disabled>
-          <Icon icon={faGear} className="me-2" />
-          Settings
-        </DropdownItem>
 
         <DropdownItem onClick={onSignOut}>
           <Icon icon={faLock} className="me-2" />

@@ -74,7 +74,7 @@ const _nav = [
       {
         component: NavItem,
         name: 'Company Reports',
-        to: '/company/reports',
+        to: '',
         icon: <Icon icon={faCommentDots} className="px-1" />,
       },
       {
