@@ -143,14 +143,14 @@ const StudentReportRemarks = () => {
   };
 
   const onDataUpdate = () => {
-    setRemarksList(current => [...current.filter(rep => rep.id !== remark.id), remark]);
+    setRemarksList(current => [...current?.filter(rep => rep.id !== remark.id), remark]);
     setRemark({});
     setAction("create");
     console.log('Form Data Updated');
   };
 
   const onDataDelete = () => {
-    setRemarksList(current => [...current.filter(rep => rep.id !== remark.id)]);
+    setRemarksList(current => [...current?.filter(rep => rep.id !== remark.id)]);
     setRemark({});
     setAction("create");
     console.log('Form Data Deleted');

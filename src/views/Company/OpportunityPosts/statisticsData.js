@@ -8,12 +8,12 @@ const statisticsDemoData = [
     chart: {
       type: "bar",
       // data: {
-      //   "Pending Posts": postsList.filter(
+      //   "Pending Posts": postsList?.filter(
       //     (rep) => !rep.remarks?.length && rep.accepted !== true
       //   )?.length,
-      //   "Accepted Posts": postsList.filter((rep) => rep.accepted === true)
+      //   "Accepted Posts": postsList?.filter((rep) => rep.accepted === true)
       //     ?.length,
-      //   "Rejected Reports": postsList.filter(
+      //   "Rejected Reports": postsList?.filter(
       //     (rep) => rep.remarks?.length && rep.accepted === false
       //   )?.length,
       // },

@@ -7,8 +7,8 @@ const visualRepresentations = postsList => {
       chart: {
         type: "bar",
         data: {
-          "Full Time": postsList.filter(intern => intern.type === "Full Time")?.length,
-          "Part Time": postsList.filter(intern => intern.type === "Part Time")?.length,
+          "Full Time": postsList?.filter(intern => intern.type === "Full Time")?.length,
+          "Part Time": postsList?.filter(intern => intern.type === "Part Time")?.length,
         },
       }
     },
@@ -18,10 +18,10 @@ const visualRepresentations = postsList => {
       chart: {
         type: "bar",
         data: {
-          "Paid Internship": postsList.filter(intern => intern.paid === "Paid Internship")?.length,
-          "Partially-paid Internship": postsList.filter(intern => intern.paid === "Partially-paid Internship")?.length,
-          "Unpaid Internship": postsList.filter(intern => intern.paid === "Unpaid Internship")?.length,
-          "Virtual Internship": postsList.filter(intern => intern.paid === "Virtual Internship")?.length,
+          "Paid Internship": postsList?.filter(intern => intern.paid === "Paid Internship")?.length,
+          "Partially-paid Internship": postsList?.filter(intern => intern.paid === "Partially-paid Internship")?.length,
+          "Unpaid Internship": postsList?.filter(intern => intern.paid === "Unpaid Internship")?.length,
+          "Virtual Internship": postsList?.filter(intern => intern.paid === "Virtual Internship")?.length,
         },
       }
     },
@@ -31,9 +31,9 @@ const visualRepresentations = postsList => {
       chart: {
         type: "bar",
         data: {
-          "Bachelors": postsList.filter(intern => intern.education === "Bachelors")?.length,
-          "Masters": postsList.filter(intern => intern.education === "Masters")?.length,
-          "Phd": postsList.filter(intern => intern.education === "Phd")?.length,
+          "Bachelors": postsList?.filter(intern => intern.education === "Bachelors")?.length,
+          "Masters": postsList?.filter(intern => intern.education === "Masters")?.length,
+          "Phd": postsList?.filter(intern => intern.education === "Phd")?.length,
         },
       }
     },
@@ -43,13 +43,13 @@ const visualRepresentations = postsList => {
       chart: {
         type: "bar",
         data: {
-          "Business": postsList.filter(intern => intern.industry === "Business")?.length,
-          "It": postsList.filter(intern => intern.industry === "It")?.length,
-          "Banking": postsList.filter(intern => intern.industry === "Banking")?.length,
-          "Education": postsList.filter(intern => intern.industry === "Education")?.length,
-          "Engineering": postsList.filter(intern => intern.industry === "Engineering")?.length,
-          "Medical": postsList.filter(intern => intern.industry === "Medical")?.length,
-          "Others": postsList.filter(intern => intern.industry === "Others")?.length,
+          "Business": postsList?.filter(intern => intern.industry === "Business")?.length,
+          "It": postsList?.filter(intern => intern.industry === "It")?.length,
+          "Banking": postsList?.filter(intern => intern.industry === "Banking")?.length,
+          "Education": postsList?.filter(intern => intern.industry === "Education")?.length,
+          "Engineering": postsList?.filter(intern => intern.industry === "Engineering")?.length,
+          "Medical": postsList?.filter(intern => intern.industry === "Medical")?.length,
+          "Others": postsList?.filter(intern => intern.industry === "Others")?.length,
         },
       }
     },
@@ -60,8 +60,8 @@ const visualRepresentations = postsList => {
       type: "doughnut",
       data:
       {
-        "Part Time": postsList.filter(intern => intern.type === "Part Time")?.length,
-        "Full Time": postsList.filter(intern => intern.type === "Full Time")?.length,
+        "Part Time": postsList?.filter(intern => intern.type === "Part Time")?.length,
+        "Full Time": postsList?.filter(intern => intern.type === "Full Time")?.length,
       },
     },
     {
@@ -69,13 +69,13 @@ const visualRepresentations = postsList => {
       type: "doughnut",
       data:
       {
-        "Business": postsList.filter(intern => intern.industry === "Business")?.length,
-        "It": postsList.filter(intern => intern.industry === "It")?.length,
-        "Banking": postsList.filter(intern => intern.industry === "Banking")?.length,
-        "Education": postsList.filter(intern => intern.industry === "Education")?.length,
-        "Engineering": postsList.filter(intern => intern.industry === "Engineering")?.length,
-        "Medical": postsList.filter(intern => intern.industry === "Medical")?.length,
-        "Others": postsList.filter(intern => intern.industry === "Others")?.length,
+        "Business": postsList?.filter(intern => intern.industry === "Business")?.length,
+        "It": postsList?.filter(intern => intern.industry === "It")?.length,
+        "Banking": postsList?.filter(intern => intern.industry === "Banking")?.length,
+        "Education": postsList?.filter(intern => intern.industry === "Education")?.length,
+        "Engineering": postsList?.filter(intern => intern.industry === "Engineering")?.length,
+        "Medical": postsList?.filter(intern => intern.industry === "Medical")?.length,
+        "Others": postsList?.filter(intern => intern.industry === "Others")?.length,
       },
     },
     {
@@ -83,9 +83,9 @@ const visualRepresentations = postsList => {
       type: "doughnut",
       data:
       {
-        "Bachelors": postsList.filter(intern => intern.education === "Bachelors")?.length,
-        "Masters": postsList.filter(intern => intern.education === "Masters")?.length,
-        "Phd": postsList.filter(intern => intern.education === "Phd")?.length,
+        "Bachelors": postsList?.filter(intern => intern.education === "Bachelors")?.length,
+        "Masters": postsList?.filter(intern => intern.education === "Masters")?.length,
+        "Phd": postsList?.filter(intern => intern.education === "Phd")?.length,
       },
     },
     {
@@ -93,10 +93,10 @@ const visualRepresentations = postsList => {
       type: "doughnut",
       data:
       {
-        "Paid Internship": postsList.filter(intern => intern.paid === "Paid Internship")?.length,
-        "Partially-paid Internship": postsList.filter(intern => intern.paid === "Partially-paid Internship")?.length,
-        "Unpaid Internship": postsList.filter(intern => intern.paid === "Unpaid Internship")?.length,
-        "Virtual Internship": postsList.filter(intern => intern.paid === "Virtual Internship")?.length,
+        "Paid Internship": postsList?.filter(intern => intern.paid === "Paid Internship")?.length,
+        "Partially-paid Internship": postsList?.filter(intern => intern.paid === "Partially-paid Internship")?.length,
+        "Unpaid Internship": postsList?.filter(intern => intern.paid === "Unpaid Internship")?.length,
+        "Virtual Internship": postsList?.filter(intern => intern.paid === "Virtual Internship")?.length,
       },
     },
   ]

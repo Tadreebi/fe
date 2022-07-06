@@ -8,19 +8,19 @@ const visualRepresentations = goals => {
       chart: {
         type: "bar",
         data: {
-          "Done": goals.filter(rep => rep.done !== true)?.length,
-          "Not Done": goals.filter(rep => rep.done === true)?.length,
+          "Done": goals?.filter(rep => rep.done !== true)?.length,
+          "Not Done": goals?.filter(rep => rep.done === true)?.length,
         },
         fill: true
       }
     },
     {
       title: "Accomplished Goals",
-      number: goals.filter(rep => rep.done !== true)?.length,
+      number: goals?.filter(rep => rep.done !== true)?.length,
       chart: {
         type: "progress",
-        value: (goals.filter(rep => rep.done !== true)?.length / goals?.length * 100),
-        text: `${(goals.filter(rep => rep.done !== true)?.length / goals?.length * 100)}%`,
+        value: (goals?.filter(rep => rep.done !== true)?.length / goals?.length * 100),
+        text: `${(goals?.filter(rep => rep.done !== true)?.length / goals?.length * 100)}%`,
         color: "success"
       }
     },
