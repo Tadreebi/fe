@@ -34,7 +34,7 @@ const StudentApplication = () => {
     { id: 2, name: "Raghad" },
   ];
 
-  useEffect(() => {
+  useEffect(async () => {
     callData();
 
     await OpportunityPostAPI.getAllPosts()
@@ -125,12 +125,13 @@ const StudentApplication = () => {
   const onFormSubmit = e => {
     e.preventDefault();
 
-    action === "create" ?
+    action === "create" ? (
       onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
+    ) : action === "update" ? (
+      onDataUpdate()
+    ) : action === "delete" && (
+      onDataDelete()
+    )
   };
 
   const onFormReset = () => {
