@@ -34,9 +34,7 @@ const UniversityTips = () => {
     { id: 5, name: "Text" },
   ];
 
-  useEffect(async () => {
-    callData();
-
+  const callListsData = async () => {
     await UniversityTipsAPI.getAllTopics()
       .then(res => {
         console.log("Called Data", res.data);
@@ -48,6 +46,11 @@ const UniversityTips = () => {
       .finally(() => {
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    callData();
+    callListsData();
   }, []);
 
   const inputs = [

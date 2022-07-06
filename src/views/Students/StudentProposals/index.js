@@ -39,9 +39,7 @@ const StudentProposalRemarks = () => {
     { id: 4, name: "Raghad Company" },
   ];
 
-  useEffect(async () => {
-    callData();
-
+  const callListsData = async () => {
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
         console.log("Called Data", res.data);
@@ -53,6 +51,11 @@ const StudentProposalRemarks = () => {
       .finally(() => {
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    callData();
+    callListsData();
   }, []);
 
   const inputs = [

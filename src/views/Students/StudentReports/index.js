@@ -32,9 +32,7 @@ const StudentReports = () => {
     { id: 2, name: "Suhaib" },
   ];
 
-  useEffect(async () => {
-    callData();
-
+  const callListsData = async () => {
     await StudentReportAPI.getAllReportTypes()
       .then(res => {
         setReportTypes(res.data)
@@ -42,6 +40,11 @@ const StudentReports = () => {
       .catch(e => {
         console.log(e)
       });
+  };
+
+  useEffect(() => {
+    callData();
+    callListsData();
   }, []);
 
   const inputs = [

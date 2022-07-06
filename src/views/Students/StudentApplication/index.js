@@ -34,9 +34,7 @@ const StudentApplication = () => {
     { id: 2, name: "Raghad" },
   ];
 
-  useEffect(async () => {
-    callData();
-
+  const callListsData = async () => {
     await OpportunityPostAPI.getAllPosts()
       .then(res => {
         console.log("Called Data", res.data);
@@ -48,6 +46,11 @@ const StudentApplication = () => {
       .finally(() => {
         setLoading(false);
       });
+  }
+
+  useEffect(() => {
+    callData();
+    callListsData();
   }, []);
 
   const inputs = [
