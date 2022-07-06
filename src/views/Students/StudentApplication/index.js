@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
-import StudentApplicationAPI from 'src/api/StudentApplication';
-import TemplatePage from '../..';
 import OpportunityPostAPI from 'src/api/OpportunityPost';
+import StudentApplicationAPI from 'src/api/StudentApplication';
+import CollapseCard from 'src/components/CollapseCard';
+import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
+import Container from 'src/components/Root/Container';
+import { Col, Row } from 'src/components/Root/Grid';
+import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
-
 
 const StudentApplication = () => {
   const [applicationsList, setApplicationsList] = useState([]);
@@ -11,6 +14,9 @@ const StudentApplication = () => {
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
+  const [pickedPost, setPickedPost] = useState({})
+
+  const image = "http://www.dermalina.com/wp-content/uploads/2020/12/no-image.jpg";
 
   const callData = async () => {
     setLoading(true);
@@ -37,7 +43,7 @@ const StudentApplication = () => {
   const callListsData = async () => {
     await OpportunityPostAPI.getAllPosts()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Internships Data", res.data);
         setInternships(res.data);
       })
       .catch(e => {
@@ -242,7 +248,97 @@ const StudentApplication = () => {
         onDataCreate={onDataCreate}
         onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
-      />
+      >
+        <CollapseCard title="Internship Oppertunites">
+          <Container>
+            <CardGroup>
+              <Card style={{ maxHeight: "100vh", overflowY: "scroll" }}>
+                <CardHeader>
+                  Posts
+                </CardHeader>
+
+                <CardBody >
+                  {internships?.map((Experience, i) => (
+                    <div key={i} onClick={() => pickedPost.id === Experience.id ? setPickedPost({}) : setPickedPost(Experience)}>
+                      <Row className={`py-4 ${Experience.id === pickedPost.id ? "bg-light" : ""}`}>
+                        <Col md={3} >
+                          <img src={image} width="100%" />
+
+                          <p className='text-center'>
+                            Company {Experience.company}
+                          </p>
+                        </Col>
+
+                        <Col md={9} className="p-2">
+                          <h5>
+                            Student {Experience.student}
+                          </h5>
+
+                          <p className='text-left'>
+                            {new Date(Experience.created_at).toLocaleDateString('en-GB')}
+                          </p>
+                        </Col>
+                      </Row>
+                    </div>
+                  ))}
+                </CardBody>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  Post Details
+                </CardHeader>
+
+                <CardBody>
+                  {pickedPost.company ? (
+                    <Row className="my-4">
+                      <Col md={4}>
+                        <img src={image} width="100%" />
+
+                        <p className='text-center'>
+                          company {pickedPost.company}
+                        </p>
+                      </Col>
+
+                      <Col md={8} className="p-2">
+                        <h5>
+                          student: <b>{pickedPost.student}</b>
+                        </h5>
+
+                        <p>
+                          improved_aspects: <b>{pickedPost.improved_aspects}</b>
+
+                        </p>
+                      </Col>
+
+                      <Col md={12} className="p-2">
+                        <h5>
+                          student: <b>{pickedPost.student}</b>
+                        </h5>
+
+                        <p>
+                          company: <b>{pickedPost.company}</b>
+                          <br />
+                          missed_aspects: <b>{pickedPost.missed_aspects}</b>
+                          <br />
+                          improved_aspects: <b>{pickedPost.improved_aspects}</b>
+                          <br />
+                          get_hired: <b>{pickedPost.get_hired}</b>
+                          <br />
+                          more: <b>{pickedPost.more}</b>
+
+                        </p>
+                      </Col>
+                    </Row>
+                  ) : (
+                    "Pick Experience"
+                  )}
+                </CardBody>
+              </Card>
+            </CardGroup>
+          </Container >
+        </CollapseCard>
+      </TemplatePage>
     </>
   )
 }

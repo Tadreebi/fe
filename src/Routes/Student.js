@@ -12,7 +12,6 @@ const StudentApplication = lazy(() => import('../views/Students/StudentApplicati
 const CompanyRating = lazy(() => import('../views/Students/CompanyRating'));
 const StudentProposals = lazy(() => import('../views/Students/StudentProposals'));
 const StudentExperiences = lazy(() => import('../views/Students/StudentExperience'));
-const OpportunityPostsList = lazy(() => import('src/views/Public/OpportunityPosts'));
 
 // Errors
 const Page404 = lazy(() => import('../views/Errors/404'));
@@ -28,7 +27,6 @@ const routes = [
   { path: '/students/company-rating', name: 'Company Rating', element: CompanyRating },
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
   { path: '/students/experiences', name: 'Student Experiences', element: StudentExperiences },
-  { path: '/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPostsList },
 
   //// Errors
   { path: '*', name: 'Error 404', element: Page404 },

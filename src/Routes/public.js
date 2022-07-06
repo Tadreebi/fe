@@ -8,7 +8,6 @@ const StudentRegister = lazy(() => import('../views/Public/Auth/StudentRegister'
 const UniversityRegister = lazy(() => import('../views/Public/Auth/UniversityRegister'));
 const CompanyRegister = lazy(() => import('../views/Public/Auth/CompanyRegister'));
 const StudentProfile = lazy(() => import('src/views/Public/StudentProfile'));
-const OpportunityPosts = lazy(() => import('src/views/Public/OpportunityPosts'));
 
 
 // Errors
@@ -21,7 +20,6 @@ const routes = [
   // Auth
   { path: '/login', name: 'Home', element: Login },
   { path: '/profile', name: 'Profile', element: StudentProfile },
-  { path: '/posts', name: 'Opportunity Posts', element: OpportunityPosts },
   { path: '/password/reset', name: 'Reset Password', element: PasswordReset },
   { path: '/password/change', name: 'Change Password', element: PasswordChange },
   { path: '/register/student', name: 'Student Register', element: StudentRegister },

@@ -15,7 +15,7 @@ const StudentExperience = () => {
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
 
-  const image = "http://www.dermalina.com/wp-content/uploads/2020/12/no-image.jpg"
+  const image = "http://www.dermalina.com/wp-content/uploads/2020/12/no-image.jpg";
 
   const callData = async () => {
     setLoading(true);
