@@ -1,12 +1,12 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Link, NavLink } from 'react-router-dom'
-import { logo } from 'src/assets/brand/logo'
 import DashboardBreadcrumb from 'src/components/Layouts/DashboardBreadcrumb'
 import Container from '../Root/Container'
 import { Header, HeaderBrand, HeaderDivider, HeaderNav, HeaderToggler } from '../Root/Header'
 import Icon from '../Root/Icon'
 import { NavItem, NavLink as NavRootLink } from '../Root/Nav'
 import HeaderDropdown from "./HeaderDropdown"
+import Logo from "src/assets/images/logo-c.png"
 
 const HeaderComp = ({ notDashboard, sidebarShow, setSidebarShow }) => {
   const navLinks = [
@@ -27,8 +27,9 @@ const HeaderComp = ({ notDashboard, sidebarShow, setSidebarShow }) => {
 
         <HeaderBrand>
           <Link to="/">
-            {/* <Icon icon={logo} height={30} alt="Logo" /> */}
-            Logo
+            {notDashboard && (
+              <img src={Logo} height="50px" />
+            )}
           </Link>
         </HeaderBrand>
 
