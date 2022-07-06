@@ -27,6 +27,12 @@ const _nav = [
     to: '/company/reports',
     icon: <Icon icon={faCommentDots} className="px-1" />,
   },
+  {
+    component: NavItem,
+    name: 'Company Ratings',
+    to: '/company/company-rating-view',
+    icon: <Icon icon={faCommentDots} className="px-1" />,
+  },
 ];
 
 export default _nav;
