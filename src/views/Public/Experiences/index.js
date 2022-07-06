@@ -119,7 +119,7 @@ const Experiences = () => {
           </CardBody>
         </Card>
       </CardGroup>
-    </Container  >
+    </Container>
   )
 }
 

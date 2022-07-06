@@ -16,7 +16,7 @@ const StudentProposalRemarks = () => {
 
     await StudentProposalAPI.getAllProposals()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Proposal Data", res.data);
         setproposals(res.data);
       })
       .catch(e => {
@@ -42,7 +42,7 @@ const StudentProposalRemarks = () => {
   const callListsData = async () => {
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Appication Data", res.data);
         setInternshipApps(res.data);
       })
       .catch(e => {
@@ -192,17 +192,17 @@ const StudentProposalRemarks = () => {
     },
     {
       name: "Internship",
-      selector: row => internshipApps.find(app => app.id === row.internship_application)?.name,
+      selector: row => internshipApps.find(app => app.id === row.internship_application)?.id,
       sortable: true
     },
     {
-      name: "remarks",
+      name: "Response",
       selector: row => row.remarks,
       sortable: true
     },
     {
       name: "Accepted By University",
-      selector: row => row.accepted ? "Yes" : "No",
+      selector: row => row.accepted ? "Yes" : row.remarks ? "No" : "Not Yet",
       sortable: true
     }
   ];

@@ -29,7 +29,9 @@ const opportunityPosts = () => {
   // API Call Needed
   const companies = [
     { id: 1, name: "ASAC" },
-    { id: 4, name: "CSS" },
+    { id: 2, name: "CSS" },
+    { id: 3, name: "AS" },
+    { id: 4, name: "CQ" },
   ];
 
   useEffect(() => {
@@ -39,12 +41,12 @@ const opportunityPosts = () => {
   const inputs = [
     {
       title: "Company",
-      name: "company_id",
+      name: "company",
       type: "select",
       required: true,
-      value: post.company_id,
+      value: post.company || post.company_id,
       onChange: (e) =>
-        setPost(current => ({ ...current, company_id: e.target.value })),
+        setPost(current => ({ ...current, company: e.target.value })),
       options: companies?.map((company) => ({ title: company.name, value: company.id })),
     },
     {

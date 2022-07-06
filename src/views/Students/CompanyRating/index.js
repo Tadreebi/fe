@@ -136,8 +136,8 @@ const CompanyRating = () => {
   };
 
   const calculateScore = () => {
-    return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5) % 10
-  }
+    return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5)
+  };
 
   const onDataCreate = async () => {
     setLoading(true);
@@ -202,6 +202,11 @@ const CompanyRating = () => {
     {
       name: "Evalutation",
       selector: row => row.score,
+      sortable: true
+    },
+    {
+      name: "Comments",
+      selector: row => row.comments,
       sortable: true
     },
   ];

@@ -17,7 +17,7 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Internship Posts Data", res.data);
         setApplicationsList(res.data);
       })
       .catch(e => {
@@ -46,7 +46,7 @@ const StudentApplication = () => {
       .finally(() => {
         setLoading(false);
       });
-  }
+  };
 
   useEffect(() => {
     callData();
@@ -71,7 +71,7 @@ const StudentApplication = () => {
       double: true,
       value: application.internship,
       onChange: e => setApplication(current => ({ ...current, internship: e.target.value })),
-      options: internships?.map(internship => ({ title: internship.name, value: internship.id }))
+      options: internships?.map(internship => ({ title: internship.id, value: internship.id }))
     },
     {
       title: "Preferable Internship Hours",
@@ -207,7 +207,7 @@ const StudentApplication = () => {
   const tableColumns = [
     {
       name: "Internship",
-      selector: row => internships.find(internship => internship.id === row.internship)?.name,
+      selector: row => internships.find(internship => internship.id === row.internship)?.id,
       sortable: true
     },
     {
