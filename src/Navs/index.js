@@ -10,11 +10,6 @@ const _nav = [
     icon: <Icon icon={faDashboard} className="px-1" />,
   },
   {
-    component: NavTitle,
-    name: 'Model Pages',
-    icon: <Icon icon={faGraduationCap} className="px-1" />,
-  },
-  {
     component: NavGroup,
     name: 'Students',
     to: '/students',

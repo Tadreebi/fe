@@ -44,6 +44,7 @@
     "chart.js": "^3.7.1",
     "classnames": "^2.3.1",
     "core-js": "^3.22.6",
+    "dotenv-cli": "^6.0.0",
     "material-table": "^2.0.3",
     "node-sass": "^7.0.1",
     "prop-types": "^15.8.1",

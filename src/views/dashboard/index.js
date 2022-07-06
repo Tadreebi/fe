@@ -149,7 +149,7 @@ const Dashboard = () => {
       {/* Student Views */}
       {/* Student Applications  */}
       <PageStatistics title={"Student Application Statistics"} statistics={dashboardFilter(StudentApplication(studentApplicationsList).statisticsData)} open />
-      <PageCharts title={"Student Application Charts"} statistics={dashboardFilter(StudentApplication(studentApplicationsList).chartsData)} open />
+      {/* <PageCharts title={"Student Application Charts"} statistics={dashboardFilter(StudentApplication(studentApplicationsList).chartsData)} open /> */}
 
       {/* Student Experiences  */}
       <PageStatistics title={"Student Experience Statistics"} statistics={dashboardFilter(StudentExperience(studentExperiencesList).statisticsData)} open />
