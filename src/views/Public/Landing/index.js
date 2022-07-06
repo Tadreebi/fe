@@ -3,9 +3,10 @@ import { Button } from 'src/components/Root/Buttons/';
 import { Card, CardBody, CardGroup } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
+import store from "../../../store"
 
 const Landing = () => {
-  const JWT = true;
+  const JWT = store.getState().JWT;
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
@@ -15,7 +16,7 @@ const Landing = () => {
             <CardGroup>
               <Card className="p-4">
                 <CardBody className='text-center'>
-                  {JWT ? (
+                  {JWT?.length > 10 ? (
                     <Link to="/dashboard">
                       <Button color="success" className="px-4">
                         Dashboard

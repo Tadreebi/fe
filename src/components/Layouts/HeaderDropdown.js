@@ -1,5 +1,6 @@
 import { faBell, faCheckCircle, faComments, faGear, faLock, faSquareEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import avatar8 from 'src/assets/images/avatars/8.jpg';
 import Avatar from '../Root/Avatar';
 import Badge from '../Root/Badge';
@@ -7,6 +8,14 @@ import { Dropdown, DropdownHeader, DropdownItem, DropdownMenu, DropdownToggle } 
 import Icon from '../Root/Icon';
 
 const HeaderDropdown = () => {
+  let navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const onSignOut = () => {
+    dispatch({ type: 'setJWT', JWT: "" })
+    navigate("/")
+  };
+
   return (
     <Dropdown variant="nav-item">
       <DropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -66,9 +75,9 @@ const HeaderDropdown = () => {
           Settings
         </DropdownItem>
 
-        <DropdownItem href="#" disabled>
+        <DropdownItem onClick={onSignOut}>
           <Icon icon={faLock} className="me-2" />
-          Lock Account
+          Sign Out
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

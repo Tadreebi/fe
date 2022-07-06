@@ -12,16 +12,22 @@ const StudentApplication = lazy(() => import('../views/Students/StudentApplicati
 const CompanyRating = lazy(() => import('../views/Students/CompanyRating'));
 const StudentProposals = lazy(() => import('../views/Students/StudentProposals'));
 const StudentExperiences = lazy(() => import('../views/Students/StudentExperience'));
+const OpportunityPostsList = lazy(() => import('src/views/Public/OpportunityPosts'));
+const ExperiencesList = lazy(() => import('src/views/Public/Experiences'));
+
 
 //// University
-const Faculty = lazy(() => import('../views/University/Faculty'));
-const SupervisedBy = lazy(() => import('../views/University/SupervisedBy'));
 const UniversityTips = lazy(() => import('../views/University/UniversityTips'));
 const UniversityFeedback = lazy(() => import('../views/University/UniversityFeedback'));
+const StudentReportRemarks = lazy(() => import('../views/University/StudentReportRemarks'));
+const UniversityProposalRemarks = lazy(() => import('../views/University/StudentProposalRemarks'));
+
 
 //// Company
 const OpportunityPosts = lazy(() => import('../views/Company/OpportunityPosts'));
 const CompanyReport = lazy(() => import('../views/Company/CompanyReport'));
+const CompanyAppResponse = lazy(() => import('../views/Company/CompanyAppResponse'));
+
 
 // Errors
 const Page404 = lazy(() => import('../views/Errors/404'));
@@ -39,17 +45,20 @@ const routes = [
   { path: '/students/application', name: 'Student Application', element: StudentApplication },
   { path: '/students/company-rating', name: 'Company Rating', element: CompanyRating },
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
-  { path: '/students/experiences', name: 'Student Reports', element: StudentExperiences },
+  { path: '/students/experiences', name: 'Student Experiences', element: StudentExperiences },
+  { path: '/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPostsList },
+  { path: '/experiences-posts', name: 'Experiences Posts', element: ExperiencesList },
 
   //// Univerity
   { path: '/staff/tips', name: 'University Tips', element: UniversityTips },
   { path: '/staff/feedback', name: 'University Feedback', element: UniversityFeedback },
-  { path: '/faculty', name: 'Faculty', element: Faculty },
-  { path: '/supervised-by', name: 'Supervised By', element: SupervisedBy },
+  { path: '/university/report-remarks', name: 'Student Report Remarks', element: StudentReportRemarks },
+  { path: '/university/proposal-remarks', name: 'Student Proposal Remarks', element: UniversityProposalRemarks },
 
   //// Company
   { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },
   { path: '/company/reports', name: 'Company Reports', element: CompanyReport },
+  { path: '/company/response', name: 'Company App Response', element: CompanyAppResponse },
 
   //// Errors
   { path: '*', name: 'Error 404', element: Page404 },

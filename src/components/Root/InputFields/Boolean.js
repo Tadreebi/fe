@@ -6,7 +6,7 @@ const Boolean = ({ name, title, size, value, onChange, disabled, children, ...re
       name={name}
       label={title}
       size={size || "lg"}
-      checked={value}
+      checked={value || false}
       onChange={onChange}
       disabled={disabled}
       {...rest}

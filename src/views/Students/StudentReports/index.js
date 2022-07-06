@@ -1,30 +1,51 @@
-import { useState } from 'react';
-import { Col, Row } from 'src/components/Root/Grid';
-import TemplatePage from '../../templatePage';
-import reportsDemoData from './demoData';
+import { useEffect, useState } from 'react';
+import StudentReportAPI from 'src/api/StudentReport';
+import TemplatePage from '../..';
 
 const StudentReports = () => {
-  const [reportsList, setReportsList] = useState([...reportsDemoData]);
+  const [reportsList, setReportsList] = useState([]);
   const [report, setReport] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.getAllReports()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setReportsList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Moayad" },
+    { id: 2, name: "Suhaib" },
   ];
+
+  const reportTypes = [
+    { name: "Weekly Report", id: 1 },
+    { name: "Monthly Report", id: 2 },
+  ];
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const inputs = [
     {
       title: "Title",
-      name: "title", // should match the property name in the backend model
+      name: "title",
       type: "text",
-      placeholder: "Report Title",
       required: true,
-      value: report.title, // should match the property name in the backend model
-      onChange: e => setReport(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
+      value: report.title,
+      onChange: e => setReport(current => ({ ...current, title: e.target.value }))
     },
     {
       title: "Student",
@@ -36,25 +57,13 @@ const StudentReports = () => {
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Star Rating",
-      name: "rating",
-      type: "rating",
-      required: true,
-      value: report.rating,
-      onChange: e => setReport(current => ({ ...current, rating: e }))
-    },
-    {
       title: "Report Type",
       name: "type",
       type: "select",
       required: true,
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
-      options: [
-        { title: "Weekly Report", value: "Weekly" },
-        { title: "Monthly Report", value: "Monthly" },
-        { title: "Final Report", value: "Final" }
-      ]
+      options: reportTypes.map(report => ({ title: report.name, value: report.id }))
     },
     {
       title: "Start Date of Report",
@@ -69,6 +78,7 @@ const StudentReports = () => {
       name: "endDate",
       type: "date",
       required: true,
+      double: true,
       value: report.endDate,
       onChange: e => setReport(current => ({ ...current, endDate: e.target.value }))
     },
@@ -77,7 +87,6 @@ const StudentReports = () => {
       name: "intro",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.intro,
       onChange: e => setReport(current => ({ ...current, intro: e.target.value }))
     },
@@ -86,7 +95,6 @@ const StudentReports = () => {
       name: "conclusion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.conclusion,
       onChange: e => setReport(current => ({ ...current, conclusion: e.target.value }))
     },
@@ -95,30 +103,29 @@ const StudentReports = () => {
       name: "remarks",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: report.remarks,
-      onChange: e => setReport(current => ({ ...current, remarks: e.target.value }))
+      disabled: true
     },
     {
       title: "Accepted",
       name: "accepted",
       type: "switch",
       fullwidth: true,
-      required: true,
       value: report.accepted,
-      onChange: e => setReport(current => ({ ...current, accepted: e.target.checked }))
+      disabled: true
     },
   ];
 
   const onFormSubmit = e => {
     e.preventDefault();
 
-    action === "create" ?
+    action === "create" ? (
       onDataCreate()
-      : action === "update" ?
-        onDataEdit()
-        : action === "delete" &&
-        onDataDelete()
+    ) : action === "update" ? (
+      onDataUpdate()
+    ) : action === "delete" && (
+      onDataDelete()
+    );
   };
 
   const onFormReset = () => {
@@ -132,25 +139,58 @@ const StudentReports = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setReportsList(current => [...current, { ...report, id: current.length }]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.createReport(report)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setReport({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setReportsList(current => [...current.filter(rep => rep.id !== report.id), report]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.updateReport(report.id, report)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setReport({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setReportsList(current => [...current.filter(rep => rep.id !== report.id)]);
-    setReport({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.deleteReport(report.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setReport({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const statisticsData = [
@@ -314,8 +354,8 @@ const StudentReports = () => {
       sortable: true
     },
     {
-      name: "Student",
-      selector: row => row.student,
+      name: "Type",
+      selector: row => reportTypes.find(type => type.id === row.type)?.name,
       sortable: true
     },
     {
@@ -325,7 +365,7 @@ const StudentReports = () => {
     },
     {
       name: "Accepted By Supervisor",
-      selector: row => row.accepted ? "True" : "False",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
   ];
@@ -334,20 +374,22 @@ const StudentReports = () => {
     <>
       <TemplatePage
         pageTitle={"Student Reports"}
-        pageDescrbition={"For student to submit periodical & final reports to university supervisor"}
-        statisticsData={statisticsData} // New
-        chartsData={chartsData} // New
+        pageDescrbition={"Students to submit periodical & final reports to university supervisor"}
+        loading={loading}
+        statisticsData={statisticsData}
+        chartsData={chartsData}
+        formTitle={"CRUD Reports"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Reports List"}
-        tableColumns={tableColumns} // New
-        tableRowDetails={true} // New
+        tableColumns={tableColumns}
+        tableRowDetails={true}
         tableData={reportsList}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

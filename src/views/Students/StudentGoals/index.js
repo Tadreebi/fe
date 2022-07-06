@@ -1,37 +1,62 @@
-import { useState } from 'react';
-import TemplatePage from '../../templatePage';
-import goalsDemoData from './demoData';
+import { useEffect, useState } from 'react';
+import StudentGoalsAPI from 'src/api/StudentGoals';
+import TemplatePage from '../..';
 
 const StudentGoals = () => {
-  const [goals, setGoals] = useState(goalsDemoData || []);
+  const [goals, setGoalsList] = useState([]);
   const [goal, setGoal] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentGoalsAPI.getAllGoals()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setGoalsList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 1, name: "Raghad" },
+    { id: 2, name: "Suhaib" },
   ];
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const inputs = [
     {
       title: "Title",
       name: "title",
       type: "text",
-      placeholder: "Goal Title",
+      double: true,
       required: true,
-      fullwidth: true,
       value: goal.title,
       onChange: e => setGoal(current => ({ ...current, title: e.target.value }))
+    },
+    {
+      title: "Student",
+      name: "student",
+      type: "select",
+      required: true,
+      value: goal.student,
+      onChange: e => setGoal(current => ({ ...current, student: e.target.value })),
+      options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Goal Description",
       name: "describtion",
       type: "textarea",
       fullwidth: true,
-      required: true,
       value: goal.describtion,
       onChange: e => setGoal(current => ({ ...current, describtion: e.target.value }))
     },
@@ -39,7 +64,6 @@ const StudentGoals = () => {
       title: "Done",
       name: "done",
       type: "switch",
-      required: true,
       value: goal.done,
       onChange: e => setGoal(current => ({ ...current, done: e.target.checked }))
     },
@@ -51,7 +75,7 @@ const StudentGoals = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -67,27 +91,59 @@ const StudentGoals = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setGoals(current => [...current, { ...goal, id: current.length }]);
-    setGoal({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await StudentGoalsAPI.createGoal(goal)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setGoal({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setGoals(current => [...current.filter(rep => rep.id !== goal.id), goal]);
-    setGoal({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await StudentGoalsAPI.updateGoal(goal.id, goal)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setGoal({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setGoals(current => [...current.filter(rep => rep.id !== goal.id)]);
-    setGoal({});
-    setAction("create");
-    console.log('Form Data Deleted');
-  };
+  const onDataDelete = async () => {
+    setLoading(true);
 
+    await StudentGoalsAPI.deleteGoal(goal.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setGoal({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   const statisticsData = [
     {
       title: "Goals Set",
@@ -126,7 +182,7 @@ const StudentGoals = () => {
     },
     {
       name: "Done",
-      selector: row => row.done ? "True" : "False",
+      selector: row => row.done ? "Yes" : "No",
       sortable: true
     }
   ];
@@ -135,20 +191,21 @@ const StudentGoals = () => {
     <>
       <TemplatePage
         pageTitle={"Student Goals"}
-        pageDescrbition={"For student to add their goals"}
+        pageDescrbition={"Students to add their personal & private goals along the internship and report to self on progess"}
+        loading={loading}
         statisticsData={statisticsData}
         formTitle={"CRUD Goals"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
-        tableTitle={"Student Goals List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
+        tableTitle={"Student Goals List"}
         tableData={goals}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>

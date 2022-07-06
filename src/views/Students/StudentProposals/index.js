@@ -1,61 +1,63 @@
-import { useState } from 'react'
-import poposalsDemoData from './demoData';
-import TemplatePage from '../../templatePage'
+import { useEffect, useState } from 'react';
+import StudentProposalAPI from 'src/api/StudentProposal';
+import TemplatePage from '../..';
 
 
-const StudentProposals = () => {
-  const [proposals, setproposals] = useState([...poposalsDemoData]);
+const StudentProposalRemarks = () => {
+  const [proposals, setproposals] = useState([]);
   const [proposal, setproposal] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentProposalAPI.getAllProposals()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setproposals(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const students = [
     { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 2, name: "Moayad" },
   ];
+
   const companies = [
     { id: 1, name: "Emad Company" },
-    { id: 2, name: "Ghaida' Company" },
-    { id: 3, name: "Moayad Company" },
     { id: 4, name: "Raghad Company" },
-    { id: 5, name: "Suhaib Company" },
   ];
 
-  const InternshipApp = [
-    { id: 1, name: "Emad Company" },
-    { id: 2, name: "Ghaida' Company" },
-    { id: 3, name: "Moayad Company" },
-    { id: 4, name: "Raghad Company" },
-    { id: 5, name: "Suhaib Company" },
+  const internshipApps = [
+    { id: 3, name: "Emad Company" },
+    { id: 4, name: "Suhaib Company" },
   ];
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   const inputs = [
-    {
-      title: "Title",
-      name: "title", // should match the property name in the backend model
-      type: "text",
-      placeholder: "Proposal Title",
-      required: true,
-      value: proposal.title, // should match the property name in the backend model
-      onChange: e => setproposal(current => ({ ...current, title: e.target.value })) // should match the property name in the backend model
-    },
     {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: proposal.student,
       onChange: e => setproposal(current => ({ ...current, student: e.target.value })),
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Companies",
+      title: "Company",
       name: "company",
       type: "select",
-      double: true,
       required: true,
       value: proposal.company,
       onChange: e => setproposal(current => ({ ...current, company: e.target.value })),
@@ -65,11 +67,10 @@ const StudentProposals = () => {
       title: "Internship",
       name: "internship_application",
       type: "select",
-      double: true,
       required: true,
       value: proposal.internship_application,
-      onChange: e => setproposal(current => ({ ...current, inter: e.target.value })),
-      options: InternshipApp.map(inter => ({ title: inter.name, value: inter.id }))
+      onChange: e => setproposal(current => ({ ...current, internship_application: e.target.value })),
+      options: internshipApps.map(inter => ({ title: inter.name, value: inter.id }))
     },
     {
       title: "Remarks",
@@ -78,7 +79,7 @@ const StudentProposals = () => {
       fullwidth: true,
       required: true,
       value: proposal.remarks,
-      onChange: e => setproposal(current => ({ ...current, remarks: e.target.value }))
+      disabled: true
     },
     {
       title: "Accepted",
@@ -87,7 +88,7 @@ const StudentProposals = () => {
       fullwidth: true,
       required: true,
       value: proposal.accepted,
-      onChange: e => setReport(current => ({ ...current, accepted: e.target.checked }))
+      disabled: true
     },
   ];
 
@@ -97,7 +98,7 @@ const StudentProposals = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -113,25 +114,58 @@ const StudentProposals = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setproposals(current => [...current, { ...proposal, id: current.length }]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await StudentProposalAPI.createProposal(proposal)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setproposal({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setproposals(current => [...current.filter(pro => pro.id !== proposal.id), proposal]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await StudentProposalAPI.updateProposal(proposal.id, proposal)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setproposal({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setproposals(current => [...current.filter(pro => pro.id !== proposal.id)]);
-    setproposal({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await StudentProposalAPI.deleteProposal(proposal.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setproposal({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const chartsData = [
@@ -204,28 +238,23 @@ const StudentProposals = () => {
 
   const tableColumns = [
     {
-      name: "Title",
-      selector: row => row.title,
-      sortable: true
-    },
-    {
-      name: "Student",
-      selector: row => row.student,
-      sortable: true
-    },
-    {
       name: "Company",
-      selector: row => row.company,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true
     },
     {
       name: "Internship",
-      selector: row => row.internship_application,
+      selector: row => internshipApps.find(app => app.id === row.internship_application)?.name,
       sortable: true
     },
     {
       name: "remarks",
       selector: row => row.remarks,
+      sortable: true
+    },
+    {
+      name: "Accepted By University",
+      selector: row => row.accepted ? "Yes" : "No",
       sortable: true
     }
   ];
@@ -236,10 +265,11 @@ const StudentProposals = () => {
     <>
       <TemplatePage
         pageTitle={"Student Proposals"}
-        pageDescrbition={"Students to submit and university to approve proposed internship vacancies to fulfill"}
-        formTitle={"CRUD Proposals"}
+        pageDescrbition={"Students to submit proposed internship vacancies to fulfill to university supervisor"}
         statisticsData={statisticsData}
         chartsData={chartsData}
+        loading={loading}
+        formTitle={"CRUD Proposals"}
         formInputs={inputs}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
@@ -250,11 +280,11 @@ const StudentProposals = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>
   )
 }
 
-export default StudentProposals
+export default StudentProposalRemarks

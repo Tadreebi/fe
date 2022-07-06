@@ -38,6 +38,14 @@ const UniversityRegister = () => {
       onChange: e => setRegData(current => ({ ...current, name: e.target.value }))
     },
     {
+      title: "Address",
+      name: "address",
+      type: "text",
+      required: true,
+      value: regData.address,
+      onChange: e => setRegData(current => ({ ...current, address: e.target.value }))
+    },
+    {
       title: "Phone No",
       name: "phone",
       type: "text",

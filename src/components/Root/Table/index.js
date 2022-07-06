@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from '../Buttons';
 import { Col, Row } from '../Grid';
 import Icon from '../Icon';
 
-const Table = ({ columns, data, expandedComponent, onActionSelection }) => {
+const Table = ({ columns, data, expandedComponent, onActionSelection, loading }) => {
 
   const detailPanel = ({ data }) => (
     <Row>
@@ -20,6 +20,7 @@ const Table = ({ columns, data, expandedComponent, onActionSelection }) => {
 
   return (
     <DataTable
+      loading={loading}
       columns={[...columns,
       {
         name: "Actions",

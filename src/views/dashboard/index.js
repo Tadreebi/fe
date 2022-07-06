@@ -153,7 +153,7 @@ const Dashboard = () => {
             </Col>
             <Col sm={7} className="d-none d-md-block">
               <Button color="primary" className="float-end">
-                <Icon icon={cilCloudDownload} />
+                {/* <Icon icon={cilCloudDownload} /> */}
               </Button>
               <ButtonGroup className="float-end me-3">
                 {['Day', 'Month', 'Year'].map((value, i) => (
@@ -328,7 +328,7 @@ const Dashboard = () => {
                   {progressGroupExample2.map((item, index) => (
                     <div className="progress-group mb-4" key={index}>
                       <div className="progress-group-header">
-                        <Icon className="me-2" icon={item.icon} size="lg" />
+                        {/* <Icon className="me-2" icon={item.icon} size="lg" /> */}
                         <span>{item.title}</span>
                         <span className="ms-auto fw-semibold">{item.value}%</span>
                       </div>
@@ -343,7 +343,7 @@ const Dashboard = () => {
                   {progressGroupExample3.map((item, index) => (
                     <div className="progress-group" key={index}>
                       <div className="progress-group-header">
-                        <Icon className="me-2" icon={item.icon} size="lg" />
+                        {/* <Icon className="me-2" icon={item.icon} size="lg" /> */}
                         <span>{item.title}</span>
                         <span className="ms-auto fw-semibold">
                           {item.value}{' '}

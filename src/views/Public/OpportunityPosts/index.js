@@ -1,13 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
 import demoData from "./demoData";
-
+import CompanyPostAPI from 'src/api/OpportunityPost';
 
 const OpportunityPosts = () => {
-  const [posts, setPosts] = useState(demoData)
+  const [posts, setPosts] = useState([])
   const [pickedPost, setPickedPost] = useState({})
+
+  const callData = async () => {
+    await CompanyPostAPI.getAllPosts()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setPosts(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    callData();
+  }, []);
 
   return (
     <Container>
@@ -19,27 +34,29 @@ const OpportunityPosts = () => {
 
           <CardBody>
             {posts?.map((post, i) => (
-              <Row key={i} className={`py-4 ${post.id === pickedPost.id ? "bg-light" : ""}`}>
-                <Col md={3} onClick={() => pickedPost.id === post.id ? setPickedPost({}) : setPickedPost(post)}>
-                  <img src={post.image} width="100%" />
+              <div key={i} onClick={() => pickedPost.id === post.id ? setPickedPost({}) : setPickedPost(post)}>
+                <Row className={`py-4 ${post.id === pickedPost.id ? "bg-light" : ""}`}>
+                  <Col md={3} >
+                    <img src={post.image} width="100%" />
 
-                  <p className='text-center'>
-                    {post.company}
-                  </p>
-                </Col>
+                    <p className='text-center'>
+                      {post.company}
+                    </p>
+                  </Col>
 
-                <Col md={9} className="p-2">
-                  <h5>
-                    {post.position}
-                  </h5>
+                  <Col md={9} className="p-2">
+                    <h5>
+                      {post.position}
+                    </h5>
 
-                  <p>
-                    {post.type}
-                    <br />
-                    {post.location}, {post.city}
-                  </p>
-                </Col>
-              </Row>
+                    <p>
+                      {post.type}
+                      <br />
+                      {post.location}, {post.city}
+                    </p>
+                  </Col>
+                </Row>
+              </div>
             ))}
           </CardBody>
         </Card>
@@ -78,39 +95,39 @@ const OpportunityPosts = () => {
                   </h5>
 
                   <p>
-                    {pickedPost.company}
+                    company: <b>{pickedPost.company}</b>
                     <br />
-                    {pickedPost.image}
+                    image: <b>{pickedPost.image}</b>
                     <br />
-                    {pickedPost.position}
+                    position: <b>{pickedPost.position}</b>
                     <br />
-                    {pickedPost.type}
+                    type: <b>{pickedPost.type}</b>
                     <br />
-                    {pickedPost.location}
+                    location: <b>{pickedPost.location}</b>
                     <br />
-                    {pickedPost.education}
+                    education: <b>{pickedPost.education}</b>
                     <br />
-                    {pickedPost.industry}
+                    industry: <b>{pickedPost.industry}</b>
                     <br />
-                    {pickedPost.experience}
+                    experience: <b>{pickedPost.experience}</b>
                     <br />
-                    {pickedPost.paid}
+                    paid: <b>{pickedPost.paid}</b>
                     <br />
-                    {pickedPost.salary}
+                    salary: <b>{pickedPost.salary}</b>
                     <br />
-                    {pickedPost.city}
+                    city: <b>{pickedPost.city}</b>
                     <br />
-                    {pickedPost.location}
+                    location: <b>{pickedPost.location}</b>
                     <br />
-                    {pickedPost.vacancies}
+                    vacancies: <b>{pickedPost.vacancies}</b>
                     <br />
-                    {pickedPost.description}
+                    description: <b>{pickedPost.description}</b>
                     <br />
-                    {pickedPost.supervisor_Name}
+                    supervisor_Name: <b>{pickedPost.supervisor_Name}</b>
                     <br />
-                    {pickedPost.supervisor_phone_number}
+                    supervisor_phone_number: <b>{pickedPost.supervisor_phone_number}</b>
                     <br />
-                    {pickedPost.subervisor_position}
+                    subervisor_position: <b>{pickedPost.subervisor_position}</b>
                   </p>
                 </Col>
               </Row>
@@ -120,7 +137,7 @@ const OpportunityPosts = () => {
           </CardBody>
         </Card>
       </CardGroup>
-    </Container>
+    </Container >
   )
 }
 

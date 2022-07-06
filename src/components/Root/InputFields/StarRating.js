@@ -7,7 +7,7 @@ const StarRating = ({ name, value, onChange, disabled, children, ...rest }) => {
       // fullSymbol={<FontAwesomeIcon icon={faStar} />}
       name={name}
       fractions={2}
-      initialRating={value}
+      initialRating={value || 0}
       onChange={onChange}
       readonly={disabled}
       {...rest}

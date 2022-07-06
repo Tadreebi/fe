@@ -1,15 +1,28 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'src/components/Root/Buttons/'
 import { Card, CardBody } from 'src/components/Root/Cards'
 import AuthTemplate from '../'
+import UserAPI from "src/api/User"
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({});
+  let navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [loginData, setLoginData] = useState({ username: "admin", password: "123" });
 
-  const onLogin = e => {
+  const onLogin = async (e) => {
     e.preventDefault();
-    console.log("Loggin In", loginData)
+
+    await UserAPI.login(loginData)
+      .then(res => {
+        console.log("Logged In", res)
+        dispatch({ type: 'setJWT', JWT: res.data.access })
+        navigate("/dashboard")
+      })
+      .catch(e => {
+        console.log(e)
+      });
   };
 
   const inputs = [

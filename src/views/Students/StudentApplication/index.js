@@ -1,67 +1,75 @@
-import { useState } from 'react'
-import applicationData from './applicationData';
-import TemplatePage from '../../templatePage'
+import { useEffect, useState } from 'react';
+import StudentApplicationAPI from 'src/api/StudentApplication';
+import TemplatePage from '../..';
 
 
 const StudentApplication = () => {
-  const [applicationsList, setApplicationsList] = useState([...applicationData]);
+  const [applicationsList, setApplicationsList] = useState([]);
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
+  const [loading, setLoading] = useState(false);
+
+  const callData = async () => {
+    setLoading(true);
+
+    await StudentApplicationAPI.getAllApplications()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setApplicationsList(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const students = [
     { id: 1, name: "Emad" },
-    { id: 2, name: "Ghaida'" },
-    { id: 3, name: "Moayad" },
-    { id: 4, name: "Raghad" },
-    { id: 5, name: "Suhaib" },
+    { id: 2, name: "Raghad" },
   ];
+
   const internships = [
     { id: 1, name: "ASAC" },
     { id: 2, name: "CSS" },
-    { id: 3, name: "CC" },
-    { id: 4, name: "Amazon" },
-    { id: 5, name: "Google" },
   ];
+
+  useEffect(() => {
+    callData();
+  }, []);
+
   const inputs = [
     {
       title: "Student",
       name: "student",
       type: "select",
-      double: true,
       required: true,
       value: application.student,
       onChange: e => setApplication(current => ({ ...current, student: e.target.value })),
       options: students.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Internship",
+      title: "Internship Oppertunity",
       name: "internship",
       type: "select",
-      double: true,
       required: true,
+      double: true,
       value: application.internship,
       onChange: e => setApplication(current => ({ ...current, internship: e.target.value })),
       options: internships.map(internship => ({ title: internship.name, value: internship.id }))
     },
     {
-      title: "Internship Hours",
+      title: "Preferable Internship Hours",
       name: "type",
       type: "select",
       required: true,
       value: application.type,
-      onChange: e => setPost(current => ({ ...current, type: e.target.value })),
+      onChange: e => setApplication(current => ({ ...current, type: e.target.value })),
       options: [
         { title: "Full Time", value: "Full Time" },
         { title: "Part Time", value: "Part Time" },
       ]
-    },
-    {
-      title: "Home Full Address",
-      name: "homeFullAddress",
-      type: "text",
-      required: true,
-      value: application.homeFullAddress,
-      onChange: e => setApplication(current => ({ ...current, homeFullAddress: e.target.value }))
     },
     {
       title: "Preferable Internship Location",
@@ -72,7 +80,7 @@ const StudentApplication = () => {
       onChange: e => setApplication(current => ({ ...current, location: e.target.value })),
       options: [
         { title: "Remote", value: "Remote" },
-        { title: "OnSite", value: "OnSite" },
+        { title: "On Site", value: "On Site" },
       ]
     },
     {
@@ -80,7 +88,7 @@ const StudentApplication = () => {
       name: "expected_salary",
       type: "number",
       required: true,
-      value: application.expected_salary,
+      value: application.expected_salary || 0,
       onChange: e => setApplication(current => ({ ...current, expected_salary: e.target.value }))
     },
     {
@@ -93,9 +101,9 @@ const StudentApplication = () => {
       onChange: e => setApplication(current => ({ ...current, coverletter: e.target.value }))
     },
     {
-      title: "Resume",
+      title: "Resume Link",
       name: "resume",
-      type: "file",
+      type: "url",
       fullwidth: true,
       required: true,
       value: application.resume,
@@ -109,7 +117,7 @@ const StudentApplication = () => {
     action === "create" ?
       onDataCreate()
       : action === "update" ?
-        onDataEdit()
+        onDataUpdate()
         : action === "delete" &&
         onDataDelete()
   };
@@ -125,26 +133,60 @@ const StudentApplication = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setApplicationsList(current => [...current, { ...application, id: current.length }]);
-    setApplication({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await StudentApplicationAPI.createApplication(application)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setApplication({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataEdit = () => {
-    setApplicationsList(current => [...current.filter(rep => rep.id !== application.id), application]);
-    setApplication({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await StudentApplicationAPI.updateApplication(application.id, application)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setApplication({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setApplicationsList(current => [...current.filter(rep => rep.id !== application.id)]);
-    setApplication({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await StudentApplicationAPI.deleteApplication(application.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setApplication({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
+
   const statisticsData = [
     {
       title: "Internship Type",
@@ -209,23 +251,17 @@ const StudentApplication = () => {
 
   const tableColumns = [
     {
-      name: "Student",
-      selector: row => row.student,
-      sortable: true
-    },
-    {
       name: "Internship",
-      selector: row => row.internship,
+      selector: row => internships.find(internship => internship.id === row.internship)?.name,
       sortable: true
     },
     {
-      name: "Preferable Internship Type",
-      selector: row => row.location,
-      sortable: true
+      name: "Cover Letter",
+      selector: row => row.coverletter,
     },
     {
-      name: "Internship Hours",
-      selector: row => row.type,
+      name: "Resume Link",
+      selector: row => <a href={row.resume} target="_blank">Check Here</a>,
       sortable: true
     },
 
@@ -234,7 +270,8 @@ const StudentApplication = () => {
     <>
       <TemplatePage
         pageTitle={"Student Applications"}
-        pageDescrbition={"For student to apply for a specific internship posted by the company"}
+        pageDescrbition={"Students to apply for specific internships posted by companies"}
+        loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
         formTitle={"CRUD Applications"}
@@ -248,7 +285,7 @@ const StudentApplication = () => {
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
-        onDataEdit={onDataEdit}
+        onDataUpdate={onDataUpdate}
         onDataDelete={onDataDelete}
       />
     </>
