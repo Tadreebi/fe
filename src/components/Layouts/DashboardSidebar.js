@@ -22,7 +22,7 @@ const DashboardSidebar = ({ sidebarShow, setSidebarShow }) => {
       case "Company": return CopmStaffNavigation;
       default: return AdminNavigation;
     }
-  }
+  };
 
   return (
     <Sidebar
