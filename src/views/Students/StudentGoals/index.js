@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import StudentGoalsAPI from 'src/api/StudentGoals';
 import TemplatePage from '../..';
+import VisualRepresentations from "./visualRepresentations";
 
 const StudentGoals = () => {
   const [goals, setGoalsList] = useState([]);
@@ -144,30 +145,8 @@ const StudentGoals = () => {
         setLoading(false);
       });
   };
-  const statisticsData = [
-    {
-      title: "Goals Set",
-      number: goals.length,
-      chart: {
-        type: "bar",
-        data: {
-          "Done": goals.filter(rep => rep.done !== true)?.length,
-          "Not Done": goals.filter(rep => rep.done === true)?.length,
-        },
-        fill: true
-      }
-    },
-    {
-      title: "Accomplished Goals",
-      number: goals.filter(rep => rep.done !== true)?.length,
-      chart: {
-        type: "progress",
-        value: (goals.filter(rep => rep.done !== true)?.length / goals?.length * 100),
-        text: `${(goals.filter(rep => rep.done !== true)?.length / goals?.length * 100)}%`,
-        color: "success"
-      }
-    },
-  ];
+
+  const { statisticsData } = VisualRepresentations(goals);
 
   const tableColumns = [
     {
