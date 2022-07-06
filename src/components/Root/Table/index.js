@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from '../Buttons';
 import { Col, Row } from '../Grid';
 import Icon from '../Icon';
 
-const Table = ({ columns, data, expandedComponent, onActionSelection, loading }) => {
+const Table = ({ columns, data, expandedComponent, onActionSelection, loading, onCreate, onEdit, onDelete }) => {
 
   const detailPanel = ({ data }) => (
     <Row>
@@ -30,17 +30,23 @@ const Table = ({ columns, data, expandedComponent, onActionSelection, loading })
               <Icon icon={faEye} />
             </Button>
 
-            <Button color="success" className="text-white" onClick={() => onActionSelection("create", row)}>
-              <Icon icon={faCopy} />
-            </Button>
+            {onCreate && (
+              <Button color="success" className="text-white" onClick={() => onActionSelection("create", row)}>
+                <Icon icon={faCopy} />
+              </Button>
+            )}
 
-            <Button color="warning" className="text-white" onClick={() => onActionSelection("update", row)}>
-              <Icon icon={faEdit} />
-            </Button>
+            {onEdit && (
+              <Button color="warning" className="text-white" onClick={() => onActionSelection("update", row)}>
+                <Icon icon={faEdit} />
+              </Button>
+            )}
 
-            <Button color="danger" className="text-white" onClick={() => onActionSelection("delete", row)}>
-              <Icon icon={faTrash} />
-            </Button>
+            {onDelete && (
+              <Button color="danger" className="text-white" onClick={() => onActionSelection("delete", row)}>
+                <Icon icon={faTrash} />
+              </Button>
+            )}
           </ButtonGroup>
         )
       }]}
