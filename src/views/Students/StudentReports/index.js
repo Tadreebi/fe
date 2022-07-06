@@ -24,6 +24,20 @@ const StudentReports = () => {
       .finally(() => {
         setLoading(false);
       });
+
+    setLoading(true);
+
+    await StudentReportAPI.getAllRemarks()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setReportsList(current => current.map(item => ({ ...res.data.find(remark => remark.report === item.id), ...item })));
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   // API Call Needed
@@ -35,6 +49,7 @@ const StudentReports = () => {
   const callListsData = async () => {
     await StudentReportAPI.getAllReportTypes()
       .then(res => {
+        console.log("Called types Data", res.data);
         setReportTypes(res.data)
       })
       .catch(e => {
@@ -72,7 +87,7 @@ const StudentReports = () => {
       required: true,
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
-      options: reportTypes?.map(report => ({ title: report.name, value: report.id }))
+      options: reportTypes?.map(report => ({ title: report.title, value: report.id }))
     },
     {
       title: "Start Date of Report",
@@ -212,7 +227,7 @@ const StudentReports = () => {
     },
     {
       name: "Type",
-      selector: row => reportTypes.find(type => type.id === row.type)?.name,
+      selector: row => reportTypes.find(type => type.id === row.type)?.title,
       sortable: true
     },
     {
@@ -221,8 +236,13 @@ const StudentReports = () => {
       sortable: true
     },
     {
+      name: "Remarks",
+      selector: row => row.remarks || "---",
+      sortable: true
+    },
+    {
       name: "Accepted By Supervisor",
-      selector: row => row.accepted ? "Yes" : "No",
+      selector: row => row.accepted ? "Yes" : row.remarks ? "No" : "Not Yet",
       sortable: true
     }
   ];

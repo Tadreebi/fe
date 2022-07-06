@@ -12,10 +12,22 @@ const StudentReportRemarks = () => {
   const callData = async () => {
     setLoading(true);
 
+    await StudentReportAPI.getAllReports()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setRemarksList(res.data.map(item => ({ ...item, id: null, reportId: item.id })));
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
     await StudentReportAPI.getAllRemarks()
       .then(res => {
         console.log("Called Data", res.data);
-        setRemarksList(res.data);
+        setRemarksList(current => current.map(item => ({ ...item, report: item.reportId, ...res.data?.find(rep => rep.report === item.reportId) })));
       })
       .catch(e => {
         console.log(e);
@@ -119,10 +131,12 @@ const StudentReportRemarks = () => {
 
     action === "create" ?
       onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
+      : action === "update" && remark.id === null ?
+        onDataCreate()
+        : action === "update" ?
+          onDataUpdate()
+          : action === "delete" &&
+          onDataDelete()
   };
 
   const onFormReset = () => {
@@ -136,25 +150,58 @@ const StudentReportRemarks = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setRemarksList(current => [...current, { ...remark, id: current.length }]);
-    setRemark({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.createRemark(remark)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setRemark({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataUpdate = () => {
-    setRemarksList(current => [...current?.filter(rep => rep.id !== remark.id), remark]);
-    setRemark({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.updateRemark(remark.id, remark)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setRemark({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setRemarksList(current => [...current?.filter(rep => rep.id !== remark.id)]);
-    setRemark({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.deleteRemark(remark.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setRemark({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const { statisticsData, chartsData } = VisualRepresentations(remarksList);
@@ -176,8 +223,13 @@ const StudentReportRemarks = () => {
       sortable: true
     },
     {
+      name: "Remarks",
+      selector: row => row.remarks,
+      sortable: true
+    },
+    {
       name: "Accepted By Supervisor",
-      selector: row => row.accepted ? "Yes" : "No",
+      selector: row => row.accepted ? "Yes" : row.remarks ? "No" : "Not Yet",
       sortable: true
     }
   ];
