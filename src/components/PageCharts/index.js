@@ -41,7 +41,7 @@ const PageCharts = ({ title = "Charts", charts = chartsDemoData }) => {
               <BarChart
                 data={{
                   labels: Object.keys(chart.data[0].data),
-                  datasets: chart.data.map(dat =>
+                  datasets: chart.data?.map(dat =>
                   ({
                     label: dat.title,
                     backgroundColor: `rgba(${rgbColors(dat.color)},1)`,
@@ -54,7 +54,7 @@ const PageCharts = ({ title = "Charts", charts = chartsDemoData }) => {
               <LineChart
                 data={{
                   labels: Object.keys(chart.data[0].data),
-                  datasets: chart.data.map(dat =>
+                  datasets: chart.data?.map(dat =>
                   ({
                     label: dat.title,
                     backgroundColor: `rgba(${rgbColors(dat.color)},0.2)`,
@@ -72,7 +72,7 @@ const PageCharts = ({ title = "Charts", charts = chartsDemoData }) => {
                   labels: Object.keys(chart.data),
                   datasets: [
                     {
-                      backgroundColor: Object.values(chart.data).map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},1)`),
+                      backgroundColor: Object.values(chart.data)?.map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},1)`),
                       data: Object.values(chart.data),
                     },
                   ],
@@ -85,8 +85,8 @@ const PageCharts = ({ title = "Charts", charts = chartsDemoData }) => {
                   datasets: [
                     {
                       data: Object.values(chart.data),
-                      backgroundColor: Object.values(chart.data).map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},1)`),
-                      hoverBackgroundColor: Object.values(chart.data).map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},1)`),
+                      backgroundColor: Object.values(chart.data)?.map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},1)`),
+                      hoverBackgroundColor: Object.values(chart.data)?.map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},1)`),
                     },
                   ],
                 }}
@@ -98,8 +98,8 @@ const PageCharts = ({ title = "Charts", charts = chartsDemoData }) => {
                   datasets: [
                     {
                       data: Object.values(chart.data),
-                      backgroundColor: Object.values(chart.data).map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},0.5)`),
-                      borderColor: Object.values(chart.data).map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},1)`),
+                      backgroundColor: Object.values(chart.data)?.map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},0.5)`),
+                      borderColor: Object.values(chart.data)?.map((_, i) => `rgba(${rgbColors(colors[i % (colors.length - 1)])},1)`),
                     },
                   ],
                 }}
@@ -108,7 +108,7 @@ const PageCharts = ({ title = "Charts", charts = chartsDemoData }) => {
               <RadarChart
                 data={{
                   labels: Object.keys(chart.data[0].data),
-                  datasets: chart.data.map((dat, i) =>
+                  datasets: chart.data?.map((dat, i) =>
                   ({
                     label: dat.title,
                     backgroundColor: `rgba(${rgbColors(dat.color)},0.2)`,

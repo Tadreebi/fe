@@ -52,7 +52,7 @@ const UniversityFeedback = () => {
       required: true,
       value: feedback.student,
       onChange: e => setFeedback(current => ({ ...current, student: parseInt(e.target.value) })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Report",
@@ -61,7 +61,7 @@ const UniversityFeedback = () => {
       required: true,
       value: feedback.report,
       onChange: e => setFeedback(current => ({ ...current, report: parseInt(e.target.value) })),
-      options: Reports.map(report => ({ title: report.name, value: report.id }))
+      options: Reports?.map(report => ({ title: report.name, value: report.id }))
     },
     {
       title: "Title",
@@ -89,7 +89,7 @@ const UniversityFeedback = () => {
       required: true,
       value: feedback.rating,
       onChange: e => setFeedback(current => ({ ...current, rating: parseInt(e.target.value) })),
-      options: Rating.map(rate => ({ title: rate.name, value: rate.id }))
+      options: Rating?.map(rate => ({ title: rate.name, value: rate.id }))
     },
   ];
 

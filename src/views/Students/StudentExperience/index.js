@@ -47,7 +47,7 @@ const StudentExperience = () => {
       required: true,
       value: experience.student,
       onChange: e => setExperience(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Company",
@@ -57,7 +57,7 @@ const StudentExperience = () => {
       required: true,
       value: experience.company,
       onChange: e => setExperience(current => ({ ...current, company: e.target.value })),
-      options: companies.map(company => ({ title: company.name, value: company.id }))
+      options: companies?.map(company => ({ title: company.name, value: company.id }))
     },
     {
       title: "Improved Aspects",

@@ -171,7 +171,7 @@ const StudentReportRemarks = () => {
     },
     {
       title: "Types of Reports Submitted",
-      number: remarksList.map(rep => rep.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: remarksList?.map(rep => rep.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
       chart: {
         type: "progress",
         value: 25,
@@ -206,21 +206,21 @@ const StudentReportRemarks = () => {
         {
           title: "Pending Reports",
           color: "warning",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Accepted Reports",
           color: "success",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => rep.accepted === true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Rejected Reports",
           color: "danger",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
           }), {}),
         }
@@ -233,21 +233,21 @@ const StudentReportRemarks = () => {
         {
           title: "Pending Reports",
           color: "warning",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Accepted Reports",
           color: "success",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => rep.accepted === true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Rejected Reports",
           color: "danger",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
           }), {}),
         }
@@ -287,21 +287,21 @@ const StudentReportRemarks = () => {
         {
           title: "Pending Reports",
           color: "warning",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Accepted Reports",
           color: "success",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => rep.accepted === true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Rejected Reports",
           color: "danger",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: remarksList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: remarksList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
           }), {}),
         }

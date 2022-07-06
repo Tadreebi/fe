@@ -52,7 +52,7 @@ const StudentProposalRemarks = () => {
       required: true,
       value: proposal.student,
       onChange: e => setproposal(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Company",
@@ -61,7 +61,7 @@ const StudentProposalRemarks = () => {
       required: true,
       value: proposal.company,
       onChange: e => setproposal(current => ({ ...current, company: e.target.value })),
-      options: companies.map(company => ({ title: company.name, value: company.id }))
+      options: companies?.map(company => ({ title: company.name, value: company.id }))
     },
     {
       title: "Internship",
@@ -70,7 +70,7 @@ const StudentProposalRemarks = () => {
       required: true,
       value: proposal.internship_application,
       onChange: e => setproposal(current => ({ ...current, internship_application: e.target.value })),
-      options: internshipApps.map(inter => ({ title: inter.name, value: inter.id }))
+      options: internshipApps?.map(inter => ({ title: inter.name, value: inter.id }))
     },
     {
       title: "Remarks",
@@ -185,21 +185,21 @@ const StudentProposalRemarks = () => {
         {
           title: "Pending Proposals",
           color: "warning",
-          data: proposals.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
+          data: proposals?.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
             ...company, [student]: proposals.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Accepted Proposals",
           color: "success",
-          data: proposals.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
+          data: proposals?.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
             ...company, [student]: proposals.filter(rep => rep.accepted === true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Rejected Proposals",
           color: "danger",
-          data: proposals.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
+          data: proposals?.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
             ...company, [student]: proposals.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
           }), {}),
         }

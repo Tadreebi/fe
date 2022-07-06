@@ -9,7 +9,7 @@ const Table = ({ columns, data, expandedComponent, onActionSelection, loading })
   const detailPanel = ({ data }) => (
     <Row>
       {
-        Object.keys(data).map(key => (
+        Object.keys(data)?.map(key => (
           <Col md={6}>
             <b>{`${key}`}:</b>{" "}{data[key]}
           </Col>

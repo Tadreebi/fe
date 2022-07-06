@@ -50,7 +50,7 @@ const StudentGoals = () => {
       required: true,
       value: goal.student,
       onChange: e => setGoal(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Goal Description",

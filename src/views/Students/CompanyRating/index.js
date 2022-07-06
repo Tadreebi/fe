@@ -42,7 +42,7 @@ const CompanyRating = () => {
       required: true,
       value: score.company,
       onChange: e => setScore(current => ({ ...current, company: e.target.value })),
-      options: companies.map(company => ({ value: company.id, title: company.name }))
+      options: companies?.map(company => ({ value: company.id, title: company.name }))
     },
     {
       title: "Does the training program covers it's description?",

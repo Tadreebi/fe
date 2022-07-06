@@ -47,7 +47,7 @@ const StudentApplication = () => {
       required: true,
       value: application.student,
       onChange: e => setApplication(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Internship Oppertunity",
@@ -57,7 +57,7 @@ const StudentApplication = () => {
       double: true,
       value: application.internship,
       onChange: e => setApplication(current => ({ ...current, internship: e.target.value })),
-      options: internships.map(internship => ({ title: internship.name, value: internship.id }))
+      options: internships?.map(internship => ({ title: internship.name, value: internship.id }))
     },
     {
       title: "Preferable Internship Hours",
@@ -190,7 +190,7 @@ const StudentApplication = () => {
   const statisticsData = [
     {
       title: "Internship Type",
-      number: applicationsList.map(intern => intern.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: applicationsList?.map(intern => intern.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -201,7 +201,7 @@ const StudentApplication = () => {
     },
     {
       title: "Preferable Internship Location",
-      number: applicationsList.map(intern => intern.location).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: applicationsList?.map(intern => intern.location).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -212,7 +212,7 @@ const StudentApplication = () => {
     },
     {
       title: "Expected Salary",
-      number: applicationsList.map(intern => intern.expected_salary).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: applicationsList?.map(intern => intern.expected_salary).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {

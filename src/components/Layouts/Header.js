@@ -34,7 +34,7 @@ const HeaderComp = ({ notDashboard, sidebarShow, setSidebarShow }) => {
         </HeaderBrand>
 
         <HeaderNav className="d-none d-md-flex me-auto">
-          {navLinks.map(({ title, link }, i) => (
+          {navLinks?.map(({ title, link }, i) => (
             <NavItem key={i}>
               <NavLink to={link} component={NavRootLink}>
                 {title}

@@ -56,7 +56,7 @@ export const DashboardSidebarNav = ({ items }) => {
   return (
     <Fragment>
       {items &&
-        items.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}
+        items?.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}
     </Fragment>
   )
 }

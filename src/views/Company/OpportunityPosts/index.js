@@ -44,7 +44,7 @@ const opportunityPosts = () => {
       value: post.company_id,
       onChange: (e) =>
         setPost(current => ({ ...current, company_id: e.target.value })),
-      options: companies.map((company) => ({ title: company.name, value: company.id })),
+      options: companies?.map((company) => ({ title: company.name, value: company.id })),
     },
     {
       title: "Position",
@@ -298,7 +298,7 @@ const opportunityPosts = () => {
   const statisticsData = [
     {
       title: "Internships Hours",
-      number: postsList.map(intern => intern.type).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
+      number: postsList?.map(intern => intern.type).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -309,7 +309,7 @@ const opportunityPosts = () => {
     },
     {
       title: "Internships Type",
-      number: postsList.map(intern => intern.paid).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
+      number: postsList?.map(intern => intern.paid).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -322,7 +322,7 @@ const opportunityPosts = () => {
     },
     {
       title: "Education",
-      number: postsList.map(intern => intern.education).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
+      number: postsList?.map(intern => intern.education).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -334,7 +334,7 @@ const opportunityPosts = () => {
     },
     {
       title: "Indsutry",
-      number: postsList.map(intern => intern.industry).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
+      number: postsList?.map(intern => intern.industry).reduce((final, current) => final.includescurrent ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {

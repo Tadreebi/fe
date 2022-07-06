@@ -56,7 +56,7 @@ const CompanyReports = () => {
       required: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students?.map(student => ({ title: student.name, value: student.id }))
 
     },
     {
@@ -67,7 +67,7 @@ const CompanyReports = () => {
       required: true,
       value: report.company,
       onChange: e => setReport(current => ({ ...current, company: e.target.value })),
-      options: companies.map(company => ({ title: company.name, value: company.id }))
+      options: companies?.map(company => ({ title: company.name, value: company.id }))
     },
     {
       title: "Report Type",
@@ -210,7 +210,7 @@ const CompanyReports = () => {
     },
     {
       title: "Types of Reports Submitted",
-      number: reportsList.map(rep => rep.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
+      number: reportsList?.map(rep => rep.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
       chart: {
         type: "bar",
         data: {
@@ -247,21 +247,21 @@ const CompanyReports = () => {
         {
           title: "Final Reports",
           color: "warning",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Periodical Reports",
           color: "success",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Complain Reports",
           color: "danger",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
           }), {}),
         }
@@ -274,21 +274,21 @@ const CompanyReports = () => {
         {
           title: "Complain Reports",
           color: "warning",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Periodical Reports",
           color: "success",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
           }), {}),
         },
         {
           title: "Complain Reports",
           color: "danger",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
           }), {}),
         }
@@ -328,21 +328,21 @@ const CompanyReports = () => {
         {
           title: "Attendance Report",
           color: "warning",
-          data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+          data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
             ...final, [student]: reportsList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
           }), {}),
         },
         // {
         //   title: "Attendance Report",
         //   color: "success",
-        //   data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+        //   data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
         //     ...final, [student]: reportsList.filter(rep => rep.accepted === true && rep.student === student)?.length,
         //   }), {}),
         // },
         // {
         //   title: "Rejected Reports",
         //   color: "danger",
-        //   data: reportsList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
+        //   data: reportsList?.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
         //     ...final, [student]: reportsList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
         //   }), {}),
         // }
