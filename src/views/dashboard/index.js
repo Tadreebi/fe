@@ -153,45 +153,45 @@ const Dashboard = () => {
 
       {/* Student Experiences  */}
       <PageStatistics title={"Student Experience Statistics"} statistics={dashboardFilter(StudentExperience(studentExperiencesList).statisticsData)} open />
-      <PageCharts title={"Student Experience Charts"} statistics={dashboardFilter(StudentExperience(studentExperiencesList).chartsData)} open />
+      <PageCharts title={"Student Experience Charts"} charts={dashboardFilter(StudentExperience(studentExperiencesList).chartsData)} open />
 
       {/* Student Goals  */}
       <PageStatistics title={"Student Goal Statistics"} statistics={dashboardFilter(StudentGoals(studentGoalsList).statisticsData)} open />
-      <PageCharts title={"Student Goal Charts"} statistics={dashboardFilter(StudentGoals(studentGoalsList).chartsData)} open />
+      <PageCharts title={"Student Goal Charts"} charts={dashboardFilter(StudentGoals(studentGoalsList).chartsData)} open />
 
       {/* Student Proposals  */}
       <PageStatistics title={"Student Proposal Statistics"} statistics={dashboardFilter(StudentProposals(studentProposalList).statisticsData)} open />
-      <PageCharts title={"Student Proposal Charts"} statistics={dashboardFilter(StudentProposals(studentProposalList).chartsData)} open />
+      <PageCharts title={"Student Proposal Charts"} charts={dashboardFilter(StudentProposals(studentProposalList).chartsData)} open />
 
       {/* Student Reports  */}
       <PageStatistics title={"Student Report Statistics"} statistics={dashboardFilter(StudentReports(studentReportsList).statisticsData)} open />
-      <PageCharts title={"Student Report Charts"} statistics={dashboardFilter(StudentReports(studentReportsList).chartsData)} open />
+      <PageCharts title={"Student Report Charts"} charts={dashboardFilter(StudentReports(studentReportsList).chartsData)} open />
 
       {/* University Supervisor Views */}
       {/* Student Proposal Remarks  */}
       <PageStatistics title={"Student Proposal Remark Statistics"} statistics={dashboardFilter(StudentProposalRemarks(universityProposalResponseList).statisticsData)} open />
-      <PageCharts title={"Student Proposal Remark Charts"} statistics={dashboardFilter(StudentProposalRemarks(universityProposalResponseList).chartsData)} open />
+      <PageCharts title={"Student Proposal Remark Charts"} charts={dashboardFilter(StudentProposalRemarks(universityProposalResponseList).chartsData)} open />
 
       {/* Student Report Remarks  */}
       <PageStatistics title={"Student Report Remark Statistics"} statistics={dashboardFilter(StudentReportRemarks(studentReportRemarksList).statisticsData)} open />
-      <PageCharts title={"Student Report Remark Charts"} statistics={dashboardFilter(StudentReportRemarks(studentReportRemarksList).chartsData)} open />
+      <PageCharts title={"Student Report Remark Charts"} charts={dashboardFilter(StudentReportRemarks(studentReportRemarksList).chartsData)} open />
 
       {/* University Feedback  */}
       <PageStatistics title={"University Feedback Statistics"} statistics={dashboardFilter(UniversityFeedback(universityFeedbackList).statisticsData)} open />
-      <PageCharts title={"University Feedback Charts"} statistics={dashboardFilter(UniversityFeedback(universityFeedbackList).chartsData)} open />
+      <PageCharts title={"University Feedback Charts"} charts={dashboardFilter(UniversityFeedback(universityFeedbackList).chartsData)} open />
 
       {/* Company Views */}
       {/* Company Application Response  */}
       <PageStatistics title={"Company Application Response Statistics"} statistics={dashboardFilter(CompanyAppResponse(studentApplicationResponsesList).statisticsData)} open />
-      <PageCharts title={"Company Application Response Charts"} statistics={dashboardFilter(CompanyAppResponse(studentApplicationResponsesList).chartsData)} open />
+      <PageCharts title={"Company Application Response Charts"} charts={dashboardFilter(CompanyAppResponse(studentApplicationResponsesList).chartsData)} open />
 
       {/* Company Report  */}
       <PageStatistics title={"Company Report Statistics"} statistics={dashboardFilter(CompanyReport(compnyReportsList).statisticsData)} open />
-      <PageCharts title={"Company Report Charts"} statistics={dashboardFilter(CompanyReport(compnyReportsList).chartsData)} open />
+      <PageCharts title={"Company Report Charts"} charts={dashboardFilter(CompanyReport(compnyReportsList).chartsData)} open />
 
       {/* Oppertunity Posts  */}
       <PageStatistics title={"Oppertunity Post Statistics"} statistics={dashboardFilter(OpportunityPosts(internshipPostsList).statisticsData)} open />
-      <PageCharts title={"Oppertunity Post Charts"} statistics={dashboardFilter(OpportunityPosts(internshipPostsList).chartsData)} open />
+      <PageCharts title={"Oppertunity Post Charts"} charts={dashboardFilter(OpportunityPosts(internshipPostsList).chartsData)} open />
 
     </>
   )
