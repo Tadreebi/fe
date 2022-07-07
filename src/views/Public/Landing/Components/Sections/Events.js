@@ -6,7 +6,11 @@ import Fade from "react-reveal/Fade";
 import img from "src/assets/images/mockup_events.png"
 import { Button } from "src/components/Root/Buttons";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Events = () => {
+  const { JWT } = useSelector(_ => _);
+
   return (
     <section className="feature_section home_section8 bg_1" id="events">
       <div className="custom_container">
@@ -21,11 +25,19 @@ const Events = () => {
               </TextContent>
             </Fade>
 
-            <Link to="/login" >
-              <Button color="info" size="lg" className="my-5 text-white">
-                Demo Access
-              </Button>
-            </Link>
+            {JWT?.length > 10 ? (
+              <Link to="/dashboard" >
+                <Button color="info" size="lg" className="my-5 text-white">
+                  Demo Access
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/login" >
+                <Button color="info" size="lg" className="my-5 text-white">
+                  Demo Access
+                </Button>
+              </Link>
+            )}
           </div>
           <div className="col-md-5 text-center">
             <div className="app_img">
