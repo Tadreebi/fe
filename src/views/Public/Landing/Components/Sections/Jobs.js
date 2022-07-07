@@ -4,7 +4,7 @@ import Circle from "../Circle";
 import Triangle from "../Triangle";
 import TextContent from "../TextContent";
 import Fade from "react-reveal/Fade";
-import img from "src/assets/images/features.png";
+import img from "src/assets/images/team.png";
 import Emad from "src/assets/images/Emad.jpg";
 import Ghaida from "src/assets/images/Ghaida.jpg";
 import Moayad from "src/assets/images/Moayad.jpg";

@@ -18,7 +18,7 @@ const Home = () => {
               <Circle num="24" className={"bg-info"} />
               <Circle num="56" className={"bg-info"} />
 
-              <Images src={Welcome} />
+              <Images src={Welcome} classes="w-100" />
 
               <Circle num="46" className={"bg-info"} />
               <Circle num="56" className={"bg-info"} />

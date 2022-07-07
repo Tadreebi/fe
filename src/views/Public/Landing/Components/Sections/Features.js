@@ -4,7 +4,7 @@ import Circle from "../Circle";
 import Triangle from "../Triangle";
 import TextContent from "../TextContent";
 import Fade from "react-reveal/Fade";
-import img from "src/assets/images/features.png"
+import img from "src/assets/images/help.png"
 
 const features = [
   "Internship Posting, Searching, Selecting & Launching",
