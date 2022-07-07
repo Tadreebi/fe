@@ -4,13 +4,13 @@ import React, { useState, useEffect } from "react";
 // import FacebookIcon from "@material-ui/icons/Facebook";
 // import LinkedInIcon from "@material-ui/icons/LinkedIn";
 // import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { SwipeableDrawer } from "@material-ui/core";
 import Google from "../Google";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import Zoom from "react-reveal/Zoom";
-// import MenuIcon from "@material-ui/icons/Menu";
+import { Button } from "src/components/Root/Buttons";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -187,84 +187,17 @@ const Header = () => {
               </a>
             </li>
           </ul>
-          <Button
-            size="large"
-            variant="outlined"
-            fullWidth={false}
-            onClick={handleOpen}
-          >
-            Login
-          </Button>
-          <div className="mob_social">
-            <ul>
-              <li>
-                {/* <TwitterIcon /> */}
-              </li>
-              <li>
-                {/* <FacebookIcon /> */}
-              </li>
-              <li>
-                {/* <InstagramIcon /> */}
-              </li>
-              <li>
-                {/* <LinkedInIcon /> */}
-              </li>
-            </ul>
-          </div>
         </div>
       </SwipeableDrawer>
       <div className="custom_container">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <a className="navbar-brand" href="/">
-            {/* <EmojiEventsIcon fontSize="large" /> */}
-          </a>
-          {/* <MenuIcon
-            fontSize="large"
-            onClick={() => setSideNav(!sideNav)}
-            className="menu-icons"
-          /> */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <div className="for_desktop">
               <ul className="navbar-nav mr-auto text-center nav_link main_menu">
                 <li className="nav-item">
-                  <a className="nav-link" href="#connect">
-                    Connect
+                  <a className="nav-link" href="#top">
+                    Logo
                   </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#college">
-                    College
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#intern">
-                    Internships
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#jobs">
-                    Jobs
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#scholarships">
-                    Scholarships
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#competitions">
-                    Competitions
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#events">
-                    Events
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <Button variant="outlined" onClick={handleOpen}>
-                    Login
-                  </Button>
                 </li>
               </ul>
             </div>

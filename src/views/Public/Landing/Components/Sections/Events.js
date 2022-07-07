@@ -3,6 +3,9 @@ import Images from "../Images";
 import Circle from "../Circle";
 import TextContent from "../TextContent";
 import Fade from "react-reveal/Fade";
+import img from "src/assets/images/mockup_events.png"
+import { Button } from "src/components/Root/Buttons";
+import { Link } from "react-router-dom";
 const Events = () => {
   return (
     <section className="feature_section home_section8 bg_1" id="events">
@@ -11,20 +14,25 @@ const Events = () => {
           <div className="col-md-7 my-auto">
             <Fade left>
               <TextContent
-                title="Find Events around you"
-                desc="Never miss important events happening near you through our AI
-                  based Recommendation engine."
+                title="Liked It?"
+                desc="Wait till you test the demo"
               >
-                <Circle num="23" />
+                <Circle num="23" className={"bg-info"} />
               </TextContent>
             </Fade>
+
+            <Link to="/login" >
+              <Button color="info" size="lg" className="my-5 text-white">
+                Demo Access
+              </Button>
+            </Link>
           </div>
           <div className="col-md-5 text-center">
             <div className="app_img">
-              <Circle num="240" />
-              <Circle num="46" />
-              <Circle num="50" />
-              <Images src="/Images/mockup_events.png" classes="feature_model" />
+              <Circle num="240" className={"bg-info"} />
+              <Circle num="46" className={"bg-primary"} />
+              <Circle num="50" className={"bg-info"} />
+              <Images src={img} classes="feature_model" />
             </div>
           </div>
         </div>

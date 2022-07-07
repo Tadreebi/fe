@@ -49,7 +49,7 @@ const Jobs = () => {
           </div>
           <div className="col-md-5 order-md-1">
             <div className="app_img">
-              <Circle num="24" />
+              <Circle num="24" className="bg-info" />
               <div className="svg10">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ const Jobs = () => {
                 </svg>
               </div>
               <Images src={img} classes="feature_model" />
-              <Circle num="240" />
+              <Circle num="240" className="bg-info" />
             </div>
           </div>
         </div>

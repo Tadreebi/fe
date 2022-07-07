@@ -18,8 +18,8 @@ const MainSection = () => {
       <Techs />
       <Jobs />
       {/* <Scholarships />
-      <Competitions />
-      <Events /> */}
+      <Competitions /> */}
+      <Events />
       {/* <Sliders /> */}
     </section>
   );
