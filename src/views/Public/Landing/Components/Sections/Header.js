@@ -11,6 +11,8 @@ import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import Zoom from "react-reveal/Zoom";
 import { Button } from "src/components/Root/Buttons";
+import Images from "../Images";
+import img from "src/assets/images/logo-c.png"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -196,7 +198,7 @@ const Header = () => {
               <ul className="navbar-nav mr-auto text-center nav_link main_menu">
                 <li className="nav-item">
                   <a className="nav-link" href="#top">
-                    Logo
+                    <Images src={img} style={{ height: "75px" }} />
                   </a>
                 </li>
               </ul>

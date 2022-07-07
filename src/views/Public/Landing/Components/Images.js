@@ -1,6 +1,6 @@
 import React from "react";
 import Fade from "react-reveal/Fade";
-const Images = ({ src, classes }) => {
+const Images = ({ src, classes, style }) => {
   return (
     <Fade bottom>
       <img
@@ -10,6 +10,7 @@ const Images = ({ src, classes }) => {
         style={{
           animationName: "fadeInUp",
           animationDelay: "0.3s",
+          ...style
         }}
         alt="colleges"
       />
