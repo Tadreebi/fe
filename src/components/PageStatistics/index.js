@@ -1,4 +1,5 @@
 import { faSquareRootVariable } from '@fortawesome/free-solid-svg-icons';
+import { rgbColors } from 'src/reusables/functions';
 import CollapseCard from '../CollapseCard';
 import { BarChart, LineChart } from '../Root/Charts';
 import { Col, Row } from '../Root/Grid';
@@ -14,19 +15,6 @@ const colors = [
   "dark",
   "secondary"
 ];
-
-const rgbColors = color => {
-  switch (color) {
-    case "primary": return "50, 31, 219";
-    case "info": return "51, 153, 255";
-    case "success": return "46, 184, 92";
-    case "danger": return "229, 83, 83";
-    case "warning": return "249, 177, 21";
-    case "dark": return "79, 93, 115";
-    case "secondary": return "157, 165, 177";
-    default: return "51, 153, 255";
-  }
-};
 
 const length = count => {
   switch (count) {

@@ -90,14 +90,6 @@ const inputsDemo = [
   },
 ];
 
-const length = count => {
-  switch (count) {
-    case 1: return 12;
-    case 2: return 6;
-    default: return 4;
-  }
-};
-
 const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction, loading }) => {
 
   const submitTextDecider = () => {
