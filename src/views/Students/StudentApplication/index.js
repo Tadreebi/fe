@@ -276,7 +276,7 @@ const StudentApplication = () => {
                           </h5>
 
                           <p className='text-left'>
-                            {dateRangeFormatter(Experience.created_at, "end")}
+                            {dateRangeFormatter(Experience.created_at)}
                           </p>
                         </Col>
                       </Row>

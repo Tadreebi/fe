@@ -235,7 +235,7 @@ const StudentReports = () => {
     },
     {
       name: "Period Cover By Report",
-      selector: row => `${dateRangeFormatter(row.startDate, "start", row.endDate)} - ${dateRangeFormatter(row.endDate, "end")}`,
+      selector: row => `${dateRangeFormatter(row.startDate, "start", row.endDate)} - ${dateRangeFormatter(row.endDate)}`,
       sortable: true
     },
     {
