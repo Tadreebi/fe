@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations"
+import { dateRangeFormatter } from 'src/reusables/functions';
 
 const StudentReportRemarks = () => {
   const [remarksList, setRemarksList] = useState([]);
@@ -234,7 +235,7 @@ const StudentReportRemarks = () => {
     },
     {
       name: "Period Cover By Report",
-      selector: row => `${new Date(row.startDate).toLocaleDateString('en-GB')} to ${new Date(row.endDate).toLocaleDateString('en-GB')}`,
+      selector: row => `${dateRangeFormatter(row.startDate, "start", row.endDate)} - ${dateRangeFormatter(row.endDate, "end")}`,
       sortable: true
     },
     {
