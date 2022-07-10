@@ -5,6 +5,7 @@ import TemplatePage from '../..';
 
 const UniversityTips = () => {
   const [tips, setTipsList] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [tip, setTip] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
@@ -25,22 +26,31 @@ const UniversityTips = () => {
       });
   };
 
-  const topics = [
-    { id: 1, name: "Motivational" },
-    { id: 2, name: "Skill References'" },
-  ];
-
   const types = [
     { id: 1, name: "File" },
     { id: 2, name: "Image" },
     { id: 3, name: "Video" },
     { id: 4, name: "Event" },
     { id: 5, name: "Text" },
-
   ];
+
+  const callListsData = async () => {
+    await UniversityTipsAPI.getAllTopics()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setTopics(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     callData();
+    callListsData();
   }, []);
 
   const inputs = [
@@ -59,7 +69,7 @@ const UniversityTips = () => {
       required: true,
       value: tip.topic,
       onChange: e => setTip(current => ({ ...current, topic: e.target.value })),
-      options: topics.map(topic => ({ title: topic.name, value: topic.id }))
+      options: topics?.map(topic => ({ title: topic.name, value: topic.id }))
     },
     {
       title: "Type",
@@ -68,7 +78,7 @@ const UniversityTips = () => {
       required: true,
       value: tip.type,
       onChange: e => setTip(current => ({ ...current, type: e.target.value })),
-      options: types.map(type => ({ title: type.name, value: type.name }))
+      options: types?.map(type => ({ title: type.name, value: type.name }))
     },
     {
       title: "Details",

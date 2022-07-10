@@ -10,11 +10,6 @@ const _nav = [
     icon: <Icon icon={faDashboard} className="px-1" />,
   },
   {
-    component: NavTitle,
-    name: 'Model Pages',
-    icon: <Icon icon={faGraduationCap} className="px-1" />,
-  },
-  {
     component: NavGroup,
     name: 'Students',
     to: '/students',
@@ -31,18 +26,6 @@ const _nav = [
         name: 'Student Goals',
         to: '/students/goals',
         icon: <Icon icon={faBullseye} className="px-1" />,
-      },
-      {
-        component: NavItem,
-        name: 'Opportunity Posts',
-        to: '/opportunity-posts',
-        icon: <Icon icon={faFilePen} className="px-1" />,
-      },
-      {
-        component: NavItem,
-        name: 'Experiences',
-        to: '/experiences-posts',
-        icon: <Icon icon={faFilePen} className="px-1" />,
       },
       {
         component: NavItem,
@@ -93,6 +76,12 @@ const _nav = [
         name: 'Company Reports',
         to: '/company/reports',
         icon: <Icon icon={faCommentDots} className="px-1" />,
+      },
+      {
+        component: NavItem,
+        name: 'Company Ratings',
+        to: '/company/company-rating-view',
+        icon: <Icon icon={faStar} className="px-1" />,
       },
     ]
   },

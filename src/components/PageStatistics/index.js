@@ -4,7 +4,6 @@ import { BarChart, LineChart } from '../Root/Charts';
 import { Col, Row } from '../Root/Grid';
 import Progress from '../Root/Progress';
 import StatsWidget from '../Root/StatsWidget';
-import statisticsDemoData from './demoData';
 
 const colors = [
   "primary",
@@ -38,11 +37,11 @@ const length = count => {
   }
 };
 
-const PageStatistics = ({ title = "Statistics", statistics = statisticsDemoData }) => {
+const PageStatistics = ({ title = "Statistics", statistics, open = false }) => {
 
 
   return (
-    <CollapseCard title={title} icon={faSquareRootVariable}>
+    <CollapseCard title={title} icon={faSquareRootVariable} open={open}>
       <Row>
         {statistics?.map((statistic, i) => (
           <Col sm={6} lg={length(statistics.length)} key={i}>

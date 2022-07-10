@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport';
 import TemplatePage from '../..';
+import VisualRepresentations from "./visualRepresentations"
 
 const StudentReportRemarks = () => {
   const [remarksList, setRemarksList] = useState([]);
@@ -11,10 +12,22 @@ const StudentReportRemarks = () => {
   const callData = async () => {
     setLoading(true);
 
+    await StudentReportAPI.getAllReports()
+      .then(res => {
+        console.log("Called Data", res.data);
+        setRemarksList(res.data.map(item => ({ ...item, id: null, reportId: item.id })));
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
     await StudentReportAPI.getAllRemarks()
       .then(res => {
         console.log("Called Data", res.data);
-        setRemarksList(res.data);
+        setRemarksList(current => current.map(item => ({ ...item, report: item.reportId, ...res.data?.find(rep => rep.report === item.reportId) })));
       })
       .catch(e => {
         console.log(e);
@@ -28,6 +41,7 @@ const StudentReportRemarks = () => {
     callData();
   }, []);
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Moayad" },
     { id: 2, name: "Raghad" },
@@ -117,10 +131,12 @@ const StudentReportRemarks = () => {
 
     action === "create" ?
       onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
+      : action === "update" && remark.id === null ?
+        onDataCreate()
+        : action === "update" ?
+          onDataUpdate()
+          : action === "delete" &&
+          onDataDelete()
   };
 
   const onFormReset = () => {
@@ -134,180 +150,61 @@ const StudentReportRemarks = () => {
     setAction(action);
   };
 
-  const onDataCreate = () => {
-    setRemarksList(current => [...current, { ...remark, id: current.length }]);
-    setRemark({});
-    setAction("create");
-    console.log('Form Data Created');
+  const onDataCreate = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.createRemark(remark)
+      .then(res => {
+        console.log("Data Created Successfully");
+        callData();
+        setRemark({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataUpdate = () => {
-    setRemarksList(current => [...current.filter(rep => rep.id !== remark.id), remark]);
-    setRemark({});
-    setAction("create");
-    console.log('Form Data Updated');
+  const onDataUpdate = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.updateRemark(remark.id, remark)
+      .then(res => {
+        console.log("Data Updated Successfully");
+        callData();
+        setRemark({});
+        setAction("create");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const onDataDelete = () => {
-    setRemarksList(current => [...current.filter(rep => rep.id !== remark.id)]);
-    setRemark({});
-    setAction("create");
-    console.log('Form Data Deleted');
+  const onDataDelete = async () => {
+    setLoading(true);
+
+    await StudentReportAPI.deleteRemark(remark.id)
+      .then(res => {
+        console.log("Data Deleted Successfully");
+        setRemark({});
+        setAction("create");
+        callData();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const statisticsData = [
-    {
-      title: "Submitted Reports",
-      number: remarksList.length,
-      chart: {
-        type: "bar",
-        data: {
-          "Pending Reports": remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
-          "Accepted Reports": remarksList.filter(rep => rep.accepted === true)?.length,
-          "Rejected Reports": remarksList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
-        },
-        fill: true
-      }
-    },
-    {
-      title: "Types of Reports Submitted",
-      number: remarksList.map(rep => rep.type).reduce((final, current) => final.includes(current) ? final : [...final, current], []).length,
-      chart: {
-        type: "progress",
-        value: 25,
-        text: "25%",
-        color: "success"
-      }
-    },
-    {
-      title: "Users",
-      number: "26",
-      chart: {
-        type: "line",
-        data: {
-          "Label 1": 70,
-          "Label 2": 60,
-          "Label 3": 40,
-          "Label 4": 50
-        },
-      }
-    },
-    {
-      title: "Users",
-      number: "26",
-    }
-  ];
-
-  const chartsData = [
-    {
-      title: "Submitted Reports",
-      type: "bar",
-      data: [
-        {
-          title: "Pending Reports",
-          color: "warning",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Accepted Reports",
-          color: "success",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => rep.accepted === true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Rejected Reports",
-          color: "danger",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
-          }), {}),
-        }
-      ]
-    },
-    {
-      title: "Submitted Reports",
-      type: "line",
-      data: [
-        {
-          title: "Pending Reports",
-          color: "warning",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Accepted Reports",
-          color: "success",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => rep.accepted === true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Rejected Reports",
-          color: "danger",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
-          }), {}),
-        }
-      ]
-    },
-    {
-      title: "Submitted Reports",
-      type: "doughnut",
-      data: {
-        "Monthly Report": remarksList.filter(rep => rep.type === "Monthly Report")?.length,
-        "Weekly Report": remarksList.filter(rep => rep.type === "Weekly Report")?.length,
-        "Final Report": remarksList.filter(rep => rep.type === "Final Report")?.length,
-      }
-    },
-    {
-      title: "Submitted Reports",
-      type: "pie",
-      data: {
-        "Pending Reports": remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
-        "Accepted Reports": remarksList.filter(rep => rep.accepted === true)?.length,
-        "Rejected Reports": remarksList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
-      }
-    },
-    {
-      title: "Submitted Reports",
-      type: "polar",
-      data: {
-        "Pending Reports": remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
-        "Accepted Reports": remarksList.filter(rep => rep.accepted === true)?.length,
-        "Rejected Reports": remarksList.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
-      }
-    },
-    {
-      title: "Submitted Reports",
-      type: "radar",
-      data: [
-        {
-          title: "Pending Reports",
-          color: "warning",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Accepted Reports",
-          color: "success",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => rep.accepted === true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Rejected Reports",
-          color: "danger",
-          data: remarksList.map(rep => rep.student).reduce((final, current) => final.includes(current) ? final : [...final, current], []).reduce((final, student) => ({
-            ...final, [student]: remarksList.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
-          }), {}),
-        }
-      ]
-    },
-  ];
+  const { statisticsData, chartsData } = VisualRepresentations(remarksList);
 
   const tableColumns = [
     {
@@ -326,8 +223,13 @@ const StudentReportRemarks = () => {
       sortable: true
     },
     {
+      name: "Remarks",
+      selector: row => row.remarks,
+      sortable: true
+    },
+    {
       name: "Accepted By Supervisor",
-      selector: row => row.accepted ? "Yes" : "No",
+      selector: row => row.accepted ? "Yes" : row.remarks ? "No" : "Not Yet",
       sortable: true
     }
   ];

@@ -30,7 +30,7 @@ const keyFilter = key => {
   }
 }
 
-const PageTable = ({ title = "Table", columns, data, expandedComponent, onActionSelection = action => console.log("Selecting Action", action), loading }) => {
+const PageTable = ({ title = "Table", columns, data, expandedComponent, onActionSelection = action => console.log("Selecting Action", action), loading, onCreate, onEdit, onDelete }) => {
   return (
     <CollapseCard title={title} icon={faTable} open>
       <Table
@@ -39,6 +39,9 @@ const PageTable = ({ title = "Table", columns, data, expandedComponent, onAction
         expandedComponent={expandedComponent}
         onActionSelection={onActionSelection}
         loading={loading}
+        onCreate={onCreate}
+        onEdit={onEdit}
+        onDelete={onDelete}
       />
     </CollapseCard>
   )

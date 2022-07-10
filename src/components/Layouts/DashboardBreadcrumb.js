@@ -32,7 +32,7 @@ const DashboardBreadcrumb = () => {
   return (
     <Breadcrumb className="m-0 ms-2">
       <BreadcrumbItem href="/">Home</BreadcrumbItem>
-      {breadcrumbs.map((breadcrumb, index) => {
+      {breadcrumbs?.map((breadcrumb, index) => {
         return (
           <BreadcrumbItem
             {...(breadcrumb.active ? { active: true } : { href: breadcrumb.pathname })}

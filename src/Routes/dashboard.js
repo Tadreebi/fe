@@ -12,8 +12,6 @@ const StudentApplication = lazy(() => import('../views/Students/StudentApplicati
 const CompanyRating = lazy(() => import('../views/Students/CompanyRating'));
 const StudentProposals = lazy(() => import('../views/Students/StudentProposals'));
 const StudentExperiences = lazy(() => import('../views/Students/StudentExperience'));
-const OpportunityPostsList = lazy(() => import('src/views/Public/OpportunityPosts'));
-const ExperiencesList = lazy(() => import('src/views/Public/Experiences'));
 
 
 //// University
@@ -27,6 +25,7 @@ const UniversityProposalRemarks = lazy(() => import('../views/University/Student
 const OpportunityPosts = lazy(() => import('../views/Company/OpportunityPosts'));
 const CompanyReport = lazy(() => import('../views/Company/CompanyReport'));
 const CompanyAppResponse = lazy(() => import('../views/Company/CompanyAppResponse'));
+const CompanyRatingView = lazy(() => import('../views/Company/CompanyRating'));
 
 
 // Errors
@@ -46,8 +45,6 @@ const routes = [
   { path: '/students/company-rating', name: 'Company Rating', element: CompanyRating },
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
   { path: '/students/experiences', name: 'Student Experiences', element: StudentExperiences },
-  { path: '/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPostsList },
-  { path: '/experiences-posts', name: 'Experiences Posts', element: ExperiencesList },
 
   //// Univerity
   { path: '/staff/tips', name: 'University Tips', element: UniversityTips },
@@ -59,6 +56,7 @@ const routes = [
   { path: '/company/opportunity-posts', name: 'Opportunity Posts', element: OpportunityPosts },
   { path: '/company/reports', name: 'Company Reports', element: CompanyReport },
   { path: '/company/response', name: 'Company App Response', element: CompanyAppResponse },
+  { path: '/company/company-rating-view', name: 'Company Rating', element: CompanyRatingView },
 
   //// Errors
   { path: '*', name: 'Error 404', element: Page404 },

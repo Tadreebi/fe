@@ -157,7 +157,7 @@ const ListGroups = () => {
               <strong>horizontal list groups cannot be combined with flush list groups.</strong>
             </p>
             <div href="components/list-group/#flush">
-              {['', '-sm', '-md', '-lg', '-xl', '-xxl'].map((breakpoint, index) => (
+              {['', '-sm', '-md', '-lg', '-xl', '-xxl']?.map((breakpoint, index) => (
                 <CListGroup className="mb-2" layout={`horizontal${breakpoint}`} key={index}>
                   <CListGroupItem>Cras justo odio</CListGroupItem>
                   <CListGroupItem>Dapibus ac facilisis in</CListGroupItem>
@@ -189,7 +189,7 @@ const ListGroups = () => {
                   'info',
                   'light',
                   'dark',
-                ].map((color, index) => (
+                ]?.map((color, index) => (
                   <CListGroupItem color={color} key={index}>
                     A simple {color} list group item
                   </CListGroupItem>
@@ -216,7 +216,7 @@ const ListGroups = () => {
                   'info',
                   'light',
                   'dark',
-                ].map((color, index) => (
+                ]?.map((color, index) => (
                   <CListGroupItem component="a" href="#" color={color} key={index}>
                     A simple {color} list group item
                   </CListGroupItem>

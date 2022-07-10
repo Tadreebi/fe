@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import StudentProposalAPI from 'src/api/StudentProposal';
 import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
 import TemplatePage from '../../';
+import VisualRepresentations from "./visualRepresentations"
 
 
 const StudentProposalsRes = () => {
@@ -44,16 +45,19 @@ const StudentProposalsRes = () => {
       });
   };
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Moayad" },
     { id: 2, name: "Raghad" },
   ];
 
+  // API Call Needed
   const companies = [
     { id: 3, name: "Emad Company" },
     { id: 4, name: "Suhaib Company" },
   ];
 
+  // API Call Needed to be checked
   const InternshipApp = [
     { id: 3, name: "Emad Company" },
     { id: 4, name: "Suhaib Company" },
@@ -72,7 +76,7 @@ const StudentProposalsRes = () => {
       type: "select",
       value: proposal.student,
       disabled: true,
-      options: students.map(student => ({ value: student.id, title: student.name }))
+      options: students?.map(student => ({ value: student.id, title: student.name }))
     },
     {
       title: "Companies",
@@ -80,7 +84,7 @@ const StudentProposalsRes = () => {
       type: "select",
       value: proposal.company,
       disabled: true,
-      options: companies.map(student => ({ value: student.id, title: student.name }))
+      options: companies?.map(student => ({ value: student.id, title: student.name }))
     },
     {
       title: "Internship",
@@ -88,7 +92,7 @@ const StudentProposalsRes = () => {
       type: "select",
       value: proposal.internship_application,
       disabled: true,
-      options: InternshipApp.map(app => ({ value: app.id, title: app.name }))
+      options: InternshipApp?.map(app => ({ value: app.id, title: app.name }))
     },
     {
       title: "Remarks",
@@ -185,72 +189,7 @@ const StudentProposalsRes = () => {
       });
   };
 
-  const chartsData = [
-    {
-      title: "Submitted proposals",
-      type: "pie",
-      data: {
-        "Pending proposals": proposals.filter(rep => !rep.remarks?.length && rep.accepted !== true)?.length,
-        "Accepted proposals": proposals.filter(rep => rep.accepted === true)?.length,
-        "Rejected proposals": proposals.filter(rep => rep.remarks?.length && rep.accepted === false)?.length,
-      }
-    },
-    {
-      title: "Submitted proposals",
-      type: "radar",
-      data: [
-        {
-          title: "Pending Proposals",
-          color: "warning",
-          data: proposals.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
-            ...company, [student]: proposals.filter(rep => !rep.remarks?.length && rep.accepted !== true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Accepted Proposals",
-          color: "success",
-          data: proposals.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
-            ...company, [student]: proposals.filter(rep => rep.accepted === true && rep.student === student)?.length,
-          }), {}),
-        },
-        {
-          title: "Rejected Proposals",
-          color: "danger",
-          data: proposals.map(rep => rep.student).reduce((company, current) => company.includes(current) ? company : [...company, current], []).reduce((company, student) => ({
-            ...company, [student]: proposals.filter(rep => rep.remarks?.length && rep.accepted === false && rep.student === student)?.length,
-          }), {}),
-        }
-      ]
-    },
-  ];
-
-  const statisticsData = [
-    {
-      title: "Submitted proposals",
-      number: proposals.length,
-      chart: {
-        type: "bar",
-        data: {
-          "Accepted proposals": proposals.filter(pro => pro.accepted == true).length,
-          "Rejected proposals": proposals.filter(pro => pro.accepted == false).length,
-        },
-        fill: true
-      }
-    },
-    {
-      title: "Users",
-      number: "26",
-      chart: {
-        type: "line",
-        data: {
-          "Label 1": 70,
-          "Label 2": 60,
-          "Label 3": 40,
-          "Label 4": 50
-        },
-      }
-    },
-  ];
+  const { statisticsData, chartsData } = VisualRepresentations(proposals);
 
   const tableColumns = [
     {
@@ -296,7 +235,7 @@ const StudentProposalsRes = () => {
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Proposals & Remarks List"}
-        tableData={proposals.map(data => ({ ...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal) }))}
+        tableData={proposals?.map(data => ({ ...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal) }))}
         tableColumns={tableColumns}
         tableRowDetails={true}
         onActionSelection={onActionSelection}

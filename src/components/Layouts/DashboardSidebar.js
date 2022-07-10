@@ -1,12 +1,28 @@
 import { memo, useState } from 'react'
+import { useSelector } from "react-redux"
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
-import Navigation from 'src/Navs'
+import Logo from "src/assets/images/logo-w.png"
+import AdminNavigation from 'src/Navs'
+import CopmStaffNavigation from 'src/Navs/ComStaff'
+import StudentNavigation from 'src/Navs/Students'
+import UniStaffNavigation from 'src/Navs/UniStaff'
 import { Sidebar, SidebarBrand, SidebarNav, SidebarToggler } from '../Root/Sidebar'
 import { DashboardSidebarNav } from './DashboardSidebarNav'
 
 const DashboardSidebar = ({ sidebarShow, setSidebarShow }) => {
   const [unfoldable, setUnfoldable] = useState(false)
+
+  const { user } = useSelector(_ => _);
+
+  const decideUser = (type) => {
+    switch (type) {
+      case "Student": return StudentNavigation;
+      case "University Employee": return UniStaffNavigation;
+      case "Company": return CopmStaffNavigation;
+      default: return AdminNavigation;
+    }
+  };
 
   return (
     <Sidebar
@@ -16,8 +32,8 @@ const DashboardSidebar = ({ sidebarShow, setSidebarShow }) => {
       onVisibleChange={(visible) => setSidebarShow(visible)}
     >
       <SidebarBrand className="d-none d-md-flex" to="/">
-        <div className="sidebar-brand-full" height={35}>
-          Logo
+        <div className="sidebar-brand-full text-center" height={35}>
+          <img src={Logo} width="50%" />
         </div>
 
         <div className="sidebar-brand-narrow" height={35}>
@@ -27,7 +43,7 @@ const DashboardSidebar = ({ sidebarShow, setSidebarShow }) => {
 
       <SidebarNav>
         <SimpleBar>
-          <DashboardSidebarNav items={Navigation} />
+          <DashboardSidebarNav items={decideUser(user?.type)} />
         </SimpleBar>
       </SidebarNav>
 

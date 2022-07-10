@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import StudentGoalsAPI from 'src/api/StudentGoals';
 import TemplatePage from '../..';
+import VisualRepresentations from "./visualRepresentations";
 
 const StudentGoals = () => {
   const [goals, setGoalsList] = useState([]);
@@ -24,6 +25,7 @@ const StudentGoals = () => {
       });
   };
 
+  // API Call Needed
   const students = [
     { id: 1, name: "Raghad" },
     { id: 2, name: "Suhaib" },
@@ -50,7 +52,7 @@ const StudentGoals = () => {
       required: true,
       value: goal.student,
       onChange: e => setGoal(current => ({ ...current, student: e.target.value })),
-      options: students.map(student => ({ title: student.name, value: student.id }))
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Goal Description",
@@ -144,30 +146,8 @@ const StudentGoals = () => {
         setLoading(false);
       });
   };
-  const statisticsData = [
-    {
-      title: "Goals Set",
-      number: goals.length,
-      chart: {
-        type: "bar",
-        data: {
-          "Done": goals.filter(rep => rep.done !== true)?.length,
-          "Not Done": goals.filter(rep => rep.done === true)?.length,
-        },
-        fill: true
-      }
-    },
-    {
-      title: "Accomplished Goals",
-      number: goals.filter(rep => rep.done !== true)?.length,
-      chart: {
-        type: "progress",
-        value: (goals.filter(rep => rep.done !== true)?.length / goals?.length * 100),
-        text: `${(goals.filter(rep => rep.done !== true)?.length / goals?.length * 100)}%`,
-        color: "success"
-      }
-    },
-  ];
+
+  const { statisticsData } = VisualRepresentations(goals);
 
   const tableColumns = [
     {

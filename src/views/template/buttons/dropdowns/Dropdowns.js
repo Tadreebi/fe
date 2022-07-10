@@ -46,7 +46,7 @@ const Dropdowns = () => {
             </p>
             <a href="components/dropdown#single-button">
               <>
-                {['primary', 'secondary', 'success', 'info', 'warning', 'danger'].map(
+                {['primary', 'secondary', 'success', 'info', 'warning', 'danger']?.map(
                   (color, index) => (
                     <CDropdown variant="btn-group" key={index}>
                       <CDropdownToggle color={color}>{color}</CDropdownToggle>
@@ -84,7 +84,7 @@ const Dropdowns = () => {
             </p>
             <a href="components/dropdown#split-button">
               <>
-                {['primary', 'secondary', 'success', 'info', 'warning', 'danger'].map(
+                {['primary', 'secondary', 'success', 'info', 'warning', 'danger']?.map(
                   (color, index) => (
                     <CDropdown variant="btn-group" key={index}>
                       <CButton color={color}>{color}</CButton>
