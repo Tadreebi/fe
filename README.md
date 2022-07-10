@@ -70,3 +70,4 @@ Soon...
 - CoreUi
 - Chart.Js
 - Prop-types
+- Material-UI
