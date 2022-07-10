@@ -5,6 +5,7 @@ import VisualRepresentations from "./visualRepresentations"
 
 const StudentReportRemarks = () => {
   const [remarksList, setRemarksList] = useState([]);
+  const [reportTypes, setReportTypes] = useState([]);
   const [remark, setRemark] = useState({});
   const [loading, setLoading] = useState(false);
   const [action, setAction] = useState("create");
@@ -37,8 +38,20 @@ const StudentReportRemarks = () => {
       });
   };
 
+  const callListsData = async () => {
+    await StudentReportAPI.getAllReportTypes()
+      .then(res => {
+        console.log("Called types Data", res.data);
+        setReportTypes(res.data)
+      })
+      .catch(e => {
+        console.log(e)
+      });
+  };
+
   useEffect(() => {
     callData();
+    callListsData();
   }, []);
 
   // API Call Needed
@@ -59,23 +72,18 @@ const StudentReportRemarks = () => {
     {
       title: "Student",
       name: "student",
-      type: "text",
+      type: "select",
       value: remark.student,
-      disabled: true
-    },
-    {
-      title: "Star Rating",
-      name: "rating",
-      type: "rating",
-      value: remark.rating,
-      disabled: true
+      disabled: true,
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Report Type",
       name: "type",
       type: "select",
       value: remark.type,
-      disabled: true
+      disabled: true,
+      options: reportTypes?.map(report => ({ title: report.title, value: report.id }))
     },
     {
       title: "Start Date of Report",
@@ -88,6 +96,7 @@ const StudentReportRemarks = () => {
       title: "End Date of Report",
       name: "endDate",
       type: "date",
+      double: true,
       value: remark.endDate,
       disabled: true
     },
@@ -129,14 +138,15 @@ const StudentReportRemarks = () => {
   const onFormSubmit = e => {
     e.preventDefault();
 
-    action === "create" ?
+    action === "create" ? (
       onDataCreate()
-      : action === "update" && remark.id === null ?
-        onDataCreate()
-        : action === "update" ?
-          onDataUpdate()
-          : action === "delete" &&
-          onDataDelete()
+    ) : action === "update" && remark.id !== null ? (
+      onDataUpdate()
+    ) : action === "update" ? (
+      onDataCreate()
+    ) : action === "delete" && (
+      onDataDelete()
+    )
   };
 
   const onFormReset = () => {
@@ -214,7 +224,12 @@ const StudentReportRemarks = () => {
     },
     {
       name: "Student",
-      selector: row => row.student,
+      selector: row => students.find(student => student.id === row.student)?.name,
+      sortable: true
+    },
+    {
+      name: "Type",
+      selector: row => reportTypes.find(type => type.id === row.type)?.title,
       sortable: true
     },
     {
