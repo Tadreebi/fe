@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport';
+import { students } from 'src/reusables/data';
 import { dateRangeFormatter } from 'src/reusables/functions';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
@@ -40,14 +41,6 @@ const StudentReports = () => {
         setLoading(false);
       });
   };
-
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Moayad" },
-    { id: 2, name: "Suhaib" },
-    { id: 3, name: "Mojhaed" },
-    { id: 4, name: "Ali" },
-  ];
 
   const callListsData = async () => {
     await StudentReportAPI.getAllReportTypes()

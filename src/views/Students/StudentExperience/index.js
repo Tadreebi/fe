@@ -1,10 +1,11 @@
-import { faPeopleGroup, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import StudentExperienceAPI from 'src/api/StudentExperience';
 import CollapseCard from 'src/components/CollapseCard';
 import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
+import { companies, students } from 'src/reusables/data';
 import { dateRangeFormatter } from 'src/reusables/functions';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
@@ -33,18 +34,6 @@ const StudentExperience = () => {
         setLoading(false);
       });
   };
-
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Moayad" },
-    { id: 2, name: "Raghad" },
-  ];
-
-  // API Call Needed
-  const companies = [
-    { id: 3, name: "Moayad company" },
-    { id: 4, name: "Suhaib company" },
-  ];
 
   useEffect(() => {
     callData();

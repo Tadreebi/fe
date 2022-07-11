@@ -1,20 +1,11 @@
 import { faSquareRootVariable } from '@fortawesome/free-solid-svg-icons';
+import { colors } from "src/reusables/data";
 import { rgbColors } from 'src/reusables/functions';
 import CollapseCard from '../CollapseCard';
 import { BarChart, LineChart } from '../Root/Charts';
 import { Col, Row } from '../Root/Grid';
 import Progress from '../Root/Progress';
 import StatsWidget from '../Root/StatsWidget';
-
-const colors = [
-  "primary",
-  "info",
-  "success",
-  "warning",
-  "danger",
-  "dark",
-  "secondary"
-];
 
 const length = count => {
   switch (count) {

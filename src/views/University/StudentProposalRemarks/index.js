@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import StudentProposalAPI from 'src/api/StudentProposal';
 import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
+import { companies, students } from 'src/reusables/data';
 import TemplatePage from '../../';
-import VisualRepresentations from "./visualRepresentations"
+import VisualRepresentations from "./visualRepresentations";
 
 
 const StudentProposalsRes = () => {
@@ -44,18 +45,6 @@ const StudentProposalsRes = () => {
         setLoading(false);
       });
   };
-
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Moayad" },
-    { id: 2, name: "Raghad" },
-  ];
-
-  // API Call Needed
-  const companies = [
-    { id: 3, name: "Emad Company" },
-    { id: 4, name: "Suhaib Company" },
-  ];
 
   // API Call Needed to be checked
   const InternshipApp = [

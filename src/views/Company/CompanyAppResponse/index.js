@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CompanyAppResponseAPI from 'src/api/CompanyAppResponse';
+import { students } from 'src/reusables/data';
 import TemplatePage from '../../';
 import VisualRepresentations from "./visualRepresentations";
 
@@ -26,16 +27,10 @@ const StudentApplicationRes = () => {
       });
   };
 
-  const students = [
-    { id: 3, name: "Emad" },
-    { id: 4, name: "Suhaib" },
-  ];
-
   const applications = [
     { id: 1, name: "ASAC" },
     { id: 2, name: "CSS" },
   ];
-
 
   useEffect(() => {
     callData();

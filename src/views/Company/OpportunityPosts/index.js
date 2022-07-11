@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CompanyPostAPI from 'src/api/OpportunityPost';
+import { companies } from 'src/reusables/data';
 import TemplatePage from "../..";
 import VisualRepresentations from "./visualRepresentations";
 
@@ -25,14 +26,6 @@ const opportunityPosts = () => {
         setLoading(false);
       });
   };
-
-  // API Call Needed
-  const companies = [
-    { id: 1, name: "ASAC" },
-    { id: 2, name: "CSS" },
-    { id: 3, name: "AS" },
-    { id: 4, name: "CQ" },
-  ];
 
   useEffect(() => {
     callData();

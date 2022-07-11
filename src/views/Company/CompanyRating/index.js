@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import CompanyRatingAPI from 'src/api/CompanyRating';
+import { companies } from 'src/reusables/data';
 import TemplatePage from '../..';
-
 
 const CompanyRating = () => {
   const [scores, setScores] = useState([]);
@@ -28,12 +28,6 @@ const CompanyRating = () => {
   useEffect(() => {
     callData();
   }, []);
-
-  // API Call Needed
-  const companies = [
-    { id: 2, name: "Socium" },
-    { id: 4, name: "ASAC'" },
-  ];
 
   const ratingOptions = [
     { title: "1 ", value: 1 },

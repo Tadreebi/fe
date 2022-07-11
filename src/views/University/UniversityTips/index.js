@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import UniversityTipsAPI from 'src/api/UniversityTip';
+import { types } from "src/reusables/data";
 import TemplatePage from '../..';
-
 
 const UniversityTips = () => {
   const [tips, setTipsList] = useState([]);
@@ -25,14 +25,6 @@ const UniversityTips = () => {
         setLoading(false);
       });
   };
-
-  const types = [
-    { id: 1, name: "File" },
-    { id: 2, name: "Image" },
-    { id: 3, name: "Video" },
-    { id: 4, name: "Event" },
-    { id: 5, name: "Text" },
-  ];
 
   const callListsData = async () => {
     await UniversityTipsAPI.getAllTopics()

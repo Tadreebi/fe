@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import StudentGoalsAPI from 'src/api/StudentGoals';
+import { students } from 'src/reusables/data';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
@@ -24,12 +25,6 @@ const StudentGoals = () => {
         setLoading(false);
       });
   };
-
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Raghad" },
-    { id: 2, name: "Suhaib" },
-  ];
 
   useEffect(() => {
     callData();

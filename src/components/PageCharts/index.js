@@ -1,18 +1,9 @@
 import { faChartPie } from '@fortawesome/free-solid-svg-icons';
+import { colors } from "src/reusables/data";
 import { rgbColors } from 'src/reusables/functions';
 import CollapseCard from '../CollapseCard';
 import { BarChart, DoughnutChart, LineChart, PieChart, PolarChart, RadarChart } from '../Root/Charts';
 import { Col, Row } from '../Root/Grid';
-
-const colors = [
-  "primary",
-  "info",
-  "success",
-  "warning",
-  "danger",
-  "dark",
-  "secondary"
-];
 
 const PageCharts = ({ title = "Charts", charts, open = false }) => {
   return (

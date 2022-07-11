@@ -1,12 +1,6 @@
-import { useState } from 'react'
-import AuthTemplate from '../'
-
-const faculties = [
-  { id: 1, name: "IT" },
-  { id: 2, name: "Eng" },
-  { id: 3, name: "Med" },
-  { id: 4, name: "Edu" },
-];
+import { useState } from 'react';
+import { faculties } from "src/reusables/data";
+import AuthTemplate from '../';
 
 const StudentRegister = () => {
   const [regData, setRegData] = useState({});

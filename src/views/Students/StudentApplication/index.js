@@ -5,6 +5,7 @@ import CollapseCard from 'src/components/CollapseCard';
 import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
+import { students } from 'src/reusables/data';
 import { dateRangeFormatter } from 'src/reusables/functions';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
@@ -34,12 +35,6 @@ const StudentApplication = () => {
         setLoading(false);
       });
   };
-
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Raghad" },
-  ];
 
   const callListsData = async () => {
     await OpportunityPostAPI.getAllPosts()

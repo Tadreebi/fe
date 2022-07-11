@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import UniversityFeedbackAPI from 'src/api/UniversityFeedback';
+import { students } from 'src/reusables/data';
 import TemplatePage from '../..';
-import VisualRepresentations from "./visualRepresentations"
+import VisualRepresentations from "./visualRepresentations";
 
 
 const UniversityFeedback = () => {
@@ -25,12 +26,6 @@ const UniversityFeedback = () => {
         setLoading(false);
       });
   };
-
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Moayad" },
-  ];
 
   const Rating = [
     { id: 1, name: "1-Star" },

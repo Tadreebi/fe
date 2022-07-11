@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import StudentProposalAPI from 'src/api/StudentProposal';
 import StudentApplicationAPI from 'src/api/StudentApplication';
+import StudentProposalAPI from 'src/api/StudentProposal';
+import { companies, students } from 'src/reusables/data';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
@@ -26,18 +27,6 @@ const StudentProposalRemarks = () => {
         setLoading(false);
       });
   };
-
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Moayad" },
-  ];
-
-  // API Call Needed
-  const companies = [
-    { id: 1, name: "Emad Company" },
-    { id: 4, name: "Raghad Company" },
-  ];
 
   const callListsData = async () => {
     await StudentApplicationAPI.getAllApplications()

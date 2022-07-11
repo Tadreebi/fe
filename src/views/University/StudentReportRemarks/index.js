@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport';
-import TemplatePage from '../..';
-import VisualRepresentations from "./visualRepresentations"
+import { students } from 'src/reusables/data';
 import { dateRangeFormatter } from 'src/reusables/functions';
+import TemplatePage from '../..';
+import VisualRepresentations from "./visualRepresentations";
 
 const StudentReportRemarks = () => {
   const [remarksList, setRemarksList] = useState([]);
@@ -54,12 +55,6 @@ const StudentReportRemarks = () => {
     callData();
     callListsData();
   }, []);
-
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Moayad" },
-    { id: 2, name: "Raghad" },
-  ];
 
   const inputs = [
     {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CompanyReportAPI from 'src/api/CompanyReport';
+import { students, companies } from 'src/reusables/data';
 import TemplatePage from '../..';
 import visualRepresentations from './visualRepresentations';
 
@@ -24,16 +25,6 @@ const CompanyReports = () => {
         setLoading(false);
       });
   };
-
-  const companies = [
-    { id: 2, name: "Socium" },
-    { id: 4, name: "ASAC'" },
-  ];
-
-  const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Suhaib" },
-  ];
 
   useEffect(() => {
     callData();
