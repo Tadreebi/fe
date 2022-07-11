@@ -17,7 +17,7 @@ const opportunityPosts = () => {
     await CompanyPostAPI.getAllPosts()
       .then(res => {
         console.log("Called Internship Posts Data", res.data);
-        setPostsList(res.data[0]);
+        setPostsList(res.data);
       })
       .catch(e => {
         console.log(e);
