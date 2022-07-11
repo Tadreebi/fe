@@ -223,7 +223,7 @@ const StudentExperience = () => {
                   Posts
                 </CardHeader>
 
-                <CardBody >
+                <CardBody>
                   {experiences?.map((Experience, i) => (
                     <div key={i} onClick={() => pickedExperience.id === Experience.id ? setPickedExperience({}) : setPickedExperience(Experience)}>
                       <Row className={`py-4 ${Experience.id === pickedExperience.id ? "bg-light" : ""}`}>

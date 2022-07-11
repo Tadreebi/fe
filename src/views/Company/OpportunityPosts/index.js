@@ -16,7 +16,7 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.getAllPosts()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Internship Posts Data", res.data);
         setPostsList(res.data[0]);
       })
       .catch(e => {
@@ -242,7 +242,7 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.createPost(post)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Internship Post Data Created Successfully");
         callData();
         setPost({});
         setAction("create");
@@ -260,7 +260,7 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.updatePost(post.id, post)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Internship Post Data Updated Successfully");
         callData();
         setPost({});
         setAction("create");
@@ -278,7 +278,7 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.deletePost(post.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Internship Post Data Deleted Successfully");
         setPost({});
         setAction("create");
         callData();
@@ -296,7 +296,7 @@ const opportunityPosts = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: row => companies.find(company => company.id === row.company_id)?.name,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true,
     },
     {
