@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import Logo from "src/assets/images/logo-w.png"
-import AdminNavigation from 'src/Navs'
+import AdminNavigation from 'src/Navs/Admin'
 import CopmStaffNavigation from 'src/Navs/ComStaff'
 import StudentNavigation from 'src/Navs/Students'
 import UniStaffNavigation from 'src/Navs/UniStaff'
