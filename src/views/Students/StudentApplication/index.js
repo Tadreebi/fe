@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import OpportunityPostAPI from 'src/api/OpportunityPost';
 import StudentApplicationAPI from 'src/api/StudentApplication';
 import CollapseCard from 'src/components/CollapseCard';
+import { Button } from 'src/components/Root/Buttons';
 import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
@@ -25,7 +26,7 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Applications Data", res.data);
         setApplicationsList(res.data);
       })
       .catch(e => {
@@ -155,7 +156,7 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.createApplication(application)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Applications Data Created Successfully");
         callData();
         setApplication({});
         setAction("create");
@@ -173,7 +174,7 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.updateApplication(application.id, application)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Applications Data Updated Successfully");
         callData();
         setApplication({});
         setAction("create");
@@ -191,7 +192,7 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.deleteApplication(application.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Applications Data Deleted Successfully");
         setApplication({});
         setAction("create");
         callData();
@@ -209,7 +210,7 @@ const StudentApplication = () => {
   const tableColumns = [
     {
       name: "Internship",
-      selector: row => internships.find(internship => internship.id === row.internship)?.id,
+      selector: row => `${internships.find(internship => internship.id === row.internship)?.position} @ ${internships.find(internship => internship.id === row.internship)?.company}`,
       sortable: true
     },
     {
@@ -253,25 +254,29 @@ const StudentApplication = () => {
                   Posts
                 </CardHeader>
 
-                <CardBody >
-                  {internships?.map((Experience, i) => (
-                    <div key={i} onClick={() => pickedPost.id === Experience.id ? setPickedPost({}) : setPickedPost(Experience)}>
-                      <Row className={`py-4 ${Experience.id === pickedPost.id ? "bg-light" : ""}`}>
+                <CardBody>
+                  {internships?.map((internship, i) => (
+                    <div key={i} onClick={() => pickedPost.id === internship.id ? setPickedPost({}) : setPickedPost(internship)}>
+                      <Row className={`py-4 ${internship.id === pickedPost.id ? "bg-light" : ""}`}>
                         <Col md={3} >
                           <img src={image} width="100%" />
 
                           <p className='text-center'>
-                            Company {Experience.company}
+                            Company {internship.company}
                           </p>
                         </Col>
 
                         <Col md={9} className="p-2">
                           <h5>
-                            Student {Experience.student}
+                            {internship.position}
                           </h5>
 
                           <p className='text-left'>
-                            {dateRangeFormatter(Experience.created_at)}
+                            {`${internship.type} - ${internship.location}`}
+                          </p>
+
+                          <p className='text-left'>
+                            {dateRangeFormatter(internship.created_at)}
                           </p>
                         </Col>
                       </Row>
@@ -298,36 +303,33 @@ const StudentApplication = () => {
 
                       <Col md={8} className="p-2">
                         <h5>
-                          student: <b>{pickedPost.student}</b>
+                          {pickedPost.position}
                         </h5>
 
-                        <p>
-                          improved_aspects: <b>{pickedPost.improved_aspects}</b>
-
+                        <p className='text-left'>
+                          {`${pickedPost.type} - ${pickedPost.location}`}
                         </p>
+
+                        <Button onClick={() => setApplication(current => ({ ...current, internship: pickedPost.id }))}>
+                          Apply Now
+                        </Button>
                       </Col>
 
                       <Col md={12} className="p-2">
                         <h5>
-                          student: <b>{pickedPost.student}</b>
+                          Job Description
                         </h5>
 
                         <p>
-                          company: <b>{pickedPost.company}</b>
-                          <br />
-                          missed_aspects: <b>{pickedPost.missed_aspects}</b>
-                          <br />
-                          improved_aspects: <b>{pickedPost.improved_aspects}</b>
-                          <br />
-                          get_hired: <b>{pickedPost.get_hired}</b>
-                          <br />
-                          more: <b>{pickedPost.more}</b>
-
+                          {Object.keys(pickedPost).map(key => <>
+                            {`${key}: ${pickedPost[key]}`}
+                            <br />
+                          </>)}
                         </p>
                       </Col>
                     </Row>
                   ) : (
-                    "Pick Experience"
+                    "Pick an Internship"
                   )}
                 </CardBody>
               </Card>
