@@ -4,7 +4,7 @@ Frontend React.Js App of TADREEBI
 
 You may find full app documantation on [Introductory Repo](https://github.com/Tadreebi/app)
 
-[Deployed App](https://tadreebi.vercel.app/)
+[Deployed App](https://tadreebi.netlify.app/)
 
 ## Development Instructions & Notes
 
