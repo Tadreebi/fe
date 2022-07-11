@@ -9,7 +9,7 @@ const CollapseCard = ({ title, open, icon = faPlusCircle, children }) => {
 
   return (
     <Card className="mb-4">
-      <CardHeader onClick={() => setVisible(current => !current)} className="p-3">
+      <CardHeader onClick={() => setVisible(current => !current)} className="p-3" role="button">
         <Icon icon={icon} />{" "} {title}
 
         <div style={{ float: "right" }}>
