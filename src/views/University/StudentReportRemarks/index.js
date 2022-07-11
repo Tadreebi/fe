@@ -17,7 +17,7 @@ const StudentReportRemarks = () => {
 
     await StudentReportAPI.getAllReports()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Reports Data", res.data);
         setRemarksList(res.data.map(item => ({ ...item, id: null, reportId: item.id })));
       })
       .catch(e => {
@@ -29,8 +29,8 @@ const StudentReportRemarks = () => {
 
     await StudentReportAPI.getAllRemarks()
       .then(res => {
-        console.log("Called Data", res.data);
-        setRemarksList(current => current.map(item => ({ ...item, report: item.reportId, ...res.data?.find(rep => rep.report === item.reportId) })));
+        console.log("Called Remarks Data", res.data);
+        setRemarksList(current => current.map(item => ({ ...item, ...res.data?.find(rep => rep.report === item.reportId) })));
       })
       .catch(e => {
         console.log(e);
@@ -136,7 +136,7 @@ const StudentReportRemarks = () => {
 
     action === "create" ? (
       onDataCreate()
-    ) : action === "update" && remark.id !== null ? (
+    ) : action === "update" && remark.report ? (
       onDataUpdate()
     ) : action === "update" ? (
       onDataCreate()
@@ -159,7 +159,7 @@ const StudentReportRemarks = () => {
   const onDataCreate = async () => {
     setLoading(true);
 
-    await StudentReportAPI.createRemark(remark)
+    await StudentReportAPI.createRemark({ ...remark, report: remark.reportId })
       .then(res => {
         console.log("Data Created Successfully");
         callData();
@@ -177,7 +177,7 @@ const StudentReportRemarks = () => {
   const onDataUpdate = async () => {
     setLoading(true);
 
-    await StudentReportAPI.updateRemark(remark.id, remark)
+    await StudentReportAPI.updateRemark(remark.report, remark)
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
@@ -195,7 +195,7 @@ const StudentReportRemarks = () => {
   const onDataDelete = async () => {
     setLoading(true);
 
-    await StudentReportAPI.deleteRemark(remark.id)
+    await StudentReportAPI.deleteRemark(remark.report)
       .then(res => {
         console.log("Data Deleted Successfully");
         setRemark({});
