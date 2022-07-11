@@ -131,7 +131,7 @@ const Dashboard = () => {
     await CompanyPostAPI.getAllPosts()
       .then(res => {
         console.log("Called Data", res.data);
-        setInternshipPostsList(res.data[0]);
+        setInternshipPostsList(res.data);
       })
       .catch(e => {
         console.log(e);
