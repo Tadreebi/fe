@@ -283,16 +283,12 @@ const StudentExperience = () => {
                         </h5>
 
                         <p>
-                          company: <b>{pickedExperience.company}</b>
-                          <br />
-                          missed_aspects: <b>{pickedExperience.missed_aspects}</b>
-                          <br />
-                          improved_aspects: <b>{pickedExperience.improved_aspects}</b>
-                          <br />
-                          get_hired: <b>{pickedExperience.get_hired}</b>
-                          <br />
-                          more: <b>{pickedExperience.more}</b>
-
+                          {Object.keys(pickedExperience).map((key, i) => (
+                            <div key={i}>
+                              {`${key}: ${pickedExperience[key]}`}
+                              <br />
+                            </div>
+                          ))}
                         </p>
                       </Col>
                     </Row>
