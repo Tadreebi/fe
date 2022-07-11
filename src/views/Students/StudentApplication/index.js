@@ -321,10 +321,12 @@ const StudentApplication = () => {
                         </h5>
 
                         <p>
-                          {Object.keys(pickedPost).map(key => <>
-                            {`${key}: ${pickedPost[key]}`}
-                            <br />
-                          </>)}
+                          {Object.keys(pickedPost).map((key, i) => (
+                            <div key={i}>
+                              {`${key}: ${pickedPost[key]}`}
+                              <br />
+                            </div>
+                          ))}
                         </p>
                       </Col>
                     </Row>
