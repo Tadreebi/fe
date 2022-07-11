@@ -151,7 +151,7 @@ const StudentGoals = () => {
       sortable: true
     },
     {
-      name: "Desc",
+      name: "Description",
       selector: row => row.describtion,
       sortable: true
     },
