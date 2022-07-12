@@ -4,8 +4,9 @@ import StudentProposalAPI from 'src/api/StudentProposal';
 import { companies, students } from 'src/reusables/data';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
+import OpportunityPostAPI from 'src/api/OpportunityPost';
 
-const StudentProposalRemarks = () => {
+const StudentProposals = () => {
   const [proposals, setproposals] = useState([]);
   const [internshipApps, setInternshipApps] = useState([]);
   const [proposal, setproposal] = useState({});
@@ -40,6 +41,19 @@ const StudentProposalRemarks = () => {
       .finally(() => {
         setLoading(false);
       });
+
+    await OpportunityPostAPI.getAllPosts()
+      .then(res => {
+        console.log("Called Internship Posts Data", res.data);
+        setInternshipApps(current => current.map(item => ({ ...res.data?.find(resp => resp.id === item.internship), ...item })));
+        console.log("Called Internship Merged Data", internshipApps);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -58,22 +72,22 @@ const StudentProposalRemarks = () => {
       options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Company",
-      name: "company",
-      type: "select",
-      required: true,
-      value: proposal.company,
-      onChange: e => setproposal(current => ({ ...current, company: e.target.value })),
-      options: companies?.map(company => ({ title: company.name, value: company.id }))
-    },
-    {
       title: "Internship",
       name: "internship_application",
       type: "select",
       required: true,
+      double: true,
       value: proposal.internship_application,
       onChange: e => setproposal(current => ({ ...current, internship_application: e.target.value })),
-      options: internshipApps?.map(inter => ({ title: inter.name, value: inter.id }))
+      options: internshipApps?.map(inter => ({ title: `${inter.position} @ ${inter.company}`, value: inter.id }))
+    },
+    {
+      title: "Notes",
+      name: "notes",
+      type: "textarea",
+      fullwidth: true,
+      value: proposal.notes,
+      onChange: e => setproposal(current => ({ ...current, notes: e.target.value })),
     },
     {
       title: "Remarks",
@@ -176,17 +190,25 @@ const StudentProposalRemarks = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: row => companies.find(company => company.id === row.company)?.name,
+      selector: row => companies.find(company => company.id === internshipApps.find(app => app.id === row.internship_application)?.company)?.name,
       sortable: true
     },
     {
       name: "Internship",
-      selector: row => internshipApps.find(app => app.id === row.internship_application)?.id,
+      selector: row => {
+        const data = internshipApps.find(app => app.id === row.internship_application);
+        return `${data?.position} @ ${data?.company}`
+      },
+      sortable: true
+    },
+    {
+      name: "Notes",
+      selector: row => row.notes,
       sortable: true
     },
     {
       name: "Response",
-      selector: row => row.remarks,
+      selector: row => row.remarks || "---",
       sortable: true
     },
     {
@@ -195,8 +217,6 @@ const StudentProposalRemarks = () => {
       sortable: true
     }
   ];
-
-
 
   return (
     <>
@@ -224,4 +244,4 @@ const StudentProposalRemarks = () => {
   )
 }
 
-export default StudentProposalRemarks
+export default StudentProposals
