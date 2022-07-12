@@ -3,7 +3,6 @@ import CompanyRatingAPI from 'src/api/CompanyRating';
 import { companies } from 'src/reusables/data';
 import TemplatePage from '../..';
 
-
 const CompanyRating = () => {
   const [scores, setScores] = useState([]);
   const [score, setScore] = useState({});
@@ -31,14 +30,14 @@ const CompanyRating = () => {
   }, []);
 
   const ratingOptions = [
-    { title: "1 ", value: 1 },
-    { title: "2 ", value: 2 },
-    { title: "3 ", value: 3 },
+    { title: "1", value: 1 },
+    { title: "2", value: 2 },
+    { title: "3", value: 3 },
     { title: "4", value: 4 },
-    { title: "5 ", value: 5 },
-    { title: "6 ", value: 6 },
-    { title: "7 ", value: 7 },
-    { title: "8 ", value: 8 },
+    { title: "5", value: 5 },
+    { title: "6", value: 6 },
+    { title: "7", value: 7 },
+    { title: "8", value: 8 },
     { title: "9", value: 9 },
     { title: "10 ", value: 10 },
   ];
@@ -131,7 +130,8 @@ const CompanyRating = () => {
   };
 
   const calculateScore = () => {
-    return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5)
+    const avg = parseInt((parseInt(score.recomended) + parseInt(score.improvement) + parseInt(score.support) + parseInt(score.student_allowed) + parseInt(score.useful_train)) / 5);
+    return avg
   };
 
   const onDataCreate = async () => {
@@ -195,7 +195,7 @@ const CompanyRating = () => {
       sortable: true
     },
     {
-      name: "Evalutation",
+      name: "Total Evaluation",
       selector: row => row.score,
       sortable: true
     },
