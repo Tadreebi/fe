@@ -108,17 +108,6 @@ const CompanyRatings = () => {
     },
   ];
 
-  const onFormSubmit = e => {
-    e.preventDefault();
-
-    action === "create" ?
-      onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
-  };
-
   const onFormReset = () => {
     setScore({})
     setAction("create");
@@ -133,60 +122,6 @@ const CompanyRatings = () => {
   const calculateScore = () => {
     return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5) % 10
   }
-
-  const onDataCreate = async () => {
-    setLoading(true);
-
-    await CompanyRatingAPI.createScore({ ...score, score: calculateScore() })
-      .then(res => {
-        console.log("Evaluation Data Created Successfully");
-        callData();
-        setScore({});
-        setAction("create");
-      })
-      .catch(e => {
-        console.log("Evaluation Data Create Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const onDataUpdate = async () => {
-    setLoading(true);
-
-    await CompanyRatingAPI.updateScore(score.id, { ...score, score: calculateScore() })
-      .then(res => {
-        console.log("Evaluation Data Updated Successfully");
-        callData();
-        setScore({});
-        setAction("create");
-      })
-      .catch(e => {
-        console.log("Evaluation Data Update Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const onDataDelete = async () => {
-    setLoading(true);
-
-    await CompanyRatingAPI.deleteScore(score.id)
-      .then(res => {
-        console.log("Evaluation Data Deleted Successfully");
-        setScore({});
-        setAction("create");
-        callData();
-      })
-      .catch(e => {
-        console.log("Evaluation Data Delete Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
 
   const tableColumns = [
     {
@@ -213,7 +148,6 @@ const CompanyRatings = () => {
         pageDescrbition={"Companies to check submitted reviews"}
         loading={loading}
         formInputs={props}
-        onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Submitted Ratings List"}
         tableColumns={tableColumns}
