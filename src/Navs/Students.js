@@ -45,6 +45,12 @@ const _nav = [
     to: '/students/company-rating',
     icon: <Icon icon={faStar} className="px-1" />,
   },
+  {
+    component: NavItem,
+    name: 'Univerity Feedbacks',
+    to: '/students/univerity-feedbacks',
+    icon: <Icon icon={faStar} className="px-1" />,
+  },
 ];
 
 export default _nav;

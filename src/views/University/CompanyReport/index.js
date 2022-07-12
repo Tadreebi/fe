@@ -154,7 +154,7 @@ const CompanyReports = () => {
     <>
       <TemplatePage
         pageTitle={"Company Reports"}
-        pageDescrbition={"Companies to submit stand-alone, periodical & final reports to university supervisor"}
+        pageDescrbition={"University supervisors to view company's stand-alone, periodical & final reports"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
