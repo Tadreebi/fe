@@ -24,11 +24,11 @@ const StudentExperience = () => {
 
     await StudentExperienceAPI.getAllExperience()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Experiences Called Data", res.data);
         setExperiences(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Experiences Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -123,13 +123,13 @@ const StudentExperience = () => {
 
     await StudentExperienceAPI.createExperience(experience)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Experience Data Created Successfully");
         callData();
         setExperience({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Experience Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -141,13 +141,13 @@ const StudentExperience = () => {
 
     await StudentExperienceAPI.updateExperience(experience.id, experience)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Experience Data Updated Successfully");
         callData();
         setExperience({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Experience Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -159,13 +159,13 @@ const StudentExperience = () => {
 
     await StudentExperienceAPI.deleteExperience(experience.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Experience Data Deleted Successfully");
         setExperience({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Experience Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -215,7 +215,7 @@ const StudentExperience = () => {
         onDataDelete={onDataDelete}
       >
         <CollapseCard title="Shared Experiences" icon={faPeopleGroup}>
-          <Container loading={loading}>
+          <Container>
             <CardGroup>
               <Card style={{ maxHeight: "100vh", overflowY: "scroll" }}>
                 <CardHeader>
@@ -292,7 +292,7 @@ const StudentExperience = () => {
                       </Col>
                     </Row>
                   ) : (
-                    "Pick Experience"
+                    "Pick an experience"
                   )}
                 </CardBody>
               </Card>

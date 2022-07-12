@@ -2,14 +2,11 @@ const students = [
   { id: 2, name: "Suhaib" },
   { id: 3, name: "Mojhaed" },
   { id: 4, name: "Ali" },
-  { id: 5, name: "Moayad" },
 ];
 
 const companies = [
-  { id: 1, name: "ASAC" },
-  { id: 2, name: "CSS" },
-  { id: 3, name: "AS" },
-  { id: 4, name: "CQ" },
+  { id: 5, name: "ASAC" },
+  { id: 6, name: "CSS" },
 ];
 
 const faculties = [
