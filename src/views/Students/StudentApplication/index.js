@@ -35,6 +35,18 @@ const StudentApplication = () => {
       .finally(() => {
         setLoading(false);
       });
+
+    await StudentApplicationAPI.getAllResponses()
+      .then(res => {
+        console.log("Called Application Responses Data", res.data);
+        setApplicationsList(current => current.map(item => ({ ...item, ...res.data?.find(resp => resp.application === item.id) })));
+      })
+      .catch(e => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const callListsData = async () => {
@@ -125,6 +137,22 @@ const StudentApplication = () => {
       required: true,
       value: application.resume,
       onChange: e => setApplication(current => ({ ...current, resume: e.target.value }))
+    },
+    {
+      title: "Remarks",
+      name: "remarks",
+      type: "textarea",
+      fullwidth: true,
+      disabled: true,
+      value: application.remarks,
+    },
+    {
+      title: "Accepted",
+      name: "accepted",
+      type: "switch",
+      fullwidth: true,
+      value: application.accepted,
+      disabled: true,
     },
   ];
 
@@ -222,7 +250,16 @@ const StudentApplication = () => {
       selector: row => <a href={row.resume} target="_blank">Check Here</a>,
       sortable: true
     },
-
+    {
+      name: "Remarks",
+      selector: row => row.remarks || "---",
+      sortable: true
+    },
+    {
+      name: "Accepted",
+      selector: row => row.accepted ? "Yes" : row.remarks ? "No" : "Not Yet",
+      sortable: true
+    },
   ];
   return (
     <>

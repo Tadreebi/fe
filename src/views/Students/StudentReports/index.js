@@ -17,7 +17,7 @@ const StudentReports = () => {
 
     await StudentReportAPI.getAllReports()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Reports Data", res.data);
         setReportsList(res.data);
       })
       .catch(e => {
@@ -31,7 +31,7 @@ const StudentReports = () => {
 
     await StudentReportAPI.getAllRemarks()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Report Remarks Data", res.data);
         setReportsList(current => current.map(item => ({ ...res.data.find(remark => remark.report === item.id), ...item })));
       })
       .catch(e => {
@@ -45,7 +45,7 @@ const StudentReports = () => {
   const callListsData = async () => {
     await StudentReportAPI.getAllReportTypes()
       .then(res => {
-        console.log("Called types Data", res.data);
+        console.log("Called Types Data", res.data);
         setReportTypes(res.data)
       })
       .catch(e => {
@@ -164,7 +164,7 @@ const StudentReports = () => {
 
     await StudentReportAPI.createReport(report)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Report Data Created Successfully");
         callData();
         setReport({});
         setAction("create");
@@ -182,7 +182,7 @@ const StudentReports = () => {
 
     await StudentReportAPI.updateReport(report.id, report)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Report Data Updated Successfully");
         callData();
         setReport({});
         setAction("create");
@@ -200,7 +200,7 @@ const StudentReports = () => {
 
     await StudentReportAPI.deleteReport(report.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Report Data Deleted Successfully");
         setReport({});
         setAction("create");
         callData();
