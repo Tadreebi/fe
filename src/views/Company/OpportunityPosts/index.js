@@ -16,11 +16,11 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.getAllPosts()
       .then(res => {
-        console.log("Called Internship Posts Data", res.data);
+        console.log("Internship Posts Called Data", res.data);
         setPostsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Posts Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -165,7 +165,7 @@ const opportunityPosts = () => {
     {
       title: "Internship Overview",
       name: "description",
-      type: "text",
+      type: "textarea",
       required: true,
       fullwidth: true,
       value: post.description,
@@ -248,7 +248,7 @@ const opportunityPosts = () => {
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Creat Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -266,7 +266,7 @@ const opportunityPosts = () => {
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -284,7 +284,7 @@ const opportunityPosts = () => {
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
