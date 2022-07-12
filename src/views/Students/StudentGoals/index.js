@@ -15,11 +15,11 @@ const StudentGoals = () => {
 
     await StudentGoalsAPI.getAllGoals()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Goals Called Data", res.data);
         setGoalsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Goals Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -93,13 +93,13 @@ const StudentGoals = () => {
 
     await StudentGoalsAPI.createGoal(goal)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Goal Data Created Successfully");
         callData();
         setGoal({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Goal Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -111,13 +111,13 @@ const StudentGoals = () => {
 
     await StudentGoalsAPI.updateGoal(goal.id, goal)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Goal Data Updated Successfully");
         callData();
         setGoal({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Goal Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -129,13 +129,13 @@ const StudentGoals = () => {
 
     await StudentGoalsAPI.deleteGoal(goal.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Goal Data Deleted Successfully");
         setGoal({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Goal Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
