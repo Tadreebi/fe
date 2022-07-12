@@ -16,11 +16,11 @@ const UniversityFeedback = () => {
 
     await UniversityFeedbackAPI.getAllUniversityFeedback()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Feedbacks Called Data", res.data);
         setFeedbackList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Feedbacks Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -53,19 +53,11 @@ const UniversityFeedback = () => {
       options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Report",
-      name: "report",
-      type: "select",
-      required: true,
-      value: feedback.report,
-      onChange: e => setFeedback(current => ({ ...current, report: parseInt(e.target.value) })),
-      options: Reports?.map(report => ({ title: report.name, value: report.id }))
-    },
-    {
       title: "Title",
       name: "title",
       type: "text",
       placeholder: "Title of the Feedback",
+      double: true,
       required: true,
       value: feedback.title,
       onChange: e => setFeedback(current => ({ ...current, title: e.target.value }))
@@ -78,16 +70,6 @@ const UniversityFeedback = () => {
       required: true,
       value: feedback.feedback,
       onChange: e => setFeedback(current => ({ ...current, feedback: e.target.value }))
-    },
-    {
-      title: "Rating",
-      name: "rating",
-      type: "select",
-      fullwidth: true,
-      required: true,
-      value: feedback.rating,
-      onChange: e => setFeedback(current => ({ ...current, rating: parseInt(e.target.value) })),
-      options: Rating?.map(rate => ({ title: rate.name, value: rate.id }))
     },
   ];
 
@@ -118,13 +100,13 @@ const UniversityFeedback = () => {
 
     await UniversityFeedbackAPI.createUniversityFeedback(feedback)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Feedbacks Data Created Successfully");
         callData();
         setFeedback({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Feedbacks Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -136,13 +118,13 @@ const UniversityFeedback = () => {
 
     await UniversityFeedbackAPI.updateUniversityFeedback(feedback.id, feedback)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Feedbacks Data Updated Successfully");
         callData();
         setFeedback({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Feedbacks Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -154,13 +136,13 @@ const UniversityFeedback = () => {
 
     await UniversityFeedbackAPI.deleteUniversityFeedback(feedback.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Feedbacks Data Deleted Successfully");
         setFeedback({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Feedbacks Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -175,19 +157,13 @@ const UniversityFeedback = () => {
       sortable: true
     },
     {
-      name: "Report",
-      selector: row => Reports.find(report => report.id === row.report)?.name,
-      sortable: true
-    },
-    {
       name: "Title",
       selector: row => row.title,
       sortable: true
     },
     {
-      name: "Rating",
-      selector: row => row.rating,
-      sortable: true
+      name: "Details",
+      selector: row => row.feedback,
     },
   ];
 
