@@ -3,7 +3,7 @@ import CompanyRatingAPI from 'src/api/CompanyRating';
 import { companies } from 'src/reusables/data';
 import TemplatePage from '../..';
 
-const CompanyRating = () => {
+const CompanyRatings = () => {
   const [scores, setScores] = useState([]);
   const [score, setScore] = useState({});
   const [action, setAction] = useState("create");
@@ -14,11 +14,11 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.getAllScores()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Evaluations Called Data", res.data);
         setScores(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluations Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -139,13 +139,13 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.createScore({ ...score, score: calculateScore() })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Evaluation Data Created Successfully");
         callData();
         setScore({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -157,13 +157,13 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.updateScore(score.id, { ...score, score: calculateScore() })
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Evaluation Data Updated Successfully");
         callData();
         setScore({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -175,13 +175,13 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.deleteScore(score.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Evaluation Data Deleted Successfully");
         setScore({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -226,4 +226,4 @@ const CompanyRating = () => {
   )
 }
 
-export default CompanyRating
+export default CompanyRatings

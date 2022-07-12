@@ -14,11 +14,11 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.getAllScores()
       .then(res => {
-        console.log("Called Evaluation Data", res.data);
+        console.log("Evaluations Called Data", res.data);
         setEvaluations(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluations Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -139,13 +139,13 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.createScore({ ...evaluation, score: calculateScore() })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Evaluation Data Created Successfully");
         callData();
         setEvaluation({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Creat Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -157,13 +157,13 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.updateScore(evaluation.id, { ...evaluation, score: calculateScore() })
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Evaluation Data Updated Successfully");
         callData();
         setEvaluation({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -175,13 +175,13 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.deleteScore(evaluation.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Evaluation Data Deleted Successfully");
         setEvaluation({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
