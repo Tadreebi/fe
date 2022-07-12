@@ -53,7 +53,7 @@ const CompanyRating = () => {
       options: companies?.map(company => ({ value: company.id, title: company.name }))
     },
     {
-      title: "Does the training program covers it's description?",
+      title: "Does the training program cover its description?",
       name: "useful_train",
       type: "select",
       disabled: true,
