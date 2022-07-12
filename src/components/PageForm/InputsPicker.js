@@ -1,5 +1,5 @@
 import { Col, Row } from '../Root/Grid';
-import { Boolean, CheckList, Input, Option, Select, StarRating, Textarea } from '../Root/InputFields';
+import { Boolean, CheckList, Input, Option, Select, StarRating, Textarea, DynamicList } from '../Root/InputFields';
 import Label from '../Root/Label';
 
 
@@ -11,14 +11,16 @@ const length = count => {
   }
 };
 
-const InputsPicker = ({ inputs = inputsDemo, currentAction }) => {
+const InputsPicker = ({ inputs = inputsDemo, currentAction, list }) => {
   return (
     <>
       {inputs?.map(({ fullwidth, double, title, required, type, name, size, value, onChange, disabled, options, placeholder, ...rest }, i) => (
-        <Col md={fullwidth ? 12 : double ? 8 : length(inputs.length)} className="py-3" key={i}>
-          <Label>
-            {title || "Title"} {required ? <span className='text-danger'>*</span> : ""}
-          </Label>
+        <Col md={(fullwidth || type === "list") ? 12 : double ? 8 : length(inputs.length)} className="py-3" key={i}>
+          {!list && (
+            <Label>
+              {title || "Title"} {required ? <span className='text-danger'>*</span> : ""}
+            </Label>
+          )}
 
           {type === "select" ? (
             <Select
@@ -52,6 +54,16 @@ const InputsPicker = ({ inputs = inputsDemo, currentAction }) => {
               <StarRating
                 name={name}
                 required={required}
+                value={value}
+                onChange={onChange}
+                disabled={disabled || currentAction === "view" || currentAction === "delete"}
+                {...rest}
+              />
+            </>
+          ) : type === "list" ? (
+            <>
+              <br />
+              <DynamicList
                 value={value}
                 onChange={onChange}
                 disabled={disabled || currentAction === "view" || currentAction === "delete"}
