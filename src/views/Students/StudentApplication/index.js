@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import OpportunityPostAPI from 'src/api/OpportunityPost';
 import StudentApplicationAPI from 'src/api/StudentApplication';
 import CollapseCard from 'src/components/CollapseCard';
+import { Button } from 'src/components/Root/Buttons';
 import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
+import { students } from 'src/reusables/data';
+import { dateRangeFormatter } from 'src/reusables/functions';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
@@ -14,7 +17,7 @@ const StudentApplication = () => {
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
-  const [pickedPost, setPickedPost] = useState({})
+  const [pickedPost, setPickedPost] = useState({});
 
   const image = "http://www.dermalina.com/wp-content/uploads/2020/12/no-image.jpg";
 
@@ -23,31 +26,37 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Applications Called Data", res.data);
         setApplicationsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Call Error", e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    await StudentApplicationAPI.getAllResponses()
+      .then(res => {
+        console.log("Application Responses Called Data", res.data);
+        setApplicationsList(current => current.map(item => ({ ...item, ...res.data?.find(resp => resp.application === item.id) })));
+      })
+      .catch(e => {
+        console.log("Application Responses Call Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Raghad" },
-  ];
-
   const callListsData = async () => {
     await OpportunityPostAPI.getAllPosts()
       .then(res => {
-        console.log("Called Internship Posts Data", res.data);
+        console.log("Internship Posts Called Data", res.data);
         setInternships(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Posts Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -59,7 +68,7 @@ const StudentApplication = () => {
     callListsData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Student",
       name: "student",
@@ -129,6 +138,22 @@ const StudentApplication = () => {
       value: application.resume,
       onChange: e => setApplication(current => ({ ...current, resume: e.target.value }))
     },
+    {
+      title: "Remarks",
+      name: "remarks",
+      type: "textarea",
+      fullwidth: true,
+      disabled: true,
+      value: application.remarks,
+    },
+    {
+      title: "Accepted",
+      name: "accepted",
+      type: "switch",
+      fullwidth: true,
+      value: application.accepted,
+      disabled: true,
+    },
   ];
 
   const onFormSubmit = e => {
@@ -159,13 +184,13 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.createApplication(application)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Applications Data Created Successfully");
         callData();
         setApplication({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -177,13 +202,13 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.updateApplication(application.id, application)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Applications Data Updated Successfully");
         callData();
         setApplication({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -195,13 +220,13 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.deleteApplication(application.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Applications Data Deleted Successfully");
         setApplication({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -213,7 +238,7 @@ const StudentApplication = () => {
   const tableColumns = [
     {
       name: "Internship",
-      selector: row => internships.find(internship => internship.id === row.internship)?.id,
+      selector: row => `${internships.find(internship => internship.id === row.internship)?.position} @ ${internships.find(internship => internship.id === row.internship)?.company}`,
       sortable: true
     },
     {
@@ -225,7 +250,16 @@ const StudentApplication = () => {
       selector: row => <a href={row.resume} target="_blank">Check Here</a>,
       sortable: true
     },
-
+    {
+      name: "Remarks",
+      selector: row => row.remarks || "---",
+      sortable: true
+    },
+    {
+      name: "Accepted",
+      selector: row => row.accepted ? "Yes" : row.remarks ? "No" : "Not Yet",
+      sortable: true
+    },
   ];
   return (
     <>
@@ -235,8 +269,7 @@ const StudentApplication = () => {
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
-        formTitle={"CRUD Applications"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Applications List"}
@@ -257,25 +290,29 @@ const StudentApplication = () => {
                   Posts
                 </CardHeader>
 
-                <CardBody >
-                  {internships?.map((Experience, i) => (
-                    <div key={i} onClick={() => pickedPost.id === Experience.id ? setPickedPost({}) : setPickedPost(Experience)}>
-                      <Row className={`py-4 ${Experience.id === pickedPost.id ? "bg-light" : ""}`}>
+                <CardBody>
+                  {internships?.map((internship, i) => (
+                    <div key={i} onClick={() => pickedPost.id === internship.id ? setPickedPost({}) : setPickedPost(internship)}>
+                      <Row className={`py-4 ${internship.id === pickedPost.id ? "bg-light" : ""}`}>
                         <Col md={3} >
                           <img src={image} width="100%" />
 
                           <p className='text-center'>
-                            Company {Experience.company}
+                            Company {internship.company}
                           </p>
                         </Col>
 
                         <Col md={9} className="p-2">
                           <h5>
-                            Student {Experience.student}
+                            {internship.position}
                           </h5>
 
                           <p className='text-left'>
-                            {new Date(Experience.created_at).toLocaleDateString('en-GB')}
+                            {`${internship.type} - ${internship.location}`}
+                          </p>
+
+                          <p className='text-left'>
+                            {dateRangeFormatter(internship.created_at)}
                           </p>
                         </Col>
                       </Row>
@@ -302,36 +339,35 @@ const StudentApplication = () => {
 
                       <Col md={8} className="p-2">
                         <h5>
-                          student: <b>{pickedPost.student}</b>
+                          {pickedPost.position}
                         </h5>
 
-                        <p>
-                          improved_aspects: <b>{pickedPost.improved_aspects}</b>
-
+                        <p className='text-left'>
+                          {`${pickedPost.type} - ${pickedPost.location}`}
                         </p>
+
+                        <Button onClick={() => setApplication(current => ({ ...current, internship: pickedPost.id }))}>
+                          Apply Now
+                        </Button>
                       </Col>
 
                       <Col md={12} className="p-2">
                         <h5>
-                          student: <b>{pickedPost.student}</b>
+                          Job Description
                         </h5>
 
                         <p>
-                          company: <b>{pickedPost.company}</b>
-                          <br />
-                          missed_aspects: <b>{pickedPost.missed_aspects}</b>
-                          <br />
-                          improved_aspects: <b>{pickedPost.improved_aspects}</b>
-                          <br />
-                          get_hired: <b>{pickedPost.get_hired}</b>
-                          <br />
-                          more: <b>{pickedPost.more}</b>
-
+                          {Object.keys(pickedPost).map((key, i) => (
+                            <div key={i}>
+                              {`${key}: ${pickedPost[key]}`}
+                              <br />
+                            </div>
+                          ))}
                         </p>
                       </Col>
                     </Row>
                   ) : (
-                    "Pick Experience"
+                    "Pick an Internship"
                   )}
                 </CardBody>
               </Card>

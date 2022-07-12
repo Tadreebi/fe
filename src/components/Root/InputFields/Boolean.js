@@ -1,6 +1,6 @@
 import { CFormSwitch } from '@coreui/react';
 
-const Boolean = ({ name, title, size, value, onChange, disabled, children, ...rest }) => {
+const Boolean = ({ name, title, size, value, onChange, disabled, children, trueText, falseText, ...rest }) => {
   return (
     <CFormSwitch
       name={name}
@@ -10,6 +10,7 @@ const Boolean = ({ name, title, size, value, onChange, disabled, children, ...re
       onChange={onChange}
       disabled={disabled}
       {...rest}
+    // label={value ? (trueText || "Yes") : (falseText || "No")}
     >
       {children}
     </CFormSwitch>

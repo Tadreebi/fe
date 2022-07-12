@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import CompanyRatingAPI from 'src/api/CompanyRating';
+import { companies } from 'src/reusables/data';
 import TemplatePage from '../..';
 
-
 const CompanyRating = () => {
-  const [scores, setScores] = useState([]);
-  const [score, setScore] = useState({});
+  const [evaluations, setEvaluations] = useState([]);
+  const [evaluation, setEvaluation] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
 
@@ -14,11 +14,11 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.getAllScores()
       .then(res => {
-        console.log("Called Data", res.data);
-        setScores(res.data);
+        console.log("Evaluations Called Data", res.data);
+        setEvaluations(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluations Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -29,42 +29,36 @@ const CompanyRating = () => {
     callData();
   }, []);
 
-  // API Call Needed
-  const companies = [
-    { id: 2, name: "Socium" },
-    { id: 4, name: "ASAC'" },
-  ];
-
   const ratingOptions = [
-    { title: "1 ", value: 1 },
-    { title: "2 ", value: 2 },
-    { title: "3 ", value: 3 },
+    { title: "1", value: 1 },
+    { title: "2", value: 2 },
+    { title: "3", value: 3 },
     { title: "4", value: 4 },
-    { title: "5 ", value: 5 },
-    { title: "6 ", value: 6 },
-    { title: "7 ", value: 7 },
-    { title: "8 ", value: 8 },
+    { title: "5", value: 5 },
+    { title: "6", value: 6 },
+    { title: "7", value: 7 },
+    { title: "8", value: 8 },
     { title: "9", value: 9 },
     { title: "10 ", value: 10 },
   ];
 
-  const inputs = [
+  const props = [
     {
       title: "Company Name",
       name: "company",
       type: "select",
       required: true,
-      value: score.company,
-      onChange: e => setScore(current => ({ ...current, company: e.target.value })),
+      value: evaluation.company,
+      onChange: e => setEvaluation(current => ({ ...current, company: e.target.value })),
       options: companies?.map(company => ({ value: company.id, title: company.name }))
     },
     {
-      title: "Does the training program covers it's description?",
+      title: "Does the training program cover its description?",
       name: "useful_train",
       type: "select",
       required: true,
-      value: score.useful_train,
-      onChange: e => setScore(current => ({ ...current, useful_train: e.target.value })),
+      value: evaluation.useful_train,
+      onChange: e => setEvaluation(current => ({ ...current, useful_train: e.target.value })),
       options: ratingOptions
     },
     {
@@ -72,8 +66,8 @@ const CompanyRating = () => {
       name: "student_allowed",
       type: "select",
       required: true,
-      value: score.student_allowed,
-      onChange: e => setScore(current => ({ ...current, student_allowed: e.target.value })),
+      value: evaluation.student_allowed,
+      onChange: e => setEvaluation(current => ({ ...current, student_allowed: e.target.value })),
       options: ratingOptions
     },
     {
@@ -81,8 +75,8 @@ const CompanyRating = () => {
       name: "support",
       type: "select",
       required: true,
-      value: score.support,
-      onChange: e => setScore(current => ({ ...current, support: e.target.value })),
+      value: evaluation.support,
+      onChange: e => setEvaluation(current => ({ ...current, support: e.target.value })),
       options: ratingOptions
     },
     {
@@ -90,8 +84,8 @@ const CompanyRating = () => {
       name: "improvement",
       type: "select",
       required: true,
-      value: score.improvement,
-      onChange: e => setScore(current => ({ ...current, improvement: e.target.value })),
+      value: evaluation.improvement,
+      onChange: e => setEvaluation(current => ({ ...current, improvement: e.target.value })),
       options: ratingOptions
     },
     {
@@ -99,8 +93,8 @@ const CompanyRating = () => {
       name: "recomended",
       type: "select",
       required: true,
-      value: score.recomended,
-      onChange: e => setScore(current => ({ ...current, recomended: e.target.value })),
+      value: evaluation.recomended,
+      onChange: e => setEvaluation(current => ({ ...current, recomended: e.target.value })),
       options: ratingOptions
     },
     {
@@ -108,8 +102,8 @@ const CompanyRating = () => {
       name: "comments",
       type: "textarea",
       fullwidth: true,
-      value: score.comments,
-      onChange: e => setScore(current => ({ ...current, comments: e.target.value }))
+      value: evaluation.comments,
+      onChange: e => setEvaluation(current => ({ ...current, comments: e.target.value }))
     },
   ];
 
@@ -125,32 +119,33 @@ const CompanyRating = () => {
   };
 
   const onFormReset = () => {
-    setScore({})
+    setEvaluation({})
     setAction("create");
     console.log("Form was reset")
   };
 
   const onActionSelection = (action, data) => {
-    setScore(data);
+    setEvaluation(data);
     setAction(action);
   };
 
   const calculateScore = () => {
-    return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5)
+    const avg = parseInt((parseInt(evaluation.recomended) + parseInt(evaluation.improvement) + parseInt(evaluation.support) + parseInt(evaluation.student_allowed) + parseInt(evaluation.useful_train)) / 5);
+    return avg
   };
 
   const onDataCreate = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.createScore({ ...score, score: calculateScore() })
+    await CompanyRatingAPI.createScore({ ...evaluation, score: calculateScore() })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Evaluation Data Created Successfully");
         callData();
-        setScore({});
+        setEvaluation({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Creat Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -160,15 +155,15 @@ const CompanyRating = () => {
   const onDataUpdate = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.updateScore(score.id, { ...score, score: calculateScore() })
+    await CompanyRatingAPI.updateScore(evaluation.id, { ...evaluation, score: calculateScore() })
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Evaluation Data Updated Successfully");
         callData();
-        setScore({});
+        setEvaluation({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -178,15 +173,15 @@ const CompanyRating = () => {
   const onDataDelete = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.deleteScore(score.id)
+    await CompanyRatingAPI.deleteScore(evaluation.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
-        setScore({});
+        console.log("Evaluation Data Deleted Successfully");
+        setEvaluation({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluation Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -200,7 +195,7 @@ const CompanyRating = () => {
       sortable: true
     },
     {
-      name: "Evalutation",
+      name: "Total Evaluation",
       selector: row => row.score,
       sortable: true
     },
@@ -217,14 +212,13 @@ const CompanyRating = () => {
         pageTitle={"Company Rating"}
         pageDescrbition={"Here you can rate the training program and the proposing company."}
         loading={loading}
-        formTitle={"Rating Form"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Submitted Ratings List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
-        tableData={scores}
+        tableData={evaluations}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}

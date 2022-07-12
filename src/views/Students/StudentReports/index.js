@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport';
+import { students } from 'src/reusables/data';
+import { dateRangeFormatter } from 'src/reusables/functions';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
@@ -15,11 +17,11 @@ const StudentReports = () => {
 
     await StudentReportAPI.getAllReports()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Reports Data", res.data);
         setReportsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Called Reports Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -29,31 +31,25 @@ const StudentReports = () => {
 
     await StudentReportAPI.getAllRemarks()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Report Remarks Data", res.data);
         setReportsList(current => current.map(item => ({ ...res.data.find(remark => remark.report === item.id), ...item })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Called Report Remarks Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Moayad" },
-    { id: 2, name: "Suhaib" },
-  ];
-
   const callListsData = async () => {
     await StudentReportAPI.getAllReportTypes()
       .then(res => {
-        console.log("Called types Data", res.data);
+        console.log("Called Types Data", res.data);
         setReportTypes(res.data)
       })
       .catch(e => {
-        console.log(e)
+        console.log("Called Types error", e);
       });
   };
 
@@ -62,7 +58,7 @@ const StudentReports = () => {
     callListsData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Title",
       name: "title",
@@ -168,13 +164,13 @@ const StudentReports = () => {
 
     await StudentReportAPI.createReport(report)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Report Data Created Successfully");
         callData();
         setReport({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -186,13 +182,13 @@ const StudentReports = () => {
 
     await StudentReportAPI.updateReport(report.id, report)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Report Data Updated Successfully");
         callData();
         setReport({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -204,13 +200,13 @@ const StudentReports = () => {
 
     await StudentReportAPI.deleteReport(report.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Report Data Deleted Successfully");
         setReport({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -232,7 +228,7 @@ const StudentReports = () => {
     },
     {
       name: "Period Cover By Report",
-      selector: row => `${new Date(row.startDate).toLocaleDateString('en-GB')} to ${new Date(row.endDate).toLocaleDateString('en-GB')}`,
+      selector: row => `${dateRangeFormatter(row.startDate, "start", row.endDate)} - ${dateRangeFormatter(row.endDate)}`,
       sortable: true
     },
     {
@@ -255,8 +251,7 @@ const StudentReports = () => {
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
-        formTitle={"CRUD Reports"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Reports List"}

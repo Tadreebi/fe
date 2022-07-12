@@ -1,10 +1,12 @@
-import { faPeopleGroup, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import StudentExperienceAPI from 'src/api/StudentExperience';
 import CollapseCard from 'src/components/CollapseCard';
 import { Card, CardBody, CardGroup, CardHeader } from 'src/components/Root/Cards';
 import Container from 'src/components/Root/Container';
 import { Col, Row } from 'src/components/Root/Grid';
+import { companies, students } from 'src/reusables/data';
+import { dateRangeFormatter } from 'src/reusables/functions';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
@@ -22,34 +24,22 @@ const StudentExperience = () => {
 
     await StudentExperienceAPI.getAllExperience()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Experiences Called Data", res.data);
         setExperiences(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Experiences Call Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Moayad" },
-    { id: 2, name: "Raghad" },
-  ];
-
-  // API Call Needed
-  const companies = [
-    { id: 3, name: "Moayad company" },
-    { id: 4, name: "Suhaib company" },
-  ];
-
   useEffect(() => {
     callData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Student",
       name: "student",
@@ -133,13 +123,13 @@ const StudentExperience = () => {
 
     await StudentExperienceAPI.createExperience(experience)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Experience Data Created Successfully");
         callData();
         setExperience({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Experience Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -151,13 +141,13 @@ const StudentExperience = () => {
 
     await StudentExperienceAPI.updateExperience(experience.id, experience)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Experience Data Updated Successfully");
         callData();
         setExperience({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Experience Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -169,13 +159,13 @@ const StudentExperience = () => {
 
     await StudentExperienceAPI.deleteExperience(experience.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Experience Data Deleted Successfully");
         setExperience({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Experience Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -211,8 +201,7 @@ const StudentExperience = () => {
         pageDescrbition={"Students to share own experiences during an internship with fellow students"}
         loading={loading}
         statisticsData={statisticsData}
-        formTitle={"CRUD Experiences"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Experiences List"}
@@ -226,14 +215,14 @@ const StudentExperience = () => {
         onDataDelete={onDataDelete}
       >
         <CollapseCard title="Shared Experiences" icon={faPeopleGroup}>
-          <Container loading={loading}>
+          <Container>
             <CardGroup>
               <Card style={{ maxHeight: "100vh", overflowY: "scroll" }}>
                 <CardHeader>
                   Posts
                 </CardHeader>
 
-                <CardBody >
+                <CardBody>
                   {experiences?.map((Experience, i) => (
                     <div key={i} onClick={() => pickedExperience.id === Experience.id ? setPickedExperience({}) : setPickedExperience(Experience)}>
                       <Row className={`py-4 ${Experience.id === pickedExperience.id ? "bg-light" : ""}`}>
@@ -251,7 +240,7 @@ const StudentExperience = () => {
                           </h5>
 
                           <p className='text-left'>
-                            {new Date(Experience.created_at).toLocaleDateString('en-GB')}
+                            {dateRangeFormatter(Experience.created_at)}
                           </p>
                         </Col>
                       </Row>
@@ -293,21 +282,17 @@ const StudentExperience = () => {
                         </h5>
 
                         <p>
-                          company: <b>{pickedExperience.company}</b>
-                          <br />
-                          missed_aspects: <b>{pickedExperience.missed_aspects}</b>
-                          <br />
-                          improved_aspects: <b>{pickedExperience.improved_aspects}</b>
-                          <br />
-                          get_hired: <b>{pickedExperience.get_hired}</b>
-                          <br />
-                          more: <b>{pickedExperience.more}</b>
-
+                          {Object.keys(pickedExperience).map((key, i) => (
+                            <div key={i}>
+                              {`${key}: ${pickedExperience[key]}`}
+                              <br />
+                            </div>
+                          ))}
                         </p>
                       </Col>
                     </Row>
                   ) : (
-                    "Pick Experience"
+                    "Pick an experience"
                   )}
                 </CardBody>
               </Card>

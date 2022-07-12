@@ -28,7 +28,7 @@ const keyFilter = key => {
     case "id": return false;
     default: return true;
   }
-}
+};
 
 const PageTable = ({ title = "Table", columns, data, expandedComponent, onActionSelection = action => console.log("Selecting Action", action), loading, onCreate, onEdit, onDelete }) => {
   return (

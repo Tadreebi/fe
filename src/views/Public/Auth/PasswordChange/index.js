@@ -9,7 +9,7 @@ const ResetChange = () => {
     console.log("Reset In", resetData)
   };
 
-  const inputs = [
+  const props = [
     {
       title: "Old Password",
       name: "oldPassword",
@@ -47,7 +47,7 @@ const ResetChange = () => {
       title={"Reset Password"}
       description={"Enter your Email To Send You the Reset Email"}
       loginButton
-      inputs={inputs}
+      inputs={props}
       onSubmit={onReset}
     />
   )

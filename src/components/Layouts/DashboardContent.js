@@ -1,7 +1,10 @@
 import React, { Suspense } from 'react';
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { default as AdminRoutes, default as CompStaffRoutes, default as StudentRoutes, default as UniStaffRoutes } from 'src/Routes/dashboard';
+import AdminRoutes from 'src/Routes/Admin';
+import CompStaffRoutes from 'src/Routes/CompStaff';
+import StudentRoutes from 'src/Routes/Student';
+import UniStaffRoutes from 'src/Routes/UniStaff';
 import Container from '../Root/Container';
 import Spinner from '../Root/Spinner';
 

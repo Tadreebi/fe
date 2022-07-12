@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import StudentGoalsAPI from 'src/api/StudentGoals';
+import { students } from 'src/reusables/data';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
@@ -14,28 +15,22 @@ const StudentGoals = () => {
 
     await StudentGoalsAPI.getAllGoals()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Goals Called Data", res.data);
         setGoalsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Goals Call Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Raghad" },
-    { id: 2, name: "Suhaib" },
-  ];
-
   useEffect(() => {
     callData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Title",
       name: "title",
@@ -98,13 +93,13 @@ const StudentGoals = () => {
 
     await StudentGoalsAPI.createGoal(goal)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Goal Data Created Successfully");
         callData();
         setGoal({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Goal Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -116,13 +111,13 @@ const StudentGoals = () => {
 
     await StudentGoalsAPI.updateGoal(goal.id, goal)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Goal Data Updated Successfully");
         callData();
         setGoal({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Goal Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -134,13 +129,13 @@ const StudentGoals = () => {
 
     await StudentGoalsAPI.deleteGoal(goal.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Goal Data Deleted Successfully");
         setGoal({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Goal Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -156,7 +151,7 @@ const StudentGoals = () => {
       sortable: true
     },
     {
-      name: "Desc",
+      name: "Description",
       selector: row => row.describtion,
       sortable: true
     },
@@ -174,8 +169,7 @@ const StudentGoals = () => {
         pageDescrbition={"Students to add their personal & private goals along the internship and report to self on progess"}
         loading={loading}
         statisticsData={statisticsData}
-        formTitle={"CRUD Goals"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableColumns={tableColumns}

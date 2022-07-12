@@ -36,7 +36,7 @@ const CompanyReports = () => {
       name: "title",
       type: "text",
       placeholder: "Report Title",
-      required: true,
+      disabled: true,
       value: report.title,
       onChange: e => setReport(current => ({ ...current, title: e.target.value }))
     },
@@ -45,7 +45,7 @@ const CompanyReports = () => {
       name: "student",
       type: "select",
       double: true,
-      required: true,
+      disabled: true,
       value: report.student,
       onChange: e => setReport(current => ({ ...current, student: e.target.value })),
       options: students?.map(student => ({ title: student.name, value: student.id }))
@@ -56,7 +56,7 @@ const CompanyReports = () => {
       name: "company",
       type: "select",
       double: true,
-      required: true,
+      disabled: true,
       value: report.company,
       onChange: e => setReport(current => ({ ...current, company: e.target.value })),
       options: companies?.map(company => ({ title: company.name, value: company.id }))
@@ -65,7 +65,7 @@ const CompanyReports = () => {
       title: "Report Type",
       name: "type",
       type: "select",
-      required: true,
+      disabled: true,
       value: report.type,
       onChange: e => setReport(current => ({ ...current, type: e.target.value })),
       options: [
@@ -79,6 +79,7 @@ const CompanyReports = () => {
       name: "intro",
       type: "textarea",
       fullwidth: true,
+      disabled: true,
       value: report.intro,
       onChange: e => setReport(current => ({ ...current, intro: e.target.value }))
     },
@@ -87,7 +88,7 @@ const CompanyReports = () => {
       name: "report",
       type: "textarea",
       fullwidth: true,
-      required: true,
+      disabled: true,
       value: report.report,
       onChange: e => setReport(current => ({ ...current, report: e.target.value }))
     },
@@ -96,6 +97,7 @@ const CompanyReports = () => {
       name: "conclusion",
       type: "textarea",
       fullwidth: true,
+      disabled: true,
       value: report.conclusion,
       onChange: e => setReport(current => ({ ...current, conclusion: e.target.value }))
     },
@@ -106,22 +108,11 @@ const CompanyReports = () => {
       max: 100,
       min: 0,
       fullwidth: true,
-      required: true,
+      disabled: true,
       value: report.attendace,
       onChange: e => setReport(current => ({ ...current, attendace: e.target.value }))
     },
   ];
-
-  const onFormSubmit = e => {
-    e.preventDefault();
-
-    action === "create" ?
-      onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
-  };
 
   const onFormReset = () => {
     setReport({})
@@ -132,60 +123,6 @@ const CompanyReports = () => {
   const onActionSelection = (action, data) => {
     setReport(data);
     setAction(action);
-  };
-
-  const onDataCreate = async () => {
-    setLoading(true);
-
-    await CompanyReportAPI.createReport(report)
-      .then(res => {
-        console.log("Report Data Created Successfully");
-        callData();
-        setReport({});
-        setAction("create");
-      })
-      .catch(e => {
-        console.log("Report Data Create Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const onDataUpdate = async () => {
-    setLoading(true);
-
-    await CompanyReportAPI.updateReport(report.id, report)
-      .then(res => {
-        console.log("Report Data Updated Successfully");
-        callData();
-        setReport({});
-        setAction("create");
-      })
-      .catch(e => {
-        console.log("Report Data Update Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const onDataDelete = async () => {
-    setLoading(true);
-
-    await CompanyReportAPI.deleteReport(report.id)
-      .then(res => {
-        console.log("Report Data Deleted Successfully");
-        setReport({});
-        setAction("create");
-        callData();
-      })
-      .catch(e => {
-        console.log("Report Data Delete Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   };
 
   const { statisticsData, chartsData } = visualRepresentations(reportsList);
@@ -217,12 +154,11 @@ const CompanyReports = () => {
     <>
       <TemplatePage
         pageTitle={"Company Reports"}
-        pageDescrbition={"Companies to submit stand-along, periodical & final reports to university supervisor"}
+        pageDescrbition={"University supervisors to view company's stand-alone, periodical & final reports"}
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
         formInputs={props}
-        onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Company Reports List"}
         tableColumns={tableColumns}
@@ -230,9 +166,6 @@ const CompanyReports = () => {
         tableData={reportsList}
         onActionSelection={onActionSelection}
         currentAction={action}
-        onDataCreate={onDataCreate}
-        onDataUpdate={onDataUpdate}
-        onDataDelete={onDataDelete}
       />
     </>
   )

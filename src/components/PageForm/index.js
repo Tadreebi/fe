@@ -4,101 +4,9 @@ import { Button, ButtonGroup } from '../Root/Buttons';
 import Form from '../Root/Form';
 import { Col, Row } from '../Root/Grid';
 import Icon from '../Root/Icon';
-import { Boolean, CheckList, Input, Option, Select, StarRating, Textarea } from '../Root/InputFields';
-import Label from '../Root/Label';
 import InputsPicker from './InputsPicker';
 
-const inputsDemo = [
-  {
-    title: "Title",
-    name: "title",
-    type: "text",
-    fullwidth: true,
-    placeholder: "Title",
-    required: true,
-    value: "Name",
-    disabled: false,
-    readOnly: false,
-    onChange: e => console.log(`You're changing ${e.target.name}`)
-  },
-  {
-    title: "Title",
-    name: "title",
-    type: "textarea",
-    double: true,
-    placeholder: "Title",
-    required: true,
-    value: "Name",
-    disabled: false,
-    readOnly: false,
-    onChange: e => console.log(`You're changing ${e.target.name}`)
-  },
-  {
-    title: "Title",
-    name: "title",
-    type: "select",
-    size: "md",
-    required: true,
-    value: "Name",
-    disabled: false,
-    onChange: e => console.log(`You're changing ${e.target.name}`),
-    options: [
-      { title: "Option 1", value: "option 1" },
-      { title: "Option 2", value: "option 2" }
-    ]
-  },
-  {
-    title: "Title",
-    name: "title",
-    type: "checkbox",
-    size: "md",
-    required: true,
-    value: "Name",
-    disabled: false,
-    onChange: e => console.log(`You're changing ${e.target.name}`),
-    options: [
-      { title: "Option 1", value: "option 1" },
-      { title: "Option 2", value: "option 2" },
-      { title: "Option 3", value: "option 3" }
-    ]
-  },
-  {
-    title: "Title",
-    name: "title",
-    type: "radio",
-    size: "md",
-    required: true,
-    value: "Name",
-    disabled: false,
-    onChange: e => console.log(`You're changing ${e.target.name}`),
-    options: [
-      { title: "Option 1", value: "option 1" },
-      { title: "Option 2", value: "option 2" },
-      { title: "Option 3", value: "option 3" }
-    ]
-  },
-  {
-    title: "Title",
-    name: "title",
-    type: "switch",
-    size: "lg",
-    required: true,
-    value: true,
-    disabled: false,
-    default: true,
-    onChange: e => console.log(`You're changing ${e.target.name}`),
-  },
-];
-
-const length = count => {
-  switch (count) {
-    case 1: return 12;
-    case 2: return 6;
-    default: return 4;
-  }
-};
-
-const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, onReset, currentAction, loading }) => {
+const PageForm = ({ title = "Form", inputs, SubmitText, onSubmit, onReset, currentAction, loading }) => {
 
   const submitTextDecider = () => {
     switch (currentAction) {
@@ -144,7 +52,7 @@ const PageForm = ({ title = "Form", inputs = inputsDemo, SubmitText, onSubmit, o
                   <Icon icon={faClockRotateLeft} /> Reset
                 </Button>
               )}
-              {currentAction !== "view" && (
+              {(currentAction !== "view" && onSubmit) && (
                 <Button type="submit" color='success' className='text-white' disabled={loading}>
                   <Icon icon={submitIconDecider()} /> {SubmitText || submitTextDecider()}
                 </Button>

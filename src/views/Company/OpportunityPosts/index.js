@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CompanyPostAPI from 'src/api/OpportunityPost';
+import { companies } from 'src/reusables/data';
 import TemplatePage from "../..";
 import VisualRepresentations from "./visualRepresentations";
 
@@ -15,30 +16,22 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.getAllPosts()
       .then(res => {
-        console.log("Called Data", res.data);
-        setPostsList(res.data[0]);
+        console.log("Internship Posts Called Data", res.data);
+        setPostsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Posts Call Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  // API Call Needed
-  const companies = [
-    { id: 1, name: "ASAC" },
-    { id: 2, name: "CSS" },
-    { id: 3, name: "AS" },
-    { id: 4, name: "CQ" },
-  ];
-
   useEffect(() => {
     callData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Company",
       name: "company",
@@ -172,7 +165,7 @@ const opportunityPosts = () => {
     {
       title: "Internship Overview",
       name: "description",
-      type: "text",
+      type: "textarea",
       required: true,
       fullwidth: true,
       value: post.description,
@@ -249,13 +242,13 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.createPost(post)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Internship Post Data Created Successfully");
         callData();
         setPost({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Creat Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -267,13 +260,13 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.updatePost(post.id, post)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Internship Post Data Updated Successfully");
         callData();
         setPost({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -285,13 +278,13 @@ const opportunityPosts = () => {
 
     await CompanyPostAPI.deletePost(post.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Internship Post Data Deleted Successfully");
         setPost({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -303,7 +296,7 @@ const opportunityPosts = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: row => companies.find(company => company.id === row.company_id)?.name,
+      selector: row => companies.find(company => company.id === row.company)?.name,
       sortable: true,
     },
     {
@@ -326,8 +319,7 @@ const opportunityPosts = () => {
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
-        formTitle={"CRUD Posts"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Internship Opportunities List"}

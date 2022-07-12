@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import routes from 'src/Routes/dashboard'
+import routes from 'src/Routes/Admin'
 import { Breadcrumb, BreadcrumbItem } from '../Root/Breadcrumb'
 
 const DashboardBreadcrumb = () => {

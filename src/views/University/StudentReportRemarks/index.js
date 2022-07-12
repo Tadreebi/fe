@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport';
+import { students } from 'src/reusables/data';
+import { dateRangeFormatter } from 'src/reusables/functions';
 import TemplatePage from '../..';
-import VisualRepresentations from "./visualRepresentations"
+import VisualRepresentations from "./visualRepresentations";
 
 const StudentReportRemarks = () => {
   const [remarksList, setRemarksList] = useState([]);
+  const [reportTypes, setReportTypes] = useState([]);
   const [remark, setRemark] = useState({});
   const [loading, setLoading] = useState(false);
   const [action, setAction] = useState("create");
@@ -14,40 +17,48 @@ const StudentReportRemarks = () => {
 
     await StudentReportAPI.getAllReports()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Called Reports Data", res.data);
         setRemarksList(res.data.map(item => ({ ...item, id: null, reportId: item.id })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Called Reports Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
 
+    setLoading(true);
+
     await StudentReportAPI.getAllRemarks()
       .then(res => {
-        console.log("Called Data", res.data);
-        setRemarksList(current => current.map(item => ({ ...item, report: item.reportId, ...res.data?.find(rep => rep.report === item.reportId) })));
+        console.log("Called Remarks Data", res.data);
+        setRemarksList(current => current.map(item => ({ ...item, ...res.data?.find(rep => rep.report === item.reportId) })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Called Report Remarks Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
+  const callListsData = async () => {
+    await StudentReportAPI.getAllReportTypes()
+      .then(res => {
+        console.log("Called Types Data", res.data);
+        setReportTypes(res.data)
+      })
+      .catch(e => {
+        console.log("Called Types Error", e);
+      });
+  };
+
   useEffect(() => {
     callData();
+    callListsData();
   }, []);
 
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Moayad" },
-    { id: 2, name: "Raghad" },
-  ];
-
-  const inputs = [
+  const props = [
     {
       title: "Title",
       name: "title",
@@ -59,23 +70,18 @@ const StudentReportRemarks = () => {
     {
       title: "Student",
       name: "student",
-      type: "text",
+      type: "select",
       value: remark.student,
-      disabled: true
-    },
-    {
-      title: "Star Rating",
-      name: "rating",
-      type: "rating",
-      value: remark.rating,
-      disabled: true
+      disabled: true,
+      options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
       title: "Report Type",
       name: "type",
       type: "select",
       value: remark.type,
-      disabled: true
+      disabled: true,
+      options: reportTypes?.map(report => ({ title: report.title, value: report.id }))
     },
     {
       title: "Start Date of Report",
@@ -88,6 +94,7 @@ const StudentReportRemarks = () => {
       title: "End Date of Report",
       name: "endDate",
       type: "date",
+      double: true,
       value: remark.endDate,
       disabled: true
     },
@@ -129,14 +136,15 @@ const StudentReportRemarks = () => {
   const onFormSubmit = e => {
     e.preventDefault();
 
-    action === "create" ?
+    action === "create" ? (
       onDataCreate()
-      : action === "update" && remark.id === null ?
-        onDataCreate()
-        : action === "update" ?
-          onDataUpdate()
-          : action === "delete" &&
-          onDataDelete()
+    ) : action === "update" && remark.report ? (
+      onDataUpdate()
+    ) : action === "update" ? (
+      onDataCreate()
+    ) : action === "delete" && (
+      onDataDelete()
+    )
   };
 
   const onFormReset = () => {
@@ -153,15 +161,15 @@ const StudentReportRemarks = () => {
   const onDataCreate = async () => {
     setLoading(true);
 
-    await StudentReportAPI.createRemark(remark)
+    await StudentReportAPI.createRemark({ ...remark, report: remark.reportId })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Remark Data Created Successfully");
         callData();
         setRemark({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Remark Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -171,15 +179,15 @@ const StudentReportRemarks = () => {
   const onDataUpdate = async () => {
     setLoading(true);
 
-    await StudentReportAPI.updateRemark(remark.id, remark)
+    await StudentReportAPI.updateRemark(remark.report, remark)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Remark Data Updated Successfully");
         callData();
         setRemark({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Remark Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -189,15 +197,15 @@ const StudentReportRemarks = () => {
   const onDataDelete = async () => {
     setLoading(true);
 
-    await StudentReportAPI.deleteRemark(remark.id)
+    await StudentReportAPI.deleteRemark(remark.report)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Remark Data Deleted Successfully");
         setRemark({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Remark Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -214,12 +222,17 @@ const StudentReportRemarks = () => {
     },
     {
       name: "Student",
-      selector: row => row.student,
+      selector: row => students.find(student => student.id === row.student)?.name,
+      sortable: true
+    },
+    {
+      name: "Type",
+      selector: row => reportTypes.find(type => type.id === row.type)?.title,
       sortable: true
     },
     {
       name: "Period Cover By Report",
-      selector: row => `${new Date(row.startDate).toLocaleDateString('en-GB')} to ${new Date(row.endDate).toLocaleDateString('en-GB')}`,
+      selector: row => `${dateRangeFormatter(row.startDate, "start", row.endDate)} - ${dateRangeFormatter(row.endDate)}`,
       sortable: true
     },
     {
@@ -242,8 +255,7 @@ const StudentReportRemarks = () => {
         statisticsData={statisticsData}
         chartsData={chartsData}
         loading={loading}
-        formTitle={"CRUD Remarks"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Report Remarks List"}

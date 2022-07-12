@@ -5,6 +5,7 @@ const Dashboard = lazy(() => import('../views/dashboard'));
 
 // Modules
 const UniversityTips = lazy(() => import('../views/University/UniversityTips'));
+const CompanyReports = lazy(() => import('../views/University/CompanyReport'));
 const UniversityFeedback = lazy(() => import('../views/University/UniversityFeedback'));
 const StudentReportRemarks = lazy(() => import('../views/University/StudentReportRemarks'));
 const UniversityProposalRemarks = lazy(() => import('../views/University/StudentProposalRemarks'));
@@ -17,6 +18,7 @@ const routes = [
 
   // Modules
   { path: '/staff/tips', name: 'University Tips', element: UniversityTips },
+  { path: '/university/company-reports', name: 'Company Reports', element: CompanyReports },
   { path: '/staff/feedback', name: 'University Feedback', element: UniversityFeedback },
   { path: '/university/report-remarks', name: 'Student Report Remarks', element: StudentReportRemarks },
   { path: '/university/proposal-remarks', name: 'Student Proposal Remarks', element: UniversityProposalRemarks },

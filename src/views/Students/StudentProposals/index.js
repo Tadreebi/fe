@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import StudentProposalAPI from 'src/api/StudentProposal';
 import StudentApplicationAPI from 'src/api/StudentApplication';
+import StudentProposalAPI from 'src/api/StudentProposal';
+import { companies, students } from 'src/reusables/data';
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
+import OpportunityPostAPI from 'src/api/OpportunityPost';
 
-const StudentProposalRemarks = () => {
+const StudentProposals = () => {
   const [proposals, setproposals] = useState([]);
   const [internshipApps, setInternshipApps] = useState([]);
   const [proposal, setproposal] = useState({});
@@ -16,37 +18,37 @@ const StudentProposalRemarks = () => {
 
     await StudentProposalAPI.getAllProposals()
       .then(res => {
-        console.log("Called Proposal Data", res.data);
+        console.log("Proposals Called Data", res.data);
         setproposals(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposals Call Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Emad" },
-    { id: 2, name: "Moayad" },
-  ];
-
-  // API Call Needed
-  const companies = [
-    { id: 1, name: "Emad Company" },
-    { id: 4, name: "Raghad Company" },
-  ];
-
   const callListsData = async () => {
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Appication Data", res.data);
+        console.log("Appications Called Data", res.data);
         setInternshipApps(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Appications Call Error", e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    await OpportunityPostAPI.getAllPosts()
+      .then(res => {
+        console.log("Internship Posts Called Data", res.data);
+        setInternshipApps(current => current.map(item => ({ ...res.data?.find(resp => resp.id === item.internship), ...item })));
+      })
+      .catch(e => {
+        console.log("Internship Posts Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -58,7 +60,7 @@ const StudentProposalRemarks = () => {
     callListsData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Student",
       name: "student",
@@ -69,22 +71,22 @@ const StudentProposalRemarks = () => {
       options: students?.map(student => ({ title: student.name, value: student.id }))
     },
     {
-      title: "Company",
-      name: "company",
-      type: "select",
-      required: true,
-      value: proposal.company,
-      onChange: e => setproposal(current => ({ ...current, company: e.target.value })),
-      options: companies?.map(company => ({ title: company.name, value: company.id }))
-    },
-    {
       title: "Internship",
       name: "internship_application",
       type: "select",
       required: true,
+      double: true,
       value: proposal.internship_application,
       onChange: e => setproposal(current => ({ ...current, internship_application: e.target.value })),
-      options: internshipApps?.map(inter => ({ title: inter.name, value: inter.id }))
+      options: internshipApps?.map(inter => ({ title: `${inter.position} @ ${inter.company}`, value: inter.id }))
+    },
+    {
+      title: "Notes",
+      name: "notes",
+      type: "textarea",
+      fullwidth: true,
+      value: proposal.notes,
+      onChange: e => setproposal(current => ({ ...current, notes: e.target.value })),
     },
     {
       title: "Remarks",
@@ -133,13 +135,13 @@ const StudentProposalRemarks = () => {
 
     await StudentProposalAPI.createProposal(proposal)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Internship Post Data Create Successfully");
         callData();
         setproposal({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -151,13 +153,13 @@ const StudentProposalRemarks = () => {
 
     await StudentProposalAPI.updateProposal(proposal.id, proposal)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Internship Post Data Updated Successfully");
         callData();
         setproposal({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -169,13 +171,13 @@ const StudentProposalRemarks = () => {
 
     await StudentProposalAPI.deleteProposal(proposal.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Internship Post Data Deleted Successfully");
         setproposal({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -187,17 +189,25 @@ const StudentProposalRemarks = () => {
   const tableColumns = [
     {
       name: "Company",
-      selector: row => companies.find(company => company.id === row.company)?.name,
+      selector: row => companies.find(company => company.id === internshipApps.find(app => app.id === row.internship_application)?.company)?.name,
       sortable: true
     },
     {
       name: "Internship",
-      selector: row => internshipApps.find(app => app.id === row.internship_application)?.id,
+      selector: row => {
+        const data = internshipApps.find(app => app.id === row.internship_application);
+        return `${data?.position} @ ${data?.company}`
+      },
+      sortable: true
+    },
+    {
+      name: "Notes",
+      selector: row => row.notes,
       sortable: true
     },
     {
       name: "Response",
-      selector: row => row.remarks,
+      selector: row => row.remarks || "---",
       sortable: true
     },
     {
@@ -207,8 +217,6 @@ const StudentProposalRemarks = () => {
     }
   ];
 
-
-
   return (
     <>
       <TemplatePage
@@ -217,8 +225,7 @@ const StudentProposalRemarks = () => {
         statisticsData={statisticsData}
         chartsData={chartsData}
         loading={loading}
-        formTitle={"CRUD Proposals"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Proposals List"}
@@ -235,4 +242,4 @@ const StudentProposalRemarks = () => {
   )
 }
 
-export default StudentProposalRemarks
+export default StudentProposals

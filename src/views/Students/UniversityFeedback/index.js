@@ -5,7 +5,7 @@ import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
 
-const UniversityFeedback = () => {
+const UniversityFeedbacks = () => {
   const [feedbackList, setFeedbackList] = useState([]);
   const [feedback, setFeedback] = useState({});
   const [action, setAction] = useState("create");
@@ -47,7 +47,7 @@ const UniversityFeedback = () => {
       title: "Student",
       name: "student",
       type: "select",
-      required: true,
+      disabled: true,
       value: feedback.student,
       onChange: e => setFeedback(current => ({ ...current, student: parseInt(e.target.value) })),
       options: students?.map(student => ({ title: student.name, value: student.id }))
@@ -58,7 +58,7 @@ const UniversityFeedback = () => {
       type: "text",
       placeholder: "Title of the Feedback",
       double: true,
-      required: true,
+      disabled: true,
       value: feedback.title,
       onChange: e => setFeedback(current => ({ ...current, title: e.target.value }))
     },
@@ -67,22 +67,11 @@ const UniversityFeedback = () => {
       name: "Feedback",
       type: "textarea",
       fullwidth: true,
-      required: true,
+      disabled: true,
       value: feedback.feedback,
       onChange: e => setFeedback(current => ({ ...current, feedback: e.target.value }))
     },
   ];
-
-  const onFormSubmit = e => {
-    e.preventDefault();
-
-    action === "create" ?
-      onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
-  };
 
   const onFormReset = () => {
     setFeedback({})
@@ -94,61 +83,6 @@ const UniversityFeedback = () => {
     setFeedback(data);
     setAction(action);
   };
-
-  const onDataCreate = async () => {
-    setLoading(true);
-
-    await UniversityFeedbackAPI.createUniversityFeedback(feedback)
-      .then(res => {
-        console.log("Feedbacks Data Created Successfully");
-        callData();
-        setFeedback({});
-        setAction("create");
-      })
-      .catch(e => {
-        console.log("Feedbacks Data Create Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const onDataUpdate = async () => {
-    setLoading(true);
-
-    await UniversityFeedbackAPI.updateUniversityFeedback(feedback.id, feedback)
-      .then(res => {
-        console.log("Feedbacks Data Updated Successfully");
-        callData();
-        setFeedback({});
-        setAction("create");
-      })
-      .catch(e => {
-        console.log("Feedbacks Data Update Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const onDataDelete = async () => {
-    setLoading(true);
-
-    await UniversityFeedbackAPI.deleteUniversityFeedback(feedback.id)
-      .then(res => {
-        console.log("Feedbacks Data Deleted Successfully");
-        setFeedback({});
-        setAction("create");
-        callData();
-      })
-      .catch(e => {
-        console.log("Feedbacks Data Delete Error", e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
 
   const tableColumns = [
     {
@@ -178,7 +112,6 @@ const UniversityFeedback = () => {
         statisticsData={statisticsData}
         chartsData={chartsData}
         formInputs={props}
-        onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Supervisor Feedbacks List"}
         tableColumns={tableColumns}
@@ -186,12 +119,9 @@ const UniversityFeedback = () => {
         tableData={feedbackList}
         onActionSelection={onActionSelection}
         currentAction={action}
-        onDataCreate={onDataCreate}
-        onDataUpdate={onDataUpdate}
-        onDataDelete={onDataDelete}
       />
     </>
   )
 }
 
-export default UniversityFeedback
+export default UniversityFeedbacks

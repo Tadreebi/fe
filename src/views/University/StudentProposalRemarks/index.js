@@ -1,80 +1,73 @@
 import { useEffect, useState } from 'react';
 import StudentProposalAPI from 'src/api/StudentProposal';
 import UniversityProposalResponseAPI from 'src/api/UniversityProposalResponse';
+import { companies, students } from 'src/reusables/data';
 import TemplatePage from '../../';
-import VisualRepresentations from "./visualRepresentations"
-
+import VisualRepresentations from "./visualRepresentations";
+import StudentApplicationAPI from "src/api/StudentApplication"
 
 const StudentProposalsRes = () => {
-  const [proposals, setproposals] = useState([]);
-  const [proposal, setproposal] = useState({});
+  const [proposals, setProposals] = useState([]);
   const [action, setAction] = useState("create");
+  const [internshipApps, setInternshipApps] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [ProposalsResponses, setProposalsResponses] = useState([]);
-  const [Response, setResponse] = useState({});
+  const [response, setResponse] = useState({});
 
   const callData = async () => {
     setLoading(true);
 
-    await UniversityProposalResponseAPI.getAllResponses()
-      .then(res => {
-        console.log("Called Data", res.data);
-        setProposalsResponses(res.data);
-      })
-      .catch(e => {
-        console.log(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const callproposalsData = async () => {
-    setLoading(true);
-
     await StudentProposalAPI.getAllProposals()
       .then(res => {
-        console.log("Called proposal Data", res.data);
-        setproposals(res.data);
+        console.log("Proposals Called Data", res.data);
+        setProposals(res.data.map(item => ({ ...item, proposalId: item.id })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposals Call Error", e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    setLoading(true);
+
+    await UniversityProposalResponseAPI.getAllResponses()
+      .then(res => {
+        console.log("Proposal Responses Called Data", res.data);
+        setProposals(current => current.map(item => ({ ...item, ...res.data?.find(rep => rep.proposal === item.id) })));
+      })
+      .catch(e => {
+        console.log("Proposal Responses Call Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  // API Call Needed
-  const students = [
-    { id: 1, name: "Moayad" },
-    { id: 2, name: "Raghad" },
-  ];
-
-  // API Call Needed
-  const companies = [
-    { id: 3, name: "Emad Company" },
-    { id: 4, name: "Suhaib Company" },
-  ];
-
-  // API Call Needed to be checked
-  const InternshipApp = [
-    { id: 3, name: "Emad Company" },
-    { id: 4, name: "Suhaib Company" },
-  ];
+  const callListsData = async () => {
+    await StudentApplicationAPI.getAllApplications()
+      .then(res => {
+        console.log("Appications Called Data", res.data);
+        setInternshipApps(res.data);
+      })
+      .catch(e => {
+        console.log("Appications Call Error", e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     callData();
-    callproposalsData();
+    callListsData();
   }, []);
 
-
-  const inputs = [
+  const props = [
     {
       title: "Student",
       name: "student",
       type: "select",
-      value: proposal.student,
+      value: response.student,
       disabled: true,
       options: students?.map(student => ({ value: student.id, title: student.name }))
     },
@@ -82,7 +75,7 @@ const StudentProposalsRes = () => {
       title: "Companies",
       name: "company",
       type: "select",
-      value: proposal.company,
+      value: response.company,
       disabled: true,
       options: companies?.map(student => ({ value: student.id, title: student.name }))
     },
@@ -90,9 +83,9 @@ const StudentProposalsRes = () => {
       title: "Internship",
       name: "internship_application",
       type: "select",
-      value: proposal.internship_application,
+      value: response.internship_application,
       disabled: true,
-      options: InternshipApp?.map(app => ({ value: app.id, title: app.name }))
+      options: internshipApps?.map(app => ({ value: app.id, title: app.name }))
     },
     {
       title: "Remarks",
@@ -100,7 +93,7 @@ const StudentProposalsRes = () => {
       type: "textarea",
       fullwidth: true,
       required: true,
-      value: Response.remarks,
+      value: response.remarks,
       onChange: e => setResponse(current => ({ ...current, remarks: e.target.value }))
     },
     {
@@ -108,7 +101,7 @@ const StudentProposalsRes = () => {
       name: "accepted",
       type: "switch",
       fullwidth: true,
-      value: Response.accepted,
+      value: response.accepted,
       onChange: e => setResponse(current => ({ ...current, accepted: e.target.checked }))
     },
   ];
@@ -116,12 +109,15 @@ const StudentProposalsRes = () => {
   const onFormSubmit = e => {
     e.preventDefault();
 
-    action === "create" ?
+    action === "create" ? (
       onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
+    ) : action === "update" && response.proposal ? (
+      onDataUpdate()
+    ) : action === "update" ? (
+      onDataCreate()
+    ) : action === "delete" && (
+      onDataDelete()
+    )
   };
 
   const onFormReset = () => {
@@ -131,22 +127,22 @@ const StudentProposalsRes = () => {
   };
 
   const onActionSelection = (action, data) => {
-    setproposal(data);
+    setResponse(data);
     setAction(action);
   };
 
   const onDataCreate = async () => {
     setLoading(true);
 
-    await UniversityProposalResponseAPI.createResponse(Response)
+    await UniversityProposalResponseAPI.createResponse({ ...response, proposal: response.proposalId })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Proposal Response Data Created Successfully");
         callData();
         setResponse({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposal Response Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -156,15 +152,15 @@ const StudentProposalsRes = () => {
   const onDataUpdate = async () => {
     setLoading(true);
 
-    await UniversityProposalResponseAPI.updateResponse(Response.id, Response)
+    await UniversityProposalResponseAPI.updateResponse(response.id, response)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Proposal Response Data Updated Successfully");
         callData();
         setResponse({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposal Response Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -174,15 +170,15 @@ const StudentProposalsRes = () => {
   const onDataDelete = async () => {
     setLoading(true);
 
-    await UniversityProposalResponseAPI.deleteResponse(Response.id)
+    await UniversityProposalResponseAPI.deleteResponse(response.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Proposal Response Data Deleted Successfully");
         setResponse({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposal Response Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -204,23 +200,20 @@ const StudentProposalsRes = () => {
     },
     {
       name: "Internship",
-      selector: row => InternshipApp.find(app => app.id === row.internship_application)?.name,
+      selector: row => internshipApps.find(app => app.id === row.internship_application)?.name,
       sortable: true
     },
     {
       name: "remarks",
-      selector: row => row.remarks,
+      selector: row => row.remarks || "---",
       sortable: true
     },
     {
       name: "Accepted By University",
-      selector: row => row.accepted ? "Yes" : "No",
+      selector: row => row.accepted ? "Yes" : row.remarks ? "No" : "Not Yet",
       sortable: true
     }
-
   ];
-
-
 
   return (
     <>
@@ -230,12 +223,11 @@ const StudentProposalsRes = () => {
         statisticsData={statisticsData}
         loading={loading}
         chartsData={chartsData}
-        formTitle={"CRUD Remarks"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Proposals & Remarks List"}
-        tableData={proposals?.map(data => ({ ...data, ...ProposalsResponses.find(da => da.id === ProposalsResponses.proposal) }))}
+        tableData={proposals}
         tableColumns={tableColumns}
         tableRowDetails={true}
         onActionSelection={onActionSelection}

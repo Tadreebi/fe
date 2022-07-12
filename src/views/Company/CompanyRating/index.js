@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import CompanyRatingAPI from 'src/api/CompanyRating';
+import { companies } from 'src/reusables/data';
 import TemplatePage from '../..';
 
-
-const CompanyRating = () => {
+const CompanyRatings = () => {
   const [scores, setScores] = useState([]);
   const [score, setScore] = useState({});
   const [action, setAction] = useState("create");
@@ -14,11 +14,11 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.getAllScores()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Evaluations Called Data", res.data);
         setScores(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Evaluations Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -28,12 +28,6 @@ const CompanyRating = () => {
   useEffect(() => {
     callData();
   }, []);
-
-  // API Call Needed
-  const companies = [
-    { id: 2, name: "Socium" },
-    { id: 4, name: "ASAC'" },
-  ];
 
   const ratingOptions = [
     { title: "1 ", value: 1 },
@@ -48,7 +42,7 @@ const CompanyRating = () => {
     { title: "10 ", value: 10 },
   ];
 
-  const inputs = [
+  const props = [
     {
       title: "Company Name",
       name: "company",
@@ -59,7 +53,7 @@ const CompanyRating = () => {
       options: companies?.map(company => ({ value: company.id, title: company.name }))
     },
     {
-      title: "Does the training program covers it's description?",
+      title: "Does the training program cover its description?",
       name: "useful_train",
       type: "select",
       disabled: true,
@@ -114,17 +108,6 @@ const CompanyRating = () => {
     },
   ];
 
-  const onFormSubmit = e => {
-    e.preventDefault();
-
-    action === "create" ?
-      onDataCreate()
-      : action === "update" ?
-        onDataUpdate()
-        : action === "delete" &&
-        onDataDelete()
-  };
-
   const onFormReset = () => {
     setScore({})
     setAction("create");
@@ -139,60 +122,6 @@ const CompanyRating = () => {
   const calculateScore = () => {
     return parseInt((score.recomended + score.improvement + score.support + score.student_allowed + score.useful_train) / 5) % 10
   }
-
-  const onDataCreate = async () => {
-    setLoading(true);
-
-    await CompanyRatingAPI.createScore({ ...score, score: calculateScore() })
-      .then(res => {
-        console.log("Data Created Successfully");
-        callData();
-        setScore({});
-        setAction("create");
-      })
-      .catch(e => {
-        console.log(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const onDataUpdate = async () => {
-    setLoading(true);
-
-    await CompanyRatingAPI.updateScore(score.id, { ...score, score: calculateScore() })
-      .then(res => {
-        console.log("Data Updated Successfully");
-        callData();
-        setScore({});
-        setAction("create");
-      })
-      .catch(e => {
-        console.log(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const onDataDelete = async () => {
-    setLoading(true);
-
-    await CompanyRatingAPI.deleteScore(score.id)
-      .then(res => {
-        console.log("Data Deleted Successfully");
-        setScore({});
-        setAction("create");
-        callData();
-      })
-      .catch(e => {
-        console.log(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
 
   const tableColumns = [
     {
@@ -218,9 +147,7 @@ const CompanyRating = () => {
         pageTitle={"Company Ratings"}
         pageDescrbition={"Companies to check submitted reviews"}
         loading={loading}
-        formTitle={"Rating Form"}
-        formInputs={inputs}
-        onFormSubmit={onFormSubmit}
+        formInputs={props}
         onFormReset={onFormReset}
         tableTitle={"Submitted Ratings List"}
         tableColumns={tableColumns}
@@ -233,4 +160,4 @@ const CompanyRating = () => {
   )
 }
 
-export default CompanyRating
+export default CompanyRatings
