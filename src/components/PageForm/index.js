@@ -52,7 +52,7 @@ const PageForm = ({ title = "Form", inputs, SubmitText, onSubmit, onReset, curre
                   <Icon icon={faClockRotateLeft} /> Reset
                 </Button>
               )}
-              {currentAction !== "view" && (
+              {(currentAction !== "view" && onSubmit) && (
                 <Button type="submit" color='success' className='text-white' disabled={loading}>
                   <Icon icon={submitIconDecider()} /> {SubmitText || submitTextDecider()}
                 </Button>

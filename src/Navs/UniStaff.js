@@ -29,6 +29,12 @@ const _nav = [
   },
   {
     component: NavItem,
+    name: 'Company Reports',
+    to: '/university/company-reports',
+    icon: <Icon icon={faFileLines} className="px-1" />,
+  },
+  {
+    component: NavItem,
     name: 'Student Proposal Remarks',
     to: '/university/proposal-remarks',
     icon: <Icon icon={faFileLines} className="px-1" />,
