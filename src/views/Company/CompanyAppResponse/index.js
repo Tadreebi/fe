@@ -8,8 +8,8 @@ import VisualRepresentations from "./visualRepresentations";
 
 const StudentApplicationRes = () => {
   const [applicationsList, setApplicationsList] = useState([]);
-  const [internships, setInternships] = useState([]);
   const [application, setApplication] = useState({});
+  const [internships, setInternships] = useState([]);
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
 
@@ -18,11 +18,11 @@ const StudentApplicationRes = () => {
 
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Applications Data", res.data);
-        setApplicationsList(res.data.map(item => ({ ...item, application: item.id })));
+        console.log("Applications Called Data", res.data);
+        setApplicationsList(res.data.map(item => ({ ...item, applicationId: item.id })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -33,10 +33,10 @@ const StudentApplicationRes = () => {
     await StudentApplicationAPI.getAllResponses()
       .then(res => {
         console.log("Called Responses Data", res.data);
-        setApplicationsList(current => current.map(item => ({ ...item, ...res.data?.find(rep => rep.application === item.application) })));
+        setApplicationsList(current => current.map(item => ({ ...item, ...res.data?.find(rep => rep.application === item.applicationId) })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Application Responses Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -50,17 +50,12 @@ const StudentApplicationRes = () => {
         setInternships(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Posts Call Error", e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
-
-  const applications = [
-    { id: 1, name: "ASAC" },
-    { id: 2, name: "CSS" },
-  ];
 
   useEffect(() => {
     callData();
@@ -177,15 +172,15 @@ const StudentApplicationRes = () => {
   const onDataCreate = async () => {
     setLoading(true);
 
-    await StudentApplicationAPI.createResponse({ ...application, detail: "" })
+    await StudentApplicationAPI.createResponse({ ...application, application: application.applicationId })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Response Data Created Successfully");
         callData();
         setApplication({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Response Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -197,13 +192,13 @@ const StudentApplicationRes = () => {
 
     await StudentApplicationAPI.updateResponse(application.application, application)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Response Data Updated Successfully");
         callData();
         setApplication({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Response Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -215,13 +210,13 @@ const StudentApplicationRes = () => {
 
     await StudentApplicationAPI.deleteResponse(application.application)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Response Data Deleted Successfully");
         setApplication({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Response Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);

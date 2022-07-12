@@ -26,11 +26,11 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Applications Data", res.data);
+        console.log("Applications Called Data", res.data);
         setApplicationsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -38,11 +38,11 @@ const StudentApplication = () => {
 
     await StudentApplicationAPI.getAllResponses()
       .then(res => {
-        console.log("Called Application Responses Data", res.data);
+        console.log("Application Responses Called Data", res.data);
         setApplicationsList(current => current.map(item => ({ ...item, ...res.data?.find(resp => resp.application === item.id) })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Application Responses Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -52,11 +52,11 @@ const StudentApplication = () => {
   const callListsData = async () => {
     await OpportunityPostAPI.getAllPosts()
       .then(res => {
-        console.log("Called Internship Posts Data", res.data);
+        console.log("Internship Posts Called Data", res.data);
         setInternships(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Posts Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -190,7 +190,7 @@ const StudentApplication = () => {
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -208,7 +208,7 @@ const StudentApplication = () => {
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -226,7 +226,7 @@ const StudentApplication = () => {
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Applications Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
