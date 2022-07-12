@@ -15,11 +15,11 @@ const UniversityTips = () => {
 
     await UniversityTipsAPI.getAllTips()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Tips Called Data", res.data);
         setTipsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Tips Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -29,11 +29,11 @@ const UniversityTips = () => {
   const callListsData = async () => {
     await UniversityTipsAPI.getAllTopics()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Tip Topics Called Data", res.data);
         setTopics(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Tip Topics Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -61,7 +61,7 @@ const UniversityTips = () => {
       required: true,
       value: tip.topic,
       onChange: e => setTip(current => ({ ...current, topic: e.target.value })),
-      options: topics?.map(topic => ({ title: topic.name, value: topic.id }))
+      options: topics?.map(topic => ({ title: topic.title, value: topic.id }))
     },
     {
       title: "Type",
@@ -109,13 +109,13 @@ const UniversityTips = () => {
 
     await UniversityTipsAPI.createTip(tip)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Tip Data Created Successfully");
         callData();
         setTip({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Tip Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -127,13 +127,13 @@ const UniversityTips = () => {
 
     await UniversityTipsAPI.updateTip(tip.id, tip)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Tip Data Updated Successfully");
         callData();
         setTip({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Tip Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -145,13 +145,13 @@ const UniversityTips = () => {
 
     await UniversityTipsAPI.deleteTip(tip.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Tip Data Deleted Successfully");
         setTip({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Tip Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -166,7 +166,7 @@ const UniversityTips = () => {
     },
     {
       name: "Topic",
-      selector: row => topics.find(topic => topic.id === row.topic)?.name,
+      selector: row => topics.find(topic => topic.id === row.topic)?.title,
       sortable: true
     },
     {
