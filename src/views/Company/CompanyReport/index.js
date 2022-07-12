@@ -15,11 +15,11 @@ const CompanyReports = () => {
 
     await CompanyReportAPI.getAllReports()
       .then(res => {
-        console.log("Called Data", res.data);
+        console.log("Reports Called Data", res.data);
         setReportsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Reports Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -103,6 +103,8 @@ const CompanyReports = () => {
       title: "Attendance",
       name: "attendace",
       type: "number",
+      max: 100,
+      min: 0,
       fullwidth: true,
       required: true,
       value: report.attendace,
@@ -137,13 +139,13 @@ const CompanyReports = () => {
 
     await CompanyReportAPI.createReport(report)
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Report Data Created Successfully");
         callData();
         setReport({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -155,13 +157,13 @@ const CompanyReports = () => {
 
     await CompanyReportAPI.updateReport(report.id, report)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Report Data Updated Successfully");
         callData();
         setReport({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -173,13 +175,13 @@ const CompanyReports = () => {
 
     await CompanyReportAPI.deleteReport(report.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Report Data Deleted Successfully");
         setReport({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
