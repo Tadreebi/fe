@@ -21,7 +21,7 @@ const StudentReports = () => {
         setReportsList(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Called Reports Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -35,7 +35,7 @@ const StudentReports = () => {
         setReportsList(current => current.map(item => ({ ...res.data.find(remark => remark.report === item.id), ...item })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Called Report Remarks Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -49,7 +49,7 @@ const StudentReports = () => {
         setReportTypes(res.data)
       })
       .catch(e => {
-        console.log(e)
+        console.log("Called Types error", e);
       });
   };
 
@@ -170,7 +170,7 @@ const StudentReports = () => {
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -188,7 +188,7 @@ const StudentReports = () => {
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -206,7 +206,7 @@ const StudentReports = () => {
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Report Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);

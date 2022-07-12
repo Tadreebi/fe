@@ -21,7 +21,7 @@ const StudentReportRemarks = () => {
         setRemarksList(res.data.map(item => ({ ...item, id: null, reportId: item.id })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Called Reports Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -35,7 +35,7 @@ const StudentReportRemarks = () => {
         setRemarksList(current => current.map(item => ({ ...item, ...res.data?.find(rep => rep.report === item.reportId) })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Called Report Remarks Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -45,11 +45,11 @@ const StudentReportRemarks = () => {
   const callListsData = async () => {
     await StudentReportAPI.getAllReportTypes()
       .then(res => {
-        console.log("Called types Data", res.data);
+        console.log("Called Types Data", res.data);
         setReportTypes(res.data)
       })
       .catch(e => {
-        console.log(e)
+        console.log("Called Types Error", e);
       });
   };
 
@@ -163,13 +163,13 @@ const StudentReportRemarks = () => {
 
     await StudentReportAPI.createRemark({ ...remark, report: remark.reportId })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Remark Data Created Successfully");
         callData();
         setRemark({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Remark Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -181,13 +181,13 @@ const StudentReportRemarks = () => {
 
     await StudentReportAPI.updateRemark(remark.report, remark)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Remark Data Updated Successfully");
         callData();
         setRemark({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Remark Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -199,13 +199,13 @@ const StudentReportRemarks = () => {
 
     await StudentReportAPI.deleteRemark(remark.report)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Remark Data Deleted Successfully");
         setRemark({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Remark Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
