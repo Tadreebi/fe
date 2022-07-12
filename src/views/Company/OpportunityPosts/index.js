@@ -31,7 +31,7 @@ const opportunityPosts = () => {
     callData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Company",
       name: "company",
@@ -319,8 +319,7 @@ const opportunityPosts = () => {
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
-        formTitle={"CRUD Posts"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Internship Opportunities List"}

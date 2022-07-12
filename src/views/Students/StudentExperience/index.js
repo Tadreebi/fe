@@ -39,7 +39,7 @@ const StudentExperience = () => {
     callData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Student",
       name: "student",
@@ -201,8 +201,7 @@ const StudentExperience = () => {
         pageDescrbition={"Students to share own experiences during an internship with fellow students"}
         loading={loading}
         statisticsData={statisticsData}
-        formTitle={"CRUD Experiences"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Experiences List"}

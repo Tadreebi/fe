@@ -45,7 +45,7 @@ const UniversityTips = () => {
     callListsData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Title",
       name: "title",
@@ -182,8 +182,7 @@ const UniversityTips = () => {
         pageTitle={"Internship Tips"}
         pageDescrbition={"University supervisors to submit tips & helpful materials about internship for students"}
         loading={loading}
-        formTitle={"CRUD Tips"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Internship Tips List"}

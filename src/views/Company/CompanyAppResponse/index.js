@@ -67,7 +67,7 @@ const StudentApplicationRes = () => {
     callListsData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Student",
       name: "student",
@@ -256,8 +256,7 @@ const StudentApplicationRes = () => {
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
-        formTitle={"CRUD Applications"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Applications List"}

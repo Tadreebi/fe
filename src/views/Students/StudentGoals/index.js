@@ -30,7 +30,7 @@ const StudentGoals = () => {
     callData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Title",
       name: "title",
@@ -169,8 +169,7 @@ const StudentGoals = () => {
         pageDescrbition={"Students to add their personal & private goals along the internship and report to self on progess"}
         loading={loading}
         statisticsData={statisticsData}
-        formTitle={"CRUD Goals"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableColumns={tableColumns}

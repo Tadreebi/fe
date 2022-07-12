@@ -26,7 +26,7 @@ const Login = () => {
       });
   };
 
-  const inputs = [
+  const props = [
     {
       title: "Username",
       name: "username",
@@ -53,7 +53,7 @@ const Login = () => {
     <AuthTemplate
       title={"Login"}
       description={"Sign in to your account to access the dashboard"}
-      inputs={inputs}
+      inputs={props}
       onSubmit={onLogin}
       resetPassword
       additionCard={

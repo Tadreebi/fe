@@ -42,7 +42,7 @@ const UniversityFeedback = () => {
     callData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Student",
       name: "student",
@@ -201,8 +201,7 @@ const UniversityFeedback = () => {
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
-        formTitle={"CRUD Feedbacks"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Supervisor Feedbacks List"}

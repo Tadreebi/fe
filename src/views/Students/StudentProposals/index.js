@@ -61,7 +61,7 @@ const StudentProposals = () => {
     callListsData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Student",
       name: "student",
@@ -226,8 +226,7 @@ const StudentProposals = () => {
         statisticsData={statisticsData}
         chartsData={chartsData}
         loading={loading}
-        formTitle={"CRUD Proposals"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Proposals List"}

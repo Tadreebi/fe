@@ -43,7 +43,7 @@ const CompanyRating = () => {
     { title: "10 ", value: 10 },
   ];
 
-  const inputs = [
+  const props = [
     {
       title: "Company Name",
       name: "company",
@@ -212,8 +212,7 @@ const CompanyRating = () => {
         pageTitle={"Company Rating"}
         pageDescrbition={"Here you can rate the training program and the proposing company."}
         loading={loading}
-        formTitle={"Rating Form"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Submitted Ratings List"}

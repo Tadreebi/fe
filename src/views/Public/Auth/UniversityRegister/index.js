@@ -9,7 +9,7 @@ const UniversityRegister = () => {
     console.log("Registering", regData)
   };
 
-  const inputs = [
+  const props = [
     {
       title: "Username",
       name: "username",
@@ -79,7 +79,7 @@ const UniversityRegister = () => {
       title={"University Register"}
       description={"This is for illustration purposes only. In actual app use, staff data will be retrieved from university system."}
       loginButton
-      inputs={inputs}
+      inputs={props}
       onSubmit={onRegister}
       onReset={() => setLoginData({})}
     />

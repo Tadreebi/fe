@@ -9,7 +9,7 @@ const CompanyRegister = () => {
     console.log("Registering", regData)
   };
 
-  const inputs = [
+  const props = [
     {
       title: "Username",
       name: "username",
@@ -87,7 +87,7 @@ const CompanyRegister = () => {
       title={"Company Register"}
       description={"Register to start posting about your internship opportunity, in to receive student applications."}
       loginButton
-      inputs={inputs}
+      inputs={props}
       onSubmit={onRegister}
       onReset={() => setLoginData({})}
     />

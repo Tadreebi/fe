@@ -58,7 +58,7 @@ const StudentReports = () => {
     callListsData();
   }, []);
 
-  const inputs = [
+  const props = [
     {
       title: "Title",
       name: "title",
@@ -251,8 +251,7 @@ const StudentReports = () => {
         loading={loading}
         statisticsData={statisticsData}
         chartsData={chartsData}
-        formTitle={"CRUD Reports"}
-        formInputs={inputs}
+        formInputs={props}
         onFormSubmit={onFormSubmit}
         onFormReset={onFormReset}
         tableTitle={"Student Reports List"}
