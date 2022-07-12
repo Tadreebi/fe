@@ -1,6 +1,6 @@
-import { faBuilding, faBuildingColumns, faBullseye, faClipboardQuestion, faCommentDots, faCommentMedical, faDashboard, faFileAlt, faFileLines, faFilePen, faFire, faGraduationCap, faIdBadge, faNewspaper, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faBullseye, faClipboardQuestion, faCommentDots, faComments, faDashboard, faFileAlt, faFilePen, faNewspaper, faStar } from '@fortawesome/free-solid-svg-icons';
 import Icon from '../components/Root/Icon';
-import { NavGroup, NavItem, NavTitle } from '../components/Root/Nav';
+import { NavItem } from '../components/Root/Nav';
 
 const _nav = [
   {
@@ -23,7 +23,7 @@ const _nav = [
   },
   {
     component: NavItem,
-    name: 'Student Application',
+    name: 'Student Applications',
     to: '/students/application',
     icon: <Icon icon={faFilePen} className="px-1" />,
   },
@@ -35,9 +35,9 @@ const _nav = [
   },
   {
     component: NavItem,
-    name: 'Student Experience',
+    name: 'Student Experiences',
     to: '/students/experiences',
-    icon: <Icon icon={faFire} className="px-1" />,
+    icon: <Icon icon={faComments} className="px-1" />,
   },
   {
     component: NavItem,
