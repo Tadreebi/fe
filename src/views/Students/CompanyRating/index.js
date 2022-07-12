@@ -4,8 +4,8 @@ import { companies } from 'src/reusables/data';
 import TemplatePage from '../..';
 
 const CompanyRating = () => {
-  const [scores, setScores] = useState([]);
-  const [score, setScore] = useState({});
+  const [evaluations, setEvaluations] = useState([]);
+  const [evaluation, setEvaluation] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
 
@@ -14,8 +14,8 @@ const CompanyRating = () => {
 
     await CompanyRatingAPI.getAllScores()
       .then(res => {
-        console.log("Called Data", res.data);
-        setScores(res.data);
+        console.log("Called Evaluation Data", res.data);
+        setEvaluations(res.data);
       })
       .catch(e => {
         console.log(e);
@@ -48,8 +48,8 @@ const CompanyRating = () => {
       name: "company",
       type: "select",
       required: true,
-      value: score.company,
-      onChange: e => setScore(current => ({ ...current, company: e.target.value })),
+      value: evaluation.company,
+      onChange: e => setEvaluation(current => ({ ...current, company: e.target.value })),
       options: companies?.map(company => ({ value: company.id, title: company.name }))
     },
     {
@@ -57,8 +57,8 @@ const CompanyRating = () => {
       name: "useful_train",
       type: "select",
       required: true,
-      value: score.useful_train,
-      onChange: e => setScore(current => ({ ...current, useful_train: e.target.value })),
+      value: evaluation.useful_train,
+      onChange: e => setEvaluation(current => ({ ...current, useful_train: e.target.value })),
       options: ratingOptions
     },
     {
@@ -66,8 +66,8 @@ const CompanyRating = () => {
       name: "student_allowed",
       type: "select",
       required: true,
-      value: score.student_allowed,
-      onChange: e => setScore(current => ({ ...current, student_allowed: e.target.value })),
+      value: evaluation.student_allowed,
+      onChange: e => setEvaluation(current => ({ ...current, student_allowed: e.target.value })),
       options: ratingOptions
     },
     {
@@ -75,8 +75,8 @@ const CompanyRating = () => {
       name: "support",
       type: "select",
       required: true,
-      value: score.support,
-      onChange: e => setScore(current => ({ ...current, support: e.target.value })),
+      value: evaluation.support,
+      onChange: e => setEvaluation(current => ({ ...current, support: e.target.value })),
       options: ratingOptions
     },
     {
@@ -84,8 +84,8 @@ const CompanyRating = () => {
       name: "improvement",
       type: "select",
       required: true,
-      value: score.improvement,
-      onChange: e => setScore(current => ({ ...current, improvement: e.target.value })),
+      value: evaluation.improvement,
+      onChange: e => setEvaluation(current => ({ ...current, improvement: e.target.value })),
       options: ratingOptions
     },
     {
@@ -93,8 +93,8 @@ const CompanyRating = () => {
       name: "recomended",
       type: "select",
       required: true,
-      value: score.recomended,
-      onChange: e => setScore(current => ({ ...current, recomended: e.target.value })),
+      value: evaluation.recomended,
+      onChange: e => setEvaluation(current => ({ ...current, recomended: e.target.value })),
       options: ratingOptions
     },
     {
@@ -102,8 +102,8 @@ const CompanyRating = () => {
       name: "comments",
       type: "textarea",
       fullwidth: true,
-      value: score.comments,
-      onChange: e => setScore(current => ({ ...current, comments: e.target.value }))
+      value: evaluation.comments,
+      onChange: e => setEvaluation(current => ({ ...current, comments: e.target.value }))
     },
   ];
 
@@ -119,29 +119,29 @@ const CompanyRating = () => {
   };
 
   const onFormReset = () => {
-    setScore({})
+    setEvaluation({})
     setAction("create");
     console.log("Form was reset")
   };
 
   const onActionSelection = (action, data) => {
-    setScore(data);
+    setEvaluation(data);
     setAction(action);
   };
 
   const calculateScore = () => {
-    const avg = parseInt((parseInt(score.recomended) + parseInt(score.improvement) + parseInt(score.support) + parseInt(score.student_allowed) + parseInt(score.useful_train)) / 5);
+    const avg = parseInt((parseInt(evaluation.recomended) + parseInt(evaluation.improvement) + parseInt(evaluation.support) + parseInt(evaluation.student_allowed) + parseInt(evaluation.useful_train)) / 5);
     return avg
   };
 
   const onDataCreate = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.createScore({ ...score, score: calculateScore() })
+    await CompanyRatingAPI.createScore({ ...evaluation, score: calculateScore() })
       .then(res => {
         console.log("Data Created Successfully");
         callData();
-        setScore({});
+        setEvaluation({});
         setAction("create");
       })
       .catch(e => {
@@ -155,11 +155,11 @@ const CompanyRating = () => {
   const onDataUpdate = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.updateScore(score.id, { ...score, score: calculateScore() })
+    await CompanyRatingAPI.updateScore(evaluation.id, { ...evaluation, score: calculateScore() })
       .then(res => {
         console.log("Data Updated Successfully");
         callData();
-        setScore({});
+        setEvaluation({});
         setAction("create");
       })
       .catch(e => {
@@ -173,10 +173,10 @@ const CompanyRating = () => {
   const onDataDelete = async () => {
     setLoading(true);
 
-    await CompanyRatingAPI.deleteScore(score.id)
+    await CompanyRatingAPI.deleteScore(evaluation.id)
       .then(res => {
         console.log("Data Deleted Successfully");
-        setScore({});
+        setEvaluation({});
         setAction("create");
         callData();
       })
@@ -218,7 +218,7 @@ const CompanyRating = () => {
         tableTitle={"Submitted Ratings List"}
         tableColumns={tableColumns}
         tableRowDetails={true}
-        tableData={scores}
+        tableData={evaluations}
         onActionSelection={onActionSelection}
         currentAction={action}
         onDataCreate={onDataCreate}
