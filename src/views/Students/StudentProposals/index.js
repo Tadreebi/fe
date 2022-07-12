@@ -18,11 +18,11 @@ const StudentProposals = () => {
 
     await StudentProposalAPI.getAllProposals()
       .then(res => {
-        console.log("Called Proposal Data", res.data);
+        console.log("Proposals Called Data", res.data);
         setproposals(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposals Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -32,11 +32,11 @@ const StudentProposals = () => {
   const callListsData = async () => {
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Appication Data", res.data);
+        console.log("Appications Called Data", res.data);
         setInternshipApps(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Appications Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -44,12 +44,11 @@ const StudentProposals = () => {
 
     await OpportunityPostAPI.getAllPosts()
       .then(res => {
-        console.log("Called Internship Posts Data", res.data);
+        console.log("Internship Posts Called Data", res.data);
         setInternshipApps(current => current.map(item => ({ ...res.data?.find(resp => resp.id === item.internship), ...item })));
-        console.log("Called Internship Merged Data", internshipApps);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Posts Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -136,13 +135,13 @@ const StudentProposals = () => {
 
     await StudentProposalAPI.createProposal(proposal)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Internship Post Data Create Successfully");
         callData();
         setproposal({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -154,13 +153,13 @@ const StudentProposals = () => {
 
     await StudentProposalAPI.updateProposal(proposal.id, proposal)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Internship Post Data Updated Successfully");
         callData();
         setproposal({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -172,13 +171,13 @@ const StudentProposals = () => {
 
     await StudentProposalAPI.deleteProposal(proposal.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Internship Post Data Deleted Successfully");
         setproposal({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Internship Post Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);

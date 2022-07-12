@@ -18,11 +18,11 @@ const StudentProposalsRes = () => {
 
     await StudentProposalAPI.getAllProposals()
       .then(res => {
-        console.log("Called Proposals Data", res.data);
+        console.log("Proposals Called Data", res.data);
         setProposals(res.data.map(item => ({ ...item, proposalId: item.id })));
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposals Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -32,12 +32,11 @@ const StudentProposalsRes = () => {
 
     await UniversityProposalResponseAPI.getAllResponses()
       .then(res => {
-        console.log("Called Proposal Responses Data", res.data);
+        console.log("Proposal Responses Called Data", res.data);
         setProposals(current => current.map(item => ({ ...item, ...res.data?.find(rep => rep.proposal === item.id) })));
-        console.log("Called Proposal Combined Data", proposals);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposal Responses Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -47,11 +46,11 @@ const StudentProposalsRes = () => {
   const callListsData = async () => {
     await StudentApplicationAPI.getAllApplications()
       .then(res => {
-        console.log("Called Appication Data", res.data);
+        console.log("Appications Called Data", res.data);
         setInternshipApps(res.data);
       })
       .catch(e => {
-        console.log(e);
+        console.log("Appications Call Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -137,13 +136,13 @@ const StudentProposalsRes = () => {
 
     await UniversityProposalResponseAPI.createResponse({ ...response, proposal: response.proposalId })
       .then(res => {
-        console.log("Data Created Successfully");
+        console.log("Proposal Response Data Created Successfully");
         callData();
         setResponse({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposal Response Data Create Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -155,13 +154,13 @@ const StudentProposalsRes = () => {
 
     await UniversityProposalResponseAPI.updateResponse(response.id, response)
       .then(res => {
-        console.log("Data Updated Successfully");
+        console.log("Proposal Response Data Updated Successfully");
         callData();
         setResponse({});
         setAction("create");
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposal Response Data Update Error", e);
       })
       .finally(() => {
         setLoading(false);
@@ -173,13 +172,13 @@ const StudentProposalsRes = () => {
 
     await UniversityProposalResponseAPI.deleteResponse(response.id)
       .then(res => {
-        console.log("Data Deleted Successfully");
+        console.log("Proposal Response Data Deleted Successfully");
         setResponse({});
         setAction("create");
         callData();
       })
       .catch(e => {
-        console.log(e);
+        console.log("Proposal Response Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
