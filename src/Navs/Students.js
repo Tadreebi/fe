@@ -1,4 +1,4 @@
-import { faBuilding, faBuildingColumns, faBullseye, faClipboardQuestion, faCommentDots, faCommentMedical, faDashboard, faFileLines, faFilePen, faFire, faGraduationCap, faIdBadge, faNewspaper, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faBuildingColumns, faBullseye, faClipboardQuestion, faCommentDots, faCommentMedical, faDashboard, faFileAlt, faFileLines, faFilePen, faFire, faGraduationCap, faIdBadge, faNewspaper, faStar } from '@fortawesome/free-solid-svg-icons';
 import Icon from '../components/Root/Icon';
 import { NavGroup, NavItem, NavTitle } from '../components/Root/Nav';
 
@@ -49,7 +49,13 @@ const _nav = [
     component: NavItem,
     name: 'Univerity Feedbacks',
     to: '/students/univerity-feedbacks',
-    icon: <Icon icon={faStar} className="px-1" />,
+    icon: <Icon icon={faFileAlt} className="px-1" />,
+  },
+  {
+    component: NavItem,
+    name: 'Univerity Tips',
+    to: '/students/univerity-tips',
+    icon: <Icon icon={faCommentDots} className="px-1" />,
   },
 ];
 

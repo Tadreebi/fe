@@ -3,7 +3,7 @@ import UniversityTipsAPI from 'src/api/UniversityTip';
 import { types } from "src/reusables/data";
 import TemplatePage from '../..';
 
-const UniversityTips = () => {
+const UniversityTip = () => {
   const [tips, setTipsList] = useState([]);
   const [topics, setTopics] = useState([]);
   const [tip, setTip] = useState({});
@@ -199,4 +199,4 @@ const UniversityTips = () => {
   )
 }
 
-export default UniversityTips
+export default UniversityTip

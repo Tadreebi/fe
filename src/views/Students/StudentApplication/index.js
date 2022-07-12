@@ -17,7 +17,7 @@ const StudentApplication = () => {
   const [application, setApplication] = useState({});
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
-  const [pickedPost, setPickedPost] = useState({})
+  const [pickedPost, setPickedPost] = useState({});
 
   const image = "http://www.dermalina.com/wp-content/uploads/2020/12/no-image.jpg";
 

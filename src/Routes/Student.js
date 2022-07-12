@@ -13,6 +13,7 @@ const CompanyRating = lazy(() => import('../views/Students/CompanyRating'));
 const StudentProposals = lazy(() => import('../views/Students/StudentProposals'));
 const StudentExperiences = lazy(() => import('../views/Students/StudentExperience'));
 const UniverityFeedbacks = lazy(() => import('../views/Students/UniversityFeedback'));
+const UniverityTips = lazy(() => import('../views/Students/UniversityTips'));
 
 // Errors
 const Page404 = lazy(() => import('../views/Errors/404'));
@@ -29,6 +30,7 @@ const routes = [
   { path: '/students/proposals', name: 'Student Proposals', element: StudentProposals },
   { path: '/students/experiences', name: 'Student Experiences', element: StudentExperiences },
   { path: '/students/univerity-feedbacks', name: 'Univerity Feedbacks', element: UniverityFeedbacks },
+  { path: '/students/univerity-tips', name: 'Univerity Tips', element: UniverityTips },
 
   //// Errors
   { path: '*', name: 'Error 404', element: Page404 },
