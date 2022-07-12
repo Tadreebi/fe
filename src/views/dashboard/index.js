@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from 'react';
-import CompanyAppResponseAPI from 'src/api/CompanyAppResponse';
 import CompanyReportAPI from 'src/api/CompanyReport';
 import CompanyPostAPI from 'src/api/OpportunityPost';
 import StudentApplicationAPI from 'src/api/StudentApplication';
@@ -110,7 +109,7 @@ const Dashboard = () => {
         console.log(e);
       });
 
-    await CompanyAppResponseAPI.getAllAppResponses()
+    await StudentApplicationAPI.getAllResponses()
       .then(res => {
         console.log("Called Data", res.data);
         setStudentApplicationResponsesList(res.data);

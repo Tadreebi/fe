@@ -27,6 +27,8 @@ const StudentReportRemarks = () => {
         setLoading(false);
       });
 
+    setLoading(true);
+
     await StudentReportAPI.getAllRemarks()
       .then(res => {
         console.log("Called Remarks Data", res.data);
