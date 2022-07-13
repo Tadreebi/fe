@@ -88,6 +88,14 @@ const Login = () => {
               </h4>
               <Row>
                 <Col>
+                  <h6>As Sys Admin</h6>
+                  <br />
+                  User: admin
+                  <br />
+                  Pass: admin
+                </Col>
+
+                <Col>
                   <h6>As Student</h6>
                   <br />
                   User: emad
@@ -106,9 +114,9 @@ const Login = () => {
                 <Col>
                   <h6>As Uni Staff</h6>
                   <br />
-                  User: uni
+                  User: yahya
                   <br />
-                  Pass: uni
+                  Pass: yahya
                 </Col>
               </Row>
             </p>
