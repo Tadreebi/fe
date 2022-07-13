@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "src/store";
 
-export const baseURL = process.env.BACKEND_URL || "http://tadreebi-backend.herokuapp.com/";
+export const baseURL = process.env.BACKEND_URL || "https://tadreebi-backend.herokuapp.com/";
 
 const service = axios.create({
   baseURL,
