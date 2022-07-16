@@ -7,21 +7,21 @@ import InputPicker from './ListInputPicker';
 const DynamicList = ({ value, onChange, disabled, props }) => {
   const newProperites = props.reduce((final, prop) => ({ ...final, [prop.name]: prop.defaultValue }), {});
 
-  const moveUp = i => {
-    let newData = [...value];
-    let temp = newData[i - 1];
-    newData[i - 1] = newData[i];
-    newData[i] = temp;
-    onChange(newData);
-  };
+  // const moveUp = i => {
+  //   let newData = [...value];
+  //   let temp = newData[i - 1];
+  //   newData[i - 1] = newData[i];
+  //   newData[i] = temp;
+  //   onChange(newData);
+  // };
 
-  const moveDown = i => {
-    let newData = [...value];
-    let temp = newData[i];
-    newData[i] = newData[i + 1];
-    newData[i + 1] = temp;
-    onChange(newData);
-  };
+  // const moveDown = i => {
+  //   let newData = [...value];
+  //   let temp = newData[i];
+  //   newData[i] = newData[i + 1];
+  //   newData[i + 1] = temp;
+  //   onChange(newData);
+  // };
 
   const onInputChange = (i, prop, type) => e => {
     let newData = [...value];
@@ -33,9 +33,9 @@ const DynamicList = ({ value, onChange, disabled, props }) => {
     <CTable>
       <CTableHead>
         <CTableRow>
-          <CTableHeaderCell>
+          {/* <CTableHeaderCell>
             Reorder
-          </CTableHeaderCell>
+          </CTableHeaderCell> */}
 
           {props.map((prop, i) => (
             <CTableHeaderCell key={i}>
@@ -60,7 +60,7 @@ const DynamicList = ({ value, onChange, disabled, props }) => {
       <CTableBody>
         {value?.map((row, i) => (
           <CTableRow key={i}>
-            <CTableDataCell>
+            {/* <CTableDataCell>
               <ButtonGroup size="sm">
                 <Button color="ghost" disabled={i === 0} onClick={() => moveUp(i)}>
                   <FontAwesomeIcon icon={faArrowUp} />
@@ -70,7 +70,7 @@ const DynamicList = ({ value, onChange, disabled, props }) => {
                   <FontAwesomeIcon icon={faArrowDown} />
                 </Button>
               </ButtonGroup>
-            </CTableDataCell>
+            </CTableDataCell> */}
 
             {props.map(({ defaultValue, ...prop }, y) => (
               <CTableDataCell key={y}>
