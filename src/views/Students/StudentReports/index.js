@@ -134,15 +134,18 @@ const StudentReports = () => {
           title: "Title",
           name: "title",
           type: "text",
-          required: true
+          required: true,
+          defaultValue: ""
         }, {
           title: "Details",
           name: "details",
           type: "textarea",
+          defaultValue: ""
         }, {
           title: "Include in Profile",
           name: "profile",
           type: "switch",
+          defaultValue: false
         }
       ],
     },

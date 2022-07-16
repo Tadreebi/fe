@@ -5,7 +5,7 @@ import { Button, ButtonGroup } from '../Buttons';
 import InputPicker from './ListInputPicker';
 
 const DynamicList = ({ value, onChange, disabled, props }) => {
-  const newProperites = props.map(prop => prop.name).reduce((final, prop) => ({ ...final, [prop]: null }), {});
+  const newProperites = props.reduce((final, prop) => ({ ...final, [prop.name]: prop.defaultValue }), {});
 
   const moveUp = i => {
     let newData = [...value];
@@ -72,7 +72,7 @@ const DynamicList = ({ value, onChange, disabled, props }) => {
               </ButtonGroup>
             </CTableDataCell>
 
-            {props.map((prop, y) => (
+            {props.map(({ defaultValue, ...prop }, y) => (
               <CTableDataCell key={y}>
                 <InputPicker {...prop} value={row[prop.name]} onChange={onInputChange(i, prop.name, prop.type)} disabled={disabled} />
               </CTableDataCell>
