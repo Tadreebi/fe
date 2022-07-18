@@ -11,6 +11,7 @@ const StudentReports = () => {
   const [reportTypes, setReportTypes] = useState([]);
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
+  const [reportSkills, setReportSkills] = useState([]);
 
   const callData = async () => {
     setLoading(true);
@@ -42,6 +43,17 @@ const StudentReports = () => {
       });
   };
 
+  const callDependantListsData = async () => {
+    await StudentReportAPI.getAllSkills()
+      .then(res => {
+        console.log("Report Skills Called Data", res.data);
+        setReportSkills(res.data)
+      })
+      .catch(e => {
+        console.log("Report Skills Call error", e);
+      });
+  };
+
   const callListsData = async () => {
     await StudentReportAPI.getAllReportTypes()
       .then(res => {
@@ -56,6 +68,7 @@ const StudentReports = () => {
   useEffect(() => {
     callData();
     callListsData();
+    callDependantListsData();
   }, []);
 
   const props = [
@@ -109,6 +122,32 @@ const StudentReports = () => {
       fullwidth: true,
       value: report.intro,
       onChange: e => setReport(current => ({ ...current, intro: e.target.value }))
+    },
+    {
+      title: "Earned Skills",
+      name: "skills",
+      type: "list",
+      value: reportSkills,
+      onChange: setReportSkills,
+      props: [
+        {
+          title: "Title",
+          name: "title",
+          type: "text",
+          required: true,
+          defaultValue: ""
+        }, {
+          title: "Details",
+          name: "details",
+          type: "textarea",
+          defaultValue: ""
+        }, {
+          title: "Include in Profile",
+          name: "profile",
+          type: "switch",
+          defaultValue: false
+        }
+      ],
     },
     {
       title: "Report Conclusion",
