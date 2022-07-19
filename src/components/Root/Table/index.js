@@ -6,17 +6,27 @@ import Icon from '../Icon';
 
 const Table = ({ columns, data, expandedComponent, onActionSelection, loading, onCreate, onEdit, onDelete }) => {
 
-  const detailPanel = ({ data }) => (
-    <Row>
-      {
-        Object.keys(data)?.map((key, i) => (
-          <Col md={6} key={i}>
-            <b>{`${key}`}:</b>{" "}{data[key]}
-          </Col>
-        ))
-      }
-    </Row>
-  );
+  const detailPanel = ({ data }) => {
+    const keyName = key => (
+      key.split("").map((letter, i) => letter === letter.toUpperCase() ? ` ${letter}` : i === 0 ? letter.toUpperCase() : letter).join("")
+    );
+
+    const keyFilter = key => (
+      (key !== "id" && key !== "created_at" && key !== "updated_at")
+    );
+
+    return (
+      <Row>
+        {
+          Object.keys(data)?.filter(key => keyFilter(key)).map((key, i) => (
+            <Col md={6} key={i}>
+              <b>{`${keyName(key)}`}:</b>{" "}{data[key]}
+            </Col>
+          ))
+        }
+      </Row>
+    )
+  };
 
   return (
     <DataTable
