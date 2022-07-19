@@ -1,5 +1,5 @@
 import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
-import { faArrowDown, faArrowUp, faClockRotateLeft, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft, faEraser, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, ButtonGroup } from '../Buttons';
 import InputPicker from './ListInputPicker';
@@ -27,6 +27,19 @@ const DynamicList = ({ value, onChange, disabled, props }) => {
     let newData = [...value];
     newData[i][prop] = type === "switch" ? e.target.checked : e.target.value;
     onChange(newData);
+  };
+
+  const onDeletion = (i, id) => {
+    if (id) {
+      onChange(currnet => currnet.map(rec => rec.id === id ? { ...rec, deleted: true } : rec))
+    }
+    else {
+      onChange(current => current.filter((_, j) => j !== i))
+    }
+  };
+
+  const undoDelete = id => {
+    onChange(currnet => currnet.map(rec => rec.id === id ? { ...rec, deleted: false } : rec))
   };
 
   return (
@@ -74,13 +87,13 @@ const DynamicList = ({ value, onChange, disabled, props }) => {
 
             {props.map(({ defaultValue, ...prop }, y) => (
               <CTableDataCell key={y}>
-                <InputPicker {...prop} value={row[prop.name]} onChange={onInputChange(i, prop.name, prop.type)} disabled={disabled} />
+                <InputPicker {...prop} value={row[prop.name]} onChange={onInputChange(i, prop.name, prop.type)} disabled={disabled || row.deleted} />
               </CTableDataCell>
             ))}
 
             <CTableDataCell>
-              <Button size="sm" color="danger" className="text-white" onClick={() => onChange(current => current.filter((_, j) => j !== i))}>
-                <FontAwesomeIcon icon={faTrash} />
+              <Button size="sm" color={row.deleted ? "warning" : "danger"} className="text-white" onClick={() => row.deleted ? undoDelete(row.id) : onDeletion(i, row.id)}>
+                <FontAwesomeIcon icon={row.deleted ? faClockRotateLeft : row.id ? faTrash : faEraser} />
               </Button>
             </CTableDataCell>
           </CTableRow>
