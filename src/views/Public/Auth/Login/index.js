@@ -5,11 +5,12 @@ import { Button } from 'src/components/Root/Buttons/'
 import { Card, CardBody } from 'src/components/Root/Cards'
 import AuthTemplate from '../'
 import UserAPI from "src/api/User"
+import { Row, Col } from 'src/components/Root/Grid'
 
 const Login = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch()
-  const [loginData, setLoginData] = useState({ username: "admin", password: "123" });
+  const [loginData, setLoginData] = useState({ username: "admin", password: "admin" });
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -80,6 +81,45 @@ const Login = () => {
                 </Button>
               </Link>
             </div>
+
+            <p>
+              <h4 className='my-3'>
+                Login data
+              </h4>
+              <Row>
+                <Col>
+                  <h6>As Sys Admin</h6>
+                  <br />
+                  User: admin
+                  <br />
+                  Pass: admin
+                </Col>
+
+                <Col>
+                  <h6>As Student</h6>
+                  <br />
+                  User: emad
+                  <br />
+                  Pass: emad
+                </Col>
+
+                <Col>
+                  <h6>As Company</h6>
+                  <br />
+                  User: google
+                  <br />
+                  Pass: google
+                </Col>
+
+                <Col>
+                  <h6>As Uni Staff</h6>
+                  <br />
+                  User: yahya
+                  <br />
+                  Pass: yahya
+                </Col>
+              </Row>
+            </p>
           </CardBody>
         </Card>
       }
