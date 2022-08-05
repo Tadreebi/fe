@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import StudentReportAPI from 'src/api/StudentReport';
 import { students } from 'src/reusables/data';
 import { dateRangeFormatter } from 'src/reusables/functions';
+
 import TemplatePage from '../..';
 import VisualRepresentations from "./visualRepresentations";
 
@@ -11,7 +12,7 @@ const StudentReports = () => {
   const [reportTypes, setReportTypes] = useState([]);
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
-  const [reportSkills, setReportSkills] = useState([]);
+  const [reportSkills, setReportSkills] = useState([{}]);
   const [reportSkillsToDelete, setReportSkillsToDelete] = useState([]);
 
   const callData = async () => {
@@ -48,7 +49,7 @@ const StudentReports = () => {
     await StudentReportAPI.getAllSkills()
       .then(res => {
         console.log("Report Skills Called Data", res.data);
-        setReportSkills(res.data)
+        setReportSkills(res.data || {})
       })
       .catch(e => {
         console.log("Report Skills Call error", e);
@@ -181,7 +182,8 @@ const StudentReports = () => {
 
     setReportSkillsToDelete(reportSkills.filter(skill => skill.deleted))
     reportSkillsToDelete.forEach(skill => onSkillDataDelete(skill.id))
-    reportSkills.filter(skill => skill.id)
+    reportSkills.filter(skill => skill.id && !skill.deleted).forEach(skill => onSkillDataUpdate(skill))
+    reportSkills.filter(skill => !skill.id && !skill.deleted).forEach(skill => onSkillDataCreate(skill))
 
     action === "create" ? (
       onDataCreate()
@@ -257,6 +259,35 @@ const StudentReports = () => {
       });
   };
 
+  const onSkillDataCreate = async (data) => {
+    setLoading(true);
+
+    await StudentReportAPI.createSkill(data)
+      .then(res => {
+        console.log("Skill Data Created Successfully");
+      })
+      .catch(e => {
+        console.log("Skill Data Create Error", e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const onSkillDataUpdate = async (data) => {
+    setLoading(true);
+
+    await StudentReportAPI.updateSkill(data.id, data)
+      .then(res => {
+        console.log("Skill Data Updated Successfully");
+      })
+      .catch(e => {
+        console.log("Skill Data Update Error", e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const onSkillDataDelete = async (id) => {
     setLoading(true);

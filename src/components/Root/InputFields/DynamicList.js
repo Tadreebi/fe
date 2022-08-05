@@ -1,6 +1,7 @@
 import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
 import { faClockRotateLeft, faEraser, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Button, ButtonGroup } from '../Buttons';
 import InputPicker from './ListInputPicker';
 
