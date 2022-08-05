@@ -12,6 +12,7 @@ const StudentReports = () => {
   const [action, setAction] = useState("create");
   const [loading, setLoading] = useState(false);
   const [reportSkills, setReportSkills] = useState([]);
+  const [reportSkillsToDelete, setReportSkillsToDelete] = useState([]);
 
   const callData = async () => {
     setLoading(true);
@@ -178,6 +179,10 @@ const StudentReports = () => {
   const onFormSubmit = e => {
     e.preventDefault();
 
+    setReportSkillsToDelete(reportSkills.filter(skill => skill.deleted))
+    reportSkillsToDelete.forEach(skill => onSkillDataDelete(skill.id))
+    reportSkills.filter(skill => skill.id)
+
     action === "create" ? (
       onDataCreate()
     ) : action === "update" ? (
@@ -246,6 +251,22 @@ const StudentReports = () => {
       })
       .catch(e => {
         console.log("Report Data Delete Error", e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+
+  const onSkillDataDelete = async (id) => {
+    setLoading(true);
+
+    await StudentReportAPI.deleteReport(id)
+      .then(res => {
+        console.log("Skill Data Deleted Successfully");
+      })
+      .catch(e => {
+        console.log("Skill Data Delete Error", e);
       })
       .finally(() => {
         setLoading(false);
