@@ -262,7 +262,7 @@ const StudentReports = () => {
   const onSkillDataCreate = async (data) => {
     setLoading(true);
 
-    await StudentReportAPI.createSkill(data)
+    await StudentReportAPI.createSkill({ ...data, report: report.id || 4 })
       .then(res => {
         console.log("Skill Data Created Successfully");
       })
